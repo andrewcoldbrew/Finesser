@@ -48,25 +48,7 @@ public class Main extends Application {
         }
         launch(args);
         // Testing
-        User user = new User("u123", "John Doe");
-        Bank bank = new Bank("b456", user);
 
-        // Add various transactions
-        bank.addTransaction(new Transaction("Initial Deposit", 1000.0, "Deposit"));
-        bank.addTransaction(new Transaction("Grocery Shopping", -150.0, "Expense"));
-        bank.addTransaction(new Transaction("Utility Bill", -200.0, "Expense"));
-        bank.addTransaction(new Transaction("ATM Withdrawal", -100.0, "Withdrawal"));
-        bank.addTransaction(new Transaction("Book Purchase", -50.0, "Expense"));
-
-        // Group transactions by category and print them
-        Map<String, List<Transaction>> categorizedTransactions = bank.groupTransactionsByCategory();
-        for (Map.Entry<String, List<Transaction>> entry : categorizedTransactions.entrySet()) {
-            System.out.println("Category: " + entry.getKey());
-            for (Transaction t : entry.getValue()) {
-                System.out.println(t);
-            }
-            System.out.println();
-        }
     }
 
 
