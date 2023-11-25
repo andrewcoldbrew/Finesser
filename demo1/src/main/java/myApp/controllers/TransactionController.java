@@ -37,6 +37,12 @@ public class TransactionController implements Initializable {
     @FXML private ComboBox<String> bankComboBox;
     @FXML private AnchorPane popupTransactionDialog;
 
+    // Filter buttons
+    @FXML private Label totalFood;
+    @FXML private Label totalEntertainment;
+    @FXML private Label totalMisc;
+
+
     private final ObservableList<String> typeList = FXCollections.observableArrayList(
             "Food", "Clothes", "Groceries", "Entertainment", "Utilities",
             "Transportation", "Healthcare", "Education", "Travel", "Miscellaneous"
@@ -57,6 +63,7 @@ public class TransactionController implements Initializable {
 
         filteredTransactions = new FilteredList<>(transactionData, p -> true);
         transactionTable.setItems(filteredTransactions);
+        updateTotals();
     }
 
     private void setupTransactionTable() {
@@ -108,6 +115,29 @@ public class TransactionController implements Initializable {
                 category == null || category.isEmpty() || transaction.getCategory().equals(category)
         );
     }
+    private void updateTotals() {
+        double totalFoodAmount = calculateTotalForCategory("Food");
+        double totalEntertainmentAmount = calculateTotalForCategory("Entertainment");
+        double totalMiscAmount = calculateTotalForCategory("Miscellaneous");
+
+        System.out.println("Total Food Amount: " + totalFoodAmount); // Debug
+        System.out.println("Total Entertainment Amount: " + totalEntertainmentAmount); // Debug
+        System.out.println("Total Misc Amount: " + totalMiscAmount); // Debug
+
+        totalFood.setText(String.format("Total: $%.2f", totalFoodAmount));
+        totalEntertainment.setText(String.format("Total: $%.2f", totalEntertainmentAmount));
+        totalMisc.setText(String.format("Total: $%.2f", totalMiscAmount));
+    }
+
+    private double calculateTotalForCategory(String category) {
+        double total = transactionData.stream()
+                .filter(tr -> tr.getCategory().equals(category))
+                .mapToDouble(Transaction::getAmount)
+                .sum();
+        System.out.println("Total for " + category + ": " + total);
+        return total;
+    }
+
     public void addTransaction(ActionEvent actionEvent) {
         String name = transactionNameField.getText().trim();
         String amountText = amountField.getText().trim();
