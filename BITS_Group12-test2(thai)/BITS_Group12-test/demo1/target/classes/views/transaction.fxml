@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="900.0" prefHeight="695.0" prefWidth="1282.0" styleClass="table-header" stylesheets="@../css/transaction.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.TransactionController">
+   <children>
+      <TableView fx:id="transactionTable" layoutX="50.0" layoutY="135.0" prefHeight="512.0" prefWidth="844.0" style="-fx-border-color: #9FE2BF; -fx-border-width: 2; -fx-padding: 0;" stylesheets="@../css/transaction.css">
+        <columns>
+          <TableColumn prefWidth="150.0" text="Name" />
+          <TableColumn prefWidth="150.0" text="Amount" />
+            <TableColumn prefWidth="150.0" text="Description" />
+            <TableColumn prefWidth="130.0" text="Type" />
+            <TableColumn prefWidth="130.0" text="Bank" />
+            <TableColumn prefWidth="133.0" text="Date" />
+        </columns>
+      </TableView>
+      <AnchorPane fx:id="popupTransactionDialog" layoutX="37.0" layoutY="66.0" minHeight="0.0" minWidth="0.0" prefHeight="263.0" prefWidth="526.0" style="-fx-background-color: aqua;" visible="false">
+         <children>
+            <VBox layoutX="303.0" layoutY="72.0" prefHeight="78.0" prefWidth="186.0" spacing="20.0">
+               <children>
+                  <ComboBox fx:id="typeComboBox" prefHeight="30.0" prefWidth="194.0" promptText="Type" />
+                  <ComboBox fx:id="bankComboBox" prefHeight="30.0" prefWidth="190.0" promptText="Bank" />
+               </children>
+            </VBox>
+            <VBox layoutX="53.0" layoutY="72.0" prefHeight="120.0" prefWidth="186.0" spacing="20.0">
+               <children>
+                  <TextField fx:id="transactionNameField" promptText="Transaction name" />
+                  <TextField fx:id="amountField" promptText="Amount" />
+                  <TextField fx:id="descriptionField" promptText="Description" />
+               </children>
+            </VBox>
+            <HBox layoutX="303.0" layoutY="177.0" prefHeight="30.0" prefWidth="186.0" spacing="20.0">
+               <children>
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addTransaction" text="Add transaction" />
+                  <Button mnemonicParsing="false" text="Cancel" textFill="RED" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <VBox layoutX="981.0" layoutY="135.0" prefHeight="512.0" prefWidth="242.0" spacing="20.0" style="-fx-border-color: #9FE2BF; -fx-border-width: 2;" stylesheets="@../css/transaction.css">
+         <children>
+            <Label fx:id="testLabel1" prefHeight="80.0" prefWidth="186.0" text="One" textAlignment="CENTER" />
+            <Separator prefHeight="26.0" prefWidth="218.0" />
+            <Label fx:id="testLabel2" prefHeight="80.0" prefWidth="186.0" text="Two" />
+            <Separator layoutX="22.0" layoutY="102.0" prefHeight="26.0" prefWidth="218.0" />
+            <Label fx:id="testLabel3" prefHeight="80.0" prefWidth="186.0" text="Three" />
+            <Separator layoutX="22.0" layoutY="105.0" prefHeight="26.0" prefWidth="218.0" />
+            <Label fx:id="testLabel31" layoutX="21.0" layoutY="221.0" prefHeight="80.0" prefWidth="186.0" text="Four" />
+            <Separator layoutX="22.0" layoutY="115.0" prefHeight="26.0" prefWidth="218.0" />
+            <Label fx:id="testLabel311" layoutX="21.0" layoutY="321.0" prefHeight="80.0" prefWidth="186.0" text="Five" />
+         </children>
+         <styleClass>
+            <String fx:value="newest-information" />
+            <String fx:value="vbox-container" />
+         </styleClass>
+      </VBox>
+      <Label contentDisplay="CENTER" graphicTextGap="6.0" layoutX="1068.0" layoutY="107.0" prefHeight="28.0" prefWidth="68.0" style="-fx-font-weight: bold;" text="Details ">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="addTransactionButton" layoutX="694.0" layoutY="66.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="200.0" styleClass="addTransactionButton" stylesheets="@../css/transaction.css" text="Add transaction">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/navbar/add.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ComboBox fx:id="sortComboBox" layoutX="50.0" layoutY="66.0" prefHeight="41.0" prefWidth="200.0" promptText="Sort By" />
+   </children>
+</AnchorPane>
