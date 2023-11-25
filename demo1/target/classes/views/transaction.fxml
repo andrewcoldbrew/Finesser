@@ -51,9 +51,9 @@
       </AnchorPane>
       <VBox layoutX="767.0" layoutY="139.0" prefHeight="104.0" prefWidth="46.0" spacing="20.0">
          <children>
-            <Label fx:id="testLabel1" text="Label" />
-            <Label fx:id="testLabel2" text="Label" />
-            <Label fx:id="testLabel3" text="Label" />
+            <Button fx:id="FilterByFood" text="Food" onAction="#filterByFood"/>
+            <Button fx:id="FilterbyEntertainment" text="Entertainment" onAction="#filterByEntertainment"/>
+            <Button fx:id="FilterByMisc" text="Miscellaneous" onAction="#filterByMisc"/>
          </children>
       </VBox>
       <ComboBox fx:id="sortComboBox" layoutX="50.0" layoutY="78.0" prefWidth="150.0" promptText="Sort By" />

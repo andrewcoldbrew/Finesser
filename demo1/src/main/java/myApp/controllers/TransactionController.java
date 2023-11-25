@@ -10,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 
+import javafx.collections.transformation.FilteredList;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,6 +45,8 @@ public class TransactionController implements Initializable {
             "TPB", "VCB", "ACB", "BIDV", "MB", "Techcombank", "VietinBank", "VPBank", "Eximbank"
     );
     private final ObservableList<Transaction> transactionData = FXCollections.observableArrayList();
+    private FilteredList<Transaction> filteredTransactions;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,6 +54,9 @@ public class TransactionController implements Initializable {
         bankComboBox.setItems(bankList);
         setupTransactionTable();
         loadTransactions();
+
+        filteredTransactions = new FilteredList<>(transactionData, p -> true);
+        transactionTable.setItems(filteredTransactions);
     }
 
     private void setupTransactionTable() {
@@ -81,7 +88,26 @@ public class TransactionController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void filterByFood(ActionEvent event) {
+        filterTransactions("Food");
+    }
 
+    @FXML
+    private void filterByEntertainment(ActionEvent event) {
+        filterTransactions("Entertainment");
+    }
+
+    @FXML
+    private void filterByMisc(ActionEvent event) {
+        filterTransactions("Miscellaneous");
+    }
+
+    private void filterTransactions(String category) {
+        filteredTransactions.setPredicate(transaction ->
+                category == null || category.isEmpty() || transaction.getCategory().equals(category)
+        );
+    }
     public void addTransaction(ActionEvent actionEvent) {
         String name = transactionNameField.getText().trim();
         String amountText = amountField.getText().trim();
