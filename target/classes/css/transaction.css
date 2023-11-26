@@ -1,0 +1,49 @@
+.table-view .column-header, .table-view .table-header {
+    -fx-background-color: #9FE2BF;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-min-height: 40px;
+}
+
+.combo-box {
+    -fx-background-color: #ffffff;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #9FE2BF;
+    -fx-text-fill: white;
+}
+
+.combo-box .list-cell {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.addTransactionButton {
+    -fx-background-color: #9FE2BF;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.addTransactionButton:hover {
+    -fx-background-color: #b2e8cc;
+}
+
+.addTransactionButton:pressed {
+    -fx-background-color: #d9f3e5;
+}
+
+.vbox-container {
+    -fx-background-color: #f0f0f0; /* Set the background color of the VBox */
+    -fx-padding: 10px; /* Add some padding for better spacing */
+    -fx-border-color: #9FE2BF;
+}
+
+.newest-information {
+    -fx-background-color: #ffffff; /* Set the background color of the information box */
+    -fx-border-width: 1px; /* Add a border */
+    -fx-border-color: #cccccc; /* Set the border color */
+    -fx-padding: 10px; /* Add some padding inside the information box */
+    -fx-font-size: 14px; /* Set the font size */
+}
