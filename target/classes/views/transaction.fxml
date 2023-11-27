@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -7,7 +8,6 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -43,7 +43,7 @@
             <String fx:value="vbox-container" />
          </styleClass>
       </VBox>
-      <Label contentDisplay="CENTER" graphicTextGap="6.0" layoutX="845.0" layoutY="171.0" prefHeight="28.0" prefWidth="68.0" style="-fx-font-weight: bold;" text="Details ">
+      <Label contentDisplay="CENTER" graphicTextGap="6.0" layoutX="824.0" layoutY="174.0" prefHeight="28.0" prefWidth="68.0" style="-fx-font-weight: bold;" text="Details ">
          <font>
             <Font size="19.0" />
          </font>
@@ -66,6 +66,6 @@
             <Image url="@../images/navbar/add.png" />
          </image>
       </ImageView>
-      <TextField fx:id="searchBar" layoutX="147.0" layoutY="73.0" prefHeight="26.0" prefWidth="459.0" />
+      <MFXTextField fx:id="searchBar" floatMode="ABOVE" layoutX="194.0" layoutY="52.0" prefHeight="50.0" prefWidth="480.0" promptText="Enter something here daddy" />
    </children>
 </AnchorPane>

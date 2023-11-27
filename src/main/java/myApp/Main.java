@@ -2,15 +2,13 @@ package myApp;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import myApp.models.Bank;
-import myApp.models.Transaction;
-import myApp.models.User;
 import myApp.utils.ConnectionManager;
 import myApp.utils.SceneManager;
 
-import java.sql.*;
-import java.util.List;
-import java.util.Map;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Main extends Application {
 
@@ -25,7 +23,7 @@ public class Main extends Application {
         SceneManager.addScene("test", "/views/test.fxml");
 
         // Set the initial scene
-        SceneManager.switchToSceneWithoutMenuBar("login");
+        SceneManager.switchToSceneWithoutMenuBar("transaction");
 
         primaryStage.setTitle("JavaFX Scene Manager");
         primaryStage.show();
