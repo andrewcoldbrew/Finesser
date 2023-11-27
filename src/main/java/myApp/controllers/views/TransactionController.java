@@ -63,18 +63,41 @@ public class TransactionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        typeComboBox.setItems(typeList);
-//        bankComboBox.setItems(bankList);
         setupTransactionTable();
         loadTransactions();
 
         filteredTransactions = new FilteredList<>(transactionData, p -> true);
         transactionTable.setItems(filteredTransactions);
-//        transactionTable.prefWidthProperty().bind(mainPane.widthProperty());
-//        transactionTable.prefHeightProperty().bind(mainPane.heightProperty());
-        updateTotals();
 
+        searchBar.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredTransactions.setPredicate(transaction -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (transaction.getName().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (transaction.getDescription() != null &&
+                            transaction.getDescription().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (String.valueOf(transaction.getAmount()).toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (transaction.getCategory() != null &&
+                            transaction.getCategory().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (transaction.getBank() != null &&
+                            transaction.getBank().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    }
+
+
+                    return false;
+                })
+        );
     }
+
 
     private void setupTransactionTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
