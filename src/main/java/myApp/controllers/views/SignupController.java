@@ -1,6 +1,5 @@
 package myApp.controllers.views;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,10 +14,7 @@ import myApp.utils.SceneManager;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import javax.crypto.*;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Base64;
 import java.util.ResourceBundle;
 
 
@@ -37,7 +33,6 @@ public class SignupController implements Initializable {
         String username = usernameField.getText();
         String password = passwordField.getText();
         String rePassword = rePasswordField.getText();
-
         if (password.equals(rePassword)) {
             Connection con = ConnectionManager.getConnection();
 
