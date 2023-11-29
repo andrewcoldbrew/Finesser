@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root prefHeight="437.0" prefWidth="500.0" style="-fx-background-color: lightgray;" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MFXButton fx:id="addBudgetButton" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL1" layoutX="175.0" layoutY="348.0" text="Add budget" />
+      <MFXButton fx:id="exitButton" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL1" layoutX="271.0" layoutY="348.0" text="Cancel" textFill="RED" />
+      <Label layoutX="111.0" layoutY="61.0" prefHeight="18.0" prefWidth="90.0" text="Category:" />
+      <Label layoutX="111.0" layoutY="134.0" text="Limit: " />
+      <Label layoutX="111.0" layoutY="212.0" text="Start Date: " />
+      <Label layoutX="111.0" layoutY="275.0" text="End Date: " />
+      <MFXFilterComboBox fx:id="categoryComboBox" floatMode="ABOVE" layoutX="205.0" layoutY="53.0" prefHeight="40.0" prefWidth="240.0" />
+      <MFXTextField fx:id="limitField" floatMode="ABOVE" layoutX="205.0" layoutY="125.0" prefHeight="40.0" prefWidth="240.0" />
+      <MFXDatePicker fx:id="startDatePicker" floatMode="ABOVE" layoutX="205.0" layoutY="203.0" prefHeight="40.0" prefWidth="240.0" />
+      <MFXDatePicker fx:id="endDatePicker" floatMode="ABOVE" layoutX="205.0" layoutY="272.0" prefHeight="40.0" prefWidth="240.0" />
+   </children>
+</fx:root>

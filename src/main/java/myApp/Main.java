@@ -3,7 +3,7 @@ package myApp;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import myApp.utils.ConnectionManager;
-import myApp.utils.SceneManager;
+import myApp.utils.LoginStageManager;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,21 +12,12 @@ import java.sql.Statement;
 
 public class Main extends Application {
 
+    private static String userId;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        SceneManager.setPrimaryStage(primaryStage);
-
-        // Add scenes to the SceneManager
-        SceneManager.addScene("login", "/views/login.fxml");
-        SceneManager.addScene("signup", "/views/signup.fxml");
-        SceneManager.addScene("transaction", "/views/transaction.fxml");
-        SceneManager.addScene("test", "/views/test.fxml");
-
         // Set the initial scene
-        SceneManager.switchToSceneWithoutMenuBar("transaction");
-
-        primaryStage.setTitle("JavaFX Scene Manager");
-        primaryStage.show();
+        LoginStageManager.setupLoginStage();
 
     }
 
@@ -50,5 +41,11 @@ public class Main extends Application {
 
     }
 
+    public static String getUserId() {
+        return userId;
+    }
 
+    public static void setUserId(String newUserId) {
+        userId = newUserId;
+    }
 }
