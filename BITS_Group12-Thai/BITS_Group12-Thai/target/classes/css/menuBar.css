@@ -1,0 +1,21 @@
+.rootPane {
+    -fx-background-color:  linear-gradient(to bottom right, #c9e29f, #1f8585);
+    -fx-background-radius: 0 20 20 0;
+    -fx-border-color: #ebebeb;
+    -fx-border-radius: 0 20 20 0;
+    -fx-font-size: 15px;
+}
+
+.rootPane .button {
+    -fx-background-color: transparent;
+    -fx-border-color: #1E152A;
+    -fx-border-radius: 10;
+    -fx-text-fill: #1E152A;
+}
+
+.rootPane .button:hover,
+.rootPane .button:focused {
+    -fx-background-color: #1E152A;
+    -fx-border-color: #9FE2BF;
+    -fx-text-fill: white;
+}
