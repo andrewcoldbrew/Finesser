@@ -14,10 +14,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import myApp.controllers.components.TransactionSortForm;
-import myApp.controllers.components.TransactionTable;
+import myApp.controllers.components.AddTransactionForm;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
-import myApp.utils.SortingEvent;
+import myApp.utils.Draggable;
 
 import java.net.URL;
 import java.sql.*;
@@ -52,8 +52,9 @@ public class TransactionController implements Initializable {
     @FXML private Label totalMisc;
 
     private TransactionSortForm sortForm = new TransactionSortForm();
-
+    private AddTransactionForm addForm = new AddTransactionForm();
     private final Connection con = ConnectionManager.getConnection();
+    private final Draggable draggable = new Draggable();
 
     private final ObservableList<Transaction> transactionData = FXCollections.observableArrayList();
     private FilteredList<Transaction> filteredTransactions;
@@ -110,7 +111,7 @@ public class TransactionController implements Initializable {
     }
 
     private void loadTransactions() {
-        try (PreparedStatement stmt = con.prepareStatement("SELECT name, amount, description, category, bank, transaction_date FROM transactions");
+        try (PreparedStatement stmt = con.prepareStatement("SELECT name, amount, description, category, bank, transaction_date FROM transaction");
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -171,18 +172,29 @@ public class TransactionController implements Initializable {
         return total;
     }
 
-    public void openPopupDialog(ActionEvent actionEvent) {
-        TransactionTable table = new TransactionTable();
+    public void handleAddForm(ActionEvent actionEvent) {
 
-        // Set the TransactionTable to the center of the mainPane
-        AnchorPane.setTopAnchor(table, (mainPane.getHeight() - table.getPrefHeight()) / 2);
-        AnchorPane.setLeftAnchor(table, (mainPane.getWidth() - table.getPrefWidth()) / 2);
+        if (!mainPane.getChildren().contains(addForm)) {
+            // Set the TransactionTable to the center of the mainPane
+            AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
+            AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
 
-        mainPane.getChildren().add(table);
+            mainPane.getChildren().add(addForm);
+            draggable.makeDraggable(addForm);
+        }
+
     }
 
 
     public void handleSortForm(MouseEvent mouseEvent) {
+        if (!mainPane.getChildren().contains(sortForm)) {
+            AnchorPane.setTopAnchor(sortForm, (mainPane.getHeight() - sortForm.getPrefHeight()) / 2);
+            AnchorPane.setLeftAnchor(sortForm, (mainPane.getWidth() - sortForm.getPrefWidth()) / 2);
+
+            mainPane.getChildren().add(sortForm);
+            draggable.makeDraggable(sortForm);
+        }
+
         // Set the event handler for the SortingEvent
         sortForm.setSortingEventHandler(sortingEvent -> {
             String sortingQuery = sortingEvent.getSortingQuery();
@@ -211,38 +223,6 @@ public class TransactionController implements Initializable {
             });
         });
 
-        AnchorPane.setTopAnchor(sortForm, (mainPane.getHeight() - sortForm.getPrefHeight()) / 2);
-        AnchorPane.setLeftAnchor(sortForm, (mainPane.getWidth() - sortForm.getPrefWidth()) / 2);
-
-        mainPane.getChildren().add(sortForm);
     }
 
-//    private void handleSortingEvent(SortingEvent sortingEvent) {
-//        // Handle the sorting event here
-//        String sortingQuery = sortingEvent.getSortingQuery();
-//        System.out.println("Received Query: " + sortingQuery);
-//
-//        // Update the data in the transaction table based on the sorting query
-//        try (Connection con = ConnectionManager.getConnection();
-//             PreparedStatement stmt = con.prepareStatement(sortingQuery);
-//             ResultSet rs = stmt.executeQuery()) {
-//
-//            // Clear existing data
-//            transactionData.clear();
-//
-//            // Populate the table with new data
-//            while (rs.next()) {
-//                String name = rs.getString("name");
-//                double amount = rs.getDouble("amount");
-//                String description = rs.getString("description");
-//                String category = rs.getString("category");
-//                String bank = rs.getString("bank");
-//                LocalDate date = rs.getDate("transaction_date").toLocalDate();
-//                Transaction transaction = new Transaction(name, amount, description, category, bank, date);
-//                transactionData.add(transaction);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
