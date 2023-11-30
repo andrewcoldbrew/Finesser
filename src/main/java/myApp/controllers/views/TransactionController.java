@@ -111,7 +111,7 @@ public class TransactionController implements Initializable {
     }
 
     private void loadTransactions() {
-        try (PreparedStatement stmt = con.prepareStatement("SELECT name, amount, description, category, bank, transaction_date FROM transaction");
+        try (PreparedStatement stmt = con.prepareStatement("SELECT name, amount, description, category, bank, transaction_date FROM transactions");
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -154,9 +154,9 @@ public class TransactionController implements Initializable {
         double totalEntertainmentAmount = calculateTotalForCategory("Entertainment");
         double totalMiscAmount = calculateTotalForCategory("Miscellaneous");
 
-        System.out.println("Total Food Amount: " + totalFoodAmount); // Debug
-        System.out.println("Total Entertainment Amount: " + totalEntertainmentAmount); // Debug
-        System.out.println("Total Misc Amount: " + totalMiscAmount); // Debug
+        //System.out.println("Total Food Amount: " + totalFoodAmount); // Debug
+        //System.out.println("Total Entertainment Amount: " + totalEntertainmentAmount); // Debug
+        //System.out.println("Total Misc Amount: " + totalMiscAmount); // Debug
 
         totalFood.setText(String.format("Total: $%.2f", totalFoodAmount));
         totalEntertainment.setText(String.format("Total: $%.2f", totalEntertainmentAmount));
@@ -168,7 +168,7 @@ public class TransactionController implements Initializable {
                 .filter(tr -> tr.getCategory().equals(category))
                 .mapToDouble(Transaction::getAmount)
                 .sum();
-        System.out.println("Total for " + category + ": " + total);
+       //System.out.println("Total for " + category + ": " + total);
         return total;
     }
 
