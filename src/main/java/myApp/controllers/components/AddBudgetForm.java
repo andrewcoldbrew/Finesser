@@ -84,6 +84,6 @@ public class AddBudgetForm extends AnchorPane {
         if (str == null || str.isEmpty()) {
             return false;
         }
-        return str.matches("\\d+"); // This regex checks if the string contains only digits
+        return str.matches("\\d+");
     }
 }

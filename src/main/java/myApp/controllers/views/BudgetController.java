@@ -1,5 +1,6 @@
 package myApp.controllers.views;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -26,54 +27,57 @@ public class BudgetController {
 
     @FXML
     public void initialize() {
-        loadBudgetData();
+        loadBudgetDataAsync();
     }
 
-    public void loadBudgetData() {
-        System.out.println("loadBudgetData() called");
+    private void loadBudgetDataAsync() {
+        Task<List<Budget>> task = new Task<>() {
+            @Override
+            protected List<Budget> call() {
+                return fetchBudgetData();
+            }
+        };
 
-        // Fetch the budget data from the database
-        List<Budget> budgets = fetchBudgetData();
-        System.out.println("Number of budgets fetched: " + budgets.size());
+        task.setOnSucceeded(e -> updateUI(task.getValue()));
+        task.setOnFailed(e -> showError(task.getException()));
 
-        // Clear any existing content in the FlowPane
+        new Thread(task).start();
+    }
+
+    private void updateUI(List<Budget> budgets) {
         flowPane1.getChildren().clear();
 
-        // Check if budgets list is empty
         if (budgets.isEmpty()) {
             System.out.println("No budgets found to display.");
             flowPane1.getChildren().add(new Label("No budgets to display."));
             return;
         }
-        // Iterate over the fetched budgets and create UI elements for each
+
         for (Budget budget : budgets) {
-            System.out.println("Processing budget: " + budget.getCategory());
-
-            // Create a VBox for each budget entry to hold the details
-            VBox budgetBox = new VBox();
-            budgetBox.setSpacing(10); // Set spacing for better readability
-
-            // Add Labels or other components as needed to the VBox
-            budgetBox.getChildren().addAll(
-                    new Label("Category: " + budget.getCategory()),
-                    new Label("Allocated: " + budget.getAllocatedAmount()),
-                    new Label("Spent: " + budget.getSpentAmount()),
-                    new Label("Remaining: " + (budget.getAllocatedAmount() - budget.getSpentAmount())),
-                    // Format dates as needed
-                    new Label("Start Date: " + budget.getStartDate().toString()),
-                    new Label("End Date: " + budget.getEndDate().toString())
-            );
-
-            // Add the VBox to the FlowPane
+            VBox budgetBox = createBudgetBox(budget);
             flowPane1.getChildren().add(budgetBox);
         }
+    }
 
-        System.out.println("Finished loading budget data");
+    private VBox createBudgetBox(Budget budget) {
+        VBox budgetBox = new VBox(10);
+        budgetBox.getChildren().addAll(
+                new Label("Category: " + budget.getCategory()),
+                new Label("Allocated: " + budget.getAllocatedAmount()),
+                new Label("Spent: " + budget.getSpentAmount()),
+                new Label("Remaining: " + (budget.getAllocatedAmount() - budget.getSpentAmount())),
+                new Label("Start Date: " + budget.getStartDate()),
+                new Label("End Date: " + budget.getEndDate())
+        );
+        return budgetBox;
     }
 
     private List<Budget> fetchBudgetData() {
         List<Budget> budgets = new ArrayList<>();
-        String query = "SELECT category, budget_limit, start_date, end_date FROM budget";
+        String query = "SELECT b.category, b.budget_limit, b.start_date, b.end_date, IFNULL(SUM(t.amount), 0) as spent_amount " +
+                "FROM budget b " +
+                "LEFT JOIN transactions t ON b.category = t.category AND t.transaction_date BETWEEN b.start_date AND b.end_date " +
+                "GROUP BY b.category, b.budget_limit, b.start_date, b.end_date";
 
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement stmt = con.prepareStatement(query);
@@ -84,44 +88,22 @@ public class BudgetController {
                 double allocatedAmount = rs.getDouble("budget_limit");
                 LocalDate startDate = rs.getDate("start_date").toLocalDate();
                 LocalDate endDate = rs.getDate("end_date").toLocalDate();
+                double spentAmount = rs.getDouble("spent_amount");
 
-                budgets.add(new Budget(category, allocatedAmount, 0.0, startDate, endDate));
+                budgets.add(new Budget(category, allocatedAmount, spentAmount, startDate, endDate));
             }
+            System.out.println("Fetched " + budgets.size() + " budgets successfully.");
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        // Calculating the spent amount for each budget
-        for (Budget budget : budgets) {
-            double spentAmount = calculateSpentAmount(budget.getCategory(), budget.getStartDate(), budget.getEndDate());
-            budget.setSpentAmount(spentAmount);
+            showError(e);
         }
 
         return budgets;
     }
 
-    private double calculateSpentAmount(String category, LocalDate startDate, LocalDate endDate) {
 
-        double spentAmount = 0.0;
-        String query = "SELECT SUM(amount) FROM transactions WHERE category = ? AND transaction_date BETWEEN ? AND ?";
-
-        try (Connection con = ConnectionManager.getConnection();
-             PreparedStatement stmt = con.prepareStatement(query)) {
-
-            stmt.setString(1, category);
-            stmt.setDate(2, java.sql.Date.valueOf(startDate));
-            stmt.setDate(3, java.sql.Date.valueOf(endDate));
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    spentAmount = rs.getDouble(1); // Assuming the sum is in the first column
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return spentAmount;
+    private void showError(Throwable throwable) {
+        System.err.println("Error: " + throwable.getMessage());
+        throwable.printStackTrace();
     }
 
     @FXML
