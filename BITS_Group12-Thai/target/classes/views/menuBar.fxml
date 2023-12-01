@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="255.0" styleClass="rootPane" stylesheets="@../css/menuBar.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="801.0" prefWidth="255.0">
+         <children>
+            <ImageView fitHeight="257.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/LogoNav.png" />
+               </image>
+            </ImageView>
+            <MFXScrollPane prefHeight="618.0" prefWidth="0.0" style="-fx-background-color: transparent; -fx-background-radius: 0 0 20 0;">
+               <content>
+                  <VBox prefHeight="645.0" prefWidth="240.0">
+                     <children>
+                        <MFXButton alignment="CENTER" buttonType="RAISED" prefHeight="60.0" prefWidth="200.0" style="-fx-padding: 15%;" text="      Profile">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/navbar/user.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXButton>
+                        <MFXButton buttonType="RAISED" prefHeight="60.0" prefWidth="238.0" text="   Dashbroad">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/navbar/dashboard-interface.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXButton>
+                        <MFXButton buttonType="RAISED" layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="238.0" text="     Finance">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/navbar/money.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXButton>
+                        <MFXButton buttonType="RAISED" layoutX="10.0" layoutY="94.0" prefHeight="60.0" prefWidth="238.0" text="       Budget">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/navbar/money-bag.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXButton>
+                        <MFXButton buttonType="RAISED" layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="238.0" text="   Transaction">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/navbar/transaction.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXButton>
+                        <MFXButton buttonType="RAISED" prefHeight="60.0" prefWidth="238.0" text="Log Out">
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/navbar/logout.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="140.0" />
+                           </VBox.margin>
+                        </MFXButton>
+                     </children>
+                  </VBox>
+               </content>
+            </MFXScrollPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
