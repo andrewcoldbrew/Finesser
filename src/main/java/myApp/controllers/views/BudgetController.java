@@ -58,25 +58,11 @@ public class BudgetController {
         }
 
         for (Budget budget : budgets) {
-//            VBox budgetBox = createBudgetBox(budget);
             double progressValue = budget.calculatePercentage();
-            BudgetBox budgetBox = new BudgetBox(budget.getCategory(), budget.getAllocatedAmount(), budget.getSpentAmount(), budget.getEndDate(), progressValue*100, progressValue);
+            BudgetBox budgetBox = new BudgetBox(budget);
 
             flowPane.getChildren().add(budgetBox);
         }
-    }
-
-    private VBox createBudgetBox(Budget budget) {
-        VBox budgetBox = new VBox(10);
-        budgetBox.getChildren().addAll(
-                new Label("Category: " + budget.getCategory()),
-                new Label("Allocated: " + budget.getAllocatedAmount()),
-                new Label("Spent: " + budget.getSpentAmount()),
-                new Label("Remaining: " + (budget.getAllocatedAmount() - budget.getSpentAmount())),
-                new Label("Start Date: " + budget.getStartDate()),
-                new Label("End Date: " + budget.getEndDate())
-        );
-        return budgetBox;
     }
 
     private List<Budget> fetchBudgetData() {
@@ -115,24 +101,16 @@ public class BudgetController {
 
     @FXML
     private void handleAddBudgetForm() {
-//        if (!mainPane.getChildren().contains(addBudgetForm)) {
-//            AnchorPane.setTopAnchor(addBudgetForm, (mainPane.getHeight() - addBudgetForm.getPrefHeight()) / 2);
-//            AnchorPane.setLeftAnchor(addBudgetForm, (mainPane.getWidth() - addBudgetForm.getPrefWidth()) / 2);
-//            mainPane.getChildren().add(addBudgetForm);
-//        }
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Add Budget Dialog");
 
         AddBudgetForm addBudgetForm = new AddBudgetForm();
 
-        // You can customize the size of the dialog
         Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
         dialogStage.setScene(dialogScene);
 
-        // Set the modality to APPLICATION_MODAL to block user interaction with the main window
         dialogStage.initModality(Modality.APPLICATION_MODAL);
 
-        // Show the dialog and wait for it to be closed
         dialogStage.showAndWait();
     }
 }

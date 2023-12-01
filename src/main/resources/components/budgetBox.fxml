@@ -15,6 +15,7 @@
             <Label fx:id="budgetLabel" text="Budget" />
             <Label fx:id="spentLabel" text="Spent" />
             <Label fx:id="endDateLabel" text="Ends at" />
+            <Label fx:id="daysUntilExpiryLabel" text="Days Until Expiry" />
             <HBox alignment="CENTER_LEFT" spacing="20.0">
                <children>
                   <Label fx:id="percentageLabel" text="Label" />
