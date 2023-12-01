@@ -59,7 +59,7 @@ public class BudgetController {
 
         for (Budget budget : budgets) {
             double progressValue = budget.calculatePercentage();
-            BudgetBox budgetBox = new BudgetBox(budget);
+            BudgetBox budgetBox = new BudgetBox(budget.getCategory(), budget.getAllocatedAmount(), budget.getSpentAmount(), budget.getEndDate(), progressValue * 100, progressValue);
 
             flowPane.getChildren().add(budgetBox);
         }
@@ -92,7 +92,6 @@ public class BudgetController {
 
         return budgets;
     }
-
 
     private void showError(Throwable throwable) {
         System.err.println("Error: " + throwable.getMessage());
