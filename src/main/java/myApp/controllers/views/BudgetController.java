@@ -59,11 +59,12 @@ public class BudgetController {
 
         for (Budget budget : budgets) {
             double progressValue = budget.calculatePercentage();
-            BudgetBox budgetBox = new BudgetBox(budget.getCategory(), budget.getAllocatedAmount(), budget.getSpentAmount(), budget.getEndDate(), progressValue * 100, progressValue);
+            BudgetBox budgetBox = new BudgetBox(budget);
 
             flowPane.getChildren().add(budgetBox);
         }
     }
+
 
     private List<Budget> fetchBudgetData() {
         List<Budget> budgets = new ArrayList<>();
