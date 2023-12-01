@@ -24,7 +24,6 @@ public class AddBudgetForm extends AnchorPane {
     public MFXTextField limitField;
     public MFXDatePicker startDatePicker;
     public MFXDatePicker endDatePicker;
-    public MFXButton exitButton;
     public MFXButton addBudgetButton;
     private final ObservableList<String> categoryList = FXCollections.observableArrayList(
             "Food", "Clothes", "Groceries", "Entertainment", "Utilities",
@@ -50,11 +49,6 @@ public class AddBudgetForm extends AnchorPane {
         startDatePicker.setValue(LocalDate.now());
         endDatePicker.setValue(LocalDate.now().plusMonths(1)); // Example end date
         addBudgetButton.setOnAction(this::addBudget);
-        exitButton.setOnAction(this::exit);
-    }
-
-    private void exit(ActionEvent actionEvent) {
-        ((Pane) getParent()).getChildren().remove(this);
     }
 
     private void addBudget(ActionEvent actionEvent) {
@@ -78,12 +72,5 @@ public class AddBudgetForm extends AnchorPane {
             e.printStackTrace();
             System.out.println("Error adding the budget to the database.");
         }
-    }
-
-    private static boolean isNumeric(String str) {
-        if (str == null || str.isEmpty()) {
-            return false;
-        }
-        return str.matches("\\d+");
     }
 }

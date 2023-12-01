@@ -2,11 +2,15 @@ package myApp.controllers.views;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import myApp.controllers.components.AddBudgetForm;
+import myApp.controllers.components.BudgetBox;
 import myApp.models.Budget;
 import myApp.utils.ConnectionManager;
 
@@ -20,9 +24,9 @@ import java.util.List;
 
 public class BudgetController {
     @FXML
-    private AnchorPane mainPane1;
+    private AnchorPane mainPane;
     @FXML
-    private FlowPane flowPane1;
+    private FlowPane flowPane;
     private final AddBudgetForm addBudgetForm = new AddBudgetForm();
 
     @FXML
@@ -45,17 +49,20 @@ public class BudgetController {
     }
 
     private void updateUI(List<Budget> budgets) {
-        flowPane1.getChildren().clear();
+        flowPane.getChildren().clear();
 
         if (budgets.isEmpty()) {
             System.out.println("No budgets found to display.");
-            flowPane1.getChildren().add(new Label("No budgets to display."));
+            flowPane.getChildren().add(new Label("No budgets to display."));
             return;
         }
 
         for (Budget budget : budgets) {
-            VBox budgetBox = createBudgetBox(budget);
-            flowPane1.getChildren().add(budgetBox);
+//            VBox budgetBox = createBudgetBox(budget);
+            double progressValue = budget.calculatePercentage();
+            BudgetBox budgetBox = new BudgetBox(budget.getCategory(), budget.getAllocatedAmount(), budget.getSpentAmount(), budget.getEndDate(), progressValue*100, progressValue);
+
+            flowPane.getChildren().add(budgetBox);
         }
     }
 
@@ -108,10 +115,24 @@ public class BudgetController {
 
     @FXML
     private void handleAddBudgetForm() {
-        if (!mainPane1.getChildren().contains(addBudgetForm)) {
-            AnchorPane.setTopAnchor(addBudgetForm, (mainPane1.getHeight() - addBudgetForm.getPrefHeight()) / 2);
-            AnchorPane.setLeftAnchor(addBudgetForm, (mainPane1.getWidth() - addBudgetForm.getPrefWidth()) / 2);
-            mainPane1.getChildren().add(addBudgetForm);
-        }
+//        if (!mainPane.getChildren().contains(addBudgetForm)) {
+//            AnchorPane.setTopAnchor(addBudgetForm, (mainPane.getHeight() - addBudgetForm.getPrefHeight()) / 2);
+//            AnchorPane.setLeftAnchor(addBudgetForm, (mainPane.getWidth() - addBudgetForm.getPrefWidth()) / 2);
+//            mainPane.getChildren().add(addBudgetForm);
+//        }
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Add Budget Dialog");
+
+        AddBudgetForm addBudgetForm = new AddBudgetForm();
+
+        // You can customize the size of the dialog
+        Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
+        dialogStage.setScene(dialogScene);
+
+        // Set the modality to APPLICATION_MODAL to block user interaction with the main window
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+
+        // Show the dialog and wait for it to be closed
+        dialogStage.showAndWait();
     }
 }
