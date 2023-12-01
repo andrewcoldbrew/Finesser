@@ -19,6 +19,15 @@ public class Budget {
         this.endDate = endDate;
     }
 
+    public double calculatePercentage() {
+        double value = this.getSpentAmount() / this.getAllocatedAmount();
+        if (value >= 1) {
+            return 1.0; // Return 1.0 directly if value is greater than or equal to 1
+        } else {
+            return value;
+        }
+    }
+
     // Getters and setters
     public int getId() {
         return id;
