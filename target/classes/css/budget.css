@@ -1,0 +1,19 @@
+#flowPane {
+    -fx-hgap: 15;
+    -fx-vgap: 15;
+}
+
+#categoryLabel {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+#budgetBox {
+    -fx-effect: dropshadow(three-pass-box, grey, 1, 0, 3, 3);
+    -fx-background-radius: 5;
+    -fx-background-color: #d3d3d3;
+}
+
+#budgetBox:hover {
+    -fx-translate-y: -10;
+}
