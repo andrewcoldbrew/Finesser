@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import java.lang.String?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -16,6 +16,11 @@
 
 <AnchorPane fx:id="mainPane" minWidth="900.0" prefHeight="695.0" prefWidth="1030.0" styleClass="table-header" stylesheets="@../css/transaction.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.TransactionController">
    <children>
+      <MFXTextField fx:id="searchBar" floatMode="ABOVE" layoutX="221.0" layoutY="30.0" prefHeight="50.0" prefWidth="454.0" promptText="Enter something here daddy">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </MFXTextField>
       <TableView fx:id="transactionTable" layoutX="77.0" layoutY="199.0" prefHeight="422.0" prefWidth="600.0" style="-fx-border-color: #9FE2BF; -fx-border-width: 2; -fx-padding: 0;" stylesheets="@../css/transaction.css">
          <columns>
             <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name" />
@@ -48,10 +53,13 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <Button fx:id="addTransactionButton" layoutX="477.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleAddForm" prefHeight="41.0" prefWidth="200.0" styleClass="addTransactionButton" stylesheets="@../css/transaction.css" text="Add transaction">
-         <font>
-            <Font size="15.0" />
-         </font>
+      <ImageView fx:id="sortButton" fitHeight="42.0" fitWidth="42.0" layoutX="126.0" layoutY="132.0" onDragDetected="#handleSortForm" onMouseClicked="#handleSortForm" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/navbar/add.png" />
+         </image>
+      </ImageView>
+      <MFXFilterComboBox fx:id="sortComboBox" floatingText="Sort By" layoutX="221.0" layoutY="133.0" prefHeight="40.0" prefWidth="200.0" />
+      <MFXButton fx:id="addTransactionButton" buttonType="RAISED" layoutX="477.0" layoutY="133.0" onAction="#handleAddForm" prefHeight="41.0" prefWidth="200.0" text="   Add transaction">
          <graphic>
             <ImageView fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -59,13 +67,6 @@
                </image>
             </ImageView>
          </graphic>
-      </Button>
-      <ComboBox fx:id="sortComboBox" layoutX="226.0" layoutY="132.0" prefHeight="41.0" prefWidth="200.0" promptText="Sort By" />
-      <ImageView fx:id="sortButton" fitHeight="42.0" fitWidth="42.0" layoutX="126.0" layoutY="132.0" onMouseClicked="#handleSortForm" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/navbar/add.png" />
-         </image>
-      </ImageView>
-      <MFXTextField fx:id="searchBar" floatMode="ABOVE" layoutX="194.0" layoutY="52.0" prefHeight="50.0" prefWidth="480.0" promptText="Enter something here daddy" />
+      </MFXButton>
    </children>
 </AnchorPane>

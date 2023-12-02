@@ -1,20 +1,20 @@
 package myApp.controllers.views;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import myApp.utils.LoginStageManager;
 import myApp.utils.MainAppManager;
 
 public class MenuBarController {
-    public Button dashBoardButton;
-    public Button transactionButton;
-    public Button budgetButton;
-    public Button financeButton;
-    public Button logoutButton;
+    public MFXButton dashBoardButton;
+    public MFXButton transactionButton;
+    public MFXButton budgetButton;
+    public MFXButton financeButton;
+    public MFXButton logoutButton;
 
     public void moveToDashBoard(ActionEvent actionEvent) {
     }
-
     public void moveToTransaction(ActionEvent actionEvent) {
         MainAppManager.switchScene("transaction");
     }
