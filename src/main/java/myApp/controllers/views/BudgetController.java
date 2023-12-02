@@ -7,12 +7,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import myApp.controllers.components.AddBudgetForm;
 import myApp.controllers.components.BudgetBox;
 import myApp.models.Budget;
 import myApp.utils.ConnectionManager;
+import myApp.utils.Draggable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -115,24 +118,49 @@ public class BudgetController {
 
     @FXML
     private void handleAddBudgetForm() {
-//        if (!mainPane.getChildren().contains(addBudgetForm)) {
-//            AnchorPane.setTopAnchor(addBudgetForm, (mainPane.getHeight() - addBudgetForm.getPrefHeight()) / 2);
-//            AnchorPane.setLeftAnchor(addBudgetForm, (mainPane.getWidth() - addBudgetForm.getPrefWidth()) / 2);
-//            mainPane.getChildren().add(addBudgetForm);
-//        }
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("Add Budget Dialog");
+        // Check if a dialog is already showing
+        if (!isDialogShowing()) {
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Add Budget Dialog");
 
-        AddBudgetForm addBudgetForm = new AddBudgetForm();
+            AddBudgetForm addBudgetForm = new AddBudgetForm();
+            addBudgetForm.setStage(dialogStage);
 
-        // You can customize the size of the dialog
-        Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
-        dialogStage.setScene(dialogScene);
+            // You can customize the size of the dialog
+            Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
+            dialogStage.setScene(dialogScene);
 
-        // Set the modality to APPLICATION_MODAL to block user interaction with the main window
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initStyle(StageStyle.TRANSPARENT);
+            dialogScene.setFill(Color.TRANSPARENT);
 
-        // Show the dialog and wait for it to be closed
-        dialogStage.showAndWait();
+            dialogStage.setResizable(false);
+
+            Draggable draggable = new Draggable();
+            draggable.makeDraggable(dialogStage);
+
+            // Set an event handler for the close request to reset the flag
+            dialogStage.setOnCloseRequest(event -> {
+                setDialogShowing(false);
+            });
+
+            // Set the flag to indicate that a dialog is showing
+            setDialogShowing(true);
+
+            dialogStage.show();
+        }
     }
+
+
+    // Flag to keep track of whether a dialog is showing
+    private boolean isDialogShowing = false;
+
+    private synchronized boolean isDialogShowing() {
+        return isDialogShowing;
+    }
+
+    private synchronized void setDialogShowing(boolean showing) {
+        isDialogShowing = showing;
+    }
+
 }

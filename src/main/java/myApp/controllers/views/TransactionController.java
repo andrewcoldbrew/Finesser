@@ -38,14 +38,6 @@ public class TransactionController implements Initializable {
     @FXML private TableColumn<Transaction, String> bankColumn;
     @FXML private TableColumn<Transaction, String> dateColumn;
 
-    @FXML private Button addTransactionButton;
-    @FXML private TextField transactionNameField;
-    @FXML private TextField amountField;
-    @FXML private TextField descriptionField;
-    @FXML private ComboBox<String> typeComboBox;
-    @FXML private ComboBox<String> bankComboBox;
-    @FXML private AnchorPane popupTransactionDialog;
-
     // Filter buttons
     @FXML private Label totalFood;
     @FXML private Label totalEntertainment;

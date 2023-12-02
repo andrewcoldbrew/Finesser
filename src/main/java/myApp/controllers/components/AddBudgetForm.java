@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import myApp.utils.ConnectionManager;
 
 import java.io.IOException;
@@ -25,6 +26,8 @@ public class AddBudgetForm extends AnchorPane {
     public MFXDatePicker startDatePicker;
     public MFXDatePicker endDatePicker;
     public MFXButton addBudgetButton;
+    public MFXButton exitButton;
+    private Stage stage;
     private final ObservableList<String> categoryList = FXCollections.observableArrayList(
             "Food", "Clothes", "Groceries", "Entertainment", "Utilities",
             "Transportation", "Healthcare", "Education"
@@ -49,6 +52,11 @@ public class AddBudgetForm extends AnchorPane {
         startDatePicker.setValue(LocalDate.now());
         endDatePicker.setValue(LocalDate.now().plusMonths(1)); // Example end date
         addBudgetButton.setOnAction(this::addBudget);
+        exitButton.setOnAction(this::exit);
+    }
+
+    private void exit(ActionEvent actionEvent) {
+        closeStage();
     }
 
     private void addBudget(ActionEvent actionEvent) {
@@ -66,11 +74,22 @@ public class AddBudgetForm extends AnchorPane {
             statement.setDate(4, Date.valueOf(endDate));
             statement.execute();
             System.out.println("Budget added!");
+            closeStage();
         } catch (NumberFormatException e) {
             System.out.println("Limit must be a number");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error adding the budget to the database.");
+        }
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    private void closeStage() {
+        if (stage != null) {
+            stage.close();
         }
     }
 }

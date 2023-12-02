@@ -2,6 +2,7 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,12 +12,15 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="255.0" styleClass="rootPane" stylesheets="@../css/menuBar.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.MenuBarController">
    <children>
-      <VBox prefHeight="801.0" prefWidth="255.0">
+      <VBox alignment="TOP_CENTER" prefHeight="801.0" prefWidth="255.0">
          <children>
-            <ImageView fitHeight="250.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="201.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/LogoNav.png" />
                </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
             </ImageView>
             <VBox alignment="TOP_CENTER" prefHeight="645.0" prefWidth="240.0">
                <children>
@@ -100,7 +104,7 @@
                         <Insets left="50.0" right="50.0" />
                      </VBox.margin>
                   </Separator>
-                  <MFXButton fx:id="logoutButton" alignment="CENTER" buttonType="RAISED" prefHeight="60.0" prefWidth="200.0" text="Log Out">
+                  <MFXButton fx:id="logoutButton" alignment="CENTER" buttonType="RAISED" onAction="#moveToLogin" prefHeight="60.0" prefWidth="200.0" text="Log Out">
                      <graphic>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
