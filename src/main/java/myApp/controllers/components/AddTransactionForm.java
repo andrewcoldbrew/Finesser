@@ -1,5 +1,7 @@
 package myApp.controllers.components;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,13 +19,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class AddTransactionForm extends AnchorPane {
-    public ComboBox<String> typeComboBox;
-    public ComboBox<String> bankComboBox;
+    public MFXFilterComboBox<String> typeComboBox;
+    public MFXFilterComboBox<String> bankComboBox;
     public TextField transactionNameField;
-    public Button addButton;
+    public MFXButton addButton;
     public TextField descriptionField;
     public TextField amountField;
-    public Button cancelButton;
+    public MFXButton cancelButton;
 
     private final ObservableList<String> typeList = FXCollections.observableArrayList(
             "Food", "Clothes", "Groceries", "Entertainment", "Utilities",

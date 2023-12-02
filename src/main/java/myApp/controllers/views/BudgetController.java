@@ -7,12 +7,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import myApp.controllers.components.AddBudgetForm;
 import myApp.controllers.components.BudgetBox;
 import myApp.models.Budget;
 import myApp.utils.ConnectionManager;
+import myApp.utils.Draggable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -58,13 +61,26 @@ public class BudgetController {
         }
 
         for (Budget budget : budgets) {
+//            VBox budgetBox = createBudgetBox(budget);
             double progressValue = budget.calculatePercentage();
-            BudgetBox budgetBox = new BudgetBox(budget);
+            BudgetBox budgetBox = new BudgetBox(budget.getCategory(), budget.getAllocatedAmount(), budget.getSpentAmount(), budget.getEndDate(), progressValue*100, progressValue);
 
             flowPane.getChildren().add(budgetBox);
         }
     }
 
+    private VBox createBudgetBox(Budget budget) {
+        VBox budgetBox = new VBox(10);
+        budgetBox.getChildren().addAll(
+                new Label("Category: " + budget.getCategory()),
+                new Label("Allocated: " + budget.getAllocatedAmount()),
+                new Label("Spent: " + budget.getSpentAmount()),
+                new Label("Remaining: " + (budget.getAllocatedAmount() - budget.getSpentAmount())),
+                new Label("Start Date: " + budget.getStartDate()),
+                new Label("End Date: " + budget.getEndDate())
+        );
+        return budgetBox;
+    }
 
     private List<Budget> fetchBudgetData() {
         List<Budget> budgets = new ArrayList<>();
@@ -94,6 +110,7 @@ public class BudgetController {
         return budgets;
     }
 
+
     private void showError(Throwable throwable) {
         System.err.println("Error: " + throwable.getMessage());
         throwable.printStackTrace();
@@ -101,16 +118,49 @@ public class BudgetController {
 
     @FXML
     private void handleAddBudgetForm() {
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("Add Budget Dialog");
+        // Check if a dialog is already showing
+        if (!isDialogShowing()) {
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Add Budget Dialog");
 
-        AddBudgetForm addBudgetForm = new AddBudgetForm();
+            AddBudgetForm addBudgetForm = new AddBudgetForm();
+            addBudgetForm.setStage(dialogStage);
 
-        Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
-        dialogStage.setScene(dialogScene);
+            // You can customize the size of the dialog
+            Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
+            dialogStage.setScene(dialogScene);
 
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initStyle(StageStyle.TRANSPARENT);
+            dialogScene.setFill(Color.TRANSPARENT);
 
-        dialogStage.showAndWait();
+            dialogStage.setResizable(false);
+
+            Draggable draggable = new Draggable();
+            draggable.makeDraggable(dialogStage);
+
+            // Set an event handler for the close request to reset the flag
+            dialogStage.setOnCloseRequest(event -> {
+                setDialogShowing(false);
+            });
+
+            // Set the flag to indicate that a dialog is showing
+            setDialogShowing(true);
+
+            dialogStage.show();
+        }
     }
+
+
+    // Flag to keep track of whether a dialog is showing
+    private boolean isDialogShowing = false;
+
+    private synchronized boolean isDialogShowing() {
+        return isDialogShowing;
+    }
+
+    private synchronized void setDialogShowing(boolean showing) {
+        isDialogShowing = showing;
+    }
+
 }
