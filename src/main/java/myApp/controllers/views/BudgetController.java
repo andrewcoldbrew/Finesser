@@ -61,10 +61,7 @@ public class BudgetController {
         }
 
         for (Budget budget : budgets) {
-//            VBox budgetBox = createBudgetBox(budget);
-            double progressValue = budget.calculatePercentage();
-            BudgetBox budgetBox = new BudgetBox(budget.getCategory(), budget.getAllocatedAmount(), budget.getSpentAmount(), budget.getEndDate(), progressValue*100, progressValue);
-
+            BudgetBox budgetBox = new BudgetBox(budget);
             flowPane.getChildren().add(budgetBox);
         }
     }
@@ -106,7 +103,6 @@ public class BudgetController {
         } catch (SQLException e) {
             showError(e);
         }
-
         return budgets;
     }
 
@@ -151,16 +147,13 @@ public class BudgetController {
         }
     }
 
-
     // Flag to keep track of whether a dialog is showing
     private boolean isDialogShowing = false;
 
     private synchronized boolean isDialogShowing() {
         return isDialogShowing;
     }
-
     private synchronized void setDialogShowing(boolean showing) {
         isDialogShowing = showing;
     }
-
 }

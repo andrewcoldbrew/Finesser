@@ -44,7 +44,10 @@ public class BudgetBox extends AnchorPane {
         spentLabel.setText(String.format("Spent: %.0f", budget.getSpentAmount()));
         String formattedEndDate = budget.getEndDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         endDateLabel.setText(String.format("Ends at: %s", formattedEndDate));
+
         percentageLabel.setText(String.format("%.1f%%", budget.calculatePercentage() * 100));
+
+
         progressBar.getRanges1().add(NumberRange.of(0.0, 0.49));
         progressBar.getRanges2().add(NumberRange.of(0.50, 0.79));
         progressBar.getRanges3().add(NumberRange.of(0.80, 1.0));
