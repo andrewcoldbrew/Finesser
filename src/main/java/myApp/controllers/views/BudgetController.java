@@ -31,10 +31,13 @@ public class BudgetController {
     @FXML
     private FlowPane flowPane;
     private final AddBudgetForm addBudgetForm = new AddBudgetForm();
+    private final Stage dialogStage = new Stage();
+    private  Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
 
     @FXML
     public void initialize() {
         loadBudgetDataAsync();
+        initializeAddBudgetForm();
     }
 
     private void loadBudgetDataAsync() {
@@ -116,39 +119,23 @@ public class BudgetController {
         throwable.printStackTrace();
     }
 
+    private void initializeAddBudgetForm() {
+        dialogStage.setTitle("Add Budget Dialog");
+
+        addBudgetForm.setStage(dialogStage);
+
+        dialogStage.setScene(dialogScene);
+
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initStyle(StageStyle.DECORATED);
+        dialogScene.setFill(Color.TRANSPARENT);
+
+        dialogStage.setResizable(false);
+    }
+
     @FXML
     private void handleAddBudgetForm() {
-        // Check if a dialog is already showing
-        if (!isDialogShowing()) {
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Add Budget Dialog");
-
-            AddBudgetForm addBudgetForm = new AddBudgetForm();
-            addBudgetForm.setStage(dialogStage);
-
-            // You can customize the size of the dialog
-            Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
-            dialogStage.setScene(dialogScene);
-
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initStyle(StageStyle.TRANSPARENT);
-            dialogScene.setFill(Color.TRANSPARENT);
-
-            dialogStage.setResizable(false);
-
-            Draggable draggable = new Draggable();
-            draggable.makeDraggable(dialogStage);
-
-            // Set an event handler for the close request to reset the flag
-            dialogStage.setOnCloseRequest(event -> {
-                setDialogShowing(false);
-            });
-
-            // Set the flag to indicate that a dialog is showing
-            setDialogShowing(true);
-
-            dialogStage.show();
-        }
+        dialogStage.show();
     }
 
 
