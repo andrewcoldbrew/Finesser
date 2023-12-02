@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/LogoNav.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/MenuBarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/MenuBarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/menuBar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/menuBar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/transaction.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/transaction.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/LogoNavbar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/navbar/add.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/add.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/navbar/dashboard-interface.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/dashboard-interface.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/navbar/logout.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/logout.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/navbar/money-bag.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/money-bag.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/navbar/money.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/money.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/navbar/transaction.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/transaction.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/navbar/user.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/user.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/menuBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/menuBar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/signup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/transaction.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/transaction.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/addBudgetForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/addBudgetForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/budget.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/budget.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/menuBar.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/menuBar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/transaction.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/transaction.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/LogoNavbar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/navbar/add.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/navbar/add.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/navbar/dashboard-interface.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/navbar/dashboard-interface.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/navbar/logout.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/navbar/logout.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/navbar/money-bag.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/navbar/money-bag.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/navbar/money.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/navbar/money.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/navbar/transaction.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/navbar/transaction.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/navbar/user.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/navbar/user.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddBudgetForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddBudgetForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/BudgetBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/BudgetBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/MenuBarController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/MenuBarController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/models/Budget.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/models/Budget.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/budget.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/budget.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/menuBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/menuBar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/signup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/transaction.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/transaction.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="ThaiNgxBa-ReBuilt" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;vinhnt2914&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="e93a114d-d2e9-4637-9ed6-a073c8ebe091" />
+        <option name="url" value="https://github.com/vinhnt2914/BITS_Group12.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2YwGM0QGNhwii7T4OVVmdzh4NVm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "NguyenTheVinh",
+    "last_opened_file_path": "C:/Users/vinhh/Documents/GitHub/BITS_Group12/src/main/resources/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.5443038",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="myApp.Main" />
+      <module name="BITS_GROUP12" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\vinhh\JavaFX\javafx-sdk-21.0.1\lib --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="" />
+      <created>1701429178984</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701429178984</updated>
+      <workItem from="1701429182091" duration="84000" />
+      <workItem from="1701429482743" duration="1004000" />
+      <workItem from="1701479444601" duration="85000" />
+      <workItem from="1701479956038" duration="3000" />
+      <workItem from="1701480001559" duration="877000" />
+      <workItem from="1701480899183" duration="1864000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/ND" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

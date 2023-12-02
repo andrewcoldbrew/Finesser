@@ -1,15 +1,23 @@
-.button {
-    -fx-background-color: #9FE2BF;
-    -fx-text-fill: black;
+.rootPane {
+    -fx-background-color:  linear-gradient(to bottom right, #c9e29f, #1f8585);
+    -fx-background-radius: 0 20 20 0;
+    -fx-border-color: #ebebeb;
+    -fx-border-radius: 0 20 20 0;
     -fx-font-size: 15px;
-    -fx-font-weight: bold;
-    -fx-background-radius: 20px;
 }
 
-.button:hover {
-    -fx-background-color: #b2e8cc;
+.rootPane .button {
+    /*-fx-background-color: transparent;*/
+    /*-fx-border-color: #1E152A;*/
+    /*-fx-border-radius: 10;*/
+    -fx-background-color: lightgrey;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #1E152A;
 }
 
-.button:pressed {
-    -fx-background-color: #d9f3e5;
+.rootPane .button:hover,
+.rootPane .button:focused {
+    /*-fx-background-color: #1E152A;*/
+    /*-fx-border-color: #9FE2BF;*/
+    -fx-text-fill: white;
 }
