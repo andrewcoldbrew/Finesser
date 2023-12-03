@@ -5,14 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddBudgetForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddBudgetForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/BudgetBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/BudgetBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/testAddBudgetForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/testAddBudgetForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/testAddBudgetForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/testAddBudgetForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddBudgetForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddBudgetForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/budgetBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/budgetBox.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/budget.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/budget.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/budget.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/budget.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/budgetBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/budgetBox.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/budget.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/budget.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/BudgetBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/BudgetBox.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/budget.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/budget.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +27,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Class" />
         <option value="FxmlFile" />
       </list>
     </option>
@@ -115,6 +121,7 @@
       <workItem from="1701489138636" duration="4174000" />
       <workItem from="1701505062475" duration="1412000" />
       <workItem from="1701524936073" duration="3976000" />
+      <workItem from="1701590706185" duration="3660000" />
     </task>
     <servers />
   </component>

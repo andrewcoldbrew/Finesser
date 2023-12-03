@@ -1,6 +1,6 @@
 #flowPane {
-    -fx-hgap: 15;
-    -fx-vgap: 15;
+    -fx-hgap: 20;
+    -fx-vgap: 20;
 }
 
 #categoryLabel {
@@ -10,7 +10,7 @@
 
 #budgetBox {
     -fx-effect: dropshadow(three-pass-box, grey, 1, 0, 3, 3);
-    -fx-background-radius: 5;
+    -fx-background-radius: 10;
     -fx-background-color: #d3d3d3;
 }
 
