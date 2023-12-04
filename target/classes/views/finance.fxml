@@ -6,35 +6,41 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.FinanceController">
    <children>
       <SplitPane dividerPositions="0.5" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="251.0" prefWidth="600.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <items>
-            <MFXScrollPane />
-            <MFXScrollPane />
+            <MFXScrollPane fx:id="incomeScrollPane" fitToHeight="true" fitToWidth="true">
+               <content>
+                  <FlowPane fx:id="incomeFlowPane" alignment="TOP_CENTER" />
+               </content></MFXScrollPane>
+            <MFXScrollPane fx:id="outcomeScrollPane" fitToHeight="true" fitToWidth="true">
+               <content>
+                  <FlowPane fx:id="outcomeFlowPane" alignment="TOP_CENTER" />
+               </content></MFXScrollPane>
          </items>
       </SplitPane>
-      <MFXButton layoutX="504.0" layoutY="68.0" text="Add finance" />
+      <MFXButton fx:id="addButton" buttonType="RAISED" layoutX="504.0" layoutY="68.0" onAction="#handleAddFinanceForm" text="Add finance" />
       <HBox layoutX="22.0" layoutY="68.0" spacing="20.0">
          <children>
-            <MFXButton fx:id="allTimeButton" text="All Time" />
-            <MFXButton fx:id="weeklyButton" text="Weekly" />
-            <MFXButton fx:id="monthyButton" text="Monthly" />
-            <MFXButton fx:id="yearlyButton" text="Yearly" />
+            <MFXButton fx:id="allTimeButton" buttonType="RAISED" text="All Time" />
+            <MFXButton fx:id="weeklyButton" buttonType="RAISED" text="Weekly" />
+            <MFXButton fx:id="monthyButton" buttonType="RAISED" text="Monthly" />
+            <MFXButton fx:id="yearlyButton" buttonType="RAISED" text="Yearly" />
          </children>
       </HBox>
-      <Label layoutX="22.0" layoutY="14.0" text="Your Current Fiance">
+      <Label layoutX="22.0" layoutY="14.0" text="Your Current Finance">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="totalLabel" layoutX="284.0" layoutY="368.0" text="Total: " />
+      <Label fx:id="totalLabel" layoutX="304.0" layoutY="382.0" text="Total: " />
    </children>
    <padding>
-      <Insets bottom="20.0" top="20.0" />
+      <Insets top="10.0" />
    </padding>
 </AnchorPane>

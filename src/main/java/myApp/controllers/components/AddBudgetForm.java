@@ -4,6 +4,7 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +29,6 @@ public class AddBudgetForm extends AnchorPane {
     public MFXButton addBudgetButton;
     public MFXButton exitButton;
     private Stage stage;
-    private boolean isShown;
     private final ObservableList<String> categoryList = FXCollections.observableArrayList(
             "Food", "Clothes", "Groceries", "Entertainment", "Utilities",
             "Transportation", "Healthcare", "Education"
@@ -38,7 +38,6 @@ public class AddBudgetForm extends AnchorPane {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/addBudgetForm.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-        this.setShown(true);
         try {
             fxmlLoader.load();
             initialize();
@@ -59,7 +58,6 @@ public class AddBudgetForm extends AnchorPane {
 
     private void exit(ActionEvent actionEvent) {
         closeStage();
-        this.setShown(false);
     }
 
     private void addBudget(ActionEvent actionEvent) {
@@ -90,6 +88,10 @@ public class AddBudgetForm extends AnchorPane {
         this.stage = stage;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
     private void closeStage() {
         if (stage != null) {
             System.out.println("CLOSING STAGE!");
@@ -97,13 +99,5 @@ public class AddBudgetForm extends AnchorPane {
         } else {
             System.out.println("STAGE NULL");
         }
-    }
-
-    public boolean isShown() {
-        return isShown;
-    }
-
-    public void setShown(boolean shown) {
-        isShown = shown;
     }
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root stylesheets="@../css/financeForm.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <HBox layoutX="483.0" layoutY="1.0" spacing="20.0">
+               <children>
+                  <ImageView fx:id="minimizeButton" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="maximizeButton" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="exitButton" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/finance/exitButton.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="128.0" layoutY="33.0" prefHeight="200.0" prefWidth="343.0" spacing="30.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="138.0" text="Finance Type" />
+                        <MFXComboBox fx:id="typeComboBox" prefHeight="40.0" prefWidth="270.0" />
+                     </children>
+                  </HBox>
+                  <MFXTextField fx:id="nameField" floatingText="Name" prefHeight="0.0" prefWidth="360.0" />
+                  <MFXTextField fx:id="amountField" floatingText="Amount" prefHeight="20.0" prefWidth="360.0" />
+                  <HBox alignment="CENTER_LEFT" spacing="50.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="78.0" text="Start Date: " />
+                        <MFXDatePicker fx:id="startDatePicker" prefHeight="38.0" prefWidth="245.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="20.0">
+                     <children>
+                        <Label text="Every: " />
+                        <MFXTextField fx:id="timeField" floatMode="DISABLED" prefHeight="40.0" />
+                        <MFXComboBox fx:id="typeOfTimeComboBox" prefHeight="10.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <MFXButton fx:id="addButton" layoutX="258.0" layoutY="404.0" text="Add Finance" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
+      </AnchorPane>
+   </center>
+</fx:root>

@@ -24,7 +24,7 @@ public class MenuBarController {
     }
 
     public void moveToFinance(ActionEvent actionEvent) {
-
+        MainAppManager.switchScene("finance");
     }
 
     public void moveToLogin(ActionEvent actionEvent) {

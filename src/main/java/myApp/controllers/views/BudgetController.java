@@ -5,6 +5,7 @@ import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -18,7 +19,9 @@ import myApp.controllers.components.AddBudgetForm;
 import myApp.controllers.components.BudgetBox;
 import myApp.models.Budget;
 import myApp.utils.ConnectionManager;
+import myApp.utils.Draggable;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,8 +29,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class BudgetController {
+public class BudgetController implements Initializable {
     public MFXButton addBudgetButton;
     public MFXScrollPane scrollPane;
     public AnchorPane mainPane;
@@ -35,13 +39,15 @@ public class BudgetController {
     private FlowPane flowPane;
     private final AddBudgetForm addBudgetForm = new AddBudgetForm();
     private final Stage dialogStage = new Stage();
-    private  Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
+    private final Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         loadBudgetDataAsync();
         initializeAddBudgetForm();
         flowPane.setPadding(new Insets(30, 0, 30, 30));
+        Draggable draggable = new Draggable();
+        draggable.makeDraggable(dialogStage);
     }
 
     private void loadBudgetDataAsync() {
@@ -72,19 +78,6 @@ public class BudgetController {
             BudgetBox budgetBox = new BudgetBox(budget.getCategory(), budget.getAllocatedAmount(), budget.getSpentAmount(), budget.getEndDate(), progressValue*100, progressValue);
             flowPane.getChildren().add(budgetBox);
         }
-    }
-
-    private VBox createBudgetBox(Budget budget) {
-        VBox budgetBox = new VBox(10);
-        budgetBox.getChildren().addAll(
-                new Label("Category: " + budget.getCategory()),
-                new Label("Allocated: " + budget.getAllocatedAmount()),
-                new Label("Spent: " + budget.getSpentAmount()),
-                new Label("Remaining: " + (budget.getAllocatedAmount() - budget.getSpentAmount())),
-                new Label("Start Date: " + budget.getStartDate()),
-                new Label("End Date: " + budget.getEndDate())
-        );
-        return budgetBox;
     }
 
     private List<Budget> fetchBudgetData() {
@@ -125,17 +118,19 @@ public class BudgetController {
         dialogStage.setTitle("Add Budget Dialog");
 
         addBudgetForm.setStage(dialogStage);
+        System.out.println(addBudgetForm.getStage());
 
         dialogStage.setScene(dialogScene);
 
         dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initStyle(StageStyle.DECORATED);
+        dialogStage.initStyle(StageStyle.UNDECORATED);
         dialogScene.setFill(Color.TRANSPARENT);
 
         dialogStage.setResizable(false);
     }
     @FXML
     private void handleAddBudgetForm() {
+        dialogStage.hide();
         dialogStage.show();
     }
 
