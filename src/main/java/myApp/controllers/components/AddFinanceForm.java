@@ -24,14 +24,14 @@ public class AddFinanceForm extends BorderPane {
     public MFXComboBox<String> typeComboBox;
     public MFXComboBox<String> typeOfTimeComboBox;
     public Button exitButton;
-//    private final ObservableList<String> financeTypeList = FXCollections.observableArrayList(
-//            "Salary", "Bills", "Expenses", "Taxes",
-//            "Rent", "Loans", "Insurance", "Membership", "Subscriptions"
-//    );
-
-        private final ObservableList<String> financeTypeList = FXCollections.observableArrayList(
-            "Income", "Outcome"
+    private final ObservableList<String> financeTypeList = FXCollections.observableArrayList(
+            "Salary", "Bills", "Expenses", "Taxes",
+            "Rent", "Loans", "Insurance", "Membership", "Subscriptions"
     );
+
+//        private final ObservableList<String> financeTypeList = FXCollections.observableArrayList(
+//            "Income", "Outcome"
+//    );
     private final ObservableList<String> timeTypeList = FXCollections.observableArrayList(
         "Days", "Weeks", "Months", "Years"
     );
@@ -54,7 +54,6 @@ public class AddFinanceForm extends BorderPane {
         exitButton.setOnAction(this::closeStage);
         typeComboBox.setItems(financeTypeList);
         typeOfTimeComboBox.setItems(timeTypeList);
-
     }
 
     private void closeStage(ActionEvent actionEvent) {
