@@ -28,6 +28,7 @@ public class AddBudgetForm extends AnchorPane {
     public MFXButton addBudgetButton;
     public MFXButton exitButton;
     private Stage stage;
+    private boolean isShown;
     private final ObservableList<String> categoryList = FXCollections.observableArrayList(
             "Food", "Clothes", "Groceries", "Entertainment", "Utilities",
             "Transportation", "Healthcare", "Education"
@@ -37,10 +38,11 @@ public class AddBudgetForm extends AnchorPane {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/addBudgetForm.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
+        this.setShown(true);
         try {
             fxmlLoader.load();
             initialize();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -57,6 +59,7 @@ public class AddBudgetForm extends AnchorPane {
 
     private void exit(ActionEvent actionEvent) {
         closeStage();
+        this.setShown(false);
     }
 
     private void addBudget(ActionEvent actionEvent) {
@@ -89,7 +92,18 @@ public class AddBudgetForm extends AnchorPane {
 
     private void closeStage() {
         if (stage != null) {
+            System.out.println("CLOSING STAGE!");
             stage.close();
+        } else {
+            System.out.println("STAGE NULL");
         }
+    }
+
+    public boolean isShown() {
+        return isShown;
+    }
+
+    public void setShown(boolean shown) {
+        isShown = shown;
     }
 }

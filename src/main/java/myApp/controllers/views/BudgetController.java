@@ -1,12 +1,15 @@
 package myApp.controllers.views;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -15,7 +18,6 @@ import myApp.controllers.components.AddBudgetForm;
 import myApp.controllers.components.BudgetBox;
 import myApp.models.Budget;
 import myApp.utils.ConnectionManager;
-import myApp.utils.Draggable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,15 +28,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BudgetController {
-    @FXML
-    private AnchorPane mainPane;
+    public MFXButton addBudgetButton;
+    public MFXScrollPane scrollPane;
+    public AnchorPane mainPane;
     @FXML
     private FlowPane flowPane;
     private final AddBudgetForm addBudgetForm = new AddBudgetForm();
+    private final Stage dialogStage = new Stage();
+    private  Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
 
     @FXML
     public void initialize() {
         loadBudgetDataAsync();
+        initializeAddBudgetForm();
+        flowPane.setPadding(new Insets(30, 0, 30, 30));
     }
 
     private void loadBudgetDataAsync() {
@@ -61,7 +68,8 @@ public class BudgetController {
         }
 
         for (Budget budget : budgets) {
-            BudgetBox budgetBox = new BudgetBox(budget);
+            double progressValue = budget.calculatePercentage();
+            BudgetBox budgetBox = new BudgetBox(budget.getCategory(), budget.getAllocatedAmount(), budget.getSpentAmount(), budget.getEndDate(), progressValue*100, progressValue);
             flowPane.getChildren().add(budgetBox);
         }
     }
@@ -103,6 +111,7 @@ public class BudgetController {
         } catch (SQLException e) {
             showError(e);
         }
+
         return budgets;
     }
 
@@ -112,48 +121,22 @@ public class BudgetController {
         throwable.printStackTrace();
     }
 
+    private void initializeAddBudgetForm() {
+        dialogStage.setTitle("Add Budget Dialog");
+
+        addBudgetForm.setStage(dialogStage);
+
+        dialogStage.setScene(dialogScene);
+
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initStyle(StageStyle.DECORATED);
+        dialogScene.setFill(Color.TRANSPARENT);
+
+        dialogStage.setResizable(false);
+    }
     @FXML
     private void handleAddBudgetForm() {
-        // Check if a dialog is already showing
-        if (!isDialogShowing()) {
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Add Budget Dialog");
-
-            AddBudgetForm addBudgetForm = new AddBudgetForm();
-            addBudgetForm.setStage(dialogStage);
-
-            // You can customize the size of the dialog
-            Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
-            dialogStage.setScene(dialogScene);
-
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initStyle(StageStyle.TRANSPARENT);
-            dialogScene.setFill(Color.TRANSPARENT);
-
-            dialogStage.setResizable(false);
-
-            Draggable draggable = new Draggable();
-            draggable.makeDraggable(dialogStage);
-
-            // Set an event handler for the close request to reset the flag
-            dialogStage.setOnCloseRequest(event -> {
-                setDialogShowing(false);
-            });
-
-            // Set the flag to indicate that a dialog is showing
-            setDialogShowing(true);
-
-            dialogStage.show();
-        }
+        dialogStage.show();
     }
 
-    // Flag to keep track of whether a dialog is showing
-    private boolean isDialogShowing = false;
-
-    private synchronized boolean isDialogShowing() {
-        return isDialogShowing;
-    }
-    private synchronized void setDialogShowing(boolean showing) {
-        isDialogShowing = showing;
-    }
 }
