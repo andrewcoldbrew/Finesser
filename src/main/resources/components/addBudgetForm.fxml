@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="437.0" prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #9FE2BF; -fx-border-width: 3; -fx-border-radius: 20;" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="82.0" layoutY="115.0" prefHeight="337.0" prefWidth="337.0" spacing="20.0">
+         <children>
+            <MFXFilterComboBox fx:id="categoryComboBox" floatMode="BORDER" floatingText="Category" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" styleClass="formBar" stylesheets="@../css/form.css" />
+            <MFXTextField fx:id="limitField" floatMode="BORDER" prefHeight="39.0" prefWidth="337.0" promptText="Limit:" style="-fx-border-color: #9FE2BF;" styleClass="formBar" stylesheets="@../css/form.css" />
+            <MFXDatePicker fx:id="startDatePicker" floatMode="BORDER" floatingText="Start Date" floatingTextGap="0.0" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" styleClass="formBar" stylesheets="@../css/form.css" />
+            <MFXDatePicker fx:id="endDatePicker" floatMode="BORDER" floatingText="End Date" floatingTextGap="0.0" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" styleClass="formBar" stylesheets="@../css/form.css" />
+            <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="337.0" spacing="10.0">
+               <children>
+                  <MFXButton fx:id="addBudgetButton" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL1" stylesheets="@../css/form.css" text="Add budget">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                     </padding></MFXButton>
+                  <MFXButton fx:id="exitButton" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL1" stylesheets="@../css/form.css" text="Cancel" textFill="RED">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </padding></MFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="200.0" layoutY="49.0" text="Add Budget">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</fx:root>

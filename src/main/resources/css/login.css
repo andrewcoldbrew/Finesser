@@ -1,0 +1,7 @@
+.leftSideLogin {
+    -fx-background-color:  linear-gradient(to bottom right, #c9e29f, #1f8585);
+}
+
+.button {
+    -fx-font-size: 15px;
+}
