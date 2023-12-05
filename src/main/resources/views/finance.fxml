@@ -14,23 +14,23 @@
    <children>
       <SplitPane dividerPositions="0.5" layoutY="112.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="251.0" prefWidth="600.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <items>
-            <MFXScrollPane fx:id="incomeScrollPane">
+            <MFXScrollPane fx:id="incomeScrollPane" fitToHeight="true" fitToWidth="true">
                <content>
-                  <FlowPane fx:id="incomeFlowPane" prefHeight="247.0" prefWidth="294.0" />
+                  <FlowPane fx:id="incomeFlowPane" alignment="TOP_CENTER" />
                </content></MFXScrollPane>
-            <MFXScrollPane fx:id="outcomeScrollPane">
+            <MFXScrollPane fx:id="outcomeScrollPane" fitToHeight="true" fitToWidth="true">
                <content>
-                  <FlowPane fx:id="outcomeFlowPane" prefHeight="246.0" prefWidth="294.0" />
+                  <FlowPane fx:id="outcomeFlowPane" alignment="TOP_CENTER" />
                </content></MFXScrollPane>
          </items>
       </SplitPane>
-      <MFXButton layoutX="504.0" layoutY="68.0" text="Add finance" />
+      <MFXButton fx:id="addButton" buttonType="RAISED" layoutX="504.0" layoutY="68.0" onAction="#handleAddFinanceForm" text="Add finance" />
       <HBox layoutX="22.0" layoutY="68.0" spacing="20.0">
          <children>
-            <MFXButton fx:id="allTimeButton" text="All Time" />
-            <MFXButton fx:id="weeklyButton" text="Weekly" />
-            <MFXButton fx:id="monthyButton" text="Monthly" />
-            <MFXButton fx:id="yearlyButton" text="Yearly" />
+            <MFXButton fx:id="allTimeButton" buttonType="RAISED" text="All Time" />
+            <MFXButton fx:id="weeklyButton" buttonType="RAISED" text="Weekly" />
+            <MFXButton fx:id="monthyButton" buttonType="RAISED" text="Monthly" />
+            <MFXButton fx:id="yearlyButton" buttonType="RAISED" text="Yearly" />
          </children>
       </HBox>
       <Label layoutX="22.0" layoutY="14.0" text="Your Current Finance">

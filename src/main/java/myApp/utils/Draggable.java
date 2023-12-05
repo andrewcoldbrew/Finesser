@@ -23,13 +23,13 @@ public class Draggable {
 
     public void makeDraggable(Stage stage){
         stage.getScene().setOnMousePressed(e -> {
-            startX = e.getSceneX() - stage.getX();
-            startY = e.getSceneY() - stage.getY();
+            startX = e.getScreenX() - stage.getX();
+            startY = e.getScreenY() - stage.getY();
         });
 
         stage.getScene().setOnMouseDragged(e -> {
-            stage.setX(e.getSceneX() - startX);
-            stage.setY(e.getSceneY() - startY);
+            stage.setX(e.getScreenX() - startX);
+            stage.setY(e.getScreenY() - startY);
         });
     }
 }

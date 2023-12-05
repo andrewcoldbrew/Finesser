@@ -47,15 +47,14 @@ public class AddTransactionForm extends AnchorPane {
             throw new RuntimeException(e);
         }
     }
-    private void initialize() {
+    public void initialize() {
         // Initialize ComboBox items with typeList and bankList
         typeComboBox.setItems(typeList);
         bankComboBox.setItems(bankList);
         addButton.setOnAction(this::addTransaction);
         cancelButton.setOnAction(this::closeTransactionForm);
-
     }
-    public void addTransaction(ActionEvent actionEvent) {
+    private void addTransaction(ActionEvent actionEvent) {
         String name = transactionNameField.getText().trim();
         String amountText = amountField.getText().trim();
         String description = descriptionField.getText().trim();

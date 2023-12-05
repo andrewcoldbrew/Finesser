@@ -15,7 +15,8 @@ public class MainAppManager {
     private static BorderPane mainLayout = new BorderPane();
     private static final Map<String, String> scenes = Map.of(
             "transaction", "/views/transaction.fxml",
-            "budget", "/views/budget.fxml"
+            "budget", "/views/budget.fxml",
+            "finance", "/views/finance.fxml"
     );
 
     public static void setupMainApp() {
