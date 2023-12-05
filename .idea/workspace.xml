@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/financeBox.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/FinanceBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/FinanceBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/FinanceBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/financeBox.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/FinanceBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/FinanceBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +125,7 @@
       <workItem from="1701737408357" duration="3646000" />
       <workItem from="1701747956692" duration="1207000" />
       <workItem from="1701749548175" duration="2710000" />
+      <workItem from="1701772173604" duration="1348000" />
     </task>
     <servers />
   </component>

@@ -41,6 +41,7 @@ public class FinanceController implements Initializable {
         Draggable draggable = new Draggable();
         draggable.makeDraggable(dialogStage);
         loadIncome();
+
     }
 
     private void initializeAddFinanceForm() {
@@ -59,7 +60,7 @@ public class FinanceController implements Initializable {
     }
 
     private void loadIncome() {
-        try (PreparedStatement stmt = con.prepareStatement("SELECT name, amount, time_duration, time_type, start_date FROM finance where type = 'Income'");
+        try (PreparedStatement stmt = con.prepareStatement("SELECT name, amount, time_duration, time_type, start_date, type FROM finance");
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -68,13 +69,21 @@ public class FinanceController implements Initializable {
                 int timeDuration = rs.getInt("time_duration");
                 String timeType = rs.getString("time_type");
                 LocalDate startDate = rs.getDate("start_date").toLocalDate();
-                FinanceBox financeBox = new FinanceBox(name, amount, startDate, timeDuration, timeType);
-                incomeFlowPane.getChildren().add(financeBox);
+                String type = rs.getString("type");
+                if (type.equals("Income")) {
+                    FinanceBox financeBox = new FinanceBox(name, amount, startDate, timeDuration, timeType, true);
+                    incomeFlowPane.getChildren().add(financeBox);
+                } else if (type.equals("Outcome")) {
+                    FinanceBox financeBox = new FinanceBox(name, amount, startDate, timeDuration, timeType, false);
+                    outcomeFlowPane.getChildren().add(financeBox);
+                }
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     private void loadOutcome() {
 
