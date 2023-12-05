@@ -37,19 +37,25 @@
          </children>
       </AnchorPane>
    </top>
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+   <bottom>
+      <AnchorPane prefHeight="200.0" prefWidth="616.0" BorderPane.alignment="CENTER">
          <children>
             <VBox layoutX="128.0" layoutY="33.0" prefHeight="200.0" prefWidth="343.0" spacing="30.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="138.0" text="Finance Type" />
-                        <MFXComboBox fx:id="typeComboBox" prefHeight="40.0" prefWidth="270.0" />
+                        <Label prefHeight="18.0" prefWidth="62.0" text="Type: " />
+                        <MFXComboBox fx:id="typeComboBox" floatMode="DISABLED" prefHeight="40.0" prefWidth="277.0" />
                      </children>
                   </HBox>
-                  <MFXTextField fx:id="nameField" floatingText="Name" prefHeight="0.0" prefWidth="360.0" />
-                  <MFXTextField fx:id="amountField" floatingText="Amount" prefHeight="20.0" prefWidth="360.0" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="62.0" text="Category:" />
+                        <MFXComboBox fx:id="categoryComboBox" floatMode="DISABLED" prefHeight="40.0" prefWidth="277.0" />
+                     </children>
+                  </HBox>
+                  <MFXTextField fx:id="nameField" floatingText="Name: " prefHeight="0.0" prefWidth="360.0" />
+                  <MFXTextField fx:id="amountField" floatingText="Amount: " prefHeight="20.0" prefWidth="360.0" />
                   <HBox alignment="CENTER_LEFT" spacing="50.0">
                      <children>
                         <Label prefHeight="18.0" prefWidth="78.0" text="Start Date: " />
@@ -59,17 +65,23 @@
                   <HBox alignment="CENTER_LEFT" spacing="20.0">
                      <children>
                         <Label text="Every: " />
-                        <MFXTextField fx:id="timeField" floatMode="DISABLED" prefHeight="40.0" />
-                        <MFXComboBox fx:id="typeOfTimeComboBox" prefHeight="10.0" />
+                        <MFXTextField fx:id="timeDurationField" floatMode="DISABLED" prefHeight="40.0" />
+                        <MFXComboBox fx:id="typeOfTimeComboBox" floatMode="DISABLED" prefHeight="10.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="20.0">
+                     <children>
+                        <Label prefHeight="18.0" prefWidth="76.0" text="Description: " />
+                        <MFXTextField fx:id="descriptionField" floatMode="DISABLED" prefWidth="261.0" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <MFXButton fx:id="addButton" layoutX="258.0" layoutY="404.0" text="Add Finance" />
+            <MFXButton fx:id="addButton" layoutX="257.0" layoutY="518.0" text="Add Finance" />
          </children>
          <padding>
             <Insets bottom="20.0" />
          </padding>
       </AnchorPane>
-   </center>
+   </bottom>
 </fx:root>

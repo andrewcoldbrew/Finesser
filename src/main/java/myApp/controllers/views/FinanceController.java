@@ -49,6 +49,7 @@ public class FinanceController implements Initializable {
     }
 
     public void handleAddFinanceForm(ActionEvent actionEvent) {
+        addFinanceForm.clearData();
         dialogStage.hide();
         dialogStage.show();
     }
