@@ -11,9 +11,17 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import myApp.controllers.components.AddFinanceForm;
+import myApp.controllers.components.FinanceBox;
+import myApp.models.Transaction;
+import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class FinanceController implements Initializable {
@@ -25,12 +33,14 @@ public class FinanceController implements Initializable {
     private final AddFinanceForm addFinanceForm = new AddFinanceForm();
     private final Stage dialogStage = new Stage();
     private final Scene dialogScene = new Scene(addFinanceForm, addFinanceForm.getPrefWidth(), addFinanceForm.getPrefHeight());
+    private Connection con = ConnectionManager.getConnection();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initializeAddFinanceForm();
         Draggable draggable = new Draggable();
         draggable.makeDraggable(dialogStage);
+        loadIncome();
     }
 
     private void initializeAddFinanceForm() {
@@ -47,6 +57,29 @@ public class FinanceController implements Initializable {
 
         dialogStage.setResizable(false);
     }
+
+    private void loadIncome() {
+        try (PreparedStatement stmt = con.prepareStatement("SELECT name, amount, time_duration, time_type, start_date FROM finance where type = 'Income'");
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                double amount = rs.getDouble("amount");
+                int timeDuration = rs.getInt("time_duration");
+                String timeType = rs.getString("time_type");
+                LocalDate startDate = rs.getDate("start_date").toLocalDate();
+                FinanceBox financeBox = new FinanceBox(name, amount, startDate, timeDuration, timeType);
+                incomeFlowPane.getChildren().add(financeBox);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadOutcome() {
+
+    }
+
 
     public void handleAddFinanceForm(ActionEvent actionEvent) {
         addFinanceForm.clearData();
