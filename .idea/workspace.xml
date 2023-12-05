@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/FinanceBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/addFinanceForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/addFinanceForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/FinanceBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/FinanceBox.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +17,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="CSS File" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -124,6 +122,7 @@
       <workItem from="1701677142013" duration="6031000" />
       <workItem from="1701698435529" duration="3018000" />
       <workItem from="1701737408357" duration="3646000" />
+      <workItem from="1701747956692" duration="1207000" />
     </task>
     <servers />
   </component>
