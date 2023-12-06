@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,9 +11,9 @@
 
 <AnchorPane fx:id="mainPane" prefHeight="695.0" prefWidth="1030.0" stylesheets="@../css/budget.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.BudgetController">
    <children>
-      <MFXButton fx:id="addBudgetButton" buttonType="RAISED" layoutX="748.0" layoutY="59.0" onAction="#handleAddBudgetForm" prefHeight="35.0" prefWidth="174.0" style="-fx-background-color: #9FE2BF;" text="Add Budget Plan" textAlignment="JUSTIFY">
+      <MFXButton fx:id="addBudgetButton" buttonType="RAISED" layoutX="806.0" layoutY="60.0" onAction="#handleAddBudgetForm" prefHeight="35.0" prefWidth="174.0" style="-fx-background-color: #9FE2BF;" text="Add Budget Plan" textAlignment="JUSTIFY">
          <graphic>
-            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="25.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/navbar/add.png" />
                </image>
@@ -21,11 +22,15 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></MFXButton>
-      <FlowPane fx:id="flowPane" layoutX="67.0" layoutY="107.0" prefHeight="238.0" prefWidth="470.0" AnchorPane.bottomAnchor="54.599999999999994" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="62.39999999999998" AnchorPane.topAnchor="107.20000000000002" />
-      <Label layoutX="67.0" layoutY="59.0" text="Current Budget Plans">
+      <Label layoutX="50.0" layoutY="60.0" text="Current Budget Plans">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" layoutX="51.2" layoutY="152.0" prefHeight="500.0" prefWidth="928.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="140.0">
+         <content>
+            <FlowPane fx:id="flowPane" hgap="15.0" prefHeight="497.0" prefWidth="926.0" vgap="15.0" />
+         </content>
+      </MFXScrollPane>
    </children>
 </AnchorPane>

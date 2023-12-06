@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root fx:id="budgetBox" prefWidth="275.0" stylesheets="@../css/budget.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="budgetBox" prefWidth="250.0" stylesheets="@../css/budget.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER_LEFT" prefWidth="275.0" spacing="20.0" style="-fx-background-color: #FAF5F1; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 3; -fx-border-color: #9FE2BF;">
+      <VBox alignment="CENTER_LEFT" prefWidth="270.0" spacing="20.0" style="-fx-background-color: #FAF5F1; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 3; -fx-border-color: #9FE2BF;">
          <children>
             <Label fx:id="categoryLabel" text="Category" />
             <Label fx:id="budgetLabel" text="Budget">

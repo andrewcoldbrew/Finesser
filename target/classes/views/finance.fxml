@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.FinanceController">
+   <children>
+      <SplitPane dividerPositions="0.5" layoutX="20.0" layoutY="164.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="990.0" style="-fx-border-color: #9FE2BF; -fx-border-width: 5;" stylesheets="@../css/finance.css" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <items>
+            <MFXScrollPane fx:id="incomeScrollPane" fitToHeight="true" fitToWidth="true">
+               <content>
+                  <FlowPane fx:id="incomeFlowPane" alignment="TOP_CENTER" prefHeight="461.0" prefWidth="491.0" vgap="15.0">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding></FlowPane>
+               </content></MFXScrollPane>
+            <MFXScrollPane fx:id="outcomeScrollPane" fitToHeight="true" fitToWidth="true">
+               <content>
+                  <FlowPane fx:id="outcomeFlowPane" alignment="TOP_CENTER" vgap="15.0">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding></FlowPane>
+               </content></MFXScrollPane>
+         </items>
+      </SplitPane>
+      <MFXButton fx:id="addButton" buttonType="RAISED" graphicTextGap="10.0" layoutX="810.0" layoutY="100.0" onAction="#handleAddFinanceForm" prefHeight="47.0" prefWidth="200.0" style="-fx-background-color: #9FE2BF;" text="Add Recurring Finances" textAlignment="JUSTIFY">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/navbar/add.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></MFXButton>
+      <HBox layoutX="356.0" layoutY="117.0" prefHeight="35.0" spacing="20.0">
+         <children>
+            <MFXButton fx:id="allTimeButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="All Time">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
+            <MFXButton fx:id="weeklyButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="Weekly">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
+            <MFXButton fx:id="monthyButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="Monthly">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
+            <MFXButton fx:id="yearlyButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="Yearly">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXButton>
+         </children>
+      </HBox>
+      <Label layoutX="390.0" layoutY="50.0" text="Current Finances">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalLabel" layoutX="794.0" layoutY="707.0" prefHeight="47.0" prefWidth="155.0" text="Surplus Funds:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <HBox prefHeight="100.0" prefWidth="200.0" />
+   </children>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
+</AnchorPane>

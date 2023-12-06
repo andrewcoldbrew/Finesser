@@ -1,6 +1,6 @@
 #flowPane {
-    -fx-hgap: 15;
-    -fx-vgap: 15;
+    -fx-hgap: 20;
+    -fx-vgap: 20;
 }
 
 #categoryLabel {
