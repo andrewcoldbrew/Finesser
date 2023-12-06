@@ -104,7 +104,6 @@ public class BudgetController implements Initializable {
         } catch (SQLException e) {
             showError(e);
         }
-
         return budgets;
     }
 

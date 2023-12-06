@@ -1,0 +1,10 @@
+#financeBox {
+    -fx-background-color: lightgrey;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, grey, 1, 0, 3, 3);
+}
+
+#incomeFlowPane, #outcomeFlowPane {
+    -fx-vgap: 15;
+}
+
