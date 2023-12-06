@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6dfb06f3-c48d-4f1f-8b3c-50530d24e51f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/io_github_palexdev_materialfx.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/io_github_palexdev_materialfx1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/io_github_palexdev_materialfx2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/materialfx-11.13.5.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/virtualizedfx-11.2.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddBudgetForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/BudgetBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/FinanceBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/TransactionSortForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/TransactionTable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/MenuBarController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/SignupController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/models/Bank.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/models/Budget.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/models/Transaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/models/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/AddTransactionEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/ConnectionManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/Draggable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/HashManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/LoginStageManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/SceneManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/SortingEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/addBudgetForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/addFinanceForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/addTransactionForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/budgetBox.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/financeBox.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/testAddBudgetForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/transactionSortForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/budget.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/financeBox.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/financeForm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/form.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/menuBar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/transaction.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/transactionTable.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/LogoNav.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/finance/eco-trash.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/finance/exitButton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/finance/update.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/dashboard-interface.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/logout.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/money-bag.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/money.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/transaction.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/navbar/user.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/budget.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/menuBar.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/signup.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/test.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/transaction.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/components/FinanceBox.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/components/addBudgetForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/components/addFinanceForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/components/addTransactionForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/components/budgetBox.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/components/categoryLabel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/components/testAddBudgetForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/components/transactionSortForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/components/transactionTable.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/css/budget.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/css/financeBox.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/css/financeForm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/css/form.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/css/login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/css/menuBar.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/css/transaction.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/css/transactionTable.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/Logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/LogoNav.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/finance/eco-trash.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/finance/exitButton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/finance/update.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/navbar/add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/navbar/dashboard-interface.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/navbar/logout.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/navbar/money-bag.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/navbar/money.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/navbar/transaction.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/images/navbar/user.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddBudgetForm.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddFinanceForm.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddTransactionForm.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/BudgetBox.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/FinanceBox.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/TransactionSortForm.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/TransactionTable.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/MenuBarController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/SignupController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TestController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/models/Bank.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/models/Budget.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/models/Transaction.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/models/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/utils/AddTransactionEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/utils/ConnectionManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/utils/Draggable.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/utils/HashManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/utils/LoginStageManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/utils/SceneManager.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/utils/SortingEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/views/budget.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/views/finance.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/views/login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/views/menuBar.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/views/signup.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/views/test.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/views/transaction.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2ZAud272KmEFufuMplGZMWuZ8hW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "kien",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6dfb06f3-c48d-4f1f-8b3c-50530d24e51f" name="Changes" comment="" />
+      <created>1701877289372</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701877289372</updated>
+      <workItem from="1701877292526" duration="144000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

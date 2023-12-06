@@ -1,0 +1,31 @@
+.rootPane {
+    -fx-background-color:  linear-gradient(to bottom right, #c9e29f, #1f8585);
+    -fx-background-radius: 0 20 20 0;
+    -fx-border-color: #ebebeb;
+    -fx-border-radius: 0 20 20 0;
+    -fx-font-size: 15px;
+}
+
+.rootPane .button {
+    /*-fx-background-color: transparent;*/
+    /*-fx-border-color: #1E152A;*/
+    /*-fx-border-radius: 10;*/
+    -fx-background-color: lightgrey;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #1E152A;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -mfx-button-type: flat;
+}
+
+.rootPane .button:hover,
+.rootPane .button:focused{
+    /*-fx-background-color: #1E152A;*/
+    /*-fx-border-color: #9FE2BF;*/
+    -fx-translate-x: 5;
+    -fx-text-fill: white;
+    -mfx-button-type: raised;
+    -fx-background-color: grey;
+    -mfx-depth-level: level4;
+
+}
