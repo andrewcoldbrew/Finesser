@@ -23,7 +23,10 @@
                </content></MFXScrollPane>
             <MFXScrollPane fx:id="outcomeScrollPane" fitToHeight="true" fitToWidth="true">
                <content>
-                  <FlowPane fx:id="outcomeFlowPane" alignment="TOP_CENTER" vgap="15.0" />
+                  <FlowPane fx:id="outcomeFlowPane" alignment="TOP_CENTER" vgap="15.0">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding></FlowPane>
                </content></MFXScrollPane>
          </items>
       </SplitPane>

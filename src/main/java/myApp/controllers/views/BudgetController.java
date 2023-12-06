@@ -84,7 +84,7 @@ public class BudgetController implements Initializable {
         List<Budget> budgets = new ArrayList<>();
         String query = "SELECT b.category, b.budget_limit, b.start_date, b.end_date, IFNULL(SUM(t.amount), 0) as spent_amount " +
                 "FROM budget b " +
-                "LEFT JOIN transactions t ON b.category = t.category AND t.transaction_date BETWEEN b.start_date AND b.end_date " +
+                "LEFT JOIN transaction t ON b.category = t.category AND t.transaction_date BETWEEN b.start_date AND b.end_date " +
                 "GROUP BY b.category, b.budget_limit, b.start_date, b.end_date";
 
         try (Connection con = ConnectionManager.getConnection();
