@@ -77,7 +77,6 @@ public class FinanceController implements Initializable {
                     FinanceBox financeBox = new FinanceBox(name, amount, startDate, timeDuration, timeType, false);
                     outcomeFlowPane.getChildren().add(financeBox);
                 }
-
             }
         } catch (SQLException e) {
             e.printStackTrace();

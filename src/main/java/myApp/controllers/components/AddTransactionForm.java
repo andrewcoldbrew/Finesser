@@ -6,16 +6,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import myApp.utils.ConnectionManager;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AddTransactionForm extends AnchorPane {
@@ -35,6 +33,8 @@ public class AddTransactionForm extends AnchorPane {
             "TPB", "VCB", "ACB", "BIDV", "MB", "Techcombank", "VietinBank", "VPBank", "Eximbank"
     );
 
+    private Connection con; // Database connection
+
     public AddTransactionForm() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/addTransactionForm.fxml"));
         fxmlLoader.setRoot(this);
@@ -47,42 +47,48 @@ public class AddTransactionForm extends AnchorPane {
             throw new RuntimeException(e);
         }
     }
-    public void initialize() {
+
+    private void initialize() {
+        this.con = ConnectionManager.getConnection(); // Initialize the connection
+
         // Initialize ComboBox items with typeList and bankList
         typeComboBox.setItems(typeList);
         bankComboBox.setItems(bankList);
+
         addButton.setOnAction(this::addTransaction);
         cancelButton.setOnAction(this::closeTransactionForm);
     }
+
     private void addTransaction(ActionEvent actionEvent) {
         String name = transactionNameField.getText().trim();
         String amountText = amountField.getText().trim();
         String description = descriptionField.getText().trim();
         String category = typeComboBox.getValue();
-        String bank = bankComboBox.getValue();
+        String bankName = bankComboBox.getValue();
 
         if (description.isEmpty()) {
             description = "No description";
         }
-        if (name.isEmpty() || amountText.isEmpty() || category == null || bank == null) {
-            System.out.println("Please fill in all required fields dumbass.");
+        if (name.isEmpty() || amountText.isEmpty() || category == null || bankName == null) {
+            System.out.println("Please fill in all required fields.");
             return;
         }
 
         try {
             double amount = Double.parseDouble(amountText);
+            String bankId = getBankIdByName(bankName); // Fetch bankId based on bank name
 
-            try (Connection con = ConnectionManager.getConnection();
-             PreparedStatement statement = con.prepareStatement("INSERT INTO transactions (name, amount, description, category, bank) VALUES (?, ?, ?, ?, ?)")) {
+            try (PreparedStatement statement = con.prepareStatement(
+                    "INSERT INTO transactions (name, amount, description, category, bankId) VALUES (?, ?, ?, ?, ?)")) {
 
                 statement.setString(1, name);
                 statement.setDouble(2, amount);
                 statement.setString(3, description);
                 statement.setString(4, category);
-                statement.setString(5, bank);
+                statement.setString(5, bankId);
 
                 statement.execute();
-                System.out.println("Transaction added you rich fuck!");
+                System.out.println("Transaction added successfully!");
             }
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount. Please enter a valid number.");
@@ -92,8 +98,21 @@ public class AddTransactionForm extends AnchorPane {
         }
     }
 
-    public void closeTransactionForm(ActionEvent actionEvent) {
-        // Assuming you want to remove the entire TransactionTable from its parent
-        ((Pane) getParent()).getChildren().remove(this);
+    private String getBankIdByName(String bankName) throws SQLException {
+        try (PreparedStatement stmt = con.prepareStatement("SELECT bankId FROM bank WHERE name = ?")) {
+            stmt.setString(1, bankName);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("bankId");
+                } else {
+                    throw new SQLException("Bank not found");
+                }
+            }
+        }
+    }
+
+    private void closeTransactionForm(ActionEvent actionEvent) {
+        // Remove the form from its parent
+        ((AnchorPane) getParent()).getChildren().remove(this);
     }
 }
