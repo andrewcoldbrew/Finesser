@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import myApp.Main;
 import myApp.controllers.components.AddBudgetForm;
 import myApp.controllers.components.BudgetBox;
 import myApp.models.Budget;
@@ -51,10 +52,13 @@ public class BudgetController implements Initializable {
     }
 
     private void loadBudgetDataAsync() {
+
+        int currentUserId = Integer.parseInt(Main.getUserId());
+
         Task<List<Budget>> task = new Task<>() {
             @Override
             protected List<Budget> call() {
-                return fetchBudgetData();
+                return fetchBudgetData(currentUserId);
             }
         };
 
@@ -63,6 +67,7 @@ public class BudgetController implements Initializable {
 
         new Thread(task).start();
     }
+
 
     private void updateUI(List<Budget> budgets) {
         flowPane.getChildren().clear();
@@ -80,32 +85,37 @@ public class BudgetController implements Initializable {
         }
     }
 
-    private List<Budget> fetchBudgetData() {
+    private List<Budget> fetchBudgetData(int userId) {
         List<Budget> budgets = new ArrayList<>();
         String query = "SELECT b.category, b.budget_limit, b.start_date, b.end_date, IFNULL(SUM(t.amount), 0) as spent_amount " +
                 "FROM budget b " +
-                "LEFT JOIN transactions t ON b.category = t.category AND t.transaction_date BETWEEN b.start_date AND b.end_date " +
+                "LEFT JOIN transaction t ON b.category = t.category AND t.transaction_date BETWEEN b.start_date AND b.end_date " +
+                "WHERE b.userID = ? " +
                 "GROUP BY b.category, b.budget_limit, b.start_date, b.end_date";
 
         try (Connection con = ConnectionManager.getConnection();
-             PreparedStatement stmt = con.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement stmt = con.prepareStatement(query)) {
 
-            while (rs.next()) {
-                String category = rs.getString("category");
-                double allocatedAmount = rs.getDouble("budget_limit");
-                LocalDate startDate = rs.getDate("start_date").toLocalDate();
-                LocalDate endDate = rs.getDate("end_date").toLocalDate();
-                double spentAmount = rs.getDouble("spent_amount");
+            stmt.setInt(1, userId);
 
-                budgets.add(new Budget(category, allocatedAmount, spentAmount, startDate, endDate));
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String category = rs.getString("category");
+                    double allocatedAmount = rs.getDouble("budget_limit");
+                    LocalDate startDate = rs.getDate("start_date").toLocalDate();
+                    LocalDate endDate = rs.getDate("end_date").toLocalDate();
+                    double spentAmount = rs.getDouble("spent_amount");
+
+                    budgets.add(new Budget(category, allocatedAmount, spentAmount, startDate, endDate));
+                }
+                System.out.println("Fetched " + budgets.size() + " budgets successfully.");
             }
-            System.out.println("Fetched " + budgets.size() + " budgets successfully.");
         } catch (SQLException e) {
             showError(e);
         }
         return budgets;
     }
+
 
 
     private void showError(Throwable throwable) {
