@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.AccountController">
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="profileImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Label fx:id="fullNameLabel" text="Full name" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Label fx:id="usernameLabel" text="Username" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Label fx:id="passwordLabel" text="Password" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Label fx:id="balanceLabel" text="Balance" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </top>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="260.0" prefWidth="407.0">
+               <content>
+                  <FlowPane fx:id="flowPane" prefHeight="258.0" prefWidth="366.0" />
+               </content>
+            </MFXScrollPane>
+            <VBox prefHeight="260.0" prefWidth="124.0" spacing="20.0">
+               <children>
+                  <MFXButton fx:id="linkBankButton" alignment="CENTER" buttonType="RAISED" onAction="#handleLinkBankForm" text="Link your bank">
+                     <padding>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                     </padding>
+                  </MFXButton>
+                  <MFXButton fx:id="addWalletButton" alignment="CENTER" buttonType="RAISED" onAction="#handleAddWalletForm" text="Add to wallet">
+                     <padding>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                     </padding>
+                  </MFXButton>
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </center>
+   <padding>
+      <Insets left="20.0" right="20.0" />
+   </padding>
+</BorderPane>

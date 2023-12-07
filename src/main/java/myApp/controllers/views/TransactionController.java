@@ -104,7 +104,7 @@ public class TransactionController implements Initializable {
     }
 
     private void loadTransactions() {
-        String userId = Main.getUserId(); // Get the logged-in user's ID
+        int userId = Main.getUserId(); // Get the logged-in user's ID
 
         String query = "SELECT t.name, t.amount, t.description, t.category, b.name as bankName, t.transaction_date " +
                 "FROM transaction t " +
@@ -112,7 +112,7 @@ public class TransactionController implements Initializable {
                 "WHERE b.ownerId = ?";
 
         try (PreparedStatement stmt = con.prepareStatement(query)) {
-            stmt.setString(1, userId);
+            stmt.setInt(1, userId);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 transactionData.clear();

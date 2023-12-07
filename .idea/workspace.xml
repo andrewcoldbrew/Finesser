@@ -5,52 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/finance.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/finance/Delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/finance/edit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/finance/maximize.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/finance/minimize.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddWalletForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LinkBankForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/addWalletForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/addWalletForm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/linkBankForm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/views/account.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/SignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/MenuBarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/MenuBarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/models/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/models/Bank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/models/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/models/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/models/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/ConnectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/addFinanceForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/addFinanceForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/budgetBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/budgetBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/financeBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/financeBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/financeBox.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/financeBox.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/financeForm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/form.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/finance/eco-trash.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/finance/exitButton.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/finance/exitButton.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/finance/update.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/FinanceBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/FinanceBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/addFinanceForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/addFinanceForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/budgetBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/budgetBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/financeBox.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/financeBox.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/financeForm.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/form.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/finance/eco-trash.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/finance/exitButton.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/finance/exitButton.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/finance/update.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddTransactionForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddTransactionForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/HashManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/HashManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/menuBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/menuBar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/SignupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/SignupController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/MenuBarController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/MenuBarController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/models/Bank.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/models/Bank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/models/Transaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/models/Transaction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/models/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/ConnectionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/ConnectionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/finance.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/finance.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/menuBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/menuBar.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,8 +42,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
         <option value="CSS File" />
       </list>
     </option>
@@ -101,34 +83,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
-    "WebServerToolWindowPanel.toolwindow.show.date": "false",
-    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
-    "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "git-widget-placeholder": "NguyenTheVinh",
-    "last_opened_file_path": "C:/Users/vinhh/Documents/GitHub/BITS_Group12/src/main/resources/images/finance",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.5443038",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;NguyenTheVinh&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/vinhh/Documents/GitHub/BITS_Group12/src/main/resources/images/finance&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.5443038&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\finance" />
@@ -175,6 +157,7 @@
       <workItem from="1701772173604" duration="1348000" />
       <workItem from="1701870323343" duration="133000" />
       <workItem from="1701871316740" duration="4196000" />
+      <workItem from="1701932065257" duration="7035000" />
     </task>
     <servers />
   </component>

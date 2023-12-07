@@ -31,4 +31,8 @@ public class MenuBarController {
         MainAppManager.getMainAppStage().close();
         LoginStageManager.setupLoginStage();
     }
+
+    public void moveToAccount(ActionEvent actionEvent) {
+        MainAppManager.switchScene("account");
+    }
 }
