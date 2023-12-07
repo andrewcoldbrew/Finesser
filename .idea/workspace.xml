@@ -5,24 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/SignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/models/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/models/Bank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/models/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/models/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/ConnectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/SignupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/SignupController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/models/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/ConnectionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/ConnectionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/finance.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/finance.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,6 +125,8 @@
       <workItem from="1701749548175" duration="2710000" />
       <workItem from="1701772173604" duration="1348000" />
       <workItem from="1701858780374" duration="3212000" />
+      <workItem from="1701871390034" duration="6162000" />
+      <workItem from="1701921118952" duration="1954000" />
     </task>
     <servers />
   </component>
