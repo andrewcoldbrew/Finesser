@@ -5,34 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddWalletForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LinkBankForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/components/addWalletForm.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/addWalletForm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/linkBankForm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/views/account.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/MenuBarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/MenuBarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/ConnectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/HashManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/HashManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/menuBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/menuBar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/MenuBarController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/MenuBarController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/ConnectionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/ConnectionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/menuBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/menuBar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,6 +132,7 @@
       <workItem from="1701870323343" duration="133000" />
       <workItem from="1701871316740" duration="4196000" />
       <workItem from="1701932065257" duration="7035000" />
+      <workItem from="1701957332179" duration="4137000" />
     </task>
     <servers />
   </component>
