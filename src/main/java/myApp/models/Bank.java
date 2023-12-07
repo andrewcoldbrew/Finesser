@@ -9,9 +9,12 @@ public class Bank {
     private String bankId;
     private double balance;
     private User owner;
+    private String name;
     private List<Transaction> transactions;
-    public Bank(String bankId, User owner) {
+
+    public Bank(String bankId, String name, User owner) {
         this.bankId = bankId;
+        this.name = name;
         this.owner = owner;
         this.balance = 0.0;
         this.transactions = new ArrayList<>();
@@ -27,6 +30,10 @@ public class Bank {
     }
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+    public String getName() {return name; }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void addTransaction(Transaction transaction) {

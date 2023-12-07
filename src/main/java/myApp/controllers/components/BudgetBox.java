@@ -47,35 +47,4 @@ public class BudgetBox extends AnchorPane {
         progressBar.getRanges3().add(NumberRange.of(0.80, 1.0));
         progressBar.setProgress(progressValue);
     }
-
-    private void createAndPlayAnimation(ProgressIndicator indicator) {
-        Animation a1 = AnimationUtils.TimelineBuilder.build()
-                .add(
-                        AnimationUtils.KeyFrames.of(2000, indicator.progressProperty(), 0.3, Interpolators.INTERPOLATOR_V1),
-                        AnimationUtils.KeyFrames.of(4000, indicator.progressProperty(), 0.6, Interpolators.INTERPOLATOR_V1),
-                        AnimationUtils.KeyFrames.of(6000, indicator.progressProperty(), 1.0, Interpolators.INTERPOLATOR_V1)
-                )
-                .getAnimation();
-
-        Animation a2 = AnimationUtils.TimelineBuilder.build()
-                .add(
-                        AnimationUtils.KeyFrames.of(1000, indicator.progressProperty(), 0, Interpolators.INTERPOLATOR_V2)
-                )
-                .getAnimation();
-
-        a1.setOnFinished(end -> AnimationUtils.PauseBuilder.build()
-                .setDuration(Duration.seconds(1))
-                .setOnFinished(event -> a2.playFromStart())
-                .getAnimation()
-                .play()
-        );
-        a2.setOnFinished(end -> AnimationUtils.PauseBuilder.build()
-                .setDuration(Duration.seconds(1))
-                .setOnFinished(event -> a1.playFromStart())
-                .getAnimation()
-                .play()
-        );
-
-        a1.play();
-    }
 }

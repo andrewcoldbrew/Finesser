@@ -4,6 +4,7 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,10 +38,10 @@ public class AddBudgetForm extends AnchorPane {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/addBudgetForm.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try {
             fxmlLoader.load();
             initialize();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -87,9 +88,16 @@ public class AddBudgetForm extends AnchorPane {
         this.stage = stage;
     }
 
+    public Stage getStage() {
+        return stage;
+    }
+
     private void closeStage() {
         if (stage != null) {
+            System.out.println("CLOSING STAGE!");
             stage.close();
+        } else {
+            System.out.println("STAGE NULL");
         }
     }
 }

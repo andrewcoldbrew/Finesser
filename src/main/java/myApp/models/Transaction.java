@@ -7,18 +7,19 @@ public class Transaction {
     private double amount;
     private String description;
     private String category;
-    private String bank;
+    private String bankName;
     private LocalDate date;
 
-    public Transaction(String name, double amount, String description, String category, String bank, LocalDate date) {
+    public Transaction(String name, double amount, String description, String category, String bankName, LocalDate date) {
         this.name = name;
         this.amount = amount;
         this.description = description;
         this.category = category;
-        this.bank = bank;
+        this.bankName = bankName;
         this.date = date;
     }
 
+    // Getters and setters
     public String getName() {
         return name;
     }
@@ -35,13 +36,14 @@ public class Transaction {
         return category;
     }
 
-    public String getBank() {
-        return bank;
+    public String getBankName() {
+        return bankName;
     }
 
     public LocalDate getDate() {
         return date;
     }
+
 
     @Override
     public String toString() {
@@ -50,7 +52,7 @@ public class Transaction {
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
-                ", bank='" + bank + '\'' +
+                ", bankId='" + bankName + '\'' +
                 ", date=" + date +
                 '}';
     }

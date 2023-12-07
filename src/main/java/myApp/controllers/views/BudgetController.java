@@ -1,12 +1,16 @@
 package myApp.controllers.views;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -17,6 +21,7 @@ import myApp.models.Budget;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,17 +29,25 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class BudgetController {
-    @FXML
-    private AnchorPane mainPane;
+public class BudgetController implements Initializable {
+    public MFXButton addBudgetButton;
+    public MFXScrollPane scrollPane;
+    public AnchorPane mainPane;
     @FXML
     private FlowPane flowPane;
     private final AddBudgetForm addBudgetForm = new AddBudgetForm();
+    private final Stage dialogStage = new Stage();
+    private final Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         loadBudgetDataAsync();
+        initializeAddBudgetForm();
+        flowPane.setPadding(new Insets(30, 0, 30, 30));
+        Draggable draggable = new Draggable();
+        draggable.makeDraggable(dialogStage);
     }
 
     private void loadBudgetDataAsync() {
@@ -61,32 +74,17 @@ public class BudgetController {
         }
 
         for (Budget budget : budgets) {
-//            VBox budgetBox = createBudgetBox(budget);
             double progressValue = budget.calculatePercentage();
             BudgetBox budgetBox = new BudgetBox(budget.getCategory(), budget.getAllocatedAmount(), budget.getSpentAmount(), budget.getEndDate(), progressValue*100, progressValue);
-
             flowPane.getChildren().add(budgetBox);
         }
-    }
-
-    private VBox createBudgetBox(Budget budget) {
-        VBox budgetBox = new VBox(10);
-        budgetBox.getChildren().addAll(
-                new Label("Category: " + budget.getCategory()),
-                new Label("Allocated: " + budget.getAllocatedAmount()),
-                new Label("Spent: " + budget.getSpentAmount()),
-                new Label("Remaining: " + (budget.getAllocatedAmount() - budget.getSpentAmount())),
-                new Label("Start Date: " + budget.getStartDate()),
-                new Label("End Date: " + budget.getEndDate())
-        );
-        return budgetBox;
     }
 
     private List<Budget> fetchBudgetData() {
         List<Budget> budgets = new ArrayList<>();
         String query = "SELECT b.category, b.budget_limit, b.start_date, b.end_date, IFNULL(SUM(t.amount), 0) as spent_amount " +
                 "FROM budget b " +
-                "LEFT JOIN transactions t ON b.category = t.category AND t.transaction_date BETWEEN b.start_date AND b.end_date " +
+                "LEFT JOIN transaction t ON b.category = t.category AND t.transaction_date BETWEEN b.start_date AND b.end_date " +
                 "GROUP BY b.category, b.budget_limit, b.start_date, b.end_date";
 
         try (Connection con = ConnectionManager.getConnection();
@@ -106,7 +104,6 @@ public class BudgetController {
         } catch (SQLException e) {
             showError(e);
         }
-
         return budgets;
     }
 
@@ -116,51 +113,24 @@ public class BudgetController {
         throwable.printStackTrace();
     }
 
+    private void initializeAddBudgetForm() {
+        dialogStage.setTitle("Add Budget Dialog");
+
+        addBudgetForm.setStage(dialogStage);
+        System.out.println(addBudgetForm.getStage());
+
+        dialogStage.setScene(dialogScene);
+
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initStyle(StageStyle.UNDECORATED);
+        dialogScene.setFill(Color.TRANSPARENT);
+
+        dialogStage.setResizable(false);
+    }
     @FXML
     private void handleAddBudgetForm() {
-        // Check if a dialog is already showing
-        if (!isDialogShowing()) {
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Add Budget Dialog");
-
-            AddBudgetForm addBudgetForm = new AddBudgetForm();
-            addBudgetForm.setStage(dialogStage);
-
-            // You can customize the size of the dialog
-            Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
-            dialogStage.setScene(dialogScene);
-
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initStyle(StageStyle.TRANSPARENT);
-            dialogScene.setFill(Color.TRANSPARENT);
-
-            dialogStage.setResizable(false);
-
-            Draggable draggable = new Draggable();
-            draggable.makeDraggable(dialogStage);
-
-            // Set an event handler for the close request to reset the flag
-            dialogStage.setOnCloseRequest(event -> {
-                setDialogShowing(false);
-            });
-
-            // Set the flag to indicate that a dialog is showing
-            setDialogShowing(true);
-
-            dialogStage.show();
-        }
-    }
-
-
-    // Flag to keep track of whether a dialog is showing
-    private boolean isDialogShowing = false;
-
-    private synchronized boolean isDialogShowing() {
-        return isDialogShowing;
-    }
-
-    private synchronized void setDialogShowing(boolean showing) {
-        isDialogShowing = showing;
+        dialogStage.hide();
+        dialogStage.show();
     }
 
 }

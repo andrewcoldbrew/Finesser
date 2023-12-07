@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class ConnectionManager {
     private static Connection con;
 
-    private static final String user = "xn42s0if92xpx06ghpe5";
-    private static final String password = "pscale_pw_Gj8sC8mW3OUiPWBPsgsxOpTgybiPTJbIaouqXSpLFOe";
+    private static final String user = "opipjlm8i4e0dsn03bjq";
+    private static final String password = "pscale_pw_1plFs0tLzq92ek4RKJOkwyuLlMRpbRuHgf7amgergl9";
 
     public static void createConnection() {
         try {
@@ -27,7 +27,7 @@ public class ConnectionManager {
         }
 
         try {
-            if (con != null && !con.isValid(5)) { // Check if connection is valid, 5 seconds timeout
+            if (con != null && !con.isValid(5)) {
                 createConnection();
             }
         } catch (SQLException ex) {
