@@ -106,6 +106,11 @@ public class TransactionController implements Initializable {
     private void loadTransactions() {
         int userId = Main.getUserId(); // Get the logged-in user's ID
 
+//        String query = "SELECT t.name, t.amount, t.description, t.category, b.name as bankName, t.transaction_date " +
+//                "FROM transaction t " +
+//                "JOIN bank b ON t.bankId = b.bankId " +
+//                "WHERE b.ownerId = ?";
+
         String query = "SELECT t.name, t.amount, t.description, t.category, b.name as bankName, t.transaction_date " +
                 "FROM transaction t " +
                 "JOIN bank b ON t.bankId = b.bankId " +

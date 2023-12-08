@@ -32,7 +32,7 @@ public class AddTransactionForm extends AnchorPane {
             "Food", "Clothes", "Groceries", "Entertainment", "Utilities",
             "Transportation", "Healthcare", "Education", "Travel", "Miscellaneous"
     );
-    private final ObservableList<String> bankList = FXCollections.observableArrayList();
+    private ObservableList<String> bankList;
 //    private Connection con; // Database connection
 
     public AddTransactionForm() {
@@ -53,7 +53,6 @@ public class AddTransactionForm extends AnchorPane {
         System.out.println("INITIALIZE TRANSACTION");
 
         loadBank();
-        bankComboBox.setItems(bankList);  // Move this line here
 
         typeComboBox.setItems(typeList);
 
@@ -82,9 +81,11 @@ public class AddTransactionForm extends AnchorPane {
             double amount = Double.parseDouble(amountText);
             if (bankName.equals("None")) {
                 addCashTransaction(name, amount, description, category, date, userId);
+                updateCashAmount(userId, amount);
             } else {
                 int bankId = getBankIdByName(bankName); // Fetch bankId based on bank name
                 addBankTransaction(name, amount, description, category, bankId, date, userId);
+                updateBankAmount(userId, amount);
             }
 
 
@@ -147,7 +148,7 @@ public class AddTransactionForm extends AnchorPane {
 
     private void addBankTransaction(String name, double amount, String description, String category, int bankId, LocalDate date, int userId) {
         try (PreparedStatement statement = con.prepareStatement(
-                "INSERT INTO transaction (name, amount, description, category, bankId transaction_date, userId) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+                "INSERT INTO transaction (name, amount, description, category, bankId, transaction_date, userId) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
 
             statement.setString(1, name);
             statement.setDouble(2, amount);
@@ -164,17 +165,44 @@ public class AddTransactionForm extends AnchorPane {
         }
     }
 
+    private void updateCashAmount(int userId, double transactionAmount) {
+        try (PreparedStatement statement = con.prepareStatement(
+                "UPDATE user SET cashAmount = cashAmount - ? WHERE userId = ?")) {
+
+            statement.setDouble(1, transactionAmount);
+            statement.setInt(2, userId);
+
+            statement.execute();
+            System.out.println("CashAmount updated successfully!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void updateBankAmount(int userId, double transactionAmount) {
+        try (PreparedStatement statement = con.prepareStatement(
+                "UPDATE user SET bankAmount = bankAmount - ? WHERE userId = ?")) {
+
+            statement.setDouble(1, transactionAmount);
+            statement.setInt(2, userId);
+
+            statement.execute();
+            System.out.println("BankAmount updated successfully!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     private void loadBank() {
-        bankList.clear();
+        bankList = FXCollections.observableArrayList();
+        bankList.add("None");
         try (PreparedStatement stmt = con.prepareStatement("SELECT name FROM bank WHERE ownerId = ?")) {
             stmt.setInt(1, Main.getUserId());
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    String bankName = rs.getString("name");
-                    bankList.add(bankName);
-                } else {
-                    throw new SQLException("No bank left");
-                }
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String bankName = rs.getString("name");
+                bankList.add(bankName);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
