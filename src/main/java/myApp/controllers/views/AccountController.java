@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -50,6 +51,7 @@ public class AccountController implements Initializable {
         draggable.makeDraggable(linkBankDialog);
         loadUserProfile();
     }
+
 
     private void loadUserProfile() {
         int userId = Main.getUserId();
