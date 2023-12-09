@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" minWidth="900.0" prefHeight="695.0" prefWidth="1030.0" styleClass="table-header" stylesheets="@../css/transaction.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.TransactionController">
+   <children>
+      <MFXTextField fx:id="searchBar" floatMode="ABOVE" layoutX="221.0" layoutY="30.0" prefHeight="50.0" prefWidth="454.0" promptText="Enter something here daddy">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </MFXTextField>
+      <TableView fx:id="transactionTable" layoutX="77.0" layoutY="199.0" prefHeight="422.0" prefWidth="600.0" style="-fx-border-color: #9FE2BF; -fx-border-width: 2; -fx-padding: 0;" stylesheets="@../css/transaction.css">
+         <columns>
+            <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name" />
+            <TableColumn fx:id="amountColumn" prefWidth="100.0" text="Amount" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="100.0" text="Description" />
+            <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Type" />
+            <TableColumn fx:id="bankColumn" prefWidth="100.0" text="Bank" />
+            <TableColumn fx:id="dateColumn" prefWidth="100.0" text="Date" />
+         </columns>
+      </TableView>
+      <VBox layoutX="758.0" layoutY="221.0" prefHeight="400.0" prefWidth="200.0" spacing="20.0" style="-fx-border-color: #9FE2BF; -fx-border-width: 2;" stylesheets="@../css/transaction.css">
+         <children>
+            <Label fx:id="totalFood" prefHeight="80.0" prefWidth="186.0" text="One" textAlignment="CENTER" />
+            <Separator prefHeight="26.0" prefWidth="218.0" />
+            <Label fx:id="totalEntertainment" prefHeight="80.0" prefWidth="186.0" text="Two" />
+            <Separator layoutX="22.0" layoutY="102.0" prefHeight="26.0" prefWidth="218.0" />
+            <Label fx:id="totalMisc" prefHeight="80.0" prefWidth="186.0" text="Three" />
+            <Separator layoutX="22.0" layoutY="105.0" prefHeight="26.0" prefWidth="218.0" />
+            <Label fx:id="testLabel31" layoutX="21.0" layoutY="221.0" prefHeight="80.0" prefWidth="186.0" text="Four" />
+            <Separator layoutX="22.0" layoutY="115.0" prefHeight="26.0" prefWidth="218.0" />
+            <Label fx:id="testLabel311" layoutX="21.0" layoutY="321.0" prefHeight="80.0" prefWidth="186.0" text="Five" />
+         </children>
+         <styleClass>
+            <String fx:value="newest-information" />
+            <String fx:value="vbox-container" />
+         </styleClass>
+      </VBox>
+      <Label contentDisplay="CENTER" graphicTextGap="6.0" layoutX="824.0" layoutY="174.0" prefHeight="28.0" prefWidth="68.0" style="-fx-font-weight: bold;" text="Details ">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <MFXFilterComboBox fx:id="sortComboBox" floatingText="Sort By" layoutX="221.0" layoutY="133.0" prefHeight="45.0" prefWidth="200.0" />
+      <MFXButton fx:id="addTransactionButton" buttonType="RAISED" layoutX="477.0" layoutY="133.0" onAction="#handleAddForm" prefHeight="45.0" prefWidth="200.0" text="   Add Transaction">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/navbar/add.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MFXButton>
+      <MFXButton buttonType="RAISED" layoutX="77.0" layoutY="131.0" prefHeight="40.0" prefWidth="96.0" text="Sort">
+         <graphic>
+            <ImageView fx:id="sortButton" fitHeight="35.0" fitWidth="35.0" onDragDetected="#handleSortForm" onMouseClicked="#handleSortForm" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/navbar/add.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </MFXButton>
+   </children>
+</AnchorPane>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="597.0" prefWidth="856.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.SignupController">
+   <children>
+      <AnchorPane prefHeight="597.0" prefWidth="470.0" style="-fx-background-radius: 0 20 20 0;" styleClass="leftSideLogin">
+         <children>
+            <ImageView fitHeight="338.0" fitWidth="323.0" layoutX="74.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Logo.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <AnchorPane layoutX="468.0" prefHeight="597.0" prefWidth="484.0">
+         <children>
+            <MFXButton fx:id="signupButton" buttonType="RAISED" depthLevel="LEVEL4" layoutX="159.0" layoutY="467.0" onAction="#signup" prefHeight="55.0" prefWidth="182.0" style="-fx-background-color: #4fa298; -fx-text-fill: white; -fx-font-size: 18px;" text="Sign Up" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </MFXButton>
+            <Label layoutX="61.0" layoutY="105.0" text="Create your account" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <Hyperlink fx:id="loginLink" layoutX="160.0" layoutY="163.0" onAction="#moveToLogin" text="Log in" textAlignment="RIGHT">
+               <graphic>
+                  <Label text="Already have an account?" />
+               </graphic>
+            </Hyperlink>
+            <MFXPasswordField fx:id="passwordField" floatMode="ABOVE" layoutX="52.0" layoutY="299.0" prefHeight="40.0" prefWidth="395.0" promptText="Password" />
+            <MFXPasswordField fx:id="rePasswordField" floatMode="ABOVE" layoutX="51.0" layoutY="384.0" prefHeight="40.0" prefWidth="395.0" promptText="Re-Password" />
+            <MFXTextField fx:id="usernameField" floatMode="ABOVE" layoutX="52.0" layoutY="220.0" prefHeight="40.0" prefWidth="395.0" promptText="Username" />
+            <Label fx:id="validationLabel" layoutX="61.0" layoutY="345.0" visible="false" wrapText="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

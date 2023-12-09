@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.LoginController">
+   <children>
+      <AnchorPane prefHeight="597.0" prefWidth="470.0" style="-fx-background-radius: 0 20 20 0;" styleClass="leftSideLogin" stylesheets="@../css/login.css">
+         <children>
+            <ImageView fitHeight="338.0" fitWidth="323.0" layoutX="74.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Logo.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <AnchorPane layoutX="470.0" prefHeight="597.0" prefWidth="484.0">
+         <children>
+            <TextField fx:id="usernameField" layoutX="53.0" layoutY="221.0" prefHeight="40.0" prefWidth="395.0" promptText="Username" />
+            <PasswordField fx:id="passwordField" layoutX="53.0" layoutY="287.0" prefHeight="40.0" prefWidth="395.0" promptText="Password" />
+            <Label layoutX="134.0" layoutY="23.0" prefHeight="111.0" prefWidth="234.0" text="Welcome">
+               <font>
+                  <Font name="System Bold" size="52.0" />
+               </font>
+            </Label>
+            <Label layoutX="100.0" layoutY="78.0" prefHeight="111.0" prefWidth="307.0" text="Access Your Account">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label layoutX="53.0" layoutY="347.0" prefHeight="17.0" prefWidth="134.0" text="Forgot your password?">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="240.0" layoutY="462.0" prefHeight="32.0" prefWidth="22.0" text="or">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <MFXButton fx:id="loginButton" buttonType="RAISED" depthLevel="LEVEL4" layoutX="163.0" layoutY="392.0" onAction="#login" prefHeight="55.0" prefWidth="182.0" style="-fx-background-color: #4fa298; -fx-text-fill: white; -fx-font-size: 18px;" text="Login">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </MFXButton>
+            <MFXButton fx:id="signupButton" buttonType="RAISED" depthLevel="LEVEL4" layoutX="163.0" layoutY="505.0" onAction="#moveToSignup" prefHeight="55.0" prefWidth="182.0" style="-fx-background-color: #4fa298; -fx-text-fill: white; -fx-font-size: 18px;" text="Sign Up">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </MFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

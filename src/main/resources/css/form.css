@@ -1,0 +1,103 @@
+/* addTransactionForm */
+#bankComboBox .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#bankComboBox .caret .mfx-font-icon {
+    -mfx-color:  #9FE2BF;
+    -fx-cursor: hand;
+}
+
+#typeComboBox .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#typeComboBox .caret .mfx-font-icon {
+    -mfx-color:  #9FE2BF;
+    -fx-cursor: hand;
+}
+
+#addButton {
+    -fx-background-color: transparent;
+    -fx-border-color:  #9FE2BF;
+    -fx-border-radius: 5;
+
+}
+
+#addButton:hover {
+    -fx-background-color:  #9FE2BF;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}
+
+#cancelButton {
+    -fx-background-color: transparent;
+    -fx-border-color:  #FF7F7F;
+    -fx-border-radius: 5;
+
+}
+
+#cancelButton:hover {
+    -fx-background-color:  #FF7F7F;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}
+
+/* addBudgetForm */
+
+#categoryComboBox .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#categoryComboBox .caret .mfx-font-icon {
+    -mfx-color:  #9FE2BF;
+    -fx-cursor: hand;
+}
+
+#startDatePicker .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#endDatePicker .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+.mfx-date-picker:focus-within .icon {
+    -mfx-color: #1E152A;
+    -fx-cursor: hand;
+}
+
+#addBudgetButton {
+    -fx-background-color: transparent;
+    -fx-border-color:  #9FE2BF;
+    -fx-border-radius: 5;
+
+}
+
+#addBudgetButton:hover {
+    -fx-background-color:  #9FE2BF;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}
+
+#exitButton {
+    -fx-background-color: transparent;
+    -fx-border-color:  #FF7F7F;
+    -fx-border-radius: 5;
+
+}
+
+#exitButton:hover {
+    -fx-background-color:  #FF7F7F;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}
