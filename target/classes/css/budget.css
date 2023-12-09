@@ -1,0 +1,31 @@
+#flowPane {
+    -fx-hgap: 20;
+    -fx-vgap: 20;
+}
+
+#categoryLabel {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+#budgetBox {
+    -fx-effect: dropshadow(three-pass-box, grey, 1, 0, 3, 3);
+    -fx-background-radius: 10;
+    -fx-background-color: #d3d3d3;
+}
+
+#budgetBox:hover {
+    -fx-translate-y: -10;
+}
+
+#progressBar:range1 .bar1 {
+    -fx-fill: #07b907;
+}
+
+#progressBar:range2 .bar1 {
+    -fx-fill: #b6b61e;
+}
+
+#progressBar:range3 .bar1 {
+    -fx-fill: #d92f2f;
+}
