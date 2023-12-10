@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" styleClass="table-header" stylesheets="@../css/transaction.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.TestTransactionController">
+    <children>
+        <MFXTextField fx:id="searchBar" floatMode="ABOVE" layoutX="221.0" layoutY="30.0" prefHeight="50.0" prefWidth="454.0" promptText="Enter something here daddy">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </MFXTextField>
+        <Label contentDisplay="CENTER" graphicTextGap="6.0" layoutX="824.0" layoutY="174.0" prefHeight="28.0" prefWidth="68.0" style="-fx-font-weight: bold;" text="Details ">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Label>
+        <MFXButton fx:id="addTransactionButton" buttonType="RAISED" layoutX="464.0" layoutY="179.0" onAction="#handleAddForm" prefHeight="45.0" prefWidth="200.0" text="   Add Transaction">
+            <graphic>
+                <ImageView fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/navbar/add.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </MFXButton>
+      <HBox layoutX="65.0" layoutY="250.0" spacing="50.0">
+         <children>
+            <MFXTableView fx:id="transactionTable" minWidth="600.0" />
+              <VBox spacing="20.0" style="-fx-border-color: #9FE2BF; -fx-border-width: 2;" stylesheets="@../css/transaction.css">
+                  <children>
+                      <Label fx:id="totalFood" prefHeight="80.0" prefWidth="186.0" text="One" textAlignment="CENTER" />
+                      <Separator prefHeight="26.0" prefWidth="218.0" />
+                      <Label fx:id="totalEntertainment" prefHeight="80.0" prefWidth="186.0" text="Two" />
+                      <Separator layoutX="22.0" layoutY="102.0" prefHeight="26.0" prefWidth="218.0" />
+                      <Label fx:id="totalMisc" prefHeight="80.0" prefWidth="186.0" text="Three" />
+                      <Separator layoutX="22.0" layoutY="105.0" prefHeight="26.0" prefWidth="218.0" />
+                      <Label fx:id="testLabel31" layoutX="21.0" layoutY="221.0" prefHeight="80.0" prefWidth="186.0" text="Four" />
+                      <Separator layoutX="22.0" layoutY="115.0" prefHeight="26.0" prefWidth="218.0" />
+                      <Label fx:id="testLabel311" layoutX="21.0" layoutY="321.0" prefHeight="80.0" prefWidth="186.0" text="Five" />
+                  </children>
+                  <styleClass>
+                      <String fx:value="newest-information" />
+                      <String fx:value="vbox-container" />
+                  </styleClass>
+              </VBox>
+         </children>
+      </HBox>
+    </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</AnchorPane>
