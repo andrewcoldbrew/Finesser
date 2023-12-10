@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.AccountController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.AccountController">
    <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="profileImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-            <VBox alignment="CENTER_LEFT" spacing="20.0">
+            <ImageView fx:id="profileImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/account/user.png" />
+               </image></ImageView>
+            <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="610.0" spacing="20.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
                      <children>
@@ -40,33 +46,101 @@
                </children>
             </VBox>
          </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
       </HBox>
    </top>
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
    <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0" BorderPane.alignment="CENTER">
          <children>
-            <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="260.0" prefWidth="407.0">
-               <content>
-                  <FlowPane fx:id="flowPane" prefHeight="258.0" prefWidth="366.0" />
-               </content>
-            </MFXScrollPane>
-            <VBox prefHeight="260.0" prefWidth="124.0" spacing="20.0">
+            <VBox prefHeight="260.0" prefWidth="124.0" spacing="50.0">
                <children>
-                  <MFXButton fx:id="linkBankButton" alignment="CENTER" buttonType="RAISED" onAction="#handleLinkBankForm" text="Link your bank">
-                     <padding>
-                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
-                     </padding>
-                  </MFXButton>
-                  <MFXButton fx:id="addWalletButton" alignment="CENTER" buttonType="RAISED" onAction="#handleAddWalletForm" text="Add to wallet">
-                     <padding>
-                        <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
-                     </padding>
-                  </MFXButton>
+                  <VBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Label text="Account Info">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/account/edit.png" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Keep your personal information up-to-date" textAlignment="CENTER" wrappingWidth="200.0" />
+                        <Hyperlink onAction="#handleUpdateInfo" text="Update Info &gt;" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Label text="Password">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/account/key.png" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Make your password stronger or change it if someone else knows it" textAlignment="CENTER" wrappingWidth="200.0" />
+                        <Hyperlink onAction="#handleChangePassword" text="Change password &gt;" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Label text="Add cash to wallet">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/account/wallet.png" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Feeling broke? Add some cash to your wallet" textAlignment="CENTER" wrappingWidth="200.0" />
+                        <Hyperlink onAction="#handleAddCash" text="Add cash &gt;" />
+                     </children>
+                  </VBox>
                </children>
             </VBox>
+            <BorderPane>
+               <center>
+                  <VBox spacing="20.0">
+                     <children>
+                        <Label text="Connected Bank">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true">
+                           <content>
+                              <FlowPane fx:id="flowPane" />
+                           </content>
+                        </MFXScrollPane>
+                     </children>
+                  </VBox>
+               </center>
+               <top>
+                  <Label text="You have ... in your wallet" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="20.0" />
+                     </BorderPane.margin>
+                  </Label>
+               </top>
+               <bottom>
+                  <Label text="You have ... sth sth" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets top="20.0" />
+                     </BorderPane.margin>
+                  </Label>
+               </bottom>
+            </BorderPane>
          </children>
          <BorderPane.margin>
             <Insets />
@@ -77,6 +151,6 @@
       </HBox>
    </center>
    <padding>
-      <Insets left="20.0" right="20.0" />
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
 </BorderPane>

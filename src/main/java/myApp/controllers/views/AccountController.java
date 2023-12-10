@@ -124,4 +124,13 @@ public class AccountController implements Initializable {
         addWalletDialog.close();
         addWalletDialog.show();
     }
+
+    public void handleUpdateInfo(ActionEvent actionEvent) {
+    }
+
+    public void handleChangePassword(ActionEvent actionEvent) {
+    }
+
+    public void handleAddCash(ActionEvent actionEvent) {
+    }
 }

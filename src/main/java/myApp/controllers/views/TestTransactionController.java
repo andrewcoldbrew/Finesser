@@ -1,9 +1,6 @@
 package myApp.controllers.views;
 
-import io.github.palexdev.materialfx.controls.MFXPaginatedTableView;
-import io.github.palexdev.materialfx.controls.MFXTableColumn;
-import io.github.palexdev.materialfx.controls.MFXTableView;
-import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.filter.DoubleFilter;
 import io.github.palexdev.materialfx.filter.EnumFilter;
@@ -22,8 +19,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
 import myApp.Main;
 import myApp.controllers.components.TransactionSortForm;
 import myApp.controllers.components.AddTransactionForm;
@@ -42,17 +38,14 @@ import java.util.ResourceBundle;
 
 
 public class TestTransactionController implements Initializable {
-    public AnchorPane mainPane;
-    public ImageView sortButton;
+    public BorderPane mainPane;
     public MFXTextField searchBar;
-    public MFXTableView<Transaction> transactionTable;
+    public MFXPaginatedTableView<Transaction> transactionTable;
 
     // Filter buttons
     @FXML private Label totalFood;
     @FXML private Label totalEntertainment;
     @FXML private Label totalMisc;
-
-    private TransactionSortForm sortForm = new TransactionSortForm();
     private AddTransactionForm addForm = new AddTransactionForm();
     private final Connection con = ConnectionManager.getConnection();
     private final Draggable draggable = new Draggable();
@@ -64,26 +57,37 @@ public class TestTransactionController implements Initializable {
 //        updateTotals();
         loadTransactions();
         setupTransactionTable();
-
         transactionTable.autosizeColumnsOnInitialization();
 
+        When.onChanged(transactionTable.currentPageProperty())
+                .then((oldValue, newValue) -> transactionTable.autosizeColumns())
+                .listen();
     }
+
 
     private void setupTransactionTable() {
         MFXTableColumn<Transaction> nameCol = new MFXTableColumn<>("Name", true, Comparator.comparing(Transaction::getName));
-        MFXTableColumn<Transaction> amountCol = new MFXTableColumn<>("Amount", true, Comparator.comparing(Transaction::getAmount));
+        MFXTableColumn<Transaction> amountCol = new MFXTableColumn<>("Amount", false, Comparator.comparing(Transaction::getAmount));
         MFXTableColumn<Transaction> descriptionCol = new MFXTableColumn<>("Description", true, Comparator.comparing(Transaction::getDescription));
-        MFXTableColumn<Transaction> typeCol = new MFXTableColumn<>("Type", true, Comparator.comparing(Transaction::getCategory));
-        MFXTableColumn<Transaction> bankCol = new MFXTableColumn<>("Bank", true, Comparator.comparing(Transaction::getBankName));
-        MFXTableColumn<Transaction> dateCol = new MFXTableColumn<>("Date", true, Comparator.comparing(Transaction::getDate, new LocalDateComparator()));
+        MFXTableColumn<Transaction> typeCol = new MFXTableColumn<>("Type", false, Comparator.comparing(Transaction::getCategory));
+        MFXTableColumn<Transaction> bankCol = new MFXTableColumn<>("Bank", false, Comparator.comparing(Transaction::getBankName));
+        MFXTableColumn<Transaction> dateCol = new MFXTableColumn<>("Date", false, Comparator.comparing(Transaction::getDate, new LocalDateComparator()));
+        MFXTableColumn<Transaction> actionCol = new MFXTableColumn<>("Actions");
         nameCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getName));
         amountCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getAmount));
         descriptionCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getDescription));
         typeCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getCategory));
         bankCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getBankName));
         dateCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getDate));
+        actionCol.setRowCellFactory(transaction -> {
+            HBox buttonContainer = createButtonContainer();
 
-        transactionTable.getTableColumns().addAll(nameCol, amountCol, descriptionCol, typeCol, bankCol, dateCol);
+            MFXTableRowCell<Transaction, HBox> cell = new MFXTableRowCell<>(value -> buttonContainer, value -> "");
+            cell.setGraphic(buttonContainer);
+            return cell;
+        });
+
+        transactionTable.getTableColumns().addAll(nameCol, amountCol, descriptionCol, typeCol, bankCol, dateCol, actionCol);
         transactionTable.getFilters().addAll(
                 new StringFilter<>("Name", Transaction::getName),
                 new DoubleFilter<>("Amount", Transaction::getAmount),
@@ -98,7 +102,7 @@ public class TestTransactionController implements Initializable {
     private void loadTransactions() {
         int userId = Main.getUserId(); // Get the logged-in user's ID
 
-        String query = "SELECT t.name, t.amount, t.description, t.category, COALESCE(b.name, 'No bank') AS bankName, t.transaction_date " +
+        String query = "SELECT t.name, t.amount, t.description, t.category, COALESCE(b.name, 'Cash') AS bankName, t.transaction_date " +
                 "FROM transaction t " +
                 "LEFT JOIN bank b ON t.bankId = b.bankId " +
                 "WHERE t.userId = ? " +
@@ -155,8 +159,37 @@ public class TestTransactionController implements Initializable {
             mainPane.getChildren().add(addForm);
             draggable.makeDraggable(addForm);
         }
-
     }
+
+    private HBox createButtonContainer() {
+        HBox buttonContainer = new HBox();
+
+        MFXButton updateButton = createButton("Update", "updateButton");
+        MFXButton deleteButton = createButton("Delete", "deleteButton");
+
+        updateButton.setOnAction(actionEvent -> updateTransaction());
+        deleteButton.setOnAction(actionEvent -> deleteTransaction());
+
+        buttonContainer.getChildren().addAll(updateButton, deleteButton);
+        buttonContainer.setAlignment(Pos.CENTER);
+        buttonContainer.setSpacing(20);
+
+        return buttonContainer;
+    }
+
+    private void deleteTransaction() {
+    }
+
+    private void updateTransaction() {
+    }
+
+    private MFXButton createButton(String text, String id) {
+        MFXButton button = new MFXButton(text);
+        button.setOnAction(actionEvent -> {});
+        button.setId(id);
+        return button;
+    }
+
 
 
 }
