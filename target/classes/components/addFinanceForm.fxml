@@ -12,17 +12,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root stylesheets="@../css/financeForm.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #9FE2BF; -fx-border-radius: 20; -fx-border-width: 3;" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <AnchorPane BorderPane.alignment="CENTER">
+      <AnchorPane prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox layoutX="483.0" layoutY="1.0" spacing="20.0">
+            <HBox layoutX="371.0" layoutY="1.0">
                <children>
-                  <ImageView fx:id="minimizeButton" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="maximizeButton" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button fx:id="exitButton" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false">
+                  <Button mnemonicParsing="false" style="-fx-background-color: none;">
+                     <graphic>
+                        <ImageView fx:id="minimizeButton" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/finance/minimize.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" style="-fx-background-color: none;">
+                     <graphic>
+                        <ImageView fx:id="maximizeButton" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/finance/maximize.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="exitButton" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" style="-fx-background-color: none;">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -37,51 +53,48 @@
          </children>
       </AnchorPane>
    </top>
-   <bottom>
-      <AnchorPane prefHeight="200.0" prefWidth="616.0" BorderPane.alignment="CENTER">
+   <center>
+      <AnchorPane prefWidth="0.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="128.0" layoutY="33.0" prefHeight="200.0" prefWidth="343.0" spacing="30.0">
+            <MFXButton fx:id="addButton" layoutX="306.0" layoutY="437.0" prefWidth="110.0" stylesheets="@../css/form.css" text="Add Finance">
+               <font>
+                  <Font size="14.0" />
+               </font></MFXButton>
+            <MFXComboBox fx:id="typeComboBox" floatMode="BORDER" floatingText="Type" layoutX="78.0" layoutY="51.0" minHeight="39.0" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" stylesheets="@../css/form.css" />
+            <MFXComboBox fx:id="categoryComboBox" floatMode="BORDER" floatingText="Category" layoutX="78.0" layoutY="103.0" minHeight="39.0" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" stylesheets="@../css/form.css" />
+            <MFXTextField fx:id="nameField" floatMode="BORDER" floatingText="Name: " graphicTextGap="0.0" layoutX="78.0" layoutY="156.0" maxHeight="39.0" prefColumnCount="0" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" stylesheets="@../css/form.css" />
+            <MFXTextField fx:id="amountField" floatMode="BORDER" floatingText="Amount: " layoutX="78.0" layoutY="207.0" prefColumnCount="0" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" stylesheets="@../css/form.css" />
+            <MFXDatePicker fx:id="startDatePicker" floatMode="BORDER" floatingText="Date" layoutX="78.0" layoutY="259.0" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" stylesheets="@../css/form.css" />
+            <HBox alignment="CENTER_LEFT" layoutX="79.0" layoutY="311.0" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <Label prefHeight="18.0" prefWidth="62.0" text="Type: " />
-                        <MFXComboBox fx:id="typeComboBox" floatMode="DISABLED" prefHeight="40.0" prefWidth="277.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <Label prefHeight="18.0" prefWidth="62.0" text="Category:" />
-                        <MFXComboBox fx:id="categoryComboBox" floatMode="DISABLED" prefHeight="40.0" prefWidth="277.0" />
-                     </children>
-                  </HBox>
-                  <MFXTextField fx:id="nameField" floatingText="Name: " prefHeight="0.0" prefWidth="360.0" />
-                  <MFXTextField fx:id="amountField" floatingText="Amount: " prefHeight="20.0" prefWidth="360.0" />
-                  <HBox alignment="CENTER_LEFT" spacing="50.0">
-                     <children>
-                        <Label prefHeight="18.0" prefWidth="78.0" text="Start Date: " />
-                        <MFXDatePicker fx:id="startDatePicker" prefHeight="38.0" prefWidth="245.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" spacing="20.0">
-                     <children>
-                        <Label text="Every: " />
-                        <MFXTextField fx:id="timeDurationField" floatMode="DISABLED" prefHeight="40.0" />
-                        <MFXComboBox fx:id="typeOfTimeComboBox" floatMode="DISABLED" prefHeight="10.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" spacing="20.0">
-                     <children>
-                        <Label prefHeight="18.0" prefWidth="76.0" text="Description: " />
-                        <MFXTextField fx:id="descriptionField" floatMode="DISABLED" prefWidth="261.0" />
-                     </children>
-                  </HBox>
+                  <Label prefHeight="17.0" prefWidth="107.0" stylesheets="@../css/form.css" text="Frequency :" />
+                  <MFXTextField fx:id="timeDurationField" floatMode="BORDER" floatingText="Value" prefHeight="39.0" style="-fx-border-color: none;" stylesheets="@../css/form.css">
+                     <HBox.margin>
+                        <Insets left="33.0" />
+                     </HBox.margin></MFXTextField>
+                  <MFXComboBox fx:id="typeOfTimeComboBox" floatMode="BORDER" floatingText="Interval" prefHeight="39.0" style="-fx-border-color: none;" stylesheets="@../css/form.css">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </MFXComboBox>
                </children>
-            </VBox>
-            <MFXButton fx:id="addButton" layoutX="257.0" layoutY="518.0" text="Add Finance" />
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </HBox>
+            <MFXTextField fx:id="descriptionField" floatMode="BORDER" floatingText="Description" layoutX="78.0" layoutY="364.0" minHeight="60.0" prefHeight="60.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" stylesheets="@../css/form.css" />
+            <Label layoutX="178.0" layoutY="14.0" text="Finance Form">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
          </children>
          <padding>
             <Insets bottom="20.0" />
          </padding>
       </AnchorPane>
-   </bottom>
+   </center>
 </fx:root>

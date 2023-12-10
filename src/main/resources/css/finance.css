@@ -1,0 +1,12 @@
+.split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: #9FE2BF;
+}
+
+#financeBox:hover {
+    -fx-translate-y: -5;
+}
+
+.timeFilter:hover,
+.timeFilter:focused{
+    -fx-background-color: #9FE2BF;
+}

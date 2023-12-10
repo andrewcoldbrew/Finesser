@@ -53,7 +53,7 @@ public class BudgetController implements Initializable {
 
     private void loadBudgetDataAsync() {
 
-        int currentUserId = Integer.parseInt(Main.getUserId());
+        int currentUserId = Main.getUserId();
 
         Task<List<Budget>> task = new Task<>() {
             @Override

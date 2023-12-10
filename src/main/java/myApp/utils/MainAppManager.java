@@ -16,7 +16,9 @@ public class MainAppManager {
     private static final Map<String, String> scenes = Map.of(
             "transaction", "/views/transaction.fxml",
             "budget", "/views/budget.fxml",
-            "finance", "/views/finance.fxml"
+            "finance", "/views/finance.fxml",
+            "account", "/views/account.fxml",
+            "testTransaction", "/views/testTransaction.fxml"
     );
 
     public static void setupMainApp() {

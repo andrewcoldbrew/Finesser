@@ -44,7 +44,9 @@ public class Transaction {
         return date;
     }
 
-
+    public String getDateString() {
+        return date.toString(); // Adjust the format as needed
+    }
     @Override
     public String toString() {
         return "Transaction{" +
