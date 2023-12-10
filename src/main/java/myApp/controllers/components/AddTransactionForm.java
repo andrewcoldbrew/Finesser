@@ -85,7 +85,7 @@ public class AddTransactionForm extends AnchorPane {
             } else {
                 int bankId = getBankIdByName(bankName); // Fetch bankId based on bank name
                 addBankTransaction(name, amount, description, category, bankId, date, userId);
-                updateBankAmount(userId, amount);
+                updateBankBalance(userId, amount);
             }
 
 
@@ -179,15 +179,15 @@ public class AddTransactionForm extends AnchorPane {
         }
     }
 
-    private void updateBankAmount(int userId, double transactionAmount) {
+    private void updateBankBalance(int userId, double transactionAmount) {
         try (PreparedStatement statement = con.prepareStatement(
-                "UPDATE user SET bankAmount = bankAmount - ? WHERE userId = ?")) {
+                "UPDATE bank SET balance = balance - ? WHERE ownerId = ?")) {
 
             statement.setDouble(1, transactionAmount);
             statement.setInt(2, userId);
 
             statement.execute();
-            System.out.println("BankAmount updated successfully!");
+            System.out.println("Bank balance updated successfully!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

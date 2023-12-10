@@ -5,14 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/components/loadingScreen.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/SuccessAlert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/successAlert.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LinkBankForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LinkBankForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/ConnectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/components/linkBankForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/linkBankForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/linkBankForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/linkBankForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/loadingScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/loadingScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/loadingScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/loadingScreen.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/LinkBankForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/LinkBankForm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/ConnectionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/ConnectionManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +91,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.5443038&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -140,7 +146,9 @@
       <workItem from="1701932065257" duration="7035000" />
       <workItem from="1701957332179" duration="4137000" />
       <workItem from="1701998885813" duration="4399000" />
-      <workItem from="1702024259172" duration="3608000" />
+      <workItem from="1702024259172" duration="8229000" />
+      <workItem from="1702044694972" duration="3362000" />
+      <workItem from="1702131144723" duration="6822000" />
     </task>
     <servers />
   </component>

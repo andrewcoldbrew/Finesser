@@ -21,7 +21,7 @@
                   <MFXFilterComboBox fx:id="bankComboBox" floatMode="DISABLED" />
                </children>
             </HBox>
-            <HBox fx:id="loadingContainer" alignment="CENTER" prefWidth="200.0" spacing="20.0" />
+            <VBox fx:id="loadingContainer" alignment="CENTER" />
             <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
                <children>
                   <MFXButton fx:id="linkBankButton" buttonType="RAISED" text="Link with this bank">

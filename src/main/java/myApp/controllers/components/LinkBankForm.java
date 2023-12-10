@@ -33,14 +33,18 @@ public class LinkBankForm extends BorderPane {
     public MFXFilterComboBox<String> bankComboBox;
     public MFXTextField balanceField;
     public MFXButton linkBankButton;
+
     public Button exitButton;
-    public HBox loadingContainer;
+    public VBox loadingContainer;
     private final Connection con = ConnectionManager.getConnection();
     private final ObservableList<String> bankList = FXCollections.observableArrayList(
             "TPB", "VCB", "ACB", "BIDV", "MB", "Techcombank", "VietinBank", "VPBank", "Eximbank"
     );
     private Stage stage;
+    private MFXProgressSpinner spinner;
     private Label balanceLabel;
+
+
     public LinkBankForm() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/linkBankForm.fxml"));
         fxmlLoader.setRoot(this);
@@ -56,10 +60,14 @@ public class LinkBankForm extends BorderPane {
         }
     }
 
-    // WORK IN PROGRESS >>> DO NOT DELETE THIS
+    private void linkBank(ActionEvent actionEvent) {
+        SuccessAlert successAlert = new SuccessAlert("The bank has been linked successfully!");
+        successAlert.showAlert();
+        exit();
+    }
+
 //    private void linkBank(ActionEvent actionEvent) {
 //        String bankName = bankComboBox.getValue();
-//        double balance =
 //        int userId = Main.getUserId();
 //
 //        if (bankName == null) {
@@ -67,40 +75,36 @@ public class LinkBankForm extends BorderPane {
 //            return;
 //        }
 //
-//        try {
+//        try (PreparedStatement updateBank = con.prepareStatement("UPDATE bank SET ownerId = ? WHERE name = ? AND ownerId")) {
 //
-//            try (PreparedStatement insertStatement = con.prepareStatement(
-//                    "INSERT INTO bank (name, ownerId, balance) VALUES (?, ?, ?)")) {
+//            updateBank.setInt(1, userId);
+//            updateBank.setString(2, bankName);
 //
-//                insertStatement.setString(1, bankName);
-//                insertStatement.setInt(2, userId);
-//                insertStatement.setDouble(3, balance);
+//            updateBank.execute();
+//            System.out.println("Bank linked successfully!");
 //
-//                insertStatement.execute();
-//                System.out.println("Bank added successfully!");
+//            // Update user's bankAmount in the user table
+//            try (PreparedStatement updateStatement = con.prepareStatement(
+//                    "UPDATE user SET bankAmount = bankAmount + ? WHERE userId = ?")) {
 //
-//                // Update user's bankAmount in the user table
-//                try (PreparedStatement updateStatement = con.prepareStatement(
-//                        "UPDATE user SET bankAmount = bankAmount + ? WHERE userId = ?")) {
+//                updateStatement.setDouble(1, balance);
+//                updateStatement.setInt(2, userId);
 //
-//                    updateStatement.setDouble(1, balance);
-//                    updateStatement.setInt(2, userId);
-//
-//                    updateStatement.executeUpdate();
-//                    System.out.println("User's bankAmount updated successfully!");
-//                }
+//                updateStatement.executeUpdate();
+//                System.out.println("User's bankAmount updated successfully!");
 //            }
-//        } catch (NumberFormatException e) {
-//            System.out.println("Invalid amount. Please enter a valid number.");
 //        } catch (SQLException e) {
-//            e.printStackTrace();
-//            System.out.println("Error adding the bank to the database.");
+//            throw new RuntimeException(e);
 //        }
 //    }
+
+
 
     private void initialize() {
         bankComboBox.setItems(bankList);
         balanceLabel = new Label();
+        spinner = new MFXProgressSpinner();
+        spinner.setPrefSize(30, 30);
         bankComboBox.setOnAction(e -> {
             handleBankSelection();
         });
@@ -116,14 +120,13 @@ public class LinkBankForm extends BorderPane {
     private void showSpinnerAndBalanceLabel(String selectedBank) {
         removeExistingBalanceLabel(balanceLabel);
         int userId = Main.getUserId();
-        MFXProgressSpinner spinner = new MFXProgressSpinner();
-        spinner.setPrefSize(30, 30);
-        loadingContainer.getChildren().addAll(spinner, balanceLabel);
+        loadingContainer.getChildren().addAll(spinner);
 
         // PauseTransition to delay the spinner for 1.5 seconds
         PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(event -> {
             // Remove the spinner after 1.5 seconds and set the label
+            loadingContainer.getChildren().addAll(balanceLabel);
             loadingContainer.getChildren().remove(spinner);
 
             // Check if the bank is not valid

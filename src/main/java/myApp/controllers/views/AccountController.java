@@ -56,14 +56,14 @@ public class AccountController implements Initializable {
     private void loadUserProfile() {
         int userId = Main.getUserId();
 
-        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT name, password, (bankAmount + cashAmount) AS balance FROM user WHERE userId = ?")) {
+        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT name, password, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerId = userId), 0) AS totalBalance FROM user WHERE userId = ?")) {
             preparedStatement.setInt(1, userId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     String name = resultSet.getString("name");
                     String password = resultSet.getString("password");
-                    double balance = resultSet.getDouble("balance");
+                    double balance = resultSet.getDouble("totalBalance");
 
                     System.out.println(name);
                     System.out.println(password);
