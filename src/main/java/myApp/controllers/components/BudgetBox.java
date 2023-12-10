@@ -1,10 +1,12 @@
 package myApp.controllers.components;
 
 import io.github.palexdev.materialfx.beans.NumberRange;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
 import io.github.palexdev.materialfx.effects.Interpolators;
 import io.github.palexdev.materialfx.utils.AnimationUtils;
 import javafx.animation.Animation;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
@@ -22,6 +24,8 @@ public class BudgetBox extends AnchorPane {
     public Label endDateLabel;
     public Label percentageLabel;
     public MFXProgressBar progressBar;
+    public MFXButton updateButton;
+    public MFXButton deleteButton;
     public BudgetBox(String category, double budget, double spent, LocalDate endDate, double percentage, double progressValue) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/budgetBox.fxml"));
         fxmlLoader.setRoot(this);
@@ -30,9 +34,18 @@ public class BudgetBox extends AnchorPane {
         try {
             fxmlLoader.load();
             initialize(category, budget, spent, endDate, percentage, progressValue);
+            updateButton.setOnAction(this::updateBudget);
+            deleteButton.setOnAction(this::deleteBudget);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void deleteBudget(ActionEvent actionEvent) {
+    }
+
+    private void updateBudget(ActionEvent actionEvent) {
+        
     }
 
     private void initialize(String category, double budget, double spent, LocalDate endDate, double percentage, double progressValue) {

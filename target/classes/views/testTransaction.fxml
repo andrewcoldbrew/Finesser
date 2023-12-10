@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane stylesheets="@../css/testTransaction.css" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.TestTransactionController">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/testTransaction.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.TestTransactionController">
    <top>
       <MFXTextField fx:id="searchBar" floatingText="Enter what you want to search" floatingTextGap="0.0" prefColumnCount="30" BorderPane.alignment="CENTER">
          <BorderPane.margin>

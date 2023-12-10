@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import myApp.Main;
 import myApp.utils.ConnectionManager;
 
 import java.io.IOException;
@@ -61,18 +62,21 @@ public class AddBudgetForm extends AnchorPane {
     }
 
     private void addBudget(ActionEvent actionEvent) {
+
         String category = categoryComboBox.getValue();
         LocalDate startDate = startDatePicker.getValue();
         LocalDate endDate = endDatePicker.getValue();
+
         try {
             double limit = Double.parseDouble(limitField.getText());
             Connection con = ConnectionManager.getConnection();
             PreparedStatement statement = con.prepareStatement(
-                    "INSERT INTO budget (category, budget_limit, start_date, end_date) VALUES (?, ?, ?, ?)");
-            statement.setString(1, category);
-            statement.setDouble(2, limit);
-            statement.setDate(3, Date.valueOf(startDate));
-            statement.setDate(4, Date.valueOf(endDate));
+                    "INSERT INTO budget (userId, category, budget_limit, start_date, end_date) VALUES (?, ?, ?, ?, ?)");
+            statement.setInt(1, Main.getUserId());
+            statement.setString(2, category);
+            statement.setDouble(3, limit);
+            statement.setDate(4, Date.valueOf(startDate));
+            statement.setDate(5, Date.valueOf(endDate));
             statement.execute();
             System.out.println("Budget added!");
             closeStage();
