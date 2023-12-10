@@ -27,9 +27,9 @@ public class MainAppManager {
         mainLayout.setLeft(leftMenuBar);
 
         // Set up the content in the center
-        switchScene("transaction");
+        switchScene("account");
 
-        // You can add additional setup for the stage if needed
+        mainAppStage.setMaximized(true);
 
         // Show the stage
         mainAppStage.setScene(new Scene(mainLayout));
@@ -49,8 +49,6 @@ public class MainAppManager {
         try {
             FXMLLoader loader = new FXMLLoader(LoginStageManager.class.getResource(scenes.get(name)));
             Parent root = loader.load();
-
-            Scene scene = new Scene(root);
 
             mainLayout.setCenter(root);
         } catch (IOException e) {
