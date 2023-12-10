@@ -61,42 +61,10 @@ public class LinkBankForm extends BorderPane {
     }
 
     private void linkBank(ActionEvent actionEvent) {
-        SuccessAlert successAlert = new SuccessAlert("The bank has been linked successfully!");
-        successAlert.showAlert();
-        exit();
+//        SuccessAlert successAlert = new SuccessAlert("The bank has been linked successfully!");
+//        successAlert.showAlert();
+//        exit();
     }
-
-//    private void linkBank(ActionEvent actionEvent) {
-//        String bankName = bankComboBox.getValue();
-//        int userId = Main.getUserId();
-//
-//        if (bankName == null) {
-//            System.out.println("Please enter all fields first.");
-//            return;
-//        }
-//
-//        try (PreparedStatement updateBank = con.prepareStatement("UPDATE bank SET ownerId = ? WHERE name = ? AND ownerId")) {
-//
-//            updateBank.setInt(1, userId);
-//            updateBank.setString(2, bankName);
-//
-//            updateBank.execute();
-//            System.out.println("Bank linked successfully!");
-//
-//            // Update user's bankAmount in the user table
-//            try (PreparedStatement updateStatement = con.prepareStatement(
-//                    "UPDATE user SET bankAmount = bankAmount + ? WHERE userId = ?")) {
-//
-//                updateStatement.setDouble(1, balance);
-//                updateStatement.setInt(2, userId);
-//
-//                updateStatement.executeUpdate();
-//                System.out.println("User's bankAmount updated successfully!");
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
 
 

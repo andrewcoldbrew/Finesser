@@ -1,6 +1,7 @@
 package myApp.controllers.views;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -16,6 +17,7 @@ import javafx.stage.StageStyle;
 import myApp.Main;
 import myApp.controllers.components.AddBudgetForm;
 import myApp.controllers.components.AddWalletForm;
+import myApp.controllers.components.BankBox;
 import myApp.controllers.components.LinkBankForm;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
@@ -33,6 +35,7 @@ public class AccountController implements Initializable {
     private final Stage linkBankDialog = new Stage();
     private final Stage addWalletDialog = new Stage();
     public Label balanceLabel;
+    public MFXScrollPane scrollPane;
     private Scene dialogScene;
     public ImageView profileImage;
     public Label fullNameLabel;
@@ -46,10 +49,10 @@ public class AccountController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeLinkBankForm();
         initializeAddWalletForm();
-        flowPane.setPadding(new Insets(30, 0, 30, 30));
         Draggable draggable = new Draggable();
         draggable.makeDraggable(linkBankDialog);
         loadUserProfile();
+        loadUserBanks();
     }
 
 
@@ -75,6 +78,24 @@ public class AccountController implements Initializable {
                 } else {
                     System.out.println("User not found.");
                 }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void loadUserBanks() {
+        int userId = Main.getUserId();
+
+        try {
+            PreparedStatement statement = con.prepareStatement("SELECT u.name AS userName, b.name AS bankName FROM user u JOIN bank b ON u.userId = b.ownerId WHERE u.userId = ?");
+            statement.setInt(1, userId);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                String bankName = rs.getString("bankName");
+                String userName = rs.getString("userName");
+                BankBox bankBox = new BankBox(bankName, userName);
+                flowPane.getChildren().add(bankBox);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
