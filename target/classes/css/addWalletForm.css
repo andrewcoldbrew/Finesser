@@ -1,0 +1,7 @@
+#exitButton {
+    -fx-background-color: transparent;
+}
+
+#exitIcon {
+    -fx-fill: red;
+}

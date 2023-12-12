@@ -40,7 +40,7 @@ public class LoginController implements Initializable {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String userId = resultSet.getString("userId");
+                int userId = resultSet.getInt("userId");
                 String hashedStoredPassword = resultSet.getString("password");
 
                 if (HashManager.validatePassword(password, hashedStoredPassword)) {

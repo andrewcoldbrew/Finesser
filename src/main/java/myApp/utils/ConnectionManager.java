@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class ConnectionManager {
     private static Connection con;
 
-    private static final String user = "opipjlm8i4e0dsn03bjq";
-    private static final String password = "pscale_pw_1plFs0tLzq92ek4RKJOkwyuLlMRpbRuHgf7amgergl9";
+    private static final String user = "o7x9xydnbjp7ib0zp59n";
+    private static final String password = "pscale_pw_vLL4tN1parthJvwBFA0B1tYyt190ghwwG81jici73NZ";
 
     public static void createConnection() {
         try {

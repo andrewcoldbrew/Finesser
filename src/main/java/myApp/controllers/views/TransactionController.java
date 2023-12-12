@@ -104,15 +104,16 @@ public class TransactionController implements Initializable {
     }
 
     private void loadTransactions() {
-        String userId = Main.getUserId(); // Get the logged-in user's ID
+        int userId = Main.getUserId(); // Get the logged-in user's ID
 
-        String query = "SELECT t.name, t.amount, t.description, t.category, b.name as bankName, t.transaction_date " +
+        String query = "SELECT t.name, t.amount, t.description, t.category, COALESCE(b.name, 'No bank') AS bankName, t.transaction_date " +
                 "FROM transaction t " +
-                "JOIN bank b ON t.bankId = b.bankId " +
-                "WHERE b.ownerId = ?";
+                "LEFT JOIN bank b ON t.bankId = b.bankId " +
+                "WHERE t.userId = ? " +
+                "ORDER BY b.bankId DESC";
 
         try (PreparedStatement stmt = con.prepareStatement(query)) {
-            stmt.setString(1, userId);
+            stmt.setInt(1, userId);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 transactionData.clear();
@@ -136,27 +137,6 @@ public class TransactionController implements Initializable {
 
 
 
-
-    @FXML
-    private void filterByFood(ActionEvent event) {
-        filterTransactions("Food");
-    }
-
-    @FXML
-    private void filterByEntertainment(ActionEvent event) {
-        filterTransactions("Entertainment");
-    }
-
-    @FXML
-    private void filterByMisc(ActionEvent event) {
-        filterTransactions("Miscellaneous");
-    }
-
-    private void filterTransactions(String category) {
-        filteredTransactions.setPredicate(transaction ->
-                category == null || category.isEmpty() || transaction.getCategory().equals(category)
-        );
-    }
     private void updateTotals() {
         double totalFoodAmount = calculateTotalForCategory("Food");
         double totalEntertainmentAmount = calculateTotalForCategory("Entertainment");

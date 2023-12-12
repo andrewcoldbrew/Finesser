@@ -24,7 +24,7 @@
             </ImageView>
             <VBox alignment="TOP_CENTER" prefHeight="645.0" prefWidth="240.0">
                <children>
-                  <MFXButton alignment="CENTER" buttonType="RAISED" prefHeight="60.0" prefWidth="200.0" text="      Profile">
+                  <MFXButton fx:id="accountButton" alignment="CENTER" buttonType="RAISED" onAction="#moveToAccount" prefHeight="60.0" prefWidth="200.0" text="My Account">
                      <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>

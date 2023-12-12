@@ -1,0 +1,9 @@
+#updateButton {
+    -fx-background-color: #4CAF50; /* Green */
+    -fx-text-fill: #ffffff; /* White text on green background */
+}
+
+#deleteButton {
+    -fx-background-color: #FF5252; /* Red */
+    -fx-text-fill: #ffffff; /* White text on red background */
+}
