@@ -2,21 +2,21 @@ package myApp.controllers.components;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import myApp.Main;
 import myApp.utils.ConnectionManager;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddTransactionForm extends AnchorPane {
     public MFXFilterComboBox<String> typeComboBox;
@@ -26,14 +26,14 @@ public class AddTransactionForm extends AnchorPane {
     public TextField descriptionField;
     public TextField amountField;
     public MFXButton cancelButton;
+    private final Connection con = ConnectionManager.getConnection();
 
     private final ObservableList<String> typeList = FXCollections.observableArrayList(
             "Food", "Clothes", "Groceries", "Entertainment", "Utilities",
             "Transportation", "Healthcare", "Education", "Travel", "Miscellaneous"
     );
-    private final ObservableList<String> bankList = FXCollections.observableArrayList(
-            "TPB", "VCB", "ACB", "BIDV", "MB", "Techcombank", "VietinBank", "VPBank", "Eximbank"
-    );
+    private ObservableList<String> bankList;
+//    private Connection con; // Database connection
 
     public AddTransactionForm() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/addTransactionForm.fxml"));
@@ -47,43 +47,61 @@ public class AddTransactionForm extends AnchorPane {
             throw new RuntimeException(e);
         }
     }
-    public void initialize() {
+
+    private void initialize() {
         // Initialize ComboBox items with typeList and bankList
+        System.out.println("INITIALIZE TRANSACTION");
+
+        loadBank();
+
         typeComboBox.setItems(typeList);
-        bankComboBox.setItems(bankList);
+
         addButton.setOnAction(this::addTransaction);
         cancelButton.setOnAction(this::closeTransactionForm);
+
     }
+
     private void addTransaction(ActionEvent actionEvent) {
         String name = transactionNameField.getText().trim();
         String amountText = amountField.getText().trim();
         String description = descriptionField.getText().trim();
         String category = typeComboBox.getValue();
-        String bank = bankComboBox.getValue();
-
+        String bankName = bankComboBox.getValue();
+        LocalDate date = LocalDate.now();
+        int userId = Main.getUserId();
         if (description.isEmpty()) {
             description = "No description";
         }
-        if (name.isEmpty() || amountText.isEmpty() || category == null || bank == null) {
-            System.out.println("Please fill in all required fields dumbass.");
+        if (name.isEmpty() || amountText.isEmpty() || category == null || bankName == null) {
+            System.out.println("Please fill in all required fields.");
             return;
         }
 
         try {
             double amount = Double.parseDouble(amountText);
-
-            try (Connection con = ConnectionManager.getConnection();
-             PreparedStatement statement = con.prepareStatement("INSERT INTO transactions (name, amount, description, category, bank) VALUES (?, ?, ?, ?, ?)")) {
-
-                statement.setString(1, name);
-                statement.setDouble(2, amount);
-                statement.setString(3, description);
-                statement.setString(4, category);
-                statement.setString(5, bank);
-
-                statement.execute();
-                System.out.println("Transaction added you rich fuck!");
+            if (bankName.equals("None")) {
+                addCashTransaction(name, amount, description, category, date, userId);
+                updateCashAmount(userId, amount);
+            } else {
+                int bankId = getBankIdByName(bankName); // Fetch bankId based on bank name
+                addBankTransaction(name, amount, description, category, bankId, date, userId);
+                updateBankBalance(userId, amount);
             }
+
+
+//            try (PreparedStatement statement = con.prepareStatement(
+//                    "INSERT INTO transactions (name, amount, description, category, bankId) VALUES (?, ?, ?, ?, ?)")) {
+//
+//                statement.setString(1, name);
+//                statement.setDouble(2, amount);
+//                statement.setString(3, description);
+//                statement.setString(4, category);
+//                statement.setString(5, bankId);
+//
+//                statement.execute();
+//                System.out.println("Transaction added successfully!");
+//
+//        }
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount. Please enter a valid number.");
         } catch (SQLException e) {
@@ -92,8 +110,103 @@ public class AddTransactionForm extends AnchorPane {
         }
     }
 
-    public void closeTransactionForm(ActionEvent actionEvent) {
-        // Assuming you want to remove the entire TransactionTable from its parent
-        ((Pane) getParent()).getChildren().remove(this);
+    private int getBankIdByName(String bankName) throws SQLException {
+        try (PreparedStatement stmt = con.prepareStatement("SELECT bankId FROM bank WHERE name = ?")) {
+            stmt.setString(1, bankName);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("bankId");
+                } else {
+                    throw new SQLException("Bank not found");
+                }
+            }
+        }
+    }
+
+    private void closeTransactionForm(ActionEvent actionEvent) {
+        // Remove the form from its parent
+        ((AnchorPane) getParent()).getChildren().remove(this);
+    }
+
+    private void addCashTransaction(String name, double amount, String description, String category, LocalDate date, int userId) {
+        try (PreparedStatement statement = con.prepareStatement(
+                "INSERT INTO transaction (name, amount, description, category, transaction_date, userId) VALUES (?, ?, ?, ?, ?, ?)")) {
+
+            statement.setString(1, name);
+            statement.setDouble(2, amount);
+            statement.setString(3, description);
+            statement.setString(4, category);
+            statement.setDate(5, Date.valueOf(date));
+            statement.setInt(6, userId);
+
+            statement.execute();
+            System.out.println("Transaction added successfully!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void addBankTransaction(String name, double amount, String description, String category, int bankId, LocalDate date, int userId) {
+        try (PreparedStatement statement = con.prepareStatement(
+                "INSERT INTO transaction (name, amount, description, category, bankId, transaction_date, userId) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+
+            statement.setString(1, name);
+            statement.setDouble(2, amount);
+            statement.setString(3, description);
+            statement.setString(4, category);
+            statement.setInt(5, bankId);
+            statement.setDate(6, Date.valueOf(date));
+            statement.setInt(7, userId);
+
+            statement.execute();
+            System.out.println("Transaction added successfully!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void updateCashAmount(int userId, double transactionAmount) {
+        try (PreparedStatement statement = con.prepareStatement(
+                "UPDATE user SET cashAmount = cashAmount - ? WHERE userId = ?")) {
+
+            statement.setDouble(1, transactionAmount);
+            statement.setInt(2, userId);
+
+            statement.execute();
+            System.out.println("CashAmount updated successfully!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void updateBankBalance(int userId, double transactionAmount) {
+        try (PreparedStatement statement = con.prepareStatement(
+                "UPDATE bank SET balance = balance - ? WHERE ownerId = ?")) {
+
+            statement.setDouble(1, transactionAmount);
+            statement.setInt(2, userId);
+
+            statement.execute();
+            System.out.println("Bank balance updated successfully!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    private void loadBank() {
+        bankList = FXCollections.observableArrayList();
+        bankList.add("None");
+        try (PreparedStatement stmt = con.prepareStatement("SELECT name FROM bank WHERE ownerId = ?")) {
+            stmt.setInt(1, Main.getUserId());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String bankName = rs.getString("name");
+                bankList.add(bankName);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        bankComboBox.setItems(bankList);
     }
 }

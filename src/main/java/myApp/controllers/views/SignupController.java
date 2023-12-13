@@ -70,23 +70,28 @@ public class SignupController implements Initializable {
     }
 
     private boolean isUsernameTaken(Connection con, String username) throws Exception {
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM user WHERE username = ?");
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM user WHERE name = ?");
         statement.setString(1, username);
         ResultSet resultSet = statement.executeQuery();
-        return resultSet.next();
+        boolean isTaken = resultSet.next();
+        resultSet.close();
+        statement.close();
+        return isTaken;
     }
 
+
     private boolean isStrongPassword(String password) {
-        // Define the regular expression for a strong password
+
         String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         return password.matches(regex);
     }
 
     private void registerUser(Connection con, String username, String password) throws Exception {
-        // Hash the password before storing it
+
         String hashedPassword = HashManager.hashPassword(password);
-        // Insert the new user
-        PreparedStatement statement = con.prepareStatement("INSERT INTO user (username, password) VALUES (?, ?)");
+
+
+        PreparedStatement statement = con.prepareStatement("INSERT INTO user (name, password) VALUES (?, ?)");
         statement.setString(1, username);
         statement.setString(2, hashedPassword);
         statement.execute();

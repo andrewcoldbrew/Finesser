@@ -16,7 +16,7 @@ public class MenuBarController {
     public void moveToDashBoard(ActionEvent actionEvent) {
     }
     public void moveToTransaction(ActionEvent actionEvent) {
-        MainAppManager.switchScene("transaction");
+        MainAppManager.switchScene("testTransaction");
     }
 
     public void moveToBudget(ActionEvent actionEvent) {
@@ -30,5 +30,9 @@ public class MenuBarController {
     public void moveToLogin(ActionEvent actionEvent) {
         MainAppManager.getMainAppStage().close();
         LoginStageManager.setupLoginStage();
+    }
+
+    public void moveToAccount(ActionEvent actionEvent) {
+        MainAppManager.switchScene("account");
     }
 }

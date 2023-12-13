@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import myApp.Main;
+import myApp.controllers.components.ErrorAlert;
 import myApp.utils.*;
 
 import java.net.URL;
@@ -30,18 +31,19 @@ public class LoginController implements Initializable {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        // Retrieve user data from the database
+
         Connection con = ConnectionManager.getConnection();
         try {
-            PreparedStatement statement = con.prepareStatement("SELECT userId, username, password FROM user WHERE username = ?");
+            // Update the query: use 'name' instead of 'username'
+            PreparedStatement statement = con.prepareStatement("SELECT userId, name, password FROM user WHERE name = ?");
             statement.setString(1, username);
-            System.out.println(statement);
+
             ResultSet resultSet = statement.executeQuery();
-            // If username exists!
+
             if (resultSet.next()) {
-                String userId = resultSet.getString("userId");
+                int userId = resultSet.getInt("userId");
                 String hashedStoredPassword = resultSet.getString("password");
-                // Check password correct or not
+
                 if (HashManager.validatePassword(password, hashedStoredPassword)) {
                     System.out.println("ACCOUNT FOUND");
                     Main.setUserId(userId);
@@ -49,16 +51,20 @@ public class LoginController implements Initializable {
                     LoginStageManager.getLoginStage().close();
                     MainAppManager.setupMainApp();
                 } else {
-                    System.out.println("WRONG PASSWORD DUMBASS");
+                    new ErrorAlert("WRONG PASSWORD", "The password you entered is incorrect! Please try again");
+                    System.out.println("INCORRECT PASSWORD");
                 }
             } else {
-                System.out.println("NO ACCOUNT FOUND");
+                new ErrorAlert("ACCOUNT NOT FOUND", "This username doesn't exists! Please enter another one");
+                System.out.println("USER NOT FOUND");
             }
+            resultSet.close();
             statement.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     public void moveToSignup(ActionEvent actionEvent) {
         LoginStageManager.switchScene("signup");

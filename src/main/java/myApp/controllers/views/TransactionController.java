@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import myApp.Main;
 import myApp.controllers.components.TransactionSortForm;
 import myApp.controllers.components.AddTransactionForm;
 import myApp.models.Transaction;
@@ -79,8 +80,8 @@ public class TransactionController implements Initializable {
                     } else if (transaction.getCategory() != null &&
                             transaction.getCategory().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (transaction.getBank() != null &&
-                            transaction.getBank().toLowerCase().contains(lowerCaseFilter)) {
+                    } else if (transaction.getBankName() != null &&
+                            transaction.getBankName().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     }
 
@@ -96,59 +97,50 @@ public class TransactionController implements Initializable {
         amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        bankColumn.setCellValueFactory(new PropertyValueFactory<>("bank"));
+        bankColumn.setCellValueFactory(new PropertyValueFactory<>("bankName"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         transactionTable.setItems(transactionData);
     }
 
     private void loadTransactions() {
-        try (PreparedStatement stmt = con.prepareStatement("SELECT name, amount, description, category, bank, transaction_date FROM transactions");
-             ResultSet rs = stmt.executeQuery()) {
+        int userId = Main.getUserId(); // Get the logged-in user's ID
 
-            while (rs.next()) {
-                String name = rs.getString("name");
-                double amount = rs.getDouble("amount");
-                String description = rs.getString("description");
-                String category = rs.getString("category");
-                String bank = rs.getString("bank");
-                LocalDate date = rs.getDate("transaction_date").toLocalDate();
-                Transaction transaction = new Transaction(name, amount, description, category, bank, date);
-                transactionData.add(transaction);
+        String query = "SELECT t.name, t.amount, t.description, t.category, COALESCE(b.name, 'No bank') AS bankName, t.transaction_date " +
+                "FROM transaction t " +
+                "LEFT JOIN bank b ON t.bankId = b.bankId " +
+                "WHERE t.userId = ? " +
+                "ORDER BY b.bankId DESC";
+
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                transactionData.clear();
+
+                while (rs.next()) {
+                    String name = rs.getString("name");
+                    double amount = rs.getDouble("amount");
+                    String description = rs.getString("description");
+                    String category = rs.getString("category");
+                    String bankName = rs.getString("bankName");
+                    LocalDate date = rs.getDate("transaction_date").toLocalDate();
+
+                    Transaction transaction = new Transaction(name, amount, description, category, bankName, date);
+                    transactionData.add(transaction);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML
-    private void filterByFood(ActionEvent event) {
-        filterTransactions("Food");
-    }
 
-    @FXML
-    private void filterByEntertainment(ActionEvent event) {
-        filterTransactions("Entertainment");
-    }
 
-    @FXML
-    private void filterByMisc(ActionEvent event) {
-        filterTransactions("Miscellaneous");
-    }
-
-    private void filterTransactions(String category) {
-        filteredTransactions.setPredicate(transaction ->
-                category == null || category.isEmpty() || transaction.getCategory().equals(category)
-        );
-    }
     private void updateTotals() {
         double totalFoodAmount = calculateTotalForCategory("Food");
         double totalEntertainmentAmount = calculateTotalForCategory("Entertainment");
         double totalMiscAmount = calculateTotalForCategory("Miscellaneous");
-
-        //System.out.println("Total Food Amount: " + totalFoodAmount); // Debug
-        //System.out.println("Total Entertainment Amount: " + totalEntertainmentAmount); // Debug
-        //System.out.println("Total Misc Amount: " + totalMiscAmount); // Debug
 
         totalFood.setText(String.format("Total: $%.2f", totalFoodAmount));
         totalEntertainment.setText(String.format("Total: $%.2f", totalEntertainmentAmount));
@@ -160,14 +152,13 @@ public class TransactionController implements Initializable {
                 .filter(tr -> tr.getCategory().equals(category))
                 .mapToDouble(Transaction::getAmount)
                 .sum();
-       //System.out.println("Total for " + category + ": " + total);
+
         return total;
     }
 
     public void handleAddForm(ActionEvent actionEvent) {
 
         if (!mainPane.getChildren().contains(addForm)) {
-            // Set the TransactionTable to the center of the mainPane
             AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
             AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
 
@@ -187,12 +178,12 @@ public class TransactionController implements Initializable {
             draggable.makeDraggable(sortForm);
         }
 
-        // Set the event handler for the SortingEvent
+
         sortForm.setSortingEventHandler(sortingEvent -> {
             String sortingQuery = sortingEvent.getSortingQuery();
-            // Update the data in the transaction table based on the sorting query
+
             Platform.runLater(() -> {
-                // Update the data in the transaction table based on the sorting query
+
                 System.out.println("RECEIVED QUERY: " + sortingQuery);
                 try {
                     transactionData.clear();
