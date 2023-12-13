@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -18,12 +17,13 @@ import myApp.utils.ImageBlender;
 
 import java.io.IOException;
 
-public class SuccessAlert extends BorderPane {
-    public ImageView successIcon;
-    public Label messageLabel;
+public class ErrorAlert extends BorderPane {
+    public ImageView errorIcon;
+    public Label errorTitle;
+    public Label errorMessage;
 
-    public SuccessAlert(String message) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/successAlert.fxml"));
+    public ErrorAlert(String title, String message) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/errorAlert.fxml"));
 
         try {
             fxmlLoader.setRoot(this);
@@ -32,12 +32,12 @@ public class SuccessAlert extends BorderPane {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
 
-            messageLabel.setText(message);
-            Image successImage = new Image("/images/account/success.png");
-            Image blendedImage = ImageBlender.blendColor(successImage, Color.GREEN);
-            successIcon.setImage(blendedImage);
+            errorTitle.setText(title);
+            errorMessage.setText(message);
+            Image successImage = new Image("/images/account/error.png");
+            Image blendedImage = ImageBlender.blendColor(successImage, Color.RED);
+            errorIcon.setImage(blendedImage);
 
-            // Show the stage with a fade-in transition
             showAlert(scene);
 
         } catch (IOException e) {
@@ -72,7 +72,6 @@ public class SuccessAlert extends BorderPane {
             });
             fadeOut.play();
         });
-
 
         pause.play();
     }

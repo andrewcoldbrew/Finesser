@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import myApp.Main;
+import myApp.controllers.components.ErrorAlert;
 import myApp.utils.*;
 
 import java.net.URL;
@@ -50,9 +51,11 @@ public class LoginController implements Initializable {
                     LoginStageManager.getLoginStage().close();
                     MainAppManager.setupMainApp();
                 } else {
+                    new ErrorAlert("WRONG PASSWORD", "The password you entered is incorrect! Please try again");
                     System.out.println("INCORRECT PASSWORD");
                 }
             } else {
+                new ErrorAlert("ACCOUNT NOT FOUND", "This username doesn't exists! Please enter another one");
                 System.out.println("USER NOT FOUND");
             }
             resultSet.close();
