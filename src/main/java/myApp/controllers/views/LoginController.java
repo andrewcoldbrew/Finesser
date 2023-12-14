@@ -35,13 +35,13 @@ public class LoginController implements Initializable {
         Connection con = ConnectionManager.getConnection();
         try {
             // Update the query: use 'name' instead of 'username'
-            PreparedStatement statement = con.prepareStatement("SELECT userId, name, password FROM user WHERE name = ?");
+            PreparedStatement statement = con.prepareStatement("SELECT userID, username, password FROM user WHERE username = ?");
             statement.setString(1, username);
 
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                int userId = resultSet.getInt("userId");
+                int userId = resultSet.getInt("userID");
                 String hashedStoredPassword = resultSet.getString("password");
 
                 if (HashManager.validatePassword(password, hashedStoredPassword)) {

@@ -29,6 +29,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import static myApp.Main.getUserId;
+
 public class LinkBankForm extends BorderPane {
     public MFXFilterComboBox<String> bankComboBox;
     public MFXTextField balanceField;
@@ -53,6 +55,7 @@ public class LinkBankForm extends BorderPane {
         try {
             fxmlLoader.load();
             initialize();
+            linkBankButton.setDisable(true);
             linkBankButton.setOnAction(this::linkBank);
             exitButton.setOnAction(this::closeStage);
         } catch (IOException e) {
@@ -61,14 +64,28 @@ public class LinkBankForm extends BorderPane {
     }
 
     private void linkBank(ActionEvent actionEvent) {
-        exit();
-        PauseTransition pause = new PauseTransition(Duration.seconds(0.25));
-        pause.setOnFinished(event -> {
-            new SuccessAlert("The bank has been linked successfully!");
-        });
-        pause.play();
+        PreparedStatement statement = null;
+        try {
+            statement = con.prepareStatement("UPDATE bank SET linked = true WHERE ownerID = ?");
+            statement.setInt(1, Main.getUserId());
+            statement.execute();
+            exit();
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.25));
+            pause.setOnFinished(event -> {
+                new SuccessAlert("The bank has been linked successfully!");
+            });
+            pause.play();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 
+//        exit();
+//        PauseTransition pause = new PauseTransition(Duration.seconds(0.25));
+//        pause.setOnFinished(event -> {
+//            new SuccessAlert("The bank has been linked successfully!");
+//        });
+//        pause.play();
     }
 
 
@@ -92,7 +109,7 @@ public class LinkBankForm extends BorderPane {
 
     private void showSpinnerAndBalanceLabel(String selectedBank) {
         removeExistingBalanceLabel(balanceLabel);
-        int userId = Main.getUserId();
+        int userId = getUserId();
         loadingContainer.getChildren().addAll(spinner);
 
         // PauseTransition to delay the spinner for 1.5 seconds
@@ -106,6 +123,9 @@ public class LinkBankForm extends BorderPane {
             double bankBalance = fetchBankBalance(selectedBank, userId);
             if (bankBalance == -1) {
                 balanceLabel.setText("You don't have an account linked with this bank.");
+                linkBankButton.setDisable(true);
+            } else if (bankBalance == -2) {
+                balanceLabel.setText("You have already linked with this bank");
                 linkBankButton.setDisable(true);
             } else {
                 balanceLabel.setText(String.format("Your balance for this bank is $%.2f", bankBalance));
@@ -125,14 +145,19 @@ public class LinkBankForm extends BorderPane {
     private double fetchBankBalance(String bankName, int userId) {
         try {
             // Update the query: use 'name' instead of 'username'
-            PreparedStatement statement = con.prepareStatement("SELECT balance FROM bank WHERE ownerId = ? AND name = ?");
+            PreparedStatement statement = con.prepareStatement("SELECT balance, linked FROM bank WHERE ownerID = ? AND bankName = ?");
             statement.setInt(1, userId);
             statement.setString(2, bankName);
 
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
-                return rs.getDouble("balance");
+                boolean isLinked = rs.getBoolean("linked");
+                if (isLinked) {
+                    return -2;
+                } else {
+                    return rs.getDouble("balance");
+                }
             }
             rs.close();
             statement.close();

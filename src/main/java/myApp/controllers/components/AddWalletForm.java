@@ -48,7 +48,7 @@ public class AddWalletForm extends BorderPane {
             double balance = Double.parseDouble(balanceText);
 
             try (PreparedStatement updateStatement = con.prepareStatement(
-                    "UPDATE user SET cashAmount = cashAmount + ? WHERE userId = ?")) {
+                    "UPDATE user SET cashAmount = cashAmount + ? WHERE userID = ?")) {
 
                 updateStatement.setDouble(1, balance);
                 updateStatement.setInt(2, userId);

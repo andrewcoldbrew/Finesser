@@ -31,7 +31,7 @@
    <center>
       <HBox fillHeight="false" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="bankNumberLabel" text="0000 0000 0000">
+            <Label fx:id="accountNumberLabel" text="0000 0000 0000">
                <font>
                   <Font size="18.0" />
                </font>

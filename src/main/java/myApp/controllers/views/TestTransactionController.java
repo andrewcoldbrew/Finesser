@@ -3,11 +3,8 @@ package myApp.controllers.views;
 import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import io.github.palexdev.materialfx.filter.DoubleFilter;
-import io.github.palexdev.materialfx.filter.EnumFilter;
-import io.github.palexdev.materialfx.filter.IntegerFilter;
 import io.github.palexdev.materialfx.filter.StringFilter;
 import io.github.palexdev.materialfx.utils.others.observables.When;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -16,12 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import myApp.Main;
-import myApp.controllers.components.TransactionSortForm;
 import myApp.controllers.components.AddTransactionForm;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
@@ -31,9 +24,7 @@ import myApp.utils.LocalDateComparator;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -46,7 +37,7 @@ public class TestTransactionController implements Initializable {
     @FXML private Label totalFood;
     @FXML private Label totalEntertainment;
     @FXML private Label totalMisc;
-    private AddTransactionForm addForm = new AddTransactionForm();
+    private final AddTransactionForm addForm = new AddTransactionForm();
     private final Connection con = ConnectionManager.getConnection();
     private final Draggable draggable = new Draggable();
 
@@ -102,11 +93,11 @@ public class TestTransactionController implements Initializable {
     private void loadTransactions() {
         int userId = Main.getUserId(); // Get the logged-in user's ID
 
-        String query = "SELECT t.name, t.amount, t.description, t.category, COALESCE(b.name, 'Cash') AS bankName, t.transaction_date " +
+        String query = "SELECT t.name, t.amount, t.description, t.category, COALESCE(b.bankName, 'Cash') AS bankName, t.transactionDate " +
                 "FROM transaction t " +
-                "LEFT JOIN bank b ON t.bankId = b.bankId " +
-                "WHERE t.userId = ? " +
-                "ORDER BY b.bankId DESC";
+                "LEFT JOIN bank b ON t.bankID = b.bankID " +
+                "WHERE t.userID = ? " +
+                "ORDER BY b.bankID DESC";
 
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setInt(1, userId);
@@ -119,7 +110,7 @@ public class TestTransactionController implements Initializable {
                     String description = rs.getString("description");
                     String category = rs.getString("category");
                     String bankName = rs.getString("bankName");
-                    LocalDate date = rs.getDate("transaction_date").toLocalDate();
+                    LocalDate date = rs.getDate("transactionDate").toLocalDate();
 
                     Transaction transaction = new Transaction(name, amount, description, category, bankName, date);
                     transactionData.add(transaction);
@@ -188,6 +179,18 @@ public class TestTransactionController implements Initializable {
         button.setOnAction(actionEvent -> {});
         button.setId(id);
         return button;
+    }
+
+    public void handleAddTransactionForm(ActionEvent actionEvent) {
+
+        if (!mainPane.getChildren().contains(addForm)) {
+            AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
+            AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
+
+            mainPane.getChildren().add(addForm);
+            draggable.makeDraggable(addForm);
+        }
+
     }
 
 

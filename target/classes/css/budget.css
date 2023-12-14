@@ -9,13 +9,14 @@
 }
 
 #budgetBox {
-    -fx-effect: dropshadow(three-pass-box, grey, 1, 0, 3, 3);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 7, 0.2, 0, 0);
     -fx-background-radius: 10;
     -fx-background-color: #d3d3d3;
 }
 
 #budgetBox:hover {
-    -fx-translate-y: -10;
+    -fx-translate-y: -5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 25, 0.4, 0, 0);
 }
 
 #progressBar:range1 .bar1 {
