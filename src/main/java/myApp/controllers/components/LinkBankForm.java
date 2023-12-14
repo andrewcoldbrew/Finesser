@@ -61,9 +61,14 @@ public class LinkBankForm extends BorderPane {
     }
 
     private void linkBank(ActionEvent actionEvent) {
-//        SuccessAlert successAlert = new SuccessAlert("The bank has been linked successfully!");
-//        successAlert.showAlert();
-//        exit();
+        exit();
+        PauseTransition pause = new PauseTransition(Duration.seconds(0.25));
+        pause.setOnFinished(event -> {
+            new SuccessAlert("The bank has been linked successfully!");
+        });
+        pause.play();
+
+
     }
 
 

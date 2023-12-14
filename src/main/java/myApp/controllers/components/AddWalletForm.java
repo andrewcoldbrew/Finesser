@@ -16,7 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class AddWalletForm extends BorderPane {
-    public Button exitButton;
+    public Button closeButton;
     public MFXTextField balanceField;
     public MFXButton addButton;
     private Connection con = ConnectionManager.getConnection();
@@ -29,7 +29,7 @@ public class AddWalletForm extends BorderPane {
         try {
             fxmlLoader.load();
             addButton.setOnAction(this::addWallet);
-            exitButton.setOnAction(this::closeStage);
+            closeButton.setOnAction(this::closeStage);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

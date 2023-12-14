@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="255.0" styleClass="rootPane" stylesheets="@../css/menuBar.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.MenuBarController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="255.0" styleClass="rootPane" stylesheets="@../css/menuBar.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.MenuBarController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="801.0" prefWidth="255.0">
+      <VBox alignment="TOP_CENTER" prefHeight="850.0" prefWidth="255.0">
          <children>
             <ImageView fitHeight="201.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -22,7 +22,7 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <VBox alignment="TOP_CENTER" prefHeight="645.0" prefWidth="240.0">
+            <VBox alignment="TOP_CENTER" prefHeight="640.0" prefWidth="255.0" spacing="15.0">
                <children>
                   <MFXButton fx:id="accountButton" alignment="CENTER" buttonType="RAISED" onAction="#moveToAccount" prefHeight="60.0" prefWidth="200.0" text="My Account">
                      <VBox.margin>
@@ -101,7 +101,7 @@
                   </MFXButton>
                   <Separator prefWidth="200.0">
                      <VBox.margin>
-                        <Insets left="50.0" right="50.0" />
+                        <Insets left="50.0" right="50.0" top="30.0" />
                      </VBox.margin>
                   </Separator>
                   <MFXButton fx:id="logoutButton" alignment="CENTER" buttonType="RAISED" onAction="#moveToLogin" prefHeight="60.0" prefWidth="200.0" text="Log Out">

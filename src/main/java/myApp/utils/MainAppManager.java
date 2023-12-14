@@ -29,7 +29,7 @@ public class MainAppManager {
         // Set up the content in the center
         switchScene("account");
 
-        mainAppStage.setMaximized(true);
+        mainAppStage.setMaximized(false);
 
         // Show the stage
         mainAppStage.setScene(new Scene(mainLayout));
