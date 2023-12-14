@@ -8,47 +8,54 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="900.0" stylesheets="@../css/account.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.AccountController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="1200.0" prefHeight="850.0" prefWidth="1200.0" stylesheets="@../css/account.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.AccountController">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
          <children>
-            <ImageView fx:id="profileImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="profileImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/account/user.png" />
-               </image></ImageView>
-            <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="610.0" spacing="20.0">
+               </image>
+               <HBox.margin>
+                  <Insets left="25.0" right="25.0" />
+               </HBox.margin></ImageView>
+            <VBox prefHeight="150.0" prefWidth="861.0" spacing="10.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <Label fx:id="fullNameLabel" text="Full name" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <Label fx:id="usernameLabel" text="Username" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <Label fx:id="passwordLabel" text="Password" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <Label fx:id="balanceLabel" text="Balance" />
-                     </children>
-                  </HBox>
+                  <Label fx:id="fullNameLabel" graphicTextGap="0.0" text="Full name">
+                     <font>
+                        <Font name="System Bold" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="usernameLabel" text="Username">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="passwordLabel" text="Password">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="balanceLabel" text="Balance">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
+               <HBox.margin>
+                  <Insets left="70.0" />
+               </HBox.margin>
             </VBox>
          </children>
          <BorderPane.margin>
-            <Insets bottom="20.0" left="50.0" />
+            <Insets bottom="40.0" left="40.0" />
          </BorderPane.margin>
       </HBox>
    </top>
@@ -56,11 +63,11 @@
       <Insets />
    </opaqueInsets>
    <center>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="150.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_LEFT" minHeight="620.0" prefWidth="1140.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <VBox prefHeight="260.0" prefWidth="124.0" spacing="50.0">
+            <VBox alignment="CENTER_LEFT" spacing="18.0">
                <children>
-                  <VBox alignment="CENTER" spacing="10.0">
+                  <VBox alignment="CENTER" styleClass="sideBox">
                      <children>
                         <Label text="Account Info">
                            <font>
@@ -71,12 +78,15 @@
                            <image>
                               <Image url="@../images/account/edit.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="2.0" top="2.0" />
+                           </VBox.margin>
                         </ImageView>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Keep your personal information up-to-date" textAlignment="CENTER" wrappingWidth="200.0" />
                         <Hyperlink onAction="#handleUpdateInfo" text="Update Info &gt;" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" spacing="10.0">
+                  <VBox alignment="CENTER" styleClass="sideBox">
                      <children>
                         <Label text="Password">
                            <font>
@@ -87,12 +97,15 @@
                            <image>
                               <Image url="@../images/account/key.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="2.0" top="2.0" />
+                           </VBox.margin>
                         </ImageView>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Make your password stronger or change it if someone else knows it" textAlignment="CENTER" wrappingWidth="200.0" />
                         <Hyperlink onAction="#handleChangePassword" text="Change password &gt;" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" spacing="10.0">
+                  <VBox alignment="CENTER" styleClass="sideBox">
                      <children>
                         <Label text="Add cash to wallet">
                            <font>
@@ -103,67 +116,99 @@
                            <image>
                               <Image url="@../images/account/wallet.png" />
                            </image>
+                           <VBox.margin>
+                              <Insets bottom="2.0" top="2.0" />
+                           </VBox.margin>
                         </ImageView>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Feeling broke? Add some cash to your wallet" textAlignment="CENTER" wrappingWidth="200.0" />
                         <Hyperlink onAction="#handleAddWalletForm" text="Add cash &gt;" />
                      </children>
                   </VBox>
                </children>
+               <HBox.margin>
+                  <Insets left="40.0" right="70.0" />
+               </HBox.margin>
             </VBox>
-            <BorderPane>
+            <BorderPane prefWidth="800.0" styleClass="moneyPane">
+               <bottom>
+                  <Label text="Total Balance: ##########" BorderPane.alignment="CENTER_RIGHT">
+                     <BorderPane.margin>
+                        <Insets bottom="15.0" right="25.0" />
+                     </BorderPane.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </bottom>
+               <HBox.margin>
+                  <Insets bottom="2.0" right="40.0" top="2.0" />
+               </HBox.margin>
                <center>
-                  <VBox prefHeight="515.0" prefWidth="478.0" spacing="20.0">
+                  <VBox BorderPane.alignment="CENTER">
                      <children>
-                        <HBox alignment="CENTER_LEFT" spacing="200.0">
-                           <children>
-                              <Label text="Connected Bank">
+                        <BorderPane>
+                           <left>
+                              <Label text="Bank Balance" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font size="20.0" />
                                  </font>
+                                 <BorderPane.margin>
+                                    <Insets left="25.0" />
+                                 </BorderPane.margin>
                               </Label>
-                              <MFXButton fx:id="linkBankButton" buttonType="RAISED" onAction="#handleLinkBankForm" text="Link Bank">
-                                 <padding>
-                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                                 </padding>
+                           </left>
+                           <right>
+                              <MFXButton fx:id="linkBankButton" buttonType="RAISED" onAction="#handleLinkBankForm" text="Link Bank" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font name="Forte" size="14.0" />
+                                    <Font size="14.0" />
                                  </font>
+                                 <BorderPane.margin>
+                                    <Insets right="25.0" />
+                                 </BorderPane.margin>
                               </MFXButton>
-                           </children>
-                        </HBox>
-                        <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
+                           </right>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </BorderPane>
+                        <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" pannable="true" vbarPolicy="NEVER">
                            <content>
-                              <FlowPane fx:id="flowPane" hgap="20.0" vgap="20.0">
+                              <GridPane fx:id="gridPane" hgap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
                                  <padding>
-                                    <Insets bottom="10.0" />
-                                 </padding></FlowPane>
+                                    <Insets bottom="30.0" left="10.0" right="10.0" top="20.0" />
+                                 </padding>
+                              </GridPane>
                            </content>
                         </MFXScrollPane>
+                        <Label text="Wallet Balance: ###########">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="25.0" top="10.0" />
+                           </VBox.margin>
+                        </Label>
                      </children>
                   </VBox>
                </center>
                <top>
-                  <Label text="You have ... in your wallet" BorderPane.alignment="CENTER">
+                  <Label text="Financial Holdings" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
                      <BorderPane.margin>
-                        <Insets bottom="20.0" />
+                        <Insets bottom="10.0" top="15.0" />
                      </BorderPane.margin>
                   </Label>
                </top>
-               <bottom>
-                  <Label text="You have ... sth sth" BorderPane.alignment="CENTER">
-                     <BorderPane.margin>
-                        <Insets top="20.0" />
-                     </BorderPane.margin>
-                  </Label>
-               </bottom>
             </BorderPane>
          </children>
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
-         <padding>
-            <Insets bottom="20.0" top="20.0" />
-         </padding>
       </HBox>
    </center>
    <padding>

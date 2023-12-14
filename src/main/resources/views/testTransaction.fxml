@@ -21,7 +21,7 @@
    <center>
       <VBox alignment="CENTER" prefWidth="517.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <MFXButton text="Add Transaction" />
+            <MFXButton onAction="#handleAddTransactionForm" text="Add Transaction" />
             <MFXPaginatedTableView fx:id="transactionTable" pagesToShow="100" rowsPerPage="10" />
          </children>
          <BorderPane.margin>

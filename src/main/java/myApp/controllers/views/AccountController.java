@@ -3,19 +3,21 @@ package myApp.controllers.views;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import myApp.Main;
-import myApp.controllers.components.AddBudgetForm;
 import myApp.controllers.components.AddWalletForm;
 import myApp.controllers.components.BankBox;
 import myApp.controllers.components.LinkBankForm;
@@ -36,12 +38,14 @@ public class AccountController implements Initializable {
     private final Stage addWalletDialog = new Stage();
     public Label balanceLabel;
     public MFXScrollPane scrollPane;
+    public FlowPane flowPane;
+    public GridPane gridPane;
+    public BorderPane bankContainer;
     private Scene dialogScene;
     public ImageView profileImage;
     public Label fullNameLabel;
     public Label usernameLabel;
     public Label passwordLabel;
-    public FlowPane flowPane;
     public MFXButton linkBankButton;
     private final Connection con = ConnectionManager.getConnection();
 
@@ -51,6 +55,15 @@ public class AccountController implements Initializable {
         initializeAddWalletForm();
         Draggable draggable = new Draggable();
         draggable.makeDraggable(linkBankDialog);
+
+
+        scrollPane.setOnScroll(event -> {
+            if (event.getDeltaX() == 0 && event.getDeltaY() != 0) {
+                double speedMultiplier = 2.5; // Adjust this value to change the scrolling speed
+                scrollPane.setHvalue(scrollPane.getHvalue() - event.getDeltaY() * speedMultiplier / gridPane.getWidth());
+            }
+        });
+
         loadUserProfile();
         loadUserBanks();
     }
@@ -59,12 +72,12 @@ public class AccountController implements Initializable {
     private void loadUserProfile() {
         int userId = Main.getUserId();
 
-        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT name, password, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerId = userId), 0) AS totalBalance FROM user WHERE userId = ?")) {
+        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT username, password, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = userID), 0) AS totalBalance FROM user WHERE userID = ?")) {
             preparedStatement.setInt(1, userId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    String name = resultSet.getString("name");
+                    String name = resultSet.getString("username");
                     String password = resultSet.getString("password");
                     double balance = resultSet.getDouble("totalBalance");
 
@@ -86,16 +99,18 @@ public class AccountController implements Initializable {
 
     private void loadUserBanks() {
         int userId = Main.getUserId();
+        int col = 0;
 
         try {
-            PreparedStatement statement = con.prepareStatement("SELECT u.name AS userName, b.name AS bankName FROM user u JOIN bank b ON u.userId = b.ownerId WHERE u.userId = ?");
+            PreparedStatement statement = con.prepareStatement("SELECT u.username, b.bankName, b.accountNumber  FROM user u JOIN bank b ON u.userID = b.ownerID WHERE u.userID = ? AND b.linked = true");
             statement.setInt(1, userId);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 String bankName = rs.getString("bankName");
-                String userName = rs.getString("userName");
-                BankBox bankBox = new BankBox(bankName, userName);
-                flowPane.getChildren().add(bankBox);
+                String userName = rs.getString("username");
+                String accountNumber = rs.getString("accountNumber");
+                BankBox bankBox = new BankBox(bankName, userName, accountNumber);
+                gridPane.add(bankBox, col++, 1);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

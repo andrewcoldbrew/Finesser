@@ -14,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import myApp.Main;
-import myApp.controllers.components.TransactionSortForm;
 import myApp.controllers.components.AddTransactionForm;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
@@ -44,7 +43,6 @@ public class TransactionController implements Initializable {
     @FXML private Label totalEntertainment;
     @FXML private Label totalMisc;
 
-    private TransactionSortForm sortForm = new TransactionSortForm();
     private AddTransactionForm addForm = new AddTransactionForm();
     private final Connection con = ConnectionManager.getConnection();
     private final Draggable draggable = new Draggable();
@@ -168,44 +166,5 @@ public class TransactionController implements Initializable {
 
     }
 
-
-    public void handleSortForm(MouseEvent mouseEvent) {
-        if (!mainPane.getChildren().contains(sortForm)) {
-            AnchorPane.setTopAnchor(sortForm, (mainPane.getHeight() - sortForm.getPrefHeight()) / 2);
-            AnchorPane.setLeftAnchor(sortForm, (mainPane.getWidth() - sortForm.getPrefWidth()) / 2);
-
-            mainPane.getChildren().add(sortForm);
-            draggable.makeDraggable(sortForm);
-        }
-
-
-        sortForm.setSortingEventHandler(sortingEvent -> {
-            String sortingQuery = sortingEvent.getSortingQuery();
-
-            Platform.runLater(() -> {
-
-                System.out.println("RECEIVED QUERY: " + sortingQuery);
-                try {
-                    transactionData.clear();
-                    Statement statement = con.createStatement();
-                    ResultSet rs = statement.executeQuery(sortingQuery);
-                    while (rs.next()) {
-                        String name = rs.getString("name");
-                        double amount = rs.getDouble("amount");
-                        String description = rs.getString("description");
-                        String category = rs.getString("category");
-                        String bank = rs.getString("bank");
-                        LocalDate date = rs.getDate("transaction_date").toLocalDate();
-                        Transaction transaction = new Transaction(name, amount, description, category, bank, date);
-                        transactionData.add(transaction);
-                    }
-                    statement.close();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-        });
-
-    }
 
 }

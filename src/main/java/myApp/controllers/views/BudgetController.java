@@ -87,11 +87,11 @@ public class BudgetController implements Initializable {
 
     private List<Budget> fetchBudgetData(int userId) {
         List<Budget> budgets = new ArrayList<>();
-        String query = "SELECT b.category, b.budget_limit, b.start_date, b.end_date, IFNULL(SUM(t.amount), 0) as spent_amount " +
+        String query = "SELECT b.category, b.budgetLimit, b.startDate, b.endDate, IFNULL(SUM(t.amount), 0) as spentAmount " +
                 "FROM budget b " +
-                "LEFT JOIN transaction t ON b.category = t.category AND t.transaction_date BETWEEN b.start_date AND b.end_date " +
+                "LEFT JOIN transaction t ON b.category = t.category AND t.transactionDate BETWEEN b.startDate AND b.endDate " +
                 "WHERE b.userID = ? " +
-                "GROUP BY b.category, b.budget_limit, b.start_date, b.end_date";
+                "GROUP BY b.category, b.budgetLimit, b.startDate, b.endDate";
 
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement stmt = con.prepareStatement(query)) {
@@ -101,10 +101,10 @@ public class BudgetController implements Initializable {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     String category = rs.getString("category");
-                    double allocatedAmount = rs.getDouble("budget_limit");
-                    LocalDate startDate = rs.getDate("start_date").toLocalDate();
-                    LocalDate endDate = rs.getDate("end_date").toLocalDate();
-                    double spentAmount = rs.getDouble("spent_amount");
+                    double allocatedAmount = rs.getDouble("budgetLimit");
+                    LocalDate startDate = rs.getDate("startDate").toLocalDate();
+                    LocalDate endDate = rs.getDate("endDate").toLocalDate();
+                    double spentAmount = rs.getDouble("spentAmount");
 
                     budgets.add(new Budget(category, allocatedAmount, spentAmount, startDate, endDate));
                 }

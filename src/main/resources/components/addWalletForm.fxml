@@ -11,18 +11,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<fx:root stylesheets="@../css/addWalletForm.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" type="BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-color: #9FE2BF; -fx-border-width: 3; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../css/form.css" type="BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <VBox alignment="CENTER" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" spacing="10.0">
                <children>
                   <Label text="Enter how much money you want to add" />
-                  <MFXTextField fx:id="balanceField" floatMode="DISABLED" prefHeight="30.0" prefWidth="216.0" />
+                  <MFXTextField fx:id="balanceField" floatMode="DISABLED" prefHeight="39.0" prefWidth="216.0" style="-fx-border-color: #9FE2BF;" />
                </children>
             </VBox>
-            <MFXButton fx:id="addButton" buttonType="RAISED" text="Add to wallet" />
+            <MFXButton fx:id="addButton" buttonType="RAISED" prefHeight="32.0" text="Add to wallet" />
          </children>
          <BorderPane.margin>
             <Insets />
@@ -35,7 +34,7 @@
    <top>
       <HBox alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="exitButton" mnemonicParsing="false">
+            <Button fx:id="exitButton" mnemonicParsing="false" styleClass="closeButton">
                <graphic>
                   <ImageView fx:id="exitIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
