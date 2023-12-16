@@ -3,106 +3,171 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.NewSignupController">
+<AnchorPane stylesheets="@../css/newSignup.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.NewSignupController">
    <children>
-      <AnchorPane fx:id="leftSignup" stylesheets="@../css/login.css">
+      <AnchorPane fx:id="leftSignup">
          <children>
-            <Label layoutX="50.0" layoutY="32.0" text="Welcome Aboard">
-               <font>
-                  <Font name="System Bold" size="48.0" />
-               </font>
-            </Label>
-            <Label layoutX="99.0" layoutY="107.0" text="Mind Sharing a Bit?">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <MFXTextField fx:id="fnameField" floatMode="BORDER" floatingText="First Name" floatingTextGap="10.0" layoutX="105.0" layoutY="217.0" prefHeight="45.0" prefWidth="270.0" style="-fx-border-color: #9FE2BF;">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </MFXTextField>
-            <MFXTextField fx:id="lnameField" floatMode="BORDER" floatingText="Last Name" floatingTextGap="10.0" layoutX="105.0" layoutY="276.0" prefHeight="45.0" prefWidth="270.0" style="-fx-border-color: #9FE2BF;">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </MFXTextField>
-            <Label layoutX="32.0" layoutY="180.0" style="-fx-font-weight: bold;" text="Name:">
+            <VBox alignment="CENTER" layoutX="82.0" layoutY="34.0">
+               <children>
+                  <Label text="Welcome Aboard">
+                     <font>
+                        <Font name="System Bold" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label text="Mind Sharing a Bit?">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Label layoutX="32.0" layoutY="180.0" style="-fx-font-weight: bold;" text="Account Information:">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="32.0" layoutY="336.0" style="-fx-font-weight: bold;" text="Contact Information:">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <MFXTextField fx:id="emailField" floatMode="BORDER" floatingText="Email address" floatingTextGap="10.0" layoutX="105.0" layoutY="387.0" prefHeight="45.0" prefWidth="270.0" style="-fx-border-color: #9FE2BF;">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </MFXTextField>
-            <MFXButton buttonType="RAISED" depthLevel="LEVEL4" layoutX="361.0" layoutY="541.0" onAction="#moveToRight" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #4fa298; -fx-text-fill: white;" text="Next Step" textFill="WHITE">
+            <MFXButton buttonType="RAISED" depthLevel="LEVEL4" layoutX="360.0" layoutY="570.0" onAction="#moveToRight" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #4fa298; -fx-text-fill: white;" text="Next Step" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </MFXButton>
+            <VBox layoutX="30.0" layoutY="230.0" spacing="50.0">
+               <children>
+                  <HBox spacing="30.0">
+                     <children>
+                        <MFXTextField fx:id="fnameField" floatingText="First Name" floatingTextGap="10.0" prefWidth="200.0" style="-fx-border-color: #9FE2BF;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXTextField>
+                        <MFXTextField fx:id="lnameField" floatingText="Last Name" floatingTextGap="10.0" prefWidth="200.0" style="-fx-border-color: #9FE2BF;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox spacing="30.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <MFXTextField fx:id="emailField" floatingText="Email address" floatingTextGap="10.0" prefWidth="200.0" style="-fx-border-color: #9FE2BF;">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </MFXTextField>
+                              <Label fx:id="emailValidation">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <MFXTextField fx:id="usernameField" floatingText="Username" floatingTextGap="10.0" prefWidth="200.0" style="-fx-border-color: #9FE2BF;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox spacing="30.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <MFXPasswordField fx:id="passwordField" floatingText="Enter password" prefWidth="200.0" />
+                              <Label fx:id="passwordValidation" maxWidth="200.0" textFill="RED" wrapText="true">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <MFXPasswordField fx:id="rePasswordField" floatingText="Re-enter password" prefWidth="200.0" />
+                              <Label fx:id="rePasswordValidation" textFill="RED">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
          <padding>
-            <Insets bottom="10.0" right="20.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
          </padding>
       </AnchorPane>
-      <AnchorPane fx:id="rightSignup" layoutX="490.0" prefHeight="583.0" prefWidth="442.0" style="-fx-background-color: white;" stylesheets="@../css/login.css">
+      <AnchorPane fx:id="rightSignup" layoutX="505.0" style="-fx-background-color: white;">
          <children>
-            <Label layoutX="150.0" layoutY="32.0" text="Next Up">
-               <font>
-                  <Font name="System Bold" size="48.0" />
-               </font>
-            </Label>
-            <Label layoutX="68.0" layoutY="107.0" text="Add Your Special Touch!">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <Label layoutX="26.0" layoutY="172.0" style="-fx-font-weight: bold;" text="Personalize:">
+            <VBox alignment="CENTER" layoutX="101.0" layoutY="32.0">
+               <children>
+                  <Label text="Next Up">
+                     <font>
+                        <Font name="System Bold" size="40.0" />
+                     </font>
+                  </Label>
+                  <Label text="Add Your Special Touch!">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Label layoutX="26.0" layoutY="180.0" style="-fx-font-weight: bold;" text="Personalize:">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <MFXButton buttonType="RAISED" depthLevel="LEVEL4" layoutX="361.0" layoutY="541.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #4fa298; -fx-text-fill: white;" text="Done" textFill="WHITE">
+            <MFXButton fx:id="signupButton" buttonType="RAISED" depthLevel="LEVEL4" layoutX="365.0" layoutY="570.0" onAction="#handleSignup" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #4fa298; -fx-text-fill: white;" text="Done" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <tooltip>
+                  <Tooltip fx:id="toolTip" />
+               </tooltip>
+            </MFXButton>
+            <MFXButton buttonType="RAISED" depthLevel="LEVEL4" layoutX="32.0" layoutY="570.0" onAction="#moveToLeft" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #4fa298; -fx-text-fill: white;" text="Previous" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </MFXButton>
-            <MFXButton buttonType="RAISED" depthLevel="LEVEL4" layoutX="26.0" layoutY="541.0" onAction="#moveToLeft" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #4fa298; -fx-text-fill: white;" text="Previous" textFill="WHITE">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </MFXButton>
-            <MFXDatePicker fx:id="dateOfBirthPicker" floatMode="BORDER" floatingText="Date of Birth" layoutX="116.0" layoutY="222.0" style="-fx-border-color: #9FE2BF;" />
+            <MFXDatePicker fx:id="dateOfBirthPicker" floatMode="BORDER" floatingText="Date of Birth" layoutX="95.0" layoutY="222.0" prefHeight="38.0" prefWidth="280.0" style="-fx-border-color: #9FE2BF;" />
             <Label layoutX="26.0" layoutY="339.0" style="-fx-font-weight: bold;" text="Occupation &amp; Intended Use:">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <MFXComboBox fx:id="countryComboBox" floatMode="BORDER" floatingText="Country" layoutX="116.0" layoutY="285.0" prefHeight="40.0" prefWidth="126.0" style="-fx-border-color: #9FE2BF;" />
+            <HBox layoutX="95.0" layoutY="285.0" spacing="30.0">
+               <children>
+                  <MFXComboBox fx:id="genderComboBox" floatingText="Gender" prefHeight="40.0" prefWidth="126.0" style="-fx-border-color: #9FE2BF;" />
+                  <MFXFilterComboBox fx:id="countryComboBox" floatingText="Country" />
+               </children>
+            </HBox>
             <MFXComboBox fx:id="jobComboBox" floatMode="BORDER" floatingText="What is your job industry?" layoutX="95.0" layoutY="388.0" prefHeight="45.0" prefWidth="270.0" style="-fx-border-color: #9FE2BF;" />
-            <MFXComboBox floatMode="BORDER" floatingText="What will you use this app for?" layoutX="95.0" layoutY="460.0" prefHeight="45.0" prefWidth="270.0" style="-fx-border-color: #9FE2BF;" />
+            <MFXComboBox fx:id="usageComboBox" floatMode="BORDER" floatingText="What will you use this app for?" layoutX="95.0" layoutY="460.0" prefHeight="45.0" prefWidth="270.0" style="-fx-border-color: #9FE2BF;" />
          </children>
          <padding>
-            <Insets bottom="10.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
          </padding>
       </AnchorPane>
-      <VBox fx:id="slidingPane" alignment="CENTER" layoutX="-3.0" prefHeight="583.0" prefWidth="491.0" style="-fx-background-color: grey;">
+      <VBox fx:id="slidingPane" alignment="CENTER" prefHeight="631.0" prefWidth="506.0">
          <children>
             <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>

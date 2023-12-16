@@ -19,7 +19,7 @@
                <image>
                   <Image url="@../images/account/success.png" />
                </image></ImageView>
-            <Label fx:id="messageLabel" text="Display success message here">
+            <Label fx:id="messageLabel" maxWidth="300.0" text="Display success message here">
                <font>
                   <Font size="16.0" />
                </font></Label>

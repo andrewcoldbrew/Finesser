@@ -45,7 +45,7 @@ public class ErrorAlert extends BorderPane {
         }
     }
 
-    public void showAlert(Scene scene) {
+    private void showAlert(Scene scene) {
         // Create a new undecorated stage
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);

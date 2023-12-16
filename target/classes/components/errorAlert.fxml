@@ -26,7 +26,7 @@
       </Label>
    </top>
    <bottom>
-      <Label fx:id="errorMessage" text="Display the error message here" BorderPane.alignment="CENTER">
+      <Label fx:id="errorMessage" maxWidth="300.0" text="Display the error message here" BorderPane.alignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>

@@ -5,17 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/newSignup.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/views/newSignup.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/views/userInfo1.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/views/userInfo2.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/LoginStageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/LoginStageManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/loadingScreen.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/transactionSortForm.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/transactionTable.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/LoginStageManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/LoginStageManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ErrorAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ErrorAlert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/errorAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/errorAlert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/successAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/successAlert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/newSignup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/newSignup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userInfo1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userInfo1.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/errorAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/errorAlert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/successAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/successAlert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/ErrorAlert.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/ErrorAlert.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +151,7 @@
       <workItem from="1702192096546" duration="8059000" />
       <workItem from="1702430379869" duration="5371000" />
       <workItem from="1702516258444" duration="8491000" />
-      <workItem from="1702709512936" duration="4362000" />
+      <workItem from="1702709512936" duration="11607000" />
     </task>
     <servers />
   </component>
