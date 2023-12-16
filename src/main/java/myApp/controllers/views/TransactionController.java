@@ -117,6 +117,7 @@ public class TransactionController implements Initializable {
                 transactionData.clear();
 
                 while (rs.next()) {
+                    int transactionId = rs.getInt("transactionId");
                     String name = rs.getString("name");
                     double amount = rs.getDouble("amount");
                     String description = rs.getString("description");
@@ -124,7 +125,7 @@ public class TransactionController implements Initializable {
                     String bankName = rs.getString("bankName");
                     LocalDate date = rs.getDate("transaction_date").toLocalDate();
 
-                    Transaction transaction = new Transaction(name, amount, description, category, bankName, date);
+                    Transaction transaction = new Transaction(transactionId,name, amount, description, category, bankName, date);
                     transactionData.add(transaction);
                 }
             }

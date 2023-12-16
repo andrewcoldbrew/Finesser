@@ -17,7 +17,7 @@
 
 <AnchorPane fx:id="mainPane" styleClass="table-header" stylesheets="@../css/transaction.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.TransactionController">
    <children>
-      <MFXTextField fx:id="searchBar" floatMode="ABOVE" layoutX="221.0" layoutY="30.0" prefHeight="50.0" prefWidth="454.0" promptText="Enter something here daddy">
+      <MFXTextField fx:id="searchBar1" floatMode="ABOVE" layoutX="221.0" layoutY="30.0" prefHeight="50.0" prefWidth="454.0" promptText="Enter something here daddy">
          <font>
             <Font size="15.0" />
          </font>
