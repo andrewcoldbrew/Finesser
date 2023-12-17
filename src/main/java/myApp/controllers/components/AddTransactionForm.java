@@ -28,7 +28,6 @@ public class AddTransactionForm extends AnchorPane {
     public TextField descriptionField;
     public TextField amountField;
     public MFXButton cancelButton;
-    private final Connection con = ConnectionManager.getConnection();
 
     private final ObservableList<String> typeList = FXCollections.observableArrayList(
             "Clothes", "Education", "Entertainment", "Food", "Groceries",
@@ -83,7 +82,7 @@ public class AddTransactionForm extends AnchorPane {
             double amount = Double.parseDouble(amountText);
             if (bankName.equals("None")) {
                 addCashTransaction(name, amount, description, category, date, userId);
-                updateCashAmount(userId, amount);
+                Platform.runLater(() -> updateCashAmount(userId, amount));
             } else {
                 int bankId = getBankIdByName(bankName); // Fetch bankId based on bank name
                 addBankTransaction(name, amount, description, category, bankId, date, userId);
@@ -100,6 +99,7 @@ public class AddTransactionForm extends AnchorPane {
     }
 
     private int getBankIdByName(String bankName) throws SQLException {
+        Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement("SELECT bankID FROM bank WHERE bankName = ?")) {
             stmt.setString(1, bankName);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -118,6 +118,7 @@ public class AddTransactionForm extends AnchorPane {
     }
 
     private void addCashTransaction(String name, double amount, String description, String category, LocalDate date, int userId) {
+        Connection con = ConnectionManager.getConnection();
         try (PreparedStatement statement = con.prepareStatement(
                 "INSERT INTO transaction (name, amount, description, category, transactionDate, userID) VALUES (?, ?, ?, ?, ?, ?)")) {
 
@@ -127,7 +128,6 @@ public class AddTransactionForm extends AnchorPane {
             statement.setString(4, category);
             statement.setDate(5, Date.valueOf(date));
             statement.setInt(6, userId);
-
             statement.execute();
             System.out.println("Transaction added successfully!");
         } catch (SQLException e) {
@@ -136,6 +136,7 @@ public class AddTransactionForm extends AnchorPane {
     }
 
     private void addBankTransaction(String name, double amount, String description, String category, int bankId, LocalDate date, int userId) {
+        Connection con = ConnectionManager.getConnection();
         try (PreparedStatement statement = con.prepareStatement(
                 "INSERT INTO transaction (name, amount, description, category, bankID, transactionDate, userID) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
 
@@ -155,6 +156,7 @@ public class AddTransactionForm extends AnchorPane {
     }
 
     private void updateCashAmount(int userId, double transactionAmount) {
+        Connection con = ConnectionManager.getConnection();
         try (PreparedStatement statement = con.prepareStatement(
                 "UPDATE user SET cashAmount = cashAmount - ? WHERE userID = ?")) {
 
@@ -169,6 +171,7 @@ public class AddTransactionForm extends AnchorPane {
     }
 
     private void updateBankBalance(int userId, double transactionAmount) {
+        Connection con = ConnectionManager.getConnection();
         try (PreparedStatement statement = con.prepareStatement(
                 "UPDATE bank SET balance = balance - ? WHERE ownerID = ?")) {
 
@@ -186,6 +189,7 @@ public class AddTransactionForm extends AnchorPane {
     private void loadBank() {
         bankList = FXCollections.observableArrayList();
         bankList.add("None");
+        Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement("SELECT bankName FROM bank WHERE ownerID = ?")) {
             stmt.setInt(1, Main.getUserId());
             ResultSet rs = stmt.executeQuery();

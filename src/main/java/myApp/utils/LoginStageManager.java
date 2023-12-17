@@ -22,7 +22,7 @@ public class LoginStageManager {
 
 
         // Set up the login page on the new stage
-        switchScene("testSignup");
+        switchScene("login");
 
         // You can add additional setup for the stage if needed
 

@@ -10,6 +10,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -30,6 +31,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class BudgetController implements Initializable {
@@ -79,19 +81,19 @@ public class BudgetController implements Initializable {
         }
 
         for (Budget budget : budgets) {
-            double progressValue = budget.calculatePercentage();
-            BudgetBox budgetBox = new BudgetBox(budget.getCategory(), budget.getAllocatedAmount(), budget.getSpentAmount(), budget.getEndDate(), progressValue*100, progressValue);
+            BudgetBox budgetBox = new BudgetBox(budget, this);
             flowPane.getChildren().add(budgetBox);
         }
+
     }
 
     private List<Budget> fetchBudgetData(int userId) {
         List<Budget> budgets = new ArrayList<>();
-        String query = "SELECT b.category, b.budgetLimit, b.startDate, b.endDate, IFNULL(SUM(t.amount), 0) as spentAmount " +
+        String query = "SELECT b.budgetID, b.category, b.budgetLimit, b.startDate, b.endDate, IFNULL(SUM(t.amount), 0) as spentAmount " +
                 "FROM budget b " +
                 "LEFT JOIN transaction t ON b.category = t.category AND t.transactionDate BETWEEN b.startDate AND b.endDate " +
                 "WHERE b.userID = ? " +
-                "GROUP BY b.category, b.budgetLimit, b.startDate, b.endDate";
+                "GROUP BY b.budgetID, b.category, b.budgetLimit, b.startDate, b.endDate";
 
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement stmt = con.prepareStatement(query)) {
@@ -100,13 +102,14 @@ public class BudgetController implements Initializable {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
+                    int budgetId = rs.getInt("budgetID");
                     String category = rs.getString("category");
                     double allocatedAmount = rs.getDouble("budgetLimit");
                     LocalDate startDate = rs.getDate("startDate").toLocalDate();
                     LocalDate endDate = rs.getDate("endDate").toLocalDate();
                     double spentAmount = rs.getDouble("spentAmount");
 
-                    budgets.add(new Budget(category, allocatedAmount, spentAmount, startDate, endDate));
+                    budgets.add(new Budget(budgetId, category, allocatedAmount, spentAmount, startDate, endDate));
                 }
                 System.out.println("Fetched " + budgets.size() + " budgets successfully.");
             }
@@ -116,6 +119,43 @@ public class BudgetController implements Initializable {
         return budgets;
     }
 
+    public void openUpdateBudgetForm(Budget budget) {
+
+        TextInputDialog dialog = new TextInputDialog(String.valueOf(budget.getAllocatedAmount()));
+        dialog.setTitle("Update Budget");
+        dialog.setHeaderText("Update Budget for " + budget.getCategory());
+        dialog.setContentText("Enter new budget limit:");
+
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(newLimit -> {
+            try {
+                updateBudgetInDatabase(budget.getId(), Double.parseDouble(newLimit));
+                // Reload or refresh budget data to reflect changes
+                loadBudgetDataAsync();
+            } catch (NumberFormatException e) {
+                // Handle invalid number format
+            }
+        });
+    }
+
+    private void updateBudgetInDatabase(int id, double v) {
+        String sql = "UPDATE budget SET budgetLimit = ? WHERE budgetID = ?";
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setDouble(1, v);
+            pstmt.setInt(2, id);
+
+            int affectedRows = pstmt.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("Budget updated successfully.");
+            }
+        } catch (SQLException e) {
+            showError(e);
+        }
+
+    }
 
 
     private void showError(Throwable throwable) {

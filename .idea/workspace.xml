@@ -5,16 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ManualAlert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/CustomButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/error.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/BudgetBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/BudgetBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ErrorAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ErrorAlert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TestTransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TestTransactionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/models/Budget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/models/Budget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/models/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/models/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/LoginStageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/LoginStageManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/components/errorAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/errorAlert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/successAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/successAlert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/newSignup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/newSignup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/userInfo1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/userInfo1.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/components/errorAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/errorAlert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/successAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/successAlert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddTransactionForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddTransactionForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/BudgetBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/BudgetBox.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/ErrorAlert.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/ErrorAlert.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TestTransactionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TestTransactionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/models/Budget.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/models/Budget.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/models/Transaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/models/Transaction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/LoginStageManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/LoginStageManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/newSignup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/newSignup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/userInfo1.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/userInfo2.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +45,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -82,7 +102,7 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;NguyenTheVinh&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/vinhh/Documents/GitHub/BITS_Group12/src/main/resources/images/account&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/vinhh/Documents/GitHub/BITS_Group12/src/main/resources/images&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -91,14 +111,15 @@
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.5443038&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\account" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\finance" />
-      <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\finance" />
@@ -151,7 +172,8 @@
       <workItem from="1702192096546" duration="8059000" />
       <workItem from="1702430379869" duration="5371000" />
       <workItem from="1702516258444" duration="8491000" />
-      <workItem from="1702709512936" duration="11607000" />
+      <workItem from="1702709512936" duration="19113000" />
+      <workItem from="1702778708601" duration="6885000" />
     </task>
     <servers />
   </component>
