@@ -95,9 +95,10 @@ public class TestTransactionController implements Initializable {
                 new StringFilter<>("Category", Transaction::getCategory),
                 new StringFilter<>("Bank", Transaction::getBankName)
                 );
-        transactionTable.setItems(transactionData);
+
+//        transactionTable.setItems(transactionData);
         transactionTable.autosizeColumnsOnInitialization();
-        transactionTable.setItems(filteredTransactions);
+//        transactionTable.setItems(filteredTransactions);
     }
 
     private void loadTransactions() {
@@ -133,19 +134,19 @@ public class TestTransactionController implements Initializable {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Log the excepti
+            e.printStackTrace(); // Log the exception
         }
 
         System.out.println("Transactions loaded: " + transactionData.size());
 
         Platform.runLater(() -> {
-            transactionTable.setItems(transactionData);
+            transactionTable.setItems(FXCollections.observableArrayList(transactionData));
         });
     }
 
     private void setupSearchBar() {
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Search text  " + newValue);
+            System.out.println("Search text: " + newValue);
             filterTransactions(newValue.trim());
         });
     }
@@ -158,8 +159,12 @@ public class TestTransactionController implements Initializable {
             filteredTransactions.setPredicate(transaction ->
                     transaction.getName().toLowerCase().contains(searchText.toLowerCase())
             );
+
+            // Update the TableView with the filtered data
         }
+        transactionTable.setItems(FXCollections.observableArrayList(filteredTransactions));
     }
+
 
 
     private void updateTotals() {
@@ -182,7 +187,6 @@ public class TestTransactionController implements Initializable {
     }
 
     public void handleAddForm(ActionEvent actionEvent) {
-
         if (!mainPane.getChildren().contains(addForm)) {
             AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
             AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
@@ -216,17 +220,17 @@ public class TestTransactionController implements Initializable {
         String sql = "UPDATE transaction SET name = ?, amount = ?, description = ?, category = ?, bankID = ?, transactionDate = ? WHERE transactionID = ?";
 
         try (Connection conn = ConnectionManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, transaction.getName());
-            pstmt.setDouble(2, transaction.getAmount());
-            pstmt.setString(3, transaction.getDescription());
-            pstmt.setString(4, transaction.getCategory());
-            pstmt.setInt(5, bankId);
-            pstmt.setDate(6, Date.valueOf(transaction.getDate()));
-            pstmt.setInt(7, transaction.getTransactionID());
+            stmt.setString(1, transaction.getName());
+            stmt.setDouble(2, transaction.getAmount());
+            stmt.setString(3, transaction.getDescription());
+            stmt.setString(4, transaction.getCategory());
+            stmt.setInt(5, bankId);
+            stmt.setDate(6, Date.valueOf(transaction.getDate()));
+            stmt.setInt(7, transaction.getTransactionID());
 
-            pstmt.executeUpdate();
+            stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -248,10 +252,8 @@ public class TestTransactionController implements Initializable {
         return -1;
     }
 
-
     private void deleteTransactionFromDatabase(Transaction transaction) {
         String sql = "DELETE FROM transaction WHERE transactionID = ?";
-
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -263,11 +265,8 @@ public class TestTransactionController implements Initializable {
         }
     }
 
-
-
     private void updateTransaction(Transaction transaction) {
         // Open a dialog to edit the transaction
-
         updateTransactionInDatabase(transaction);
         loadTransactions();
     }
@@ -282,7 +281,6 @@ public class TestTransactionController implements Initializable {
         });
     }
 
-
     private MFXButton createButton(String text, String id) {
         MFXButton button = new MFXButton(text);
         button.setOnAction(actionEvent -> {});
@@ -291,7 +289,6 @@ public class TestTransactionController implements Initializable {
     }
 
     public void handleAddTransactionForm(ActionEvent actionEvent) {
-
         if (!mainPane.getChildren().contains(addForm)) {
             AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
             AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);

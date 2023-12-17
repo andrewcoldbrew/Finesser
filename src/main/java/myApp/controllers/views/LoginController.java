@@ -3,11 +3,10 @@ package myApp.controllers.views;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import myApp.Main;
 import myApp.controllers.components.ErrorAlert;
+import myApp.controllers.components.ManualAlert;
 import myApp.utils.*;
 
 import java.net.URL;
@@ -30,7 +29,6 @@ public class LoginController implements Initializable {
     public void login(ActionEvent actionEvent) {
         String username = usernameField.getText();
         String password = passwordField.getText();
-
 
         Connection con = ConnectionManager.getConnection();
         try {
@@ -67,7 +65,7 @@ public class LoginController implements Initializable {
 
 
     public void moveToSignup(ActionEvent actionEvent) {
-        LoginStageManager.switchScene("signup");
+        LoginStageManager.switchScene("testSignup");
     }
 
     @Override
