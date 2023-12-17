@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -14,33 +15,42 @@
    <children>
       <VBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #FAF5F1; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 3; -fx-border-color: #9FE2BF;">
          <children>
-            <HBox spacing="50.0">
-               <children>
-                  <Label fx:id="categoryLabel" text="Category" />
-                  <HBox spacing="20.0">
+            <BorderPane>
+               <left>
+                  <Label fx:id="categoryLabel" text="Category" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <HBox spacing="20.0" BorderPane.alignment="CENTER">
                      <children>
                         <MFXButton fx:id="updateButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY">
                            <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="editIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/finance/edit.png" />
+                                    <Image url="@../images/budget/edit.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </MFXButton>
                         <MFXButton fx:id="deleteButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY">
                            <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="trashIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/finance/Delete.png" />
+                                    <Image url="@../images/budget/trash.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </MFXButton>
                      </children>
                   </HBox>
-               </children>
-            </HBox>
+               </right>
+               <center>
+                  <HBox BorderPane.alignment="CENTER">
+                     <padding>
+                        <Insets right="60.0" />
+                     </padding>
+                  </HBox>
+               </center>
+            </BorderPane>
             <Label fx:id="budgetLabel" text="Budget">
                <VBox.margin>
                   <Insets />

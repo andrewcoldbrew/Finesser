@@ -83,10 +83,12 @@ public class AddTransactionForm extends AnchorPane {
             if (bankName.equals("None")) {
                 addCashTransaction(name, amount, description, category, date, userId);
                 Platform.runLater(() -> updateCashAmount(userId, amount));
+                new SuccessAlert("Transaction added!");
             } else {
                 int bankId = getBankIdByName(bankName); // Fetch bankId based on bank name
                 addBankTransaction(name, amount, description, category, bankId, date, userId);
-                updateBankBalance(userId, amount);
+                Platform.runLater(() -> updateBankBalance(userId, amount));
+                new SuccessAlert("Transaction added!");
             }
 
 

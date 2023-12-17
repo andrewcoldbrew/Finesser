@@ -2,18 +2,16 @@ package myApp.controllers.components;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class ManualAlert extends Alert {
 
     private static final Map<ICON, String> scenes = Map.of(
-            ICON.ERROR, "/images/error.gif"
+            ICON.ERROR, "/images/gif/error.gif",
+            ICON.SUCCESS, "images/gif/check.gif",
+            ICON.WARNING, "images/gif/warning.gif"
     );
 
     private enum ICON {

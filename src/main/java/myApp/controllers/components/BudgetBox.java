@@ -2,10 +2,15 @@ package myApp.controllers.components;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
+import io.github.palexdev.materialfx.effects.DepthLevel;
+import io.github.palexdev.materialfx.enums.ButtonType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import myApp.controllers.views.BudgetController;
@@ -16,6 +21,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import myApp.utils.Animate;
 import myApp.utils.ConnectionManager;
 
 public class BudgetBox extends AnchorPane {
@@ -27,8 +34,9 @@ public class BudgetBox extends AnchorPane {
     public MFXProgressBar progressBar;
     public MFXButton updateButton;
     public MFXButton deleteButton;
+    public ImageView editIcon;
+    public ImageView trashIcon;
     private Budget budget;
-
     private BudgetController budgetController;
 
     public BudgetBox(Budget budget, BudgetController budgetController) {
@@ -41,11 +49,35 @@ public class BudgetBox extends AnchorPane {
         try {
             fxmlLoader.load();
             initialize();
+            // Add CRUD
             updateButton.setOnAction(this::updateBudget);
             deleteButton.setOnAction(this::deleteBudget);
+            // Animate button
+            updateButton.setOnMouseEntered(this::animateUpdate);
+            updateButton.setOnMouseExited(this::staticUpdate);
+            deleteButton.setOnMouseEntered(this::animateDelete);
+            deleteButton.setOnMouseExited(this::staticDelete);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void staticDelete(MouseEvent mouseEvent) {
+        trashIcon.setImage(new Image("/images/budget/trash.png"));
+    }
+
+    private void animateDelete(MouseEvent mouseEvent) {
+        trashIcon.setImage(new Image("/images/gif/trash.gif"));
+    }
+
+    private void staticUpdate(MouseEvent mouseEvent) {
+        editIcon.setImage(new Image("/images/budget/edit.png"));
+    }
+
+    private void animateUpdate(MouseEvent mouseEvent) {
+        updateButton.setButtonType(ButtonType.RAISED);
+        updateButton.setDepthLevel(DepthLevel.LEVEL2);
+        editIcon.setImage(new Image("/images/gif/edit.gif"));
     }
 
     private void deleteBudget(ActionEvent actionEvent) {

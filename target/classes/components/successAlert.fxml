@@ -17,7 +17,7 @@
          <children>
             <ImageView fx:id="successIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/account/success.png" />
+                  <Image url="@../images/alert/check.png" />
                </image></ImageView>
             <Label fx:id="messageLabel" maxWidth="300.0" text="Display success message here">
                <font>

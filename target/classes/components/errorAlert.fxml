@@ -14,7 +14,7 @@
             <Insets bottom="20.0" top="20.0" />
          </BorderPane.margin>
          <image>
-            <Image url="@../images/error.gif" />
+            <Image url="@../images/alert/error.png" />
          </image>
       </ImageView>
    </center>
