@@ -59,7 +59,6 @@ public class AddTransactionForm extends AnchorPane {
 
         addButton.setOnAction(this::addTransaction);
         cancelButton.setOnAction(this::closeTransactionForm);
-
     }
 
     private void addTransaction(ActionEvent actionEvent) {
@@ -99,6 +98,8 @@ public class AddTransactionForm extends AnchorPane {
             System.out.println("Error adding the transaction to the database.");
         }
     }
+
+
 
     private int getBankIdByName(String bankName) throws SQLException {
         Connection con = ConnectionManager.getConnection();

@@ -58,6 +58,7 @@ public class BudgetBox extends AnchorPane {
             updateButton.setOnMouseExited(this::staticUpdate);
             deleteButton.setOnMouseEntered(this::animateDelete);
             deleteButton.setOnMouseExited(this::staticDelete);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -18,6 +18,7 @@ import javafx.scene.layout.*;
 import myApp.Main;
 import myApp.controllers.components.AddTransactionForm;
 import myApp.controllers.components.ManualAlert;
+import myApp.controllers.components.UpdateTransactionForm;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
@@ -39,7 +40,8 @@ public class TransactionController implements Initializable {
     @FXML private Label totalFood;
     @FXML private Label totalEntertainment;
     @FXML private Label totalMisc;
-    private final AddTransactionForm addForm = new AddTransactionForm();
+    private AddTransactionForm addForm;
+    private UpdateTransactionForm updateForm;
 
     private final Draggable draggable = new Draggable();
 
@@ -53,6 +55,7 @@ public class TransactionController implements Initializable {
         filteredTransactions = new FilteredList<>(transactionData, p -> true);
         setupTransactionTable();
         setupSearchBar();
+        transactionTable.getSelectionModel().setAllowsMultipleSelection(false);
         transactionTable.autosizeColumnsOnInitialization();
 
         When.onChanged(transactionTable.currentPageProperty())
@@ -213,14 +216,6 @@ public class TransactionController implements Initializable {
 
     // Method to update a transaction in the database
     private void updateTransactionInDatabase(Transaction transaction) {
-        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
-                "Are you sure you want to delete this transaction?",
-                "This action cannot be revert!");
-        confirm.showAndWait().ifPresent(buttonType -> {
-            if (buttonType.equals(ButtonType.OK)) {
-
-            }
-        });
         // Assuming you have a method to get bank ID from bank name
         int bankId = getBankIdByName(transaction.getBankName());
 
@@ -230,7 +225,7 @@ public class TransactionController implements Initializable {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, transaction.getName());
-            stmt.setDouble(2, transaction.getAmount());
+            stmt.setDouble(2, transaction.getAmount() + 100);
             stmt.setString(3, transaction.getDescription());
             stmt.setString(4, transaction.getCategory());
             stmt.setInt(5, bankId);
@@ -273,9 +268,19 @@ public class TransactionController implements Initializable {
     }
 
     private void updateTransaction(Transaction transaction) {
-        // Open a dialog to edit the transaction
-        updateTransactionInDatabase(transaction);
-        loadTransactions();
+        Platform.runLater(() -> {
+            // get the selected transaction
+           Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedValues().getFirst();
+           // show the form
+           if (!mainPane.getChildren().contains(updateForm)) {
+               updateForm = new UpdateTransactionForm(selectedTransaction);
+               AnchorPane.setTopAnchor(updateForm, (mainPane.getHeight() - updateForm.getPrefHeight()) / 2);
+               AnchorPane.setLeftAnchor(updateForm, (mainPane.getWidth() - updateForm.getPrefWidth()) / 2);
+               mainPane.getChildren().add(updateForm);
+               draggable.makeDraggable(updateForm);
+           }
+        });
+
     }
 
     private void deleteTransaction(Transaction transaction) {
@@ -299,6 +304,7 @@ public class TransactionController implements Initializable {
 
     public void handleAddTransactionForm(ActionEvent actionEvent) {
         if (!mainPane.getChildren().contains(addForm)) {
+            addForm = new AddTransactionForm();
             AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
             AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
 

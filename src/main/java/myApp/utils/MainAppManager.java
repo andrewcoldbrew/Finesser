@@ -17,8 +17,7 @@ public class MainAppManager {
             "transaction", "/views/transaction.fxml",
             "budget", "/views/budget.fxml",
             "finance", "/views/finance.fxml",
-            "account", "/views/account.fxml",
-            "testTransaction", "/views/testTransaction.fxml"
+            "account", "/views/account.fxml"
     );
 
     public static void setupMainApp() {
