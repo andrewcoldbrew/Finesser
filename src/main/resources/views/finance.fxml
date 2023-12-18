@@ -49,19 +49,19 @@
          </cursor></MFXButton>
       <HBox layoutX="356.0" layoutY="117.0" prefHeight="35.0" spacing="20.0">
          <children>
-            <MFXButton fx:id="allTimeButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="All Time">
+            <MFXButton fx:id="allTimeButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="All Time" onAction="#handleAllTimeFilter">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></MFXButton>
-            <MFXButton fx:id="weeklyButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="Weekly">
+            <MFXButton fx:id="weeklyButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="Weekly" onAction="#handleWeeklyFilter">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></MFXButton>
-            <MFXButton fx:id="monthyButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="Monthly">
+            <MFXButton fx:id="monthyButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="Monthly" onAction="#handleMonthlyFilter">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></MFXButton>
-            <MFXButton fx:id="yearlyButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="Yearly">
+            <MFXButton fx:id="yearlyButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="Yearly" onAction="#handleYearlyFilter">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></MFXButton>

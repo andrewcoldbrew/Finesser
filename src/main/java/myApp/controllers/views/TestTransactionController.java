@@ -102,7 +102,6 @@ public class TestTransactionController implements Initializable {
     }
 
     private void loadTransactions() {
-        // Clear existing data to avoid duplicates
         transactionData.clear();
 
         // Database query
@@ -115,7 +114,6 @@ public class TestTransactionController implements Initializable {
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            // Set the user ID
             stmt.setInt(1, Main.getUserId());
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -160,7 +158,6 @@ public class TestTransactionController implements Initializable {
                     transaction.getName().toLowerCase().contains(searchText.toLowerCase())
             );
 
-            // Update the TableView with the filtered data
         }
         transactionTable.setItems(FXCollections.observableArrayList(filteredTransactions));
     }
