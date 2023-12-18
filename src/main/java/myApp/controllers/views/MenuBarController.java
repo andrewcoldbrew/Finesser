@@ -16,7 +16,7 @@ public class MenuBarController {
     public void moveToDashBoard(ActionEvent actionEvent) {
     }
     public void moveToTransaction(ActionEvent actionEvent) {
-        MainAppManager.switchScene("testTransaction");
+        MainAppManager.switchScene("transaction");
     }
 
     public void moveToBudget(ActionEvent actionEvent) {

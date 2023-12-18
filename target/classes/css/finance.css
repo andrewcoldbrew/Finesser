@@ -1,5 +1,5 @@
 .split-pane:horizontal > .split-pane-divider {
-    -fx-background-color: #9FE2BF;
+    -fx-background-color: black;
 }
 
 #financeBox:hover {

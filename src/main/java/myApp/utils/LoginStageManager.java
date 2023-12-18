@@ -13,7 +13,8 @@ public class LoginStageManager {
     private static Stage loginStage = new Stage();
     private static final Map<String, String> scenes = Map.of(
             "login", "/views/login.fxml",
-            "signup", "/views/signup.fxml"
+            "signup", "/views/signup.fxml",
+            "testSignup", "/views/newSignup.fxml"
     );
 
     public static void setupLoginStage() {

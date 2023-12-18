@@ -134,12 +134,3 @@
 }
 
 /* addWalletForm */
-
-#closeButton {
-    -fx-background-color: transparent;
-}
-
-#exitIcon {
-    -fx-fill: red;
-}
-
