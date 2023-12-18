@@ -7,50 +7,57 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MainAppManager {
 
     private static Stage mainAppStage = new Stage();
-    private static BorderPane mainLayout = new BorderPane();
-    private static final Map<String, String> scenes = Map.of(
-            "transaction", "/views/transaction.fxml",
-            "budget", "/views/budget.fxml",
-            "finance", "/views/finance.fxml",
-            "account", "/views/account.fxml",
-            "testTransaction", "/views/testTransaction.fxml"
-    );
+    private static BorderPane mainLayout;
+    private static final Map<String, String> scenes = new HashMap<>();
+
+    static {
+        scenes.put("transaction", "/views/transaction.fxml");
+        scenes.put("budget", "/views/budget.fxml");
+        scenes.put("finance", "/views/finance.fxml");
+        scenes.put("account", "/views/account.fxml");
+        scenes.put("testTransaction", "/views/testTransaction.fxml");
+    }
 
     public static void setupMainApp() {
-        // Set up the left menu bar
+        mainAppStage.setMaximized(false);
+
+
+        mainLayout = new BorderPane();
+
+
         Parent leftMenuBar = loadLeftMenuBar();
         mainLayout.setLeft(leftMenuBar);
 
-        // Set up the content in the center
-        switchScene("account");
 
-        mainAppStage.setMaximized(false);
+        setupScene("account");
 
-        // Show the stage
-        mainAppStage.setScene(new Scene(mainLayout));
+
+        Scene scene = new Scene(mainLayout);
+        mainAppStage.setScene(scene);
         mainAppStage.show();
     }
 
-    private static Parent loadLeftMenuBar() {
+    private static void setupScene(String name) {
         try {
-            FXMLLoader loader = new FXMLLoader(LoginStageManager.class.getResource("/views/menuBar.fxml"));
-            return loader.load();
+
+            FXMLLoader loader = new FXMLLoader(MainAppManager.class.getResource(scenes.get(name)));
+            Parent content = loader.load();
+            mainLayout.setCenter(content);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void switchScene(String name) {
+    private static Parent loadLeftMenuBar() {
         try {
-            FXMLLoader loader = new FXMLLoader(LoginStageManager.class.getResource(scenes.get(name)));
-            Parent root = loader.load();
-
-            mainLayout.setCenter(root);
+            FXMLLoader loader = new FXMLLoader(MainAppManager.class.getResource("/views/menuBar.fxml"));
+            return loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -60,7 +67,8 @@ public class MainAppManager {
         return mainAppStage;
     }
 
-    public static BorderPane getMainLayout() {
-        return mainLayout;
+
+    public static void switchScene(String name) {
+        setupScene(name);
     }
 }
