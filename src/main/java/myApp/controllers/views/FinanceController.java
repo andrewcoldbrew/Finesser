@@ -13,6 +13,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import myApp.Main;
 import javafx.stage.StageStyle;
 import myApp.controllers.components.AddFinanceForm;
 import myApp.controllers.components.FinanceBox;
@@ -37,7 +38,7 @@ public class FinanceController implements Initializable {
     public MFXButton monthyButton;
     public MFXButton yearlyButton;
 
-
+    private int userID;
     private final AddFinanceForm addFinanceForm = new AddFinanceForm();
     private final Stage dialogStage = new Stage();
     private final Scene dialogScene = new Scene(addFinanceForm, addFinanceForm.getPrefWidth(), addFinanceForm.getPrefHeight());
@@ -52,6 +53,9 @@ public class FinanceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        this.userID = Main.getUserId();
+
         initializeAddFinanceForm();
         dialogStage.setScene(dialogScene);
         Draggable draggable = new Draggable();
@@ -116,14 +120,16 @@ public class FinanceController implements Initializable {
 
     private void loadIncome(LocalDate startDate, LocalDate endDate) {
         System.out.println("Loading income...");
-        String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE category = 'income' AND transactionDate BETWEEN ? AND ?";
+        String query = "SELECT name, amount, transactionDate, category FROM transaction " +
+                "WHERE userID = ? AND category = 'income' AND transactionDate BETWEEN ? AND ?";
 
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
             LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
 
-            stmt.setDate(1, java.sql.Date.valueOf(startDate));
-            stmt.setDate(2, java.sql.Date.valueOf(endDate));
+            stmt.setInt(1, userID);
+            stmt.setDate(2, java.sql.Date.valueOf(startDate));
+            stmt.setDate(3, java.sql.Date.valueOf(endDate));
 
             try (ResultSet rs = stmt.executeQuery()) {
                 int count = 0;
@@ -158,14 +164,16 @@ public class FinanceController implements Initializable {
 
     private void loadOutcome(LocalDate startDate, LocalDate endDate) {
         System.out.println("Loading outcome...");
-        String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE category IN ('subscription', 'rent') AND transactionDate BETWEEN ? AND ?";
+        String query = "SELECT name, amount, transactionDate, category FROM transaction " +
+                "WHERE userID = ? AND category IN ('subscription', 'rent') AND transactionDate BETWEEN ? AND ?";
 
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
             LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
 
-            stmt.setDate(1, java.sql.Date.valueOf(startDate));
-            stmt.setDate(2, java.sql.Date.valueOf(endDate));
+            stmt.setInt(1, userID);
+            stmt.setDate(2, java.sql.Date.valueOf(startDate));
+            stmt.setDate(3, java.sql.Date.valueOf(endDate));
 
             try (ResultSet rs = stmt.executeQuery()) {
                 int count = 0;

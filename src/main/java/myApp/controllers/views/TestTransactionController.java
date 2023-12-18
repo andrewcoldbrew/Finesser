@@ -209,9 +209,8 @@ public class TestTransactionController implements Initializable {
     }
 
 
-    // Method to update a transaction in the database
     private void updateTransactionInDatabase(Transaction transaction) {
-        // Assuming you have a method to get bank ID from bank name
+
         int bankId = getBankIdByName(transaction.getBankName());
 
         String sql = "UPDATE transaction SET name = ?, amount = ?, description = ?, category = ?, bankID = ?, transactionDate = ? WHERE transactionID = ?";
