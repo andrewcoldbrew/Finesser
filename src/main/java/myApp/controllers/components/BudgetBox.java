@@ -1,5 +1,6 @@
 package myApp.controllers.components;
 
+import io.github.palexdev.materialfx.beans.NumberRange;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
 import io.github.palexdev.materialfx.effects.DepthLevel;
@@ -58,6 +59,10 @@ public class BudgetBox extends AnchorPane {
             updateButton.setOnMouseExited(this::staticUpdate);
             deleteButton.setOnMouseEntered(this::animateDelete);
             deleteButton.setOnMouseExited(this::staticDelete);
+
+            progressBar.getRanges1().add(NumberRange.of(0.0, 0.49));
+            progressBar.getRanges2().add(NumberRange.of(0.50, 0.79));
+            progressBar.getRanges3().add(NumberRange.of(0.80, 1.0));
 
         } catch (IOException e) {
             throw new RuntimeException(e);
