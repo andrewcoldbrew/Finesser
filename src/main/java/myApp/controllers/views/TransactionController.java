@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import myApp.Main;
 import myApp.controllers.components.AddTransactionForm;
+import myApp.controllers.components.ManualAlert;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
@@ -212,6 +213,14 @@ public class TransactionController implements Initializable {
 
     // Method to update a transaction in the database
     private void updateTransactionInDatabase(Transaction transaction) {
+        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
+                "Are you sure you want to delete this transaction?",
+                "This action cannot be revert!");
+        confirm.showAndWait().ifPresent(buttonType -> {
+            if (buttonType.equals(ButtonType.OK)) {
+
+            }
+        });
         // Assuming you have a method to get bank ID from bank name
         int bankId = getBankIdByName(transaction.getBankName());
 
@@ -270,8 +279,10 @@ public class TransactionController implements Initializable {
     }
 
     private void deleteTransaction(Transaction transaction) {
-        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION, "Delete this transaction?", ButtonType.YES, ButtonType.NO);
-        confirmDialog.showAndWait().ifPresent(response -> {
+        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
+                "Are you sure you want to delete this budget?",
+                "This action cannot be revert!");
+        confirm.showAndWait().ifPresent(response -> {
             if (response == ButtonType.YES) {
                 deleteTransactionFromDatabase(transaction);
                 loadTransactions();
