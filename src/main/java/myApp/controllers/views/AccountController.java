@@ -29,6 +29,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class AccountController implements Initializable {
@@ -38,14 +39,17 @@ public class AccountController implements Initializable {
     private final Stage addWalletDialog = new Stage();
     public Label balanceLabel;
     public MFXScrollPane scrollPane;
-    public FlowPane flowPane;
     public GridPane gridPane;
-    public BorderPane bankContainer;
+    public Label emailLabel;
+    public Label genderLabel;
+    public Label dobLabel;
+    public Label countryLabel;
+    public Label totalBalanceLabel;
+    public Label bankBalanceLabel;
+    public Label walletBalanceLabel;
     private Scene dialogScene;
     public ImageView profileImage;
     public Label fullNameLabel;
-    public Label usernameLabel;
-    public Label passwordLabel;
     public MFXButton linkBankButton;
     private final Connection con = ConnectionManager.getConnection();
 
@@ -72,22 +76,30 @@ public class AccountController implements Initializable {
     private void loadUserProfile() {
         int userId = Main.getUserId();
 
-        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT username, password, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = userID), 0) AS totalBalance FROM user WHERE userID = ?")) {
+        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT fname, lname, email, gender, DOB, country, cashAmount, COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = ?), 0) AS bankAmount, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = ?), 0) AS totalBalance FROM user WHERE userID = ?")) {
             preparedStatement.setInt(1, userId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    String name = resultSet.getString("username");
-                    String password = resultSet.getString("password");
-                    double balance = resultSet.getDouble("totalBalance");
+                    String fname = resultSet.getString("fname");
+                    String lname = resultSet.getString("lname");
+                    String email = resultSet.getString("email");
+                    String gender = resultSet.getString("gender");
+                    LocalDate dob = resultSet.getDate("DOB").toLocalDate();
+                    String country = resultSet.getString("country");
+                    double cashAmount = resultSet.getDouble("cashAmount");
+                    double bankAmount = resultSet.getDouble("bankAmount");
+                    double totalBalance = resultSet.getDouble("totalBalance");
+                    String fullname = fname + " " + lname;
 
-                    System.out.println(name);
-                    System.out.println(password);
-                    System.out.println(balance);
-
-                    usernameLabel.setText("Username: " + name);
-                    passwordLabel.setText("Password: " + password);
-                    balanceLabel.setText("Balance: " + balance);
+                    fullNameLabel.setText("Fullname: " + fullname);
+                    emailLabel.setText("Email: " + email);
+                    genderLabel.setText("Gender: " + gender);
+                    dobLabel.setText("Date of Birth: " + dob);
+                    countryLabel.setText("Country: " + country);
+                    walletBalanceLabel.setText(String.format("Your current wallet: %.2f", cashAmount));
+                    bankBalanceLabel.setText(String.format("Your current banks' money: %.2f", bankAmount));
+                    totalBalanceLabel.setText(String.format("Your total money: %.2f", totalBalance));
                 } else {
                     System.out.println("User not found.");
                 }
