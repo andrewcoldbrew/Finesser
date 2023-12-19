@@ -3,6 +3,7 @@ package myApp.models;
 import java.time.LocalDate;
 
 public class Transaction {
+    private int transactionID;
     private String name;
     private double amount;
     private String description;
@@ -10,7 +11,8 @@ public class Transaction {
     private String bankName;
     private LocalDate date;
 
-    public Transaction(String name, double amount, String description, String category, String bankName, LocalDate date) {
+    public Transaction(int transactionID, String name, double amount, String description, String category, String bankName, LocalDate date) {
+        this.transactionID = transactionID;
         this.name = name;
         this.amount = amount;
         this.description = description;
@@ -19,7 +21,9 @@ public class Transaction {
         this.date = date;
     }
 
-    // Getters and setters
+    public int getTransactionID() {
+        return transactionID;
+    }
     public String getName() {
         return name;
     }
@@ -44,7 +48,9 @@ public class Transaction {
         return date;
     }
 
-
+    public String getDateString() {
+        return date.toString(); // Adjust the format as needed
+    }
     @Override
     public String toString() {
         return "Transaction{" +

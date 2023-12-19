@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-border-color: #9FE2BF; -fx-border-width: 3; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../css/form.css" type="BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="CENTER" spacing="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label text="Enter how much money you want to add" />
+                  <MFXTextField fx:id="balanceField" floatMode="DISABLED" prefHeight="39.0" prefWidth="216.0" style="-fx-border-color: #9FE2BF;" />
+               </children>
+            </VBox>
+            <MFXButton fx:id="addButton" buttonType="RAISED" prefHeight="32.0" text="Add to wallet" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </center>
+   <top>
+      <HBox alignment="TOP_RIGHT" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="exitButton" mnemonicParsing="false" styleClass="closeButton">
+               <graphic>
+                  <ImageView fx:id="exitIcon" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/finance/exitButton.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+</fx:root>

@@ -2,17 +2,21 @@ package myApp.controllers.views;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import java.time.LocalDate;
 import javafx.scene.Scene;
+import java.time.DayOfWeek;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import myApp.Main;
 import javafx.stage.StageStyle;
 import myApp.controllers.components.AddFinanceForm;
 import myApp.controllers.components.FinanceBox;
-import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
 
@@ -29,70 +33,236 @@ public class FinanceController implements Initializable {
     public FlowPane incomeFlowPane;
     public FlowPane outcomeFlowPane;
     public Label totalLabel;
+    public MFXButton allTimeButton;
+    public MFXButton weeklyButton;
+    public MFXButton monthyButton;
+    public MFXButton yearlyButton;
 
+    private int userID;
     private final AddFinanceForm addFinanceForm = new AddFinanceForm();
     private final Stage dialogStage = new Stage();
     private final Scene dialogScene = new Scene(addFinanceForm, addFinanceForm.getPrefWidth(), addFinanceForm.getPrefHeight());
     private Connection con = ConnectionManager.getConnection();
+
+    private double totalIncome = 0.0;
+    private double totalOutcome = 0.0;
+
+    private enum TimeFrame {
+        ALL_TIME, WEEKLY, MONTHLY, YEARLY
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        this.userID = Main.getUserId();
+
         initializeAddFinanceForm();
+        dialogStage.setScene(dialogScene);
         Draggable draggable = new Draggable();
         draggable.makeDraggable(dialogStage);
-        loadIncome();
 
+        allTimeButton.setOnAction(event -> filterFinances(TimeFrame.ALL_TIME));
+        weeklyButton.setOnAction(event -> filterFinances(TimeFrame.WEEKLY));
+        monthyButton.setOnAction(event -> filterFinances(TimeFrame.MONTHLY));
+        yearlyButton.setOnAction(event -> filterFinances(TimeFrame.YEARLY));
+
+
+        LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
+        LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+        loadFinanceData(startOfMonth, endOfMonth);
     }
+
+
+    private void filterFinances(TimeFrame timeFrame) {
+        LocalDate start = LocalDate.now();
+        LocalDate end = LocalDate.now();
+
+        switch (timeFrame) {
+            case ALL_TIME:
+                start = start.withDayOfYear(1);
+                end = start.plusYears(1).withDayOfYear(1).minusDays(1);
+                break;
+            case WEEKLY:
+                start = start.with(DayOfWeek.MONDAY);
+                end = start.plusWeeks(1).with(DayOfWeek.SUNDAY);
+                break;
+            case MONTHLY:
+                start = start.withDayOfMonth(1);
+                end = start.plusMonths(1).withDayOfMonth(1).minusDays(1);
+                break;
+            case YEARLY:
+                start = start.withDayOfYear(1);
+                end = start.plusYears(1).withDayOfYear(1).minusDays(1);
+                break;
+        }
+
+
+        incomeFlowPane.getChildren().clear();
+        outcomeFlowPane.getChildren().clear();
+
+
+        loadIncome(start, end);
+        loadOutcome(start, end);
+    }
+
 
     private void initializeAddFinanceForm() {
-        dialogStage.setTitle("Add Finance Form");
 
-        addFinanceForm.setStage(dialogStage);
-        System.out.println("STAGE: " + addFinanceForm.getStage());
-
-        dialogStage.setScene(dialogScene);
-
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initStyle(StageStyle.UNDECORATED);
-        dialogScene.setFill(Color.TRANSPARENT);
-
-        dialogStage.setResizable(false);
     }
 
-    private void loadIncome() {
-        try (PreparedStatement stmt = con.prepareStatement("SELECT name, amount, time_duration, time_type, start_date, type FROM finance");
-             ResultSet rs = stmt.executeQuery()) {
+    private void loadFinanceData(LocalDate startDate, LocalDate endDate) {
+        incomeFlowPane.getChildren().clear();
+        outcomeFlowPane.getChildren().clear();
+        loadIncome(startDate, endDate);
+        loadOutcome(startDate, endDate);
+    }
 
-            while (rs.next()) {
-                String name = rs.getString("name");
-                double amount = rs.getDouble("amount");
-                int timeDuration = rs.getInt("time_duration");
-                String timeType = rs.getString("time_type");
-                LocalDate startDate = rs.getDate("start_date").toLocalDate();
-                String type = rs.getString("type");
-                if (type.equals("Income")) {
-                    FinanceBox financeBox = new FinanceBox(name, amount, startDate, timeDuration, timeType, true);
+
+    private void loadIncome(LocalDate startDate, LocalDate endDate) {
+        System.out.println("Loading income...");
+        String query = "SELECT name, amount, transactionDate, category FROM transaction " +
+                "WHERE userID = ? AND category = 'income' AND transactionDate BETWEEN ? AND ?";
+
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
+            LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+
+            stmt.setInt(1, userID);
+            stmt.setDate(2, java.sql.Date.valueOf(startDate));
+            stmt.setDate(3, java.sql.Date.valueOf(endDate));
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                int count = 0;
+                while (rs.next()) {
+                    count++;
+                    String name = rs.getString("name");
+                    double amount = rs.getDouble("amount");
+                    LocalDate transactionDate = rs.getDate("transactionDate").toLocalDate();
+                    String category = rs.getString("category");
+
+                    System.out.println("Income #" + count + ": " + name + ", Amount: " + amount + ", Date: " + transactionDate + ", Category: " + category);
+                    FinanceBox financeBox = new FinanceBox(name, amount, category, transactionDate);
                     incomeFlowPane.getChildren().add(financeBox);
-                } else if (type.equals("Outcome")) {
-                    FinanceBox financeBox = new FinanceBox(name, amount, startDate, timeDuration, timeType, false);
-                    outcomeFlowPane.getChildren().add(financeBox);
                 }
-
+                if (count == 0) {
+                    System.out.println("No income transactions found for the current month.");
+                }
+                totalIncome = 0.0;
+                for (Node node : incomeFlowPane.getChildren()) {
+                    if (node instanceof FinanceBox) {
+                        FinanceBox box = (FinanceBox) node;
+                        totalIncome += box.getAmount();
+                    }
+                }
+                updateSurplus();
             }
         } catch (SQLException e) {
+            System.err.println("SQLException in loadIncome: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
+    private void loadOutcome(LocalDate startDate, LocalDate endDate) {
+        System.out.println("Loading outcome...");
+        String query = "SELECT name, amount, transactionDate, category FROM transaction " +
+                "WHERE userID = ? AND category IN ('subscription', 'rent') AND transactionDate BETWEEN ? AND ?";
 
-    private void loadOutcome() {
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
+            LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
 
+            stmt.setInt(1, userID);
+            stmt.setDate(2, java.sql.Date.valueOf(startDate));
+            stmt.setDate(3, java.sql.Date.valueOf(endDate));
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                int count = 0;
+                while (rs.next()) {
+                    count++;
+                    String name = rs.getString("name");
+                    double amount = rs.getDouble("amount");
+                    LocalDate transactionDate = rs.getDate("transactionDate").toLocalDate();
+                    String category = rs.getString("category");
+
+                    System.out.println("Outcome #" + count + ": " + name + ", Amount: " + amount + ", Date: " + transactionDate + ", Category: " + category);
+                    FinanceBox financeBox = new FinanceBox(name, amount, category, transactionDate);
+                    outcomeFlowPane.getChildren().add(financeBox);
+                }
+                if (count == 0) {
+                    System.out.println("No outcome transactions found for the current month.");
+                }
+                totalOutcome = 0.0;
+                for (Node node : outcomeFlowPane.getChildren()) {
+                    if (node instanceof FinanceBox) {
+                        FinanceBox box = (FinanceBox) node;
+                        totalOutcome += box.getAmount();
+                    }
+                }
+                updateSurplus();
+            }
+        } catch (SQLException e) {
+            System.err.println("SQLException in loadOutcome: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    private void updateSurplus() {
+        double surplus = totalIncome - totalOutcome;
+        totalLabel.setText(String.format("Surplus Funds: $%.2f", surplus));
+        System.out.println("Total surplus"+surplus);
     }
 
+    private LocalDate[] getAllTimeDateRange() {
+        LocalDate startOfYear = LocalDate.now().withDayOfYear(1);
+        LocalDate endOfYear = LocalDate.now().withDayOfYear(LocalDate.now().lengthOfYear());
+        return new LocalDate[] { startOfYear, endOfYear };
+    }
+
+    private LocalDate[] getWeeklyDateRange() {
+        LocalDate today = LocalDate.now();
+        LocalDate startOfWeek = today.with(DayOfWeek.MONDAY);
+        LocalDate endOfWeek = today.with(DayOfWeek.SUNDAY);
+        return new LocalDate[] { startOfWeek, endOfWeek };
+    }
+
+    private LocalDate[] getMonthlyDateRange() {
+        LocalDate today = LocalDate.now();
+        LocalDate startOfMonth = today.withDayOfMonth(1);
+        LocalDate endOfMonth = today.withDayOfMonth(today.lengthOfMonth());
+        return new LocalDate[] { startOfMonth, endOfMonth };
+    }
+
+    private LocalDate[] getYearlyDateRange() {
+        LocalDate today = LocalDate.now();
+        LocalDate startOfYear = today.withDayOfYear(1);
+        LocalDate endOfYear = today.withDayOfYear(today.lengthOfYear());
+        return new LocalDate[] { startOfYear, endOfYear };
+    }
+
+    @FXML
+    private void handleAllTimeFilter(ActionEvent event) {
+        LocalDate[] range = getAllTimeDateRange();
+        loadFinanceData(range[0], range[1]);
+    }
+
+    @FXML
+    private void handleWeeklyFilter(ActionEvent event) {
+        LocalDate[] range = getWeeklyDateRange();
+        loadFinanceData(range[0], range[1]);
+    }
+
+    @FXML
+    private void handleMonthlyFilter(ActionEvent event) {
+        LocalDate[] range = getMonthlyDateRange();
+        loadFinanceData(range[0], range[1]);
+    }
+
+    @FXML
+    private void handleYearlyFilter(ActionEvent event) {
+        LocalDate[] range = getYearlyDateRange();
+        loadFinanceData(range[0], range[1]);
+    }
 
     public void handleAddFinanceForm(ActionEvent actionEvent) {
-        addFinanceForm.clearData();
-        dialogStage.hide();
-        dialogStage.show();
+
     }
 }

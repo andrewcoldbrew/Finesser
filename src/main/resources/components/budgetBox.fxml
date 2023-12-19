@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXProgressBar?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <fx:root fx:id="budgetBox" prefWidth="250.0" stylesheets="@../css/budget.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER_LEFT" prefWidth="250.0" spacing="20.0" style="-fx-background-color: #FAF5F1; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 3; -fx-border-color: #9FE2BF;">
+      <VBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #FAF5F1; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 3; -fx-border-color: #9FE2BF;">
          <children>
-            <Label fx:id="categoryLabel" text="Category" />
+            <HBox spacing="50.0">
+               <children>
+                  <Label fx:id="categoryLabel" text="Category" />
+                  <HBox spacing="20.0">
+                     <children>
+                        <MFXButton fx:id="updateButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/finance/edit.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MFXButton>
+                        <MFXButton fx:id="deleteButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/finance/Delete.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
             <Label fx:id="budgetLabel" text="Budget">
                <VBox.margin>
                   <Insets />

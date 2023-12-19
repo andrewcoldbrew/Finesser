@@ -101,3 +101,45 @@
     -fx-text-fill: white;
     -fx-font-size: 14;
 }
+
+/* addFinanceForm */
+#nameField .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#amountField .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#descriptionField .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#timeDurationField .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#typeOfTimeComboBox .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#typeOfTimeComboBox .caret .mfx-font-icon {
+    -mfx-color:  #9FE2BF;
+    -fx-cursor: hand;
+}
+
+/* addWalletForm */
+
+#closeButton {
+    -fx-background-color: transparent;
+}
+
+#exitIcon {
+    -fx-fill: red;
+}
+

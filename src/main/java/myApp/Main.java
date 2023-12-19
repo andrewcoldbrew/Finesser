@@ -12,7 +12,7 @@ import java.sql.Statement;
 
 public class Main extends Application {
 
-    private static String userId;
+    private static int userId;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -41,11 +41,11 @@ public class Main extends Application {
 
     }
 
-    public static String getUserId() {
+    public static int getUserId() {
         return userId;
     }
 
-    public static void setUserId(String newUserId) {
+    public static void setUserId(int newUserId) {
         userId = newUserId;
     }
 }

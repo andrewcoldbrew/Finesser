@@ -11,7 +11,8 @@ public class Budget {
     private LocalDate endDate;
 
     // Constructor
-    public Budget(String category, double allocatedAmount, double spentAmount, LocalDate startDate, LocalDate endDate) {
+    public Budget(int id, String category, double allocatedAmount, double spentAmount, LocalDate startDate, LocalDate endDate) {
+        this.id = id;
         this.category = category;
         this.allocatedAmount = allocatedAmount;
         this.spentAmount = spentAmount;

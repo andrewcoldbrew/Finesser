@@ -70,7 +70,7 @@ public class SignupController implements Initializable {
     }
 
     private boolean isUsernameTaken(Connection con, String username) throws Exception {
-        PreparedStatement statement = con.prepareStatement("SELECT * FROM user WHERE name = ?");
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM user WHERE username = ?");
         statement.setString(1, username);
         ResultSet resultSet = statement.executeQuery();
         boolean isTaken = resultSet.next();
@@ -91,9 +91,10 @@ public class SignupController implements Initializable {
         String hashedPassword = HashManager.hashPassword(password);
 
 
-        PreparedStatement statement = con.prepareStatement("INSERT INTO user (name, password) VALUES (?, ?)");
+        PreparedStatement statement = con.prepareStatement("INSERT INTO user (username, password, email) VALUES (?, ?, ?)");
         statement.setString(1, username);
         statement.setString(2, hashedPassword);
+        statement.setString(3, String.format("%s@gmail.com", username));
         statement.execute();
         statement.close();
     }
