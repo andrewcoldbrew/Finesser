@@ -53,6 +53,7 @@ public class UpdateTransactionForm extends BorderPane {
         transactionNameField.setText(transaction.getName());
         amountField.setText(String.valueOf(transaction.getAmount()));
         descriptionField.setText(transaction.getDescription());
+        datePicker.setValue(transaction.getDate());
 
         updateButton.setOnAction(this::updateTransaction);
         cancelButton.setOnAction(this::cancel);
@@ -63,19 +64,17 @@ public class UpdateTransactionForm extends BorderPane {
     }
 
     private void updateTransaction(ActionEvent actionEvent) {
-        int userId = Main.getUserId();
-
         String name = transactionNameField.getText().trim();
         String amountText = amountField.getText().trim();
         String description = descriptionField.getText().trim();
         String category = typeComboBox.getValue();
-        LocalDate date = LocalDate.now();
+        LocalDate date = datePicker.getValue();
 
         if (description.isEmpty()) {
             description = "No description";
         }
-        if (name.isEmpty() || amountText.isEmpty() || category == null) {
-            System.out.println("Please fill in all required fields.");
+        if (name.isEmpty() || amountText.isEmpty() || category.isEmpty() || date == null) {
+            new ErrorAlert("Update declined", "Please fill in all fields!");
             return;
         }
 
@@ -83,13 +82,10 @@ public class UpdateTransactionForm extends BorderPane {
             double amount = Double.parseDouble(amountText);
             // INVOKE THE FUNCTION HERE! ~UwU~
             transactionController.updateTransactionInDatabase(transaction);
+            new SuccessAlert("Your transaction has been updated successfully!");
 
         } catch (NumberFormatException e) {
-            System.out.println("Invalid amount. Please enter a valid number.");
+            new ErrorAlert("Invalid input", "Amount must be a number");
         }
-    }
-
-    private void updateTransactionInDB(String name, double amount, String description, String category, int bankId, LocalDate date, int userId) {
-        // UPDATE TRANSACTION LOGIC HERE! ~UwU~
     }
 }
