@@ -2,21 +2,32 @@ package myApp.utils;
 
 import javafx.animation.ScaleTransition;
 import javafx.animation.Transition;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
 public class Animate {
+    public static void addHoverScalingEffect(Node node, double val) {
+        ScaleTransition scaleInTransition = createScaleTransition(node, 1.0, val);
+        ScaleTransition scaleOutTransition = createScaleTransition(node, val, 1.0);
 
-    public static void applyScaleInOut(Node node, double v1, double v2) {
-        ScaleTransition scaleIn = new ScaleTransition(Duration.seconds(0.25), node);
-        scaleIn.setToX(v1);
-        scaleIn.setToY(v1);
+        node.setOnMouseEntered(event -> {
+            scaleInTransition.play();
+            node.setCursor(Cursor.HAND);
+        });
 
-        ScaleTransition scaleOut = new ScaleTransition(Duration.seconds(0.25), node);
-        scaleOut.setToX(v2);
-        scaleOut.setToY(v2);
+        node.setOnMouseExited(event -> {
+            scaleOutTransition.play();
+            node.setCursor(Cursor.DEFAULT);
+        });
+    }
 
-        node.setOnMouseEntered(event -> scaleIn.play());
-        node.setOnMouseExited(event -> scaleOut.play());
+    private static ScaleTransition createScaleTransition(Node node, double fromValue, double toValue) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), node);
+        scaleTransition.setFromX(fromValue);
+        scaleTransition.setFromY(fromValue);
+        scaleTransition.setToX(toValue);
+        scaleTransition.setToY(toValue);
+        return scaleTransition;
     }
 }

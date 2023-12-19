@@ -1,3 +1,6 @@
+#leftButton, #rightButton {
+}
+
 #flowPane {
     -fx-background-color: transparent;
 }
@@ -39,6 +42,10 @@
     -fx-background-radius: 10;
 }
 
-#scrollButton {
-    -fx-background-color: #9FE2BF;
+#leftButton, #rightButton {
+    -fx-background-color: transparent;
+}
+
+.paginationButton:hover {
+    -fx-cursor: hand;
 }

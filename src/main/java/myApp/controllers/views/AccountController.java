@@ -94,7 +94,7 @@ public class AccountController implements Initializable {
                     double totalBalance = resultSet.getDouble("totalBalance");
                     String fullname = fname + " " + lname;
 
-                    fullNameLabel.setText("Fullname: " + fullname);
+                    fullNameLabel.setText(fullname);
                     emailLabel.setText("Email: " + email);
                     genderLabel.setText("Gender: " + gender);
                     dobLabel.setText("Date of Birth: " + dob);

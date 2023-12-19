@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800.0" minWidth="1200.0" prefHeight="850.0" prefWidth="1200.0" stylesheets="@../css/account.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.AccountController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="1200.0" stylesheets="@../css/account.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.AccountController">
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
          <children>
@@ -136,13 +136,16 @@
             </VBox>
             <BorderPane prefWidth="800.0" styleClass="moneyPane">
                <bottom>
-                  <Label fx:id="totalBalanceLabel" text="Total Balance: ##########" BorderPane.alignment="CENTER_RIGHT">
+                  <Label fx:id="totalBalanceLabel" prefHeight="64.0" prefWidth="289.0" styleClass="totalBalance" text="Total Balance: ##########" BorderPane.alignment="CENTER_RIGHT">
                      <BorderPane.margin>
                         <Insets bottom="15.0" right="25.0" />
                      </BorderPane.margin>
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
                   </Label>
                </bottom>
                <HBox.margin>
@@ -151,7 +154,7 @@
                <center>
                   <VBox BorderPane.alignment="CENTER">
                      <children>
-                        <BorderPane>
+                        <BorderPane prefHeight="54.0" prefWidth="790.0">
                            <left>
                               <Label fx:id="bankBalanceLabel" text="Bank Balance" BorderPane.alignment="CENTER">
                                  <font>
@@ -176,18 +179,42 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </BorderPane>
-                        <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" pannable="true" vbarPolicy="NEVER">
-                           <content>
-                              <GridPane fx:id="gridPane" hgap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <padding>
-                                    <Insets bottom="30.0" left="10.0" right="10.0" top="20.0" />
-                                 </padding>
-                              </GridPane>
-                           </content>
-                        </MFXScrollPane>
+                        <BorderPane prefHeight="346.0" prefWidth="790.0">
+                           <center>
+                              <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" pannable="true" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+                                 <content>
+                                    <GridPane fx:id="gridPane" hgap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <padding>
+                                          <Insets bottom="30.0" left="10.0" right="10.0" top="20.0" />
+                                       </padding>
+                                    </GridPane>
+                                 </content>
+                              </MFXScrollPane>
+                           </center>
+                           <left>
+                              <MFXButton fx:id="scrollBtnL" style="-fx-background-color: #9FE2BF; -fx-background-radius: 50;" styleClass="scrollButton" stylesheets="@../css/account.css" text="&lt;" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                                 <BorderPane.margin>
+                                    <Insets left="25.0" right="10.0" />
+                                 </BorderPane.margin>
+                              </MFXButton>
+                           </left>
+                           <right>
+                              <MFXButton fx:id="scrollBtnR" style="-fx-background-color: #9FE2BF; -fx-background-radius: 50;" styleClass="scrollButton" stylesheets="@../css/account.css" text="&gt;" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                                 <BorderPane.margin>
+                                    <Insets left="10.0" right="25.0" />
+                                 </BorderPane.margin>
+                              </MFXButton>
+                           </right>
+                        </BorderPane>
                         <Label fx:id="walletBalanceLabel" text="Wallet Balance: ###########">
                            <font>
                               <Font size="20.0" />

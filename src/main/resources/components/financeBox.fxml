@@ -3,75 +3,68 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<fx:root style="-fx-background-color: lightgrey; -fx-background-radius: 10;" type="HBox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="financeBox" prefWidth="500.0" stylesheets="@../css/financeBox.css" type="HBox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" HBox.hgrow="ALWAYS">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="20.0" HBox.hgrow="ALWAYS">
          <children>
-            <HBox VBox.vgrow="ALWAYS">
+            <HBox VBox.vgrow="NEVER">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
                <children>
                   <BorderPane HBox.hgrow="ALWAYS">
                      <left>
-                        <Label fx:id="nameLabel" text="Finance name" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets />
-                           </BorderPane.margin>
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
+                        <VBox BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="nameLabel" maxWidth="300.0" prefWidth="300.0" text="Finance name" wrapText="true">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="categoryLabel" text="Category">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
                      </left>
                      <right>
-                        <Label fx:id="categoryLabel" text="Category" BorderPane.alignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
+                        <HBox spacing="20.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <MFXButton fx:id="updateButton" contentDisplay="GRAPHIC_ONLY">
+                                 <graphic>
+                                    <ImageView fx:id="editIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/budget/edit.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MFXButton>
+                              <MFXButton fx:id="deleteButton" contentDisplay="GRAPHIC_ONLY">
+                                 <graphic>
+                                    <ImageView fx:id="trashIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/budget/trash.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </MFXButton>
+                           </children>
+                        </HBox>
                      </right>
                   </BorderPane>
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <BorderPane HBox.hgrow="ALWAYS">
-                     <left>
-                        <Label fx:id="amountLabel" text="Amount" BorderPane.alignment="CENTER" />
-                     </left>
-                     <right>
-                        <MFXButton fx:id="updateButton" contentDisplay="GRAPHIC_ONLY" BorderPane.alignment="CENTER">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </MFXButton>
-                     </right>
-                  </BorderPane>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <BorderPane HBox.hgrow="ALWAYS">
-                     <left>
-                        <Label fx:id="dateLabel" text="Date" BorderPane.alignment="CENTER" />
-                     </left>
-                     <right>
-                        <MFXButton fx:id="deleteButton" contentDisplay="GRAPHIC_ONLY" BorderPane.alignment="CENTER">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </MFXButton>
-                     </right>
-                  </BorderPane>
-               </children>
-            </HBox>
+            <Label fx:id="amountLabel" text="Amount" />
+            <Label fx:id="dateLabel" text="Date" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -39,9 +39,9 @@ public class FinanceController implements Initializable {
     public MFXButton yearlyButton;
 
 
-    private final AddFinanceForm addFinanceForm = new AddFinanceForm();
-    private final Stage dialogStage = new Stage();
-    private final Scene dialogScene = new Scene(addFinanceForm, addFinanceForm.getPrefWidth(), addFinanceForm.getPrefHeight());
+//    private final AddFinanceForm addFinanceForm;
+//    private final Stage dialogStage = new Stage();
+//    private final Scene dialogScene = new Scene(addFinanceForm, addFinanceForm.getPrefWidth(), addFinanceForm.getPrefHeight());
     public GridPane incomeGrid;
     public GridPane outcomeGrid;
     private Connection con = ConnectionManager.getConnection();
@@ -55,10 +55,10 @@ public class FinanceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeAddFinanceForm();
-        dialogStage.setScene(dialogScene);
-        Draggable draggable = new Draggable();
-        draggable.makeDraggable(dialogStage);
+//        initializeAddFinanceForm();
+//        dialogStage.setScene(dialogScene);
+//        Draggable draggable = new Draggable();
+//        draggable.makeDraggable(dialogStage);
 
         allTimeButton.setOnAction(event -> filterFinances(TimeFrame.ALL_TIME));
         weeklyButton.setOnAction(event -> filterFinances(TimeFrame.WEEKLY));
@@ -96,8 +96,8 @@ public class FinanceController implements Initializable {
         }
 
 
-        incomeFlowPane.getChildren().clear();
-        outcomeFlowPane.getChildren().clear();
+        incomeGrid.getChildren().clear();
+        outcomeGrid.getChildren().clear();
 
 
         loadIncome(start, end);
