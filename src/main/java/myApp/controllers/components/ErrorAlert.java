@@ -1,10 +1,15 @@
 package myApp.controllers.components;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.effects.DepthLevel;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,9 +39,6 @@ public class ErrorAlert extends BorderPane {
 
             errorTitle.setText(title);
             errorMessage.setText(message);
-            Image successImage = new Image("/images/account/error.png");
-            Image blendedImage = ImageBlender.blendColor(successImage, Color.RED);
-            errorIcon.setImage(blendedImage);
 
             showAlert(scene);
 
@@ -45,7 +47,7 @@ public class ErrorAlert extends BorderPane {
         }
     }
 
-    public void showAlert(Scene scene) {
+    private void showAlert(Scene scene) {
         // Create a new undecorated stage
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
@@ -55,16 +57,16 @@ public class ErrorAlert extends BorderPane {
         setOpacity(0);
 
         // Create a fade-in transition
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.1), this);
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.3), this);
         fadeIn.setToValue(1); // Set the target opacity to 1 (fully opaque)
 
         stage.show();
         fadeIn.play();
 
-        // Create a pause for 2 sec
-        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        // Create a pause for 3 sec
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(event -> {
-            FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.1), this);
+            FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.3), this);
             fadeOut.setToValue(0); // Set the target opacity to 0 (fully transparent)
             // Set the action to be performed after the fade-out transition completes
             fadeOut.setOnFinished(fadeEvent -> {
@@ -75,4 +77,6 @@ public class ErrorAlert extends BorderPane {
 
         pause.play();
     }
+
+
 }

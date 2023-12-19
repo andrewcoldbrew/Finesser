@@ -1,3 +1,8 @@
 #exitButton {
     -fx-background-color: transparent;
 }
+
+#BorderPane {
+    -fx-background-radius: 20;
+    -fx-background-color: black;
+}

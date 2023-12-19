@@ -19,6 +19,10 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 25, 0.4, 0, 0);
 }
 
+#updateButton, #deleteButton:hover {
+    -fx-cursor: hand;
+}
+
 #progressBar:range1 .bar1 {
     -fx-fill: #07b907;
 }

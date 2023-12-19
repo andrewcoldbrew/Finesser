@@ -31,8 +31,8 @@ public class AddBudgetForm extends AnchorPane {
     public MFXButton exitButton;
     private Stage stage;
     private final ObservableList<String> categoryList = FXCollections.observableArrayList(
-            "Food", "Clothes", "Groceries", "Entertainment", "Utilities",
-            "Transportation", "Healthcare", "Education"
+            "Clothes", "Education", "Entertainment", "Food", "Groceries",
+            "Healthcare", "Transportation", "Travel", "Utilities", "Miscellaneous", "Other"
     );
 
     public AddBudgetForm() {
@@ -71,7 +71,7 @@ public class AddBudgetForm extends AnchorPane {
             double limit = Double.parseDouble(limitField.getText());
             Connection con = ConnectionManager.getConnection();
             PreparedStatement statement = con.prepareStatement(
-                    "INSERT INTO budget (userId, category, budget_limit, start_date, end_date) VALUES (?, ?, ?, ?, ?)");
+                    "INSERT INTO budget (userID, category, budgetLimit, startDate, endDate) VALUES (?, ?, ?, ?, ?)");
             statement.setInt(1, Main.getUserId());
             statement.setString(2, category);
             statement.setDouble(3, limit);
