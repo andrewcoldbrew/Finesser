@@ -1,10 +1,10 @@
 #flowPane {
-    -fx-hgap: 20;
-    -fx-vgap: 20;
+    -fx-hgap: 1000;
+    -fx-vgap: 1000;
 }
 
 #categoryLabel {
-    -fx-font-size: 24px;
+    -fx-font-size: 100px;
     -fx-font-weight: bold;
 }
 
@@ -34,3 +34,5 @@
 #progressBar:range3 .bar1 {
     -fx-fill: #d92f2f;
 }
+
+.body

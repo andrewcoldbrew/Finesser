@@ -82,7 +82,7 @@
       </HBox>
    </bottom>
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" styleClass="titleBox" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="100.0" styleClass="titleBox" BorderPane.alignment="CENTER">
          <children>
             <Label text="Transaction History">
                <font>

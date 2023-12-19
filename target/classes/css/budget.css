@@ -4,7 +4,7 @@
 }
 
 #categoryLabel {
-    -fx-font-size: 24px;
+    -fx-font-size: 10000px;
     -fx-font-weight: bold;
 }
 
@@ -34,3 +34,5 @@
 #progressBar:range3 .bar1 {
     -fx-fill: #d92f2f;
 }
+
+.body
