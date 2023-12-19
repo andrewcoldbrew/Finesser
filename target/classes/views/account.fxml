@@ -33,17 +33,22 @@
                         <Font name="System Bold" size="40.0" />
                      </font>
                   </Label>
-                  <Label fx:id="usernameLabel" text="Username">
+                  <Label fx:id="emailLabel" text="Email">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="passwordLabel" text="Password">
+                  <Label fx:id="genderLabel" text="Gender">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="balanceLabel" text="Balance">
+                  <Label fx:id="dobLabel" text="Date of birth">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="countryLabel" text="Country">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -131,7 +136,7 @@
             </VBox>
             <BorderPane prefWidth="800.0" styleClass="moneyPane">
                <bottom>
-                  <Label text="Total Balance: ##########" BorderPane.alignment="CENTER_RIGHT">
+                  <Label fx:id="totalBalanceLabel" text="Total Balance: ##########" BorderPane.alignment="CENTER_RIGHT">
                      <BorderPane.margin>
                         <Insets bottom="15.0" right="25.0" />
                      </BorderPane.margin>
@@ -148,7 +153,7 @@
                      <children>
                         <BorderPane>
                            <left>
-                              <Label text="Bank Balance" BorderPane.alignment="CENTER">
+                              <Label fx:id="bankBalanceLabel" text="Bank Balance" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -183,7 +188,7 @@
                               </GridPane>
                            </content>
                         </MFXScrollPane>
-                        <Label text="Wallet Balance: ###########">
+                        <Label fx:id="walletBalanceLabel" text="Wallet Balance: ###########">
                            <font>
                               <Font size="20.0" />
                            </font>

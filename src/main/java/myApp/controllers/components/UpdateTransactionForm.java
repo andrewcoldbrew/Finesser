@@ -1,8 +1,8 @@
 package myApp.controllers.components;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,12 +11,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import myApp.Main;
-import myApp.models.Budget;
+import myApp.controllers.views.TransactionController;
 import myApp.models.Transaction;
-import myApp.utils.ConnectionManager;
 
 import java.io.IOException;
-import java.sql.*;
 import java.time.LocalDate;
 
 public class UpdateTransactionForm extends BorderPane {
@@ -25,12 +23,17 @@ public class UpdateTransactionForm extends BorderPane {
     public MFXButton updateButton;
     public TextField descriptionField;
     public TextField amountField;
+    public MFXDatePicker datePicker;
     public MFXButton cancelButton;
+    private TransactionController transactionController;
+    private Transaction transaction;
     private final ObservableList<String> typeList = FXCollections.observableArrayList(
             "Clothes", "Education", "Entertainment", "Food", "Groceries",
             "Healthcare", "Transportation", "Travel", "Utilities", "Miscellaneous", "Other"
     );
-    public UpdateTransactionForm(Transaction transaction) {
+    public UpdateTransactionForm(Transaction transaction, TransactionController transactionController) {
+        this.transactionController = transactionController;
+        this.transaction = transaction;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/updateTransactionForm.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -79,6 +82,7 @@ public class UpdateTransactionForm extends BorderPane {
         try {
             double amount = Double.parseDouble(amountText);
             // INVOKE THE FUNCTION HERE! ~UwU~
+            transactionController.updateTransactionInDatabase(transaction);
 
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount. Please enter a valid number.");

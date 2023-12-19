@@ -188,22 +188,12 @@ public class TransactionController implements Initializable {
         return total;
     }
 
-    public void handleAddForm(ActionEvent actionEvent) {
-        if (!mainPane.getChildren().contains(addForm)) {
-            AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
-            AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
-
-            mainPane.getChildren().add(addForm);
-            draggable.makeDraggable(addForm);
-        }
-    }
-
     private HBox createButtonContainer(Transaction transaction) {
         HBox buttonContainer = new HBox();
         MFXButton updateButton = createButton("Update", "updateButton");
         MFXButton deleteButton = createButton("Delete", "deleteButton");
 
-        updateButton.setOnAction(actionEvent -> updateTransaction(transaction));
+        updateButton.setOnAction(actionEvent -> updateTransaction());
         deleteButton.setOnAction(actionEvent -> deleteTransaction(transaction));
 
         buttonContainer.getChildren().addAll(updateButton, deleteButton);
@@ -215,7 +205,7 @@ public class TransactionController implements Initializable {
 
 
     // Method to update a transaction in the database
-    private void updateTransactionInDatabase(Transaction transaction) {
+    public void updateTransactionInDatabase(Transaction transaction) {
         // Assuming you have a method to get bank ID from bank name
         int bankId = getBankIdByName(transaction.getBankName());
 
@@ -225,7 +215,7 @@ public class TransactionController implements Initializable {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, transaction.getName());
-            stmt.setDouble(2, transaction.getAmount() + 100);
+            stmt.setDouble(2, transaction.getAmount());
             stmt.setString(3, transaction.getDescription());
             stmt.setString(4, transaction.getCategory());
             stmt.setInt(5, bankId);
@@ -267,13 +257,13 @@ public class TransactionController implements Initializable {
         }
     }
 
-    private void updateTransaction(Transaction transaction) {
+    private void updateTransaction() {
         Platform.runLater(() -> {
             // get the selected transaction
            Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedValues().getFirst();
            // show the form
            if (!mainPane.getChildren().contains(updateForm)) {
-               updateForm = new UpdateTransactionForm(selectedTransaction);
+               updateForm = new UpdateTransactionForm(selectedTransaction, this);
                AnchorPane.setTopAnchor(updateForm, (mainPane.getHeight() - updateForm.getPrefHeight()) / 2);
                AnchorPane.setLeftAnchor(updateForm, (mainPane.getWidth() - updateForm.getPrefWidth()) / 2);
                mainPane.getChildren().add(updateForm);

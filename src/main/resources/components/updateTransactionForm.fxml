@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -36,6 +37,7 @@
                <cursor>
                    <Cursor fx:constant="TEXT" />
                </cursor></TextField>
+         <MFXDatePicker fx:id="datePicker" floatMode="BORDER" floatingText="Transaction date" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" />
            <HBox alignment="CENTER_RIGHT" minWidth="300.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="300.0" spacing="10.0">
                <MFXButton fx:id="updateButton" buttonType="RAISED" mnemonicParsing="false" stylesheets="@../css/form.css" text="Update">
                    <font>
