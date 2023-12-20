@@ -1,0 +1,51 @@
+#leftButton, #rightButton {
+}
+
+#flowPane {
+    -fx-background-color: transparent;
+}
+
+#scrollPane {
+    -fx-background-color: transparent;
+}
+
+.sideBox {
+    -fx-background-color: white;
+    -fx-padding:  30px 0px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);;
+}
+
+.sideBox:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 15, 0.3, 0, 0);
+}
+
+.moneyPane {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);
+}
+
+#linkBankButton {
+    -fx-border-color: #9FE2BF;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-size: 14;
+}
+
+#linkBankButton:hover {
+    -fx-background-color:  #9FE2BF;
+    -fx-text-fill: white;
+}
+
+.totalBalance {
+    -fx-background-color: #f4f4f4;
+    -fx-background-radius: 10;
+}
+
+#leftButton, #rightButton {
+    -fx-background-color: transparent;
+}
+
+.paginationButton:hover {
+    -fx-cursor: hand;
+}

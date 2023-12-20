@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root style="-fx-background-color: white; -fx-border-color: #9FE2BF; -fx-border-width: 3; -fx-border-radius: 20; -fx-background-radius: 20;" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+       <VBox layoutX="83.0" layoutY="76.0" spacing="20.0">
+           <MFXFilterComboBox fx:id="typeComboBox" floatMode="BORDER" floatingText="Type" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" style="-fx-border-color: #9FE2BF;" styleClass="mfxcombobox" stylesheets="@../css/form.css" />
+           <TextField fx:id="transactionNameField" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Transaction name" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <padding>
+                   <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <cursor>
+                   <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
+           <TextField fx:id="amountField" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Amount" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <padding>
+                   <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <cursor>
+                   <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
+           <TextField fx:id="descriptionField" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Description" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <padding>
+                   <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+               <cursor>
+                   <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
+         <MFXDatePicker fx:id="datePicker" floatMode="BORDER" floatingText="Transaction date" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" />
+           <HBox alignment="CENTER_RIGHT" minWidth="300.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="300.0" spacing="10.0">
+               <MFXButton fx:id="updateButton" buttonType="RAISED" mnemonicParsing="false" stylesheets="@../css/form.css" text="Update">
+                   <font>
+                       <Font size="14.0" />
+                   </font>
+               <padding>
+                  <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+               </padding>
+               </MFXButton>
+               <MFXButton fx:id="cancelButton" buttonType="RAISED" mnemonicParsing="false" stylesheets="@../css/form.css" text="Cancel">
+                   <font>
+                       <Font size="14.0" />
+                   </font>
+               <padding>
+                  <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+               </padding>
+               </MFXButton>
+           </HBox>
+       </VBox>
+   </center>
+   <padding>
+      <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+   </padding>
+   <top>
+       <Label text="Update Transaction" BorderPane.alignment="CENTER">
+           <font>
+               <Font name="System Bold" size="18.0" />
+           </font>
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
+       </Label>
+   </top>
+</fx:root>

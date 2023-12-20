@@ -7,3 +7,32 @@
     -fx-background-color: #FF5252; /* Red */
     -fx-text-fill: #ffffff; /* White text on red background */
 }
+
+.body {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);
+}
+
+.bottomBox {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);
+    -fx-min-width: 300px;
+}
+
+.titleBox {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);
+}
+
+.addTransactionBtn {
+    -fx-border-color: #9FE2BF;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-size: 14;
+}
+
+.addTransactionBtn:hover {
+    -fx-background-color:  #9FE2BF;
+    -fx-text-fill: white;
+}

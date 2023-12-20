@@ -17,6 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import myApp.Main;
 import myApp.controllers.components.AddTransactionForm;
+import myApp.controllers.components.ManualAlert;
+import myApp.controllers.components.UpdateTransactionForm;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
@@ -25,13 +27,11 @@ import myApp.utils.LocalDateComparator;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.ResourceBundle;
 
 
-public class TestTransactionController implements Initializable {
+public class TransactionController implements Initializable {
     public BorderPane mainPane;
     public MFXTextField searchBar;
     public MFXPaginatedTableView<Transaction> transactionTable;
@@ -40,7 +40,8 @@ public class TestTransactionController implements Initializable {
     @FXML private Label totalFood;
     @FXML private Label totalEntertainment;
     @FXML private Label totalMisc;
-    private final AddTransactionForm addForm = new AddTransactionForm();
+    private AddTransactionForm addForm;
+    private UpdateTransactionForm updateForm;
 
     private final Draggable draggable = new Draggable();
 
@@ -54,11 +55,13 @@ public class TestTransactionController implements Initializable {
         filteredTransactions = new FilteredList<>(transactionData, p -> true);
         setupTransactionTable();
         setupSearchBar();
+        transactionTable.getSelectionModel().setAllowsMultipleSelection(false);
         transactionTable.autosizeColumnsOnInitialization();
 
         When.onChanged(transactionTable.currentPageProperty())
                 .then((oldValue, newValue) -> transactionTable.autosizeColumns())
                 .listen();
+
     }
 
 
@@ -102,6 +105,7 @@ public class TestTransactionController implements Initializable {
     }
 
     private void loadTransactions() {
+        // Clear existing data to avoid duplicates
         transactionData.clear();
 
         // Database query
@@ -114,6 +118,7 @@ public class TestTransactionController implements Initializable {
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
+            // Set the user ID
             stmt.setInt(1, Main.getUserId());
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -158,6 +163,7 @@ public class TestTransactionController implements Initializable {
                     transaction.getName().toLowerCase().contains(searchText.toLowerCase())
             );
 
+            // Update the TableView with the filtered data
         }
         transactionTable.setItems(FXCollections.observableArrayList(filteredTransactions));
     }
@@ -183,22 +189,12 @@ public class TestTransactionController implements Initializable {
         return total;
     }
 
-    public void handleAddForm(ActionEvent actionEvent) {
-        if (!mainPane.getChildren().contains(addForm)) {
-            AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
-            AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
-
-            mainPane.getChildren().add(addForm);
-            draggable.makeDraggable(addForm);
-        }
-    }
-
     private HBox createButtonContainer(Transaction transaction) {
         HBox buttonContainer = new HBox();
         MFXButton updateButton = createButton("Update", "updateButton");
         MFXButton deleteButton = createButton("Delete", "deleteButton");
 
-        updateButton.setOnAction(actionEvent -> updateTransaction(transaction));
+        updateButton.setOnAction(actionEvent -> updateTransaction());
         deleteButton.setOnAction(actionEvent -> deleteTransaction(transaction));
 
         buttonContainer.getChildren().addAll(updateButton, deleteButton);
@@ -209,8 +205,9 @@ public class TestTransactionController implements Initializable {
     }
 
 
-    private void updateTransactionInDatabase(Transaction transaction) {
-
+    // Method to update a transaction in the database
+    public void updateTransactionInDatabase(Transaction transaction) {
+        // Assuming you have a method to get bank ID from bank name
         int bankId = getBankIdByName(transaction.getBankName());
 
         String sql = "UPDATE transaction SET name = ?, amount = ?, description = ?, category = ?, bankID = ?, transactionDate = ? WHERE transactionID = ?";
@@ -261,15 +258,27 @@ public class TestTransactionController implements Initializable {
         }
     }
 
-    private void updateTransaction(Transaction transaction) {
-        // Open a dialog to edit the transaction
-        updateTransactionInDatabase(transaction);
-        loadTransactions();
+    private void updateTransaction() {
+        Platform.runLater(() -> {
+            // get the selected transaction
+           Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedValues().getFirst();
+           // show the form
+           if (!mainPane.getChildren().contains(updateForm)) {
+               updateForm = new UpdateTransactionForm(selectedTransaction, this);
+               AnchorPane.setTopAnchor(updateForm, (mainPane.getHeight() - updateForm.getPrefHeight()) / 2);
+               AnchorPane.setLeftAnchor(updateForm, (mainPane.getWidth() - updateForm.getPrefWidth()) / 2);
+               mainPane.getChildren().add(updateForm);
+               draggable.makeDraggable(updateForm);
+           }
+        });
+
     }
 
     private void deleteTransaction(Transaction transaction) {
-        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION, "Delete this transaction?", ButtonType.YES, ButtonType.NO);
-        confirmDialog.showAndWait().ifPresent(response -> {
+        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
+                "Are you sure you want to delete this budget?",
+                "This action cannot be revert!");
+        confirm.showAndWait().ifPresent(response -> {
             if (response == ButtonType.YES) {
                 deleteTransactionFromDatabase(transaction);
                 loadTransactions();
@@ -286,6 +295,7 @@ public class TestTransactionController implements Initializable {
 
     public void handleAddTransactionForm(ActionEvent actionEvent) {
         if (!mainPane.getChildren().contains(addForm)) {
+            addForm = new AddTransactionForm();
             AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
             AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
 

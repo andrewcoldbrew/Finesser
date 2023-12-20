@@ -10,10 +10,10 @@ import javafx.scene.Scene;
 import java.time.DayOfWeek;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import myApp.Main;
 import javafx.stage.StageStyle;
 import myApp.controllers.components.AddFinanceForm;
 import myApp.controllers.components.FinanceBox;
@@ -30,18 +30,18 @@ import java.util.ResourceBundle;
 
 public class FinanceController implements Initializable {
     public MFXButton addButton;
-    public FlowPane incomeFlowPane;
-    public FlowPane outcomeFlowPane;
     public Label totalLabel;
     public MFXButton allTimeButton;
     public MFXButton weeklyButton;
     public MFXButton monthyButton;
     public MFXButton yearlyButton;
 
-    private int userID;
-    private final AddFinanceForm addFinanceForm = new AddFinanceForm();
-    private final Stage dialogStage = new Stage();
-    private final Scene dialogScene = new Scene(addFinanceForm, addFinanceForm.getPrefWidth(), addFinanceForm.getPrefHeight());
+
+    private AddFinanceForm addFinanceForm;
+    private Stage dialogStage;
+    private Scene dialogScene;
+    public GridPane incomeGrid;
+    public GridPane outcomeGrid;
     private Connection con = ConnectionManager.getConnection();
 
     private double totalIncome = 0.0;
@@ -54,18 +54,10 @@ public class FinanceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        this.userID = Main.getUserId();
-
-        initializeAddFinanceForm();
-        dialogStage.setScene(dialogScene);
-        Draggable draggable = new Draggable();
-        draggable.makeDraggable(dialogStage);
-
         allTimeButton.setOnAction(event -> filterFinances(TimeFrame.ALL_TIME));
         weeklyButton.setOnAction(event -> filterFinances(TimeFrame.WEEKLY));
         monthyButton.setOnAction(event -> filterFinances(TimeFrame.MONTHLY));
         yearlyButton.setOnAction(event -> filterFinances(TimeFrame.YEARLY));
-
 
         LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
         LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
@@ -97,22 +89,17 @@ public class FinanceController implements Initializable {
         }
 
 
-        incomeFlowPane.getChildren().clear();
-        outcomeFlowPane.getChildren().clear();
+        incomeGrid.getChildren().clear();
+        outcomeGrid.getChildren().clear();
 
 
         loadIncome(start, end);
         loadOutcome(start, end);
     }
 
-
-    private void initializeAddFinanceForm() {
-
-    }
-
     private void loadFinanceData(LocalDate startDate, LocalDate endDate) {
-        incomeFlowPane.getChildren().clear();
-        outcomeFlowPane.getChildren().clear();
+        incomeGrid.getChildren().clear();
+        outcomeGrid.getChildren().clear();
         loadIncome(startDate, endDate);
         loadOutcome(startDate, endDate);
     }
@@ -120,19 +107,18 @@ public class FinanceController implements Initializable {
 
     private void loadIncome(LocalDate startDate, LocalDate endDate) {
         System.out.println("Loading income...");
-        String query = "SELECT name, amount, transactionDate, category FROM transaction " +
-                "WHERE userID = ? AND category = 'income' AND transactionDate BETWEEN ? AND ?";
+        String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE category = 'Income' AND transactionDate BETWEEN ? AND ?";
 
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
             LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
 
-            stmt.setInt(1, userID);
-            stmt.setDate(2, java.sql.Date.valueOf(startDate));
-            stmt.setDate(3, java.sql.Date.valueOf(endDate));
+            stmt.setDate(1, java.sql.Date.valueOf(startDate));
+            stmt.setDate(2, java.sql.Date.valueOf(endDate));
 
             try (ResultSet rs = stmt.executeQuery()) {
                 int count = 0;
+                int row = 1;
                 while (rs.next()) {
                     count++;
                     String name = rs.getString("name");
@@ -142,13 +128,13 @@ public class FinanceController implements Initializable {
 
                     System.out.println("Income #" + count + ": " + name + ", Amount: " + amount + ", Date: " + transactionDate + ", Category: " + category);
                     FinanceBox financeBox = new FinanceBox(name, amount, category, transactionDate);
-                    incomeFlowPane.getChildren().add(financeBox);
+                    incomeGrid.add(financeBox, 0, row++);
                 }
                 if (count == 0) {
                     System.out.println("No income transactions found for the current month.");
                 }
                 totalIncome = 0.0;
-                for (Node node : incomeFlowPane.getChildren()) {
+                for (Node node : incomeGrid.getChildren()) {
                     if (node instanceof FinanceBox) {
                         FinanceBox box = (FinanceBox) node;
                         totalIncome += box.getAmount();
@@ -164,19 +150,18 @@ public class FinanceController implements Initializable {
 
     private void loadOutcome(LocalDate startDate, LocalDate endDate) {
         System.out.println("Loading outcome...");
-        String query = "SELECT name, amount, transactionDate, category FROM transaction " +
-                "WHERE userID = ? AND category IN ('subscription', 'rent') AND transactionDate BETWEEN ? AND ?";
+        String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE category IN ('subscription', 'rent') AND transactionDate BETWEEN ? AND ?";
 
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
             LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
 
-            stmt.setInt(1, userID);
-            stmt.setDate(2, java.sql.Date.valueOf(startDate));
-            stmt.setDate(3, java.sql.Date.valueOf(endDate));
+            stmt.setDate(1, java.sql.Date.valueOf(startDate));
+            stmt.setDate(2, java.sql.Date.valueOf(endDate));
 
             try (ResultSet rs = stmt.executeQuery()) {
                 int count = 0;
+                int row = 1;
                 while (rs.next()) {
                     count++;
                     String name = rs.getString("name");
@@ -186,13 +171,13 @@ public class FinanceController implements Initializable {
 
                     System.out.println("Outcome #" + count + ": " + name + ", Amount: " + amount + ", Date: " + transactionDate + ", Category: " + category);
                     FinanceBox financeBox = new FinanceBox(name, amount, category, transactionDate);
-                    outcomeFlowPane.getChildren().add(financeBox);
+                    outcomeGrid.add(financeBox, 0, row++);
                 }
                 if (count == 0) {
                     System.out.println("No outcome transactions found for the current month.");
                 }
                 totalOutcome = 0.0;
-                for (Node node : outcomeFlowPane.getChildren()) {
+                for (Node node : outcomeGrid.getChildren()) {
                     if (node instanceof FinanceBox) {
                         FinanceBox box = (FinanceBox) node;
                         totalOutcome += box.getAmount();
@@ -262,7 +247,29 @@ public class FinanceController implements Initializable {
         loadFinanceData(range[0], range[1]);
     }
 
-    public void handleAddFinanceForm(ActionEvent actionEvent) {
+    private void initializeAddFinanceForm() {
+        dialogStage = new Stage();
 
+        addFinanceForm = new AddFinanceForm();
+        dialogScene = new Scene(addFinanceForm, addFinanceForm.getPrefWidth(), addFinanceForm.getPrefHeight());
+        addFinanceForm.setStage(dialogStage);
+
+
+        System.out.println(addFinanceForm.getStage());
+        dialogStage.setTitle("Add Budget Dialog");
+        dialogStage.setScene(dialogScene);
+
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initStyle(StageStyle.UNDECORATED);
+        dialogScene.setFill(Color.TRANSPARENT);
+
+        dialogStage.setResizable(false);
+
+
+        dialogStage.show();
+    }
+
+    public void handleAddFinanceForm(ActionEvent actionEvent) {
+        initializeAddFinanceForm();
     }
 }

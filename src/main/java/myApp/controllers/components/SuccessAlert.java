@@ -33,9 +33,7 @@ public class SuccessAlert extends BorderPane {
             Scene scene = new Scene(root);
 
             messageLabel.setText(message);
-            Image successImage = new Image("/images/account/success.png");
-            Image blendedImage = ImageBlender.blendColor(successImage, Color.GREEN);
-            successIcon.setImage(blendedImage);
+
 
             // Show the stage with a fade-in transition
             showAlert(scene);

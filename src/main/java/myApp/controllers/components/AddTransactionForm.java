@@ -59,7 +59,6 @@ public class AddTransactionForm extends AnchorPane {
 
         addButton.setOnAction(this::addTransaction);
         cancelButton.setOnAction(this::closeTransactionForm);
-
     }
 
     private void addTransaction(ActionEvent actionEvent) {
@@ -83,10 +82,12 @@ public class AddTransactionForm extends AnchorPane {
             if (bankName.equals("None")) {
                 addCashTransaction(name, amount, description, category, date, userId);
                 Platform.runLater(() -> updateCashAmount(userId, amount));
+                new SuccessAlert("Transaction added!");
             } else {
                 int bankId = getBankIdByName(bankName); // Fetch bankId based on bank name
                 addBankTransaction(name, amount, description, category, bankId, date, userId);
-                updateBankBalance(userId, amount);
+                Platform.runLater(() -> updateBankBalance(userId, amount));
+                new SuccessAlert("Transaction added!");
             }
 
 
@@ -97,6 +98,8 @@ public class AddTransactionForm extends AnchorPane {
             System.out.println("Error adding the transaction to the database.");
         }
     }
+
+
 
     private int getBankIdByName(String bankName) throws SQLException {
         Connection con = ConnectionManager.getConnection();
