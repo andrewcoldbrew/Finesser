@@ -1,6 +1,8 @@
 package myApp.controllers.views;
 
+import animatefx.animation.*;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -12,7 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import myApp.Main;
 import myApp.controllers.components.AddWalletForm;
 import myApp.controllers.components.BankBox;
@@ -87,7 +91,12 @@ public class TestAccountController implements Initializable {
     private void displayCreditCard(int index) {
         creditCardContainer.getChildren().clear();
         creditCardContainer.getChildren().add(creditCardList.get(index));
-
+        new Pulse(getCurentCard().getAccountNumberLabel()).play();
+        new Pulse(getCurentCard().getBankNameLabel()).play();
+        new Pulse(getCurentCard().getUserNameLabel()).play();
+        new GlowText(getCurentCard().getUserNameLabel(), Color.WHITE, Color.DARKGOLDENROD).play();
+        new GlowText(getCurentCard().getAccountNumberLabel(), Color.WHITE, Color.DARKGOLDENROD).play();
+        new GlowText(getCurentCard().getBankNameLabel(), Color.WHITE, Color.DARKGOLDENROD).play();
         // Update pagination buttons
         updatePagination(index);
     }
@@ -95,6 +104,10 @@ public class TestAccountController implements Initializable {
     private int getCurrentCardIndex() {
         BankBox currentCard = (BankBox) creditCardContainer.getChildren().getFirst();
         return creditCardList.indexOf(currentCard);
+    }
+
+    private BankBox getCurentCard() {
+        return (BankBox) creditCardContainer.getChildren().getFirst();
     }
 
     private void moveToLeftCard(ActionEvent actionEvent) {

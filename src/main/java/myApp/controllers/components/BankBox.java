@@ -1,10 +1,18 @@
 package myApp.controllers.components;
 
+import animatefx.animation.GlowBackground;
+import animatefx.animation.GlowText;
+import animatefx.animation.JackInTheBox;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import myApp.utils.Animate;
 
@@ -23,7 +31,6 @@ public class BankBox extends BorderPane {
         try {
             fxmlLoader.load();
             initialize(bankName, userName, accountNumber);
-//            Animate.addHoverScalingEffect(this);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -35,4 +42,15 @@ public class BankBox extends BorderPane {
         accountNumberLabel.setText(accountNumber);
     }
 
+    public Label getBankNameLabel() {
+        return bankNameLabel;
+    }
+
+    public Label getUserNameLabel() {
+        return userNameLabel;
+    }
+
+    public Label getAccountNumberLabel() {
+        return accountNumberLabel;
+    }
 }

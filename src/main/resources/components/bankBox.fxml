@@ -11,7 +11,7 @@
    <top>
       <HBox prefHeight="30.0" prefWidth="420.0" spacing="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER_LEFT" spacing="10.0">
+            <VBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label fx:id="bankNameLabel" text="Bank Name">
                      <font>
@@ -31,7 +31,7 @@
    <center>
       <HBox fillHeight="false" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="accountNumberLabel" text="0000 0000 0000">
+            <Label fx:id="accountNumberLabel" text="0000 0000 0000" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="18.0" />
                </font>
@@ -46,9 +46,9 @@
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
    <bottom>
-      <HBox fillHeight="false" spacing="200.0" BorderPane.alignment="CENTER">
+      <HBox BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER_LEFT" spacing="20.0">
+            <VBox alignment="CENTER_LEFT" spacing="20.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="CARD HOLDER">
                      <font>
@@ -62,7 +62,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER_RIGHT" spacing="20.0">
+            <VBox alignment="CENTER_RIGHT" spacing="20.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="VALID THRU">
                      <font>

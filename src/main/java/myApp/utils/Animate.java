@@ -1,7 +1,6 @@
 package myApp.utils;
 
-import javafx.animation.ScaleTransition;
-import javafx.animation.Transition;
+import javafx.animation.*;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.util.Duration;
@@ -29,5 +28,22 @@ public class Animate {
         scaleTransition.setToX(toValue);
         scaleTransition.setToY(toValue);
         return scaleTransition;
+    }
+
+    public static void fadeOutLeft(Node node) {
+        // Create a FadeTransition for the fade-out effect
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), node);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        // Create a TranslateTransition for the leftward translation
+        TranslateTransition translateLeft = new TranslateTransition(Duration.seconds(1), node);
+        translateLeft.setByX(-30);
+
+        // Combine the two transitions using a ParallelTransition
+        ParallelTransition parallelTransition = new ParallelTransition(fadeOut, translateLeft);
+
+        // Play the combined transition
+        parallelTransition.play();
     }
 }
