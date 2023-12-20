@@ -40,7 +40,7 @@ public class LinkBankForm extends BorderPane {
     public VBox loadingContainer;
     private final Connection con = ConnectionManager.getConnection();
     private final ObservableList<String> bankList = FXCollections.observableArrayList(
-            "TPB", "VCB", "ACB", "BIDV", "MB", "Techcombank", "VietinBank", "VPBank", "Eximbank"
+            "TPBank", "VietcomBank", "ACBank", "BIDV", "MBBank", "TechcomBank", "VietinBank", "VPBank", "EximBank", "SHBank", "NAB"
     );
     private Stage stage;
     private MFXProgressSpinner spinner;

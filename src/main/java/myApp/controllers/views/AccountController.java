@@ -99,9 +99,9 @@ public class AccountController implements Initializable {
         new Pulse(getCurentCard().accountNumberLabel).play();
         new Pulse(getCurentCard().bankNameLabel).play();
         new Pulse(getCurentCard().fullNameLabel).play();
-        new GlowText(getCurentCard().fullNameLabel, Color.WHITE, Color.DARKGOLDENROD).play();
-        new GlowText(getCurentCard().accountNumberLabel, Color.WHITE, Color.DARKGOLDENROD).play();
-        new GlowText(getCurentCard().bankNameLabel, Color.WHITE, Color.DARKGOLDENROD).play();
+        new GlowText(getCurentCard().fullNameLabel, Color.WHITE, Color.GOLDENROD).play();
+        new GlowText(getCurentCard().accountNumberLabel, Color.WHITE, Color.GOLDENROD).play();
+        new GlowText(getCurentCard().bankNameLabel, Color.WHITE, Color.GOLDENROD).play();
         // Update pagination buttons
         updatePagination(index);
     }

@@ -3,7 +3,7 @@
 }
 
 #financeBox:hover {
-    -fx-translate-y: -5;
+    -fx-cursor: hand;
 }
 
 .timeFilter:hover,

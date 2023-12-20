@@ -81,7 +81,7 @@ public class UpdateTransactionForm extends BorderPane {
         try {
             double amount = Double.parseDouble(amountText);
             // INVOKE THE FUNCTION HERE! ~UwU~
-            transactionController.updateTransactionInDatabase(transaction);
+            transactionController.updateTransactionInDatabase(name, amount, description, category, transaction.getBankName(), date, transaction.getTransactionID());
             new SuccessAlert("Your transaction has been updated successfully!");
 
         } catch (NumberFormatException e) {
