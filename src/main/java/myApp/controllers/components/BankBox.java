@@ -20,7 +20,7 @@ import java.io.IOException;
 
 public class BankBox extends BorderPane {
     public Label bankNameLabel;
-    public Label userNameLabel;
+    public Label fullNameLabel;
     public Label accountNumberLabel;
 
     public BankBox(String bankName, String userName, String accountNumber) {
@@ -38,7 +38,7 @@ public class BankBox extends BorderPane {
 
     private void initialize(String bankName, String userName, String accountNumber) {
         bankNameLabel.setText(bankName);
-        userNameLabel.setText(userName);
+        fullNameLabel.setText(userName);
         accountNumberLabel.setText(accountNumber);
     }
 
@@ -46,8 +46,8 @@ public class BankBox extends BorderPane {
         return bankNameLabel;
     }
 
-    public Label getUserNameLabel() {
-        return userNameLabel;
+    public Label getFullNameLabel() {
+        return fullNameLabel;
     }
 
     public Label getAccountNumberLabel() {

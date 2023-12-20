@@ -61,6 +61,7 @@ public class TransactionController implements Initializable {
         When.onChanged(transactionTable.currentPageProperty())
                 .then((oldValue, newValue) -> transactionTable.autosizeColumns())
                 .listen();
+
     }
 
 

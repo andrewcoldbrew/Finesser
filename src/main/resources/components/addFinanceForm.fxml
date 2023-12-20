@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #9FE2BF; -fx-border-radius: 20; -fx-border-width: 3;" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" />
+<fx:root prefWidth="500.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #9FE2BF; -fx-border-radius: 20; -fx-border-width: 3;" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <BorderPane BorderPane.alignment="CENTER">
+         <left>
+            <Label text="Add Finance Form" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </left>
+         <right>
+            <MFXButton fx:id="exitButton" contentDisplay="GRAPHIC_ONLY" BorderPane.alignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/finance/exitButton.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MFXButton>
+         </right>
+         <BorderPane.margin>
+            <Insets left="20.0" right="5.0" />
+         </BorderPane.margin>
+      </BorderPane>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <MFXFilterComboBox fx:id="categoryComboBox" floatingText="Category" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+            <MFXTextField fx:id="nameField" floatingText="Finance name" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+            <MFXTextField fx:id="amountField" floatingText="Amount" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+            <MFXDatePicker fx:id="datePicker" floatMode="INLINE" floatingText="Date" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+            <MFXFilterComboBox fx:id="bankComboBox" floatingText="Bank" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+            <MFXTextField fx:id="descriptionField" floatingText="Description" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
+            <MFXButton fx:id="addButton" buttonType="RAISED" text="Add Finance">
+               <padding>
+                  <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+               </padding>
+            </MFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</fx:root>

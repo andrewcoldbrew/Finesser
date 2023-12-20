@@ -55,7 +55,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="userNameLabel" text="Nguyen The Vinh">
+                  <Label fx:id="fullNameLabel" text="Nguyen The Vinh">
                      <font>
                         <Font size="15.0" />
                      </font>

@@ -6,12 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/BankBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/BankBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TestAccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TestAccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/Animate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/Animate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TestAccountController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/addFinanceForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/addFinanceForm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/components/bankBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/bankBox.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/account.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/testAccount.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/addFinanceForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/addFinanceForm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/components/bankBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/bankBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TestAccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TestAccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddFinanceForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddFinanceForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/BankBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/BankBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController$TimeFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController$TimeFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TestAccountController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/account.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +202,7 @@
       <workItem from="1702957533564" duration="27000" />
       <workItem from="1702958343926" duration="3458000" />
       <workItem from="1702964369039" duration="12163000" />
-      <workItem from="1703037967189" duration="3940000" />
+      <workItem from="1703037967189" duration="9868000" />
     </task>
     <servers />
   </component>
@@ -221,7 +237,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java</url>
-          <line>145</line>
+          <line>133</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

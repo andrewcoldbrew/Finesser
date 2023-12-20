@@ -30,8 +30,6 @@ import java.util.ResourceBundle;
 
 public class FinanceController implements Initializable {
     public MFXButton addButton;
-    public FlowPane incomeFlowPane;
-    public FlowPane outcomeFlowPane;
     public Label totalLabel;
     public MFXButton allTimeButton;
     public MFXButton weeklyButton;
@@ -39,9 +37,9 @@ public class FinanceController implements Initializable {
     public MFXButton yearlyButton;
 
 
-//    private final AddFinanceForm addFinanceForm;
-//    private final Stage dialogStage = new Stage();
-//    private final Scene dialogScene = new Scene(addFinanceForm, addFinanceForm.getPrefWidth(), addFinanceForm.getPrefHeight());
+    private AddFinanceForm addFinanceForm;
+    private Stage dialogStage;
+    private Scene dialogScene;
     public GridPane incomeGrid;
     public GridPane outcomeGrid;
     private Connection con = ConnectionManager.getConnection();
@@ -55,16 +53,11 @@ public class FinanceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        initializeAddFinanceForm();
-//        dialogStage.setScene(dialogScene);
-//        Draggable draggable = new Draggable();
-//        draggable.makeDraggable(dialogStage);
 
         allTimeButton.setOnAction(event -> filterFinances(TimeFrame.ALL_TIME));
         weeklyButton.setOnAction(event -> filterFinances(TimeFrame.WEEKLY));
         monthyButton.setOnAction(event -> filterFinances(TimeFrame.MONTHLY));
         yearlyButton.setOnAction(event -> filterFinances(TimeFrame.YEARLY));
-
 
         LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
         LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
@@ -102,11 +95,6 @@ public class FinanceController implements Initializable {
 
         loadIncome(start, end);
         loadOutcome(start, end);
-    }
-
-
-    private void initializeAddFinanceForm() {
-
     }
 
     private void loadFinanceData(LocalDate startDate, LocalDate endDate) {
@@ -259,7 +247,29 @@ public class FinanceController implements Initializable {
         loadFinanceData(range[0], range[1]);
     }
 
-    public void handleAddFinanceForm(ActionEvent actionEvent) {
+    private void initializeAddFinanceForm() {
+        dialogStage = new Stage();
 
+        addFinanceForm = new AddFinanceForm();
+        dialogScene = new Scene(addFinanceForm, addFinanceForm.getPrefWidth(), addFinanceForm.getPrefHeight());
+        addFinanceForm.setStage(dialogStage);
+
+
+        System.out.println(addFinanceForm.getStage());
+        dialogStage.setTitle("Add Budget Dialog");
+        dialogStage.setScene(dialogScene);
+
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initStyle(StageStyle.UNDECORATED);
+        dialogScene.setFill(Color.TRANSPARENT);
+
+        dialogStage.setResizable(false);
+
+
+        dialogStage.show();
+    }
+
+    public void handleAddFinanceForm(ActionEvent actionEvent) {
+        initializeAddFinanceForm();
     }
 }
