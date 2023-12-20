@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -33,7 +34,18 @@
                                 <Font name="System Bold" size="18.0" />
                             </font>
                         </Label>
-                  <VBox fx:id="transactionContainer" alignment="TOP_CENTER" spacing="10.0" VBox.vgrow="ALWAYS" />
+                  <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox fx:id="transactionContainer" alignment="TOP_CENTER" spacing="20.0">
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </VBox.margin>
+                  </MFXScrollPane>
                   <Hyperlink fx:id="seeMoreLink" text="See more..." />
                </children>
                 </VBox>
@@ -80,7 +92,7 @@
                         </AnchorPane>
                     </children>
                 </HBox>
-                <AnchorPane prefHeight="308.0" prefWidth="940.0" styleClass="sideBox">
+                <AnchorPane prefHeight="289.0" prefWidth="861.0" styleClass="sideBox">
                     <children>
                         <Label alignment="CENTER" layoutX="404.0" layoutY="143.0" prefHeight="17.0" prefWidth="72.0" text="Line Graph" />
                     </children>

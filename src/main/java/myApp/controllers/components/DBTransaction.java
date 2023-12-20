@@ -11,24 +11,22 @@ import java.time.LocalDate;
 public class DBTransaction extends VBox {
     public Label nameLabel;
     public Label amountLabel;
-    public Label dateLabel;
 
-    public DBTransaction(String name, double amount, LocalDate date) {
+    public DBTransaction(String name, double amount) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/dbTransaction.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
         try {
             fxmlLoader.load();
-            initialize(name, amount, date);
+            initialize(name, amount);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void initialize(String name, double amount, LocalDate date) {
+    private void initialize(String name, double amount) {
         nameLabel.setText(name);
         amountLabel.setText(String.format("Amount: %.2f", amount));
-        dateLabel.setText(String.format("Date: %s", date));
     }
 }

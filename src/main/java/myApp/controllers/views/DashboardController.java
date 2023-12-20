@@ -34,15 +34,14 @@ public class DashboardController implements Initializable {
     private void loadTransactions() {
         Connection con = ConnectionManager.getConnection();
         try {
-            PreparedStatement stmt = con.prepareStatement("SELECT name, amount, transactionDate FROM transaction WHERE userID = ? ORDER BY transactionDate DESC LIMIT 5 ");
+            PreparedStatement stmt = con.prepareStatement("SELECT name, amount FROM transaction WHERE userID = ? ORDER BY transactionDate DESC LIMIT 10");
             stmt.setInt(1, Main.getUserId());
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 String name = rs.getString("name");
                 double amount = rs.getDouble("amount");
-                LocalDate date = rs.getDate("transactionDate").toLocalDate();
                 Platform.runLater(() -> {
-                    DBTransaction dbTransaction = new DBTransaction(name, amount, date);
+                    DBTransaction dbTransaction = new DBTransaction(name, amount);
                     transactionContainer.getChildren().add(dbTransaction);
                 });
 
