@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/DBTransaction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/DashboardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/components/dbTransaction.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/dashboard.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/dbTransaction.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/MenuBarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/MenuBarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/addFinanceForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/addFinanceForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/MenuBarController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/MenuBarController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/DBTransaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/DBTransaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,9 +19,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
         <option value="CSS File" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -193,6 +186,7 @@
       <workItem from="1702964369039" duration="12163000" />
       <workItem from="1703037967189" duration="9868000" />
       <workItem from="1703057069115" duration="6004000" />
+      <workItem from="1703069424156" duration="2174000" />
     </task>
     <servers />
   </component>

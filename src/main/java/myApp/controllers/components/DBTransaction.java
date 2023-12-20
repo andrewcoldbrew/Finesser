@@ -29,5 +29,6 @@ public class DBTransaction extends VBox {
     private void initialize(String name, double amount, LocalDate date) {
         nameLabel.setText(name);
         amountLabel.setText(String.format("Amount: %.2f", amount));
+        dateLabel.setText(String.format("Date: %s", date));
     }
 }
