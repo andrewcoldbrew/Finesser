@@ -6,17 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddWalletForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddWalletForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LinkBankForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LinkBankForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/SuccessAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/SuccessAlert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/addWalletForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/addWalletForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/linkBankForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/linkBankForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/account.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/account.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/addWalletForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/addWalletForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/linkBankForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/linkBankForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/account.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +185,7 @@
       <workItem from="1703057069115" duration="6004000" />
       <workItem from="1703069424156" duration="2174000" />
       <workItem from="1703081651866" duration="6481000" />
-      <workItem from="1703123586964" duration="6348000" />
+      <workItem from="1703123586964" duration="8855000" />
     </task>
     <servers />
   </component>

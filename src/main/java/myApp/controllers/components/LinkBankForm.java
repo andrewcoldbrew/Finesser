@@ -90,6 +90,8 @@ public class LinkBankForm extends BorderPane {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+        } else {
+            new ErrorAlert("Wrong Key", "The entered account key is not correct!");
         }
     }
 
