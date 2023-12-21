@@ -4,7 +4,9 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.enums.FloatMode;
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,16 +14,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import myApp.Main;
-import myApp.utils.ConnectionManager;
-import myApp.utils.HashManager;
-import myApp.utils.LoginStageManager;
-import myApp.utils.MainAppManager;
+import myApp.controllers.views.AccountController;
+import myApp.utils.*;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -38,19 +40,21 @@ public class LinkBankForm extends BorderPane {
 
     public Button exitButton;
     public VBox loadingContainer;
-    private final Connection con = ConnectionManager.getConnection();
     private final ObservableList<String> bankList = FXCollections.observableArrayList(
             "TPBank", "VietcomBank", "ACBank", "BIDV", "MBBank", "TechcomBank", "VietinBank", "VPBank", "EximBank", "SHBank", "NAB"
     );
     private Stage stage;
     private MFXProgressSpinner spinner;
     private Label balanceLabel;
+    private MFXTextField accountKeyField;
+    private final AccountController accountController;
 
 
-    public LinkBankForm() {
+    public LinkBankForm(AccountController accountController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/linkBankForm.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+        this.accountController = accountController;
 
         try {
             fxmlLoader.load();
@@ -64,40 +68,41 @@ public class LinkBankForm extends BorderPane {
     }
 
     private void linkBank(ActionEvent actionEvent) {
-        PreparedStatement statement = null;
-        try {
-            statement = con.prepareStatement("UPDATE bank SET linked = true WHERE ownerID = ?");
-            statement.setInt(1, Main.getUserId());
-            statement.execute();
-            exit();
-            PauseTransition pause = new PauseTransition(Duration.seconds(0.25));
-            pause.setOnFinished(event -> {
-                new SuccessAlert("The bank has been linked successfully!");
-            });
-            pause.play();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        String accountKey = getAccountKeyFromDB();
+        String inputAccountKey = accountKeyField.getText();
+        String bankName = bankComboBox.getValue();
+        if (inputAccountKey.equals(accountKey)) {
+            Connection con = ConnectionManager.getConnection();
+            try {
+                PreparedStatement statement = con.prepareStatement("UPDATE bank SET linked = true WHERE ownerID = ? AND bankName = ?");
+                statement.setInt(1, Main.getUserId());
+                statement.setString(2, bankName);
+                statement.execute();
+                exit();
+                PauseTransition pause = new PauseTransition(Duration.seconds(0.25));
+                pause.setOnFinished(event -> {
+                    new SuccessAlert("The bank has been linked successfully!");
+                    accountController.loadUserProfile();
+                    Platform.runLater(accountController::loadCreditCard);
+
+                });
+                pause.play();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
-
-
-//        exit();
-//        PauseTransition pause = new PauseTransition(Duration.seconds(0.25));
-//        pause.setOnFinished(event -> {
-//            new SuccessAlert("The bank has been linked successfully!");
-//        });
-//        pause.play();
     }
-
-
 
     private void initialize() {
         bankComboBox.setItems(bankList);
         balanceLabel = new Label();
         spinner = new MFXProgressSpinner();
         spinner.setPrefSize(30, 30);
+        spinner.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
         bankComboBox.setOnAction(e -> {
             handleBankSelection();
         });
+        new Draggable().makeDraggable(this);
     }
 
     private void handleBankSelection() {
@@ -108,15 +113,15 @@ public class LinkBankForm extends BorderPane {
     }
 
     private void showSpinnerAndBalanceLabel(String selectedBank) {
-        removeExistingBalanceLabel(balanceLabel);
         int userId = getUserId();
-        loadingContainer.getChildren().addAll(spinner);
+        loadingContainer.getChildren().clear();
+        loadingContainer.getChildren().add(spinner);
 
         // PauseTransition to delay the spinner for 1.5 seconds
-        PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+        PauseTransition pause = new PauseTransition(Duration.seconds(1.2));
         pause.setOnFinished(event -> {
             // Remove the spinner after 1.5 seconds and set the label
-            loadingContainer.getChildren().addAll(balanceLabel);
+            loadingContainer.getChildren().add(balanceLabel);
             loadingContainer.getChildren().remove(spinner);
 
             // Check if the bank is not valid
@@ -129,6 +134,8 @@ public class LinkBankForm extends BorderPane {
                 linkBankButton.setDisable(true);
             } else {
                 balanceLabel.setText(String.format("Your balance for this bank is $%.2f", bankBalance));
+                accountKeyField = createAccountKeyForm();
+                loadingContainer.getChildren().add(accountKeyField);
                 linkBankButton.setDisable(false);
             }
         });
@@ -136,13 +143,33 @@ public class LinkBankForm extends BorderPane {
         pause.play();
     }
 
-    private void removeExistingBalanceLabel(Label balanceLabel) {
-        if (loadingContainer.getChildren().contains(balanceLabel)) {
-            loadingContainer.getChildren().remove(balanceLabel);
+    private String getAccountKeyFromDB() {
+        Connection con = ConnectionManager.getConnection();
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement("SELECT accountKey FROM bank WHERE bankName = ? AND ownerID = ?");
+            stmt.setString(1, bankComboBox.getValue());
+            stmt.setInt(2, Main.getUserId());
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                return rs.getString("accountKey");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+        return "";
+    }
+
+    private MFXTextField createAccountKeyForm() {
+        MFXTextField textField = new MFXTextField();
+        textField.setPrefWidth(200);
+        textField.setFloatingText("Enter your bank account key here");
+        textField.setFloatMode(FloatMode.INLINE);
+        return textField;
     }
 
     private double fetchBankBalance(String bankName, int userId) {
+        Connection con = ConnectionManager.getConnection();
         try {
             // Update the query: use 'name' instead of 'username'
             PreparedStatement statement = con.prepareStatement("SELECT balance, linked FROM bank WHERE ownerID = ? AND bankName = ?");
@@ -173,12 +200,13 @@ public class LinkBankForm extends BorderPane {
     }
 
     private void exit() {
-        if (stage != null) {
-            System.out.println("CLOSING STAGE!");
-            stage.close();
-        } else {
-            System.out.println("STAGE NULL");
-        }
+//        if (stage != null) {
+//            System.out.println("CLOSING STAGE!");
+//            stage.close();
+//        } else {
+//            System.out.println("STAGE NULL");
+//        }
+        ((Pane) getParent()).getChildren().remove(this);
     }
 
     public Stage getStage() {

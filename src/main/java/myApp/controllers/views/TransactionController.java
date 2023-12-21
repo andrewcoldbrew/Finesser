@@ -112,7 +112,7 @@ public class TransactionController implements Initializable {
         String query = "SELECT t.transactionID, t.name, t.amount, t.description, t.category, COALESCE(b.bankName, 'Cash') AS bankName, t.transactionDate " +
                 "FROM transaction t " +
                 "LEFT JOIN bank b ON t.bankID = b.bankID " +
-                "WHERE t.userID = ? " +
+                "WHERE t.userID = ? AND b.linked = true " +  // Note the added space before ORDER BY
                 "ORDER BY t.transactionDate DESC";
 
         try (Connection conn = ConnectionManager.getConnection();

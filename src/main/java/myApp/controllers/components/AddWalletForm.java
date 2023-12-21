@@ -6,9 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import myApp.Main;
 import myApp.utils.ConnectionManager;
+import myApp.utils.Draggable;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,6 +32,7 @@ public class AddWalletForm extends BorderPane {
             fxmlLoader.load();
             addButton.setOnAction(this::addWallet);
             exitButton.setOnAction(this::closeStage);
+            new Draggable().makeDraggable(this);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -69,12 +72,13 @@ public class AddWalletForm extends BorderPane {
     }
 
     private void exit() {
-        if (stage != null) {
-            System.out.println("CLOSING STAGE!");
-            stage.close();
-        } else {
-            System.out.println("STAGE NULL");
-        }
+        ((Pane) getParent()).getChildren().remove(this);
+//        if (stage != null) {
+//            System.out.println("CLOSING STAGE!");
+//            stage.close();
+//        } else {
+//            System.out.println("STAGE NULL");
+//        }
     }
 
     public Stage getStage() {
