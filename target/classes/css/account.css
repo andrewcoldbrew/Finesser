@@ -42,3 +42,7 @@
 #scrollButton {
     -fx-background-color: #9FE2BF;
 }
+
+.noCardLabel {
+    -fx-font-size: 30px;
+}

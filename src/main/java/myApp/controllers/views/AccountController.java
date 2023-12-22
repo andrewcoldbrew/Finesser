@@ -2,8 +2,10 @@ package myApp.controllers.views;
 
 import animatefx.animation.*;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,8 +14,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -32,6 +39,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AccountController implements Initializable {
@@ -39,10 +47,10 @@ public class AccountController implements Initializable {
     public Button leftButton;
     public Button rightButton;
     public HBox paginationContainer;
-    private LinkBankForm linkBankForm;
-    private AddWalletForm addWalletForm;
-    private final Stage linkBankDialog = new Stage();
-    private final Stage addWalletDialog = new Stage();
+    public BorderPane creditCardWrapper;
+    public StackPane mainPane;
+    private Stage linkBankDialog;
+    private Stage addWalletDialog;
     public Label emailLabel;
     public Label genderLabel;
     public Label dobLabel;
@@ -57,18 +65,22 @@ public class AccountController implements Initializable {
     private List<BankBox> creditCardList;
     private Scene dialogScene;
     private List<Button> paginationList;
+    private Label noBankLabel;
+
+    public AccountController() {
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadUserProfile();
         loadCreditCard();
-        displayCreditCard(0);
         rightButton.setOnAction(this::moveToRightCard);
         leftButton.setOnAction(this::moveToLeftCard);
         Animate.addHoverScalingEffect(leftButton, 1.1);
         Animate.addHoverScalingEffect(rightButton, 1.1);
     }
 
-    private void loadCreditCard() {
+    public void loadCreditCard() {
         creditCardList = new ArrayList<>();
         int userId = Main.getUserId();
 
@@ -86,8 +98,26 @@ public class AccountController implements Initializable {
                 BankBox bankBox = new BankBox(bankName, fullname, accountNumber);
                 creditCardList.add(bankBox);
             }
-            displayCreditCard(0);
-            loadPagination();
+
+            System.out.println(creditCardList);
+
+            if (creditCardList.isEmpty()) {
+                noBankLabel = new Label("You haven't connect to any banks");
+                noBankLabel.setPrefWidth(300);
+                noBankLabel.setFont(new Font(30));
+                noBankLabel.setWrapText(true);
+                noBankLabel.setTextAlignment(TextAlignment.CENTER);
+                creditCardWrapper.setCenter(noBankLabel);
+                leftButton.setVisible(false);
+                rightButton.setVisible(false);
+            } else {
+                creditCardWrapper.setCenter(creditCardContainer);
+                leftButton.setVisible(true);
+                rightButton.setVisible(true);
+                displayCreditCard(0);
+                loadPagination();
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -99,9 +129,9 @@ public class AccountController implements Initializable {
         new Pulse(getCurentCard().accountNumberLabel).play();
         new Pulse(getCurentCard().bankNameLabel).play();
         new Pulse(getCurentCard().fullNameLabel).play();
-        new GlowText(getCurentCard().fullNameLabel, Color.WHITE, Color.DARKGOLDENROD).play();
-        new GlowText(getCurentCard().accountNumberLabel, Color.WHITE, Color.DARKGOLDENROD).play();
-        new GlowText(getCurentCard().bankNameLabel, Color.WHITE, Color.DARKGOLDENROD).play();
+        new GlowText(getCurentCard().fullNameLabel, Color.WHITE, Color.GOLDENROD).play();
+        new GlowText(getCurentCard().accountNumberLabel, Color.WHITE, Color.GOLDENROD).play();
+        new GlowText(getCurentCard().bankNameLabel, Color.WHITE, Color.GOLDENROD).play();
         // Update pagination buttons
         updatePagination(index);
     }
@@ -140,7 +170,6 @@ public class AccountController implements Initializable {
 
             // Add event handler to update pagination on button click
             paginationButton.setOnAction(event -> displayCreditCard(index));
-            paginationButton.getStyleClass().add("paginationButton");
             // Initially set the first pagination button as selected
             if (i == 0) {
                 setPaginationSelected(paginationButton);
@@ -182,10 +211,10 @@ public class AccountController implements Initializable {
         ((ImageView) button.getGraphic()).setImage(new Image("/images/account/unselect.png"));
     }
 
-    private void loadUserProfile() {
+    public void loadUserProfile() {
         int userId = Main.getUserId();
         Connection con = ConnectionManager.getConnection();
-        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT fname, lname, email, gender, DOB, country, cashAmount, COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = ?), 0) AS bankAmount, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = ?), 0) AS totalBalance FROM user WHERE userID = ?")) {
+        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT fname, lname, email, gender, DOB, country, cashAmount, COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = ? AND linked = true), 0) AS bankAmount, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = ? AND linked = true), 0) AS totalBalance FROM user WHERE userID = ?")) {
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, userId);
             preparedStatement.setInt(3, userId);
@@ -220,8 +249,11 @@ public class AccountController implements Initializable {
         }
     }
 
+
     private void initializeLinkBankForm() {
-        linkBankForm = new LinkBankForm();
+        linkBankDialog = new Stage(StageStyle.UNDECORATED);
+
+        LinkBankForm linkBankForm = new LinkBankForm(this);
         dialogScene = new Scene(linkBankForm, linkBankForm.getPrefWidth(), linkBankForm.getPrefHeight());
         linkBankDialog.setTitle("Link Bank");
 
@@ -231,15 +263,17 @@ public class AccountController implements Initializable {
         linkBankDialog.setScene(dialogScene);
 
         linkBankDialog.initModality(Modality.WINDOW_MODAL);
-        linkBankDialog.initStyle(StageStyle.UNDECORATED);
         dialogScene.setFill(Color.TRANSPARENT);
 
         linkBankDialog.setResizable(false);
+        linkBankDialog.show();
     }
 
     private void initializeAddWalletForm() {
-        addWalletForm = new AddWalletForm();
+        addWalletDialog = new Stage(StageStyle.UNDECORATED);
+        AddWalletForm addWalletForm = new AddWalletForm();
         dialogScene = new Scene(addWalletForm, addWalletForm.getPrefWidth(), addWalletForm.getPrefHeight());
+
         addWalletDialog.setTitle("Link Bank");
 
         addWalletForm.setStage(addWalletDialog);
@@ -247,25 +281,47 @@ public class AccountController implements Initializable {
 
         addWalletDialog.setScene(dialogScene);
 
-        addWalletDialog.initModality(Modality.WINDOW_MODAL);
+        addWalletDialog.initModality(Modality.APPLICATION_MODAL);
         addWalletDialog.initStyle(StageStyle.UNDECORATED);
+        addWalletDialog.setResizable(true);
         dialogScene.setFill(Color.TRANSPARENT);
 
         addWalletDialog.setResizable(false);
+        addWalletDialog.show();
     }
 
     public void handleLinkBankForm(ActionEvent actionEvent) {
-        initializeLinkBankForm();
-        addWalletDialog.close();
-        linkBankDialog.close();
-        linkBankDialog.show();
+        // Check if a LinkBankForm is already present
+        if (!isLinkBankFormOpen()) {
+            mainPane.getChildren().add(new LinkBankForm(this));
+        }
     }
 
     public void handleAddWalletForm(ActionEvent actionEvent) {
-        initializeAddWalletForm();
-        linkBankDialog.close();
-        addWalletDialog.close();
-        addWalletDialog.show();
+        // Check if an AddWalletForm is already present
+        if (!isAddWalletFormOpen()) {
+            mainPane.getChildren().add(new AddWalletForm());
+        }
+    }
+
+    private boolean isLinkBankFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : mainPane.getChildren()) {
+            if (node instanceof LinkBankForm) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isAddWalletFormOpen() {
+        // Check if an AddWalletForm is already present in mainPane
+        for (Node node : mainPane.getChildren()) {
+            if (node instanceof AddWalletForm) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void handleUpdateInfo(ActionEvent actionEvent) {

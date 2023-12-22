@@ -1,0 +1,13 @@
+.sideBox {
+    -fx-background-color: white;
+    -fx-padding:  28px 0px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0.2, 0, 0);
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+.sideBox:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);
+}

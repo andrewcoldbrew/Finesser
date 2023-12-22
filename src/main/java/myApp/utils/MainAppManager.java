@@ -21,6 +21,7 @@ public class MainAppManager {
         scenes.put("budget", "/views/budget.fxml");
         scenes.put("finance", "/views/finance.fxml");
         scenes.put("account", "/views/account.fxml");
+        scenes.put("dashboard", "/views/dashboard.fxml");
 //        scenes.put("testTransaction", "/views/testTransaction.fxml");
     }
 

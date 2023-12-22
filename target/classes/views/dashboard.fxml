@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1200.0" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.DashboardController">
+    <right>
+        <VBox alignment="TOP_CENTER" maxWidth="250.0" prefHeight="850.0" prefWidth="210.0" spacing="30.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="totalBalanceBox" alignment="CENTER" prefHeight="140.0" prefWidth="180.0" styleClass="sideBox" text="Total Balance" />
+                <VBox alignment="TOP_CENTER" spacing="20.0" styleClass="sideBox" VBox.vgrow="ALWAYS">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <children>
+                        <Label alignment="TOP_CENTER" text="Most recent transactions" textAlignment="CENTER" wrapText="true" VBox.vgrow="NEVER">
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Label>
+                  <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox fx:id="transactionContainer" alignment="TOP_CENTER" spacing="20.0">
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                     <VBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </VBox.margin>
+                  </MFXScrollPane>
+                  <Hyperlink fx:id="seeMoreLink" text="See more..." />
+               </children>
+                </VBox>
+            </children>
+        </VBox>
+    </right>
+    <center>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="200.0" prefWidth="538.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="150.0" prefWidth="678.0" styleClass="sideBox" text="Welcome Mr/Ms">
+                            <font>
+                                <Font size="65.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets bottom="25.0" left="50.0" right="25.0" top="25.0" />
+                            </HBox.margin>
+                        </Label>
+                        <ImageView fitHeight="205.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" styleClass="sideBox">
+                            <image>
+                                <Image url="@../images/account/user.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                            </HBox.margin>
+                        </ImageView>
+                    </children>
+                </HBox>
+                <HBox prefHeight="296.0" prefWidth="990.0">
+                    <children>
+                        <Circle fill="#7fa0bf" radius="145.0" stroke="BLACK" strokeType="INSIDE">
+                            <HBox.margin>
+                                <Insets left="50.0" right="75.0" />
+                            </HBox.margin>
+                        </Circle>
+                        <AnchorPane prefHeight="219.0" prefWidth="485.0" styleClass="sideBox">
+                            <HBox.margin>
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                            </HBox.margin>
+                            <children>
+                                <Label alignment="CENTER" layoutX="215.0" layoutY="112.0" prefHeight="17.0" prefWidth="56.0" text="Bar Chart" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+                <AnchorPane prefHeight="289.0" prefWidth="861.0" styleClass="sideBox">
+                    <children>
+                        <Label alignment="CENTER" layoutX="404.0" layoutY="143.0" prefHeight="17.0" prefWidth="72.0" text="Line Graph" />
+                    </children>
+                    <VBox.margin>
+                        <Insets left="50.0" right="60.0" top="25.0" />
+                    </VBox.margin>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </center>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</BorderPane>

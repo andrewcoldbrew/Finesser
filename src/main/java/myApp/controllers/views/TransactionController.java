@@ -112,7 +112,7 @@ public class TransactionController implements Initializable {
         String query = "SELECT t.transactionID, t.name, t.amount, t.description, t.category, COALESCE(b.bankName, 'Cash') AS bankName, t.transactionDate " +
                 "FROM transaction t " +
                 "LEFT JOIN bank b ON t.bankID = b.bankID " +
-                "WHERE t.userID = ? " +
+                "WHERE t.userID = ? AND b.linked = true " +  // Note the added space before ORDER BY
                 "ORDER BY t.transactionDate DESC";
 
         try (Connection conn = ConnectionManager.getConnection();
@@ -206,22 +206,21 @@ public class TransactionController implements Initializable {
 
 
     // Method to update a transaction in the database
-    public void updateTransactionInDatabase(Transaction transaction) {
+    public void updateTransactionInDatabase(String name, double amount, String description, String category, String bankName, LocalDate transactionDate, int transactionID) {
         // Assuming you have a method to get bank ID from bank name
-        int bankId = getBankIdByName(transaction.getBankName());
-
+        int bankID = getBankIdByName(bankName);
         String sql = "UPDATE transaction SET name = ?, amount = ?, description = ?, category = ?, bankID = ?, transactionDate = ? WHERE transactionID = ?";
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, transaction.getName());
-            stmt.setDouble(2, transaction.getAmount());
-            stmt.setString(3, transaction.getDescription());
-            stmt.setString(4, transaction.getCategory());
-            stmt.setInt(5, bankId);
-            stmt.setDate(6, Date.valueOf(transaction.getDate()));
-            stmt.setInt(7, transaction.getTransactionID());
+            stmt.setString(1, name);
+            stmt.setDouble(2, amount);
+            stmt.setString(3, description);
+            stmt.setString(4, category);
+            stmt.setInt(5, bankID);
+            stmt.setDate(6, Date.valueOf(transactionDate));
+            stmt.setInt(7, transactionID);
 
             stmt.executeUpdate();
         } catch (SQLException e) {

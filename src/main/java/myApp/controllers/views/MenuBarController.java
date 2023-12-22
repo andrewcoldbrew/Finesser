@@ -14,6 +14,7 @@ public class MenuBarController {
     public MFXButton logoutButton;
 
     public void moveToDashBoard(ActionEvent actionEvent) {
+        MainAppManager.switchScene("dashboard");
     }
     public void moveToTransaction(ActionEvent actionEvent) {
         MainAppManager.switchScene("transaction");
