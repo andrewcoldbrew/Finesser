@@ -11,3 +11,11 @@
 .sideBox:hover {
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);
 }
+
+.budget-series .chart-bar {
+    -fx-bar-fill: red;
+}
+
+.spending-series .chart-bar {
+    -fx-bar-fill: blue;
+}

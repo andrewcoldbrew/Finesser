@@ -37,7 +37,7 @@ public class MainAppManager {
 
 
         setupScene("account");
-        mainAppStage.setMaximized(true);
+        mainAppStage.setMaximized(false);
 
         Scene scene = new Scene(mainLayout);
         mainAppStage.setScene(scene);
