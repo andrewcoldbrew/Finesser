@@ -50,7 +50,7 @@ public class TransactionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        updateTotals();
+
         loadTransactions();
         filteredTransactions = new FilteredList<>(transactionData, p -> true);
         setupTransactionTable();
@@ -105,20 +105,21 @@ public class TransactionController implements Initializable {
     }
 
     private void loadTransactions() {
-        // Clear existing data to avoid duplicates
+
         transactionData.clear();
 
-        // Database query
-        String query = "SELECT t.transactionID, t.name, t.amount, t.description, t.category, COALESCE(b.bankName, 'Cash') AS bankName, t.transactionDate " +
+
+        String query = "SELECT t.transactionID, t.name, t.amount, t.description, t.category, COALESCE(b.bankName, 'Cash') AS bankName, t.transactionDate, t.recurrencePeriod " +
                 "FROM transaction t " +
                 "LEFT JOIN bank b ON t.bankID = b.bankID " +
-                "WHERE t.userID = ? AND b.linked = true " +  // Note the added space before ORDER BY
+                "WHERE t.userID = ? AND b.linked = true " +
                 "ORDER BY t.transactionDate DESC";
+
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            // Set the user ID
+
             stmt.setInt(1, Main.getUserId());
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -130,14 +131,14 @@ public class TransactionController implements Initializable {
                     String category = rs.getString("category");
                     String bankName = rs.getString("bankName");
                     LocalDate date = rs.getDate("transactionDate").toLocalDate();
+                    String recurrencePeriod = rs.getString("recurrencePeriod");
 
-                    // Create and add transaction to the list
-                    Transaction transaction = new Transaction(transactionId, name, amount, description, category, bankName, date);
+                    Transaction transaction = new Transaction(transactionId, name, amount, description, category, bankName, date, recurrencePeriod);
                     transactionData.add(transaction);
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Log the exception
+            e.printStackTrace();
         }
 
         System.out.println("Transactions loaded: " + transactionData.size());
@@ -163,7 +164,6 @@ public class TransactionController implements Initializable {
                     transaction.getName().toLowerCase().contains(searchText.toLowerCase())
             );
 
-            // Update the TableView with the filtered data
         }
         transactionTable.setItems(FXCollections.observableArrayList(filteredTransactions));
     }
@@ -205,9 +205,8 @@ public class TransactionController implements Initializable {
     }
 
 
-    // Method to update a transaction in the database
     public void updateTransactionInDatabase(String name, double amount, String description, String category, String bankName, LocalDate transactionDate, int transactionID) {
-        // Assuming you have a method to get bank ID from bank name
+
         int bankID = getBankIdByName(bankName);
         String sql = "UPDATE transaction SET name = ?, amount = ?, description = ?, category = ?, bankID = ?, transactionDate = ? WHERE transactionID = ?";
 
@@ -259,9 +258,9 @@ public class TransactionController implements Initializable {
 
     private void updateTransaction() {
         Platform.runLater(() -> {
-            // get the selected transaction
+
            Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedValues().getFirst();
-           // show the form
+
            if (!mainPane.getChildren().contains(updateForm)) {
                updateForm = new UpdateTransactionForm(selectedTransaction, this);
                AnchorPane.setTopAnchor(updateForm, (mainPane.getHeight() - updateForm.getPrefHeight()) / 2);

@@ -1,31 +1,33 @@
 package myApp.controllers.views;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import java.time.LocalDate;
 import javafx.scene.Scene;
-import java.time.DayOfWeek;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import myApp.Main;
 import myApp.controllers.components.AddFinanceForm;
 import myApp.controllers.components.FinanceBox;
+import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
-import myApp.utils.Draggable;
 
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class FinanceController implements Initializable {
@@ -42,7 +44,6 @@ public class FinanceController implements Initializable {
     private Scene dialogScene;
     public GridPane incomeGrid;
     public GridPane outcomeGrid;
-    private Connection con = ConnectionManager.getConnection();
 
     private double totalIncome = 0.0;
     private double totalOutcome = 0.0;
@@ -59,9 +60,13 @@ public class FinanceController implements Initializable {
         monthyButton.setOnAction(event -> filterFinances(TimeFrame.MONTHLY));
         yearlyButton.setOnAction(event -> filterFinances(TimeFrame.YEARLY));
 
-        LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
-        LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
-        loadFinanceData(startOfMonth, endOfMonth);
+        Platform.runLater(() -> {
+            LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
+            LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+            loadFinanceData(startOfMonth, endOfMonth);
+            handleTransactionRecurrences();
+        });
+
     }
 
 
@@ -107,12 +112,10 @@ public class FinanceController implements Initializable {
 
     private void loadIncome(LocalDate startDate, LocalDate endDate) {
         System.out.println("Loading income...");
+
         String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE category = 'Income' AND transactionDate BETWEEN ? AND ?";
-
+        Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement(query)) {
-            LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
-            LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
-
             stmt.setDate(1, java.sql.Date.valueOf(startDate));
             stmt.setDate(2, java.sql.Date.valueOf(endDate));
 
@@ -150,12 +153,10 @@ public class FinanceController implements Initializable {
 
     private void loadOutcome(LocalDate startDate, LocalDate endDate) {
         System.out.println("Loading outcome...");
+
         String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE category IN ('subscription', 'rent') AND transactionDate BETWEEN ? AND ?";
-
+        Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement(query)) {
-            LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
-            LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
-
             stmt.setDate(1, java.sql.Date.valueOf(startDate));
             stmt.setDate(2, java.sql.Date.valueOf(endDate));
 
@@ -190,6 +191,7 @@ public class FinanceController implements Initializable {
             e.printStackTrace();
         }
     }
+
     private void updateSurplus() {
         double surplus = totalIncome - totalOutcome;
         totalLabel.setText(String.format("Surplus Funds: $%.2f", surplus));
@@ -245,6 +247,94 @@ public class FinanceController implements Initializable {
     private void handleYearlyFilter(ActionEvent event) {
         LocalDate[] range = getYearlyDateRange();
         loadFinanceData(range[0], range[1]);
+    }
+    private List<Transaction> handleTransactionRecurrences() {
+        LocalDate today = LocalDate.now();
+        String query = "SELECT * FROM transaction WHERE recurrencePeriod IS NOT NULL AND userID = ?";
+        List<Transaction> transactions = new ArrayList<>();
+
+        try (Connection con = ConnectionManager.getConnection();
+             PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, Main.getUserId());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    transactions.add(extractTransactionFromResultSet(con, rs));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Consider logging the exception
+        }
+
+        return transactions;
+    }
+
+    private Transaction extractTransactionFromResultSet(Connection con, ResultSet rs) throws SQLException {
+        int transactionID = rs.getInt("transactionID");
+        String name = rs.getString("name");
+        double amount = rs.getDouble("amount");
+        String description = rs.getString("description");
+        String category = rs.getString("category");
+        LocalDate date = rs.getDate("transactionDate").toLocalDate();
+        String recurrencePeriod = rs.getString("recurrencePeriod");
+        int bankID = rs.getInt("bankID");
+
+        String bankName = null;
+
+        try (PreparedStatement bankStmt = con.prepareStatement("SELECT bankName FROM bank WHERE bankID = ?")) {
+            bankStmt.setInt(1, bankID);
+
+            try (ResultSet bankRs = bankStmt.executeQuery()) {
+                if (bankRs.next()) {
+                    bankName = bankRs.getString("bankName");
+                }
+            }
+        }
+
+        return new Transaction(transactionID, name, amount, description, category, bankName, date, recurrencePeriod);
+    }
+
+
+    private boolean shouldCreateNewTransaction(Transaction transaction, LocalDate today) {
+        LocalDate lastDate = transaction.getDate();
+        String recurrencePeriod = transaction.getRecurrencePeriod();
+
+        switch (recurrencePeriod) {
+            case "monthly":
+                return lastDate.plusMonths(1).isBefore(today) || lastDate.plusMonths(1).isEqual(today);
+            case "weekly":
+                LocalDate nextWeeklyDate = lastDate.plusWeeks(1);
+                LocalDate nextWeeklyOrEqualDate = lastDate.plusWeeks(1).minusDays(1);
+                return (nextWeeklyDate.isBefore(today) || nextWeeklyDate.isEqual(today))
+                        && today.isBefore(nextWeeklyOrEqualDate);
+            default:
+                return false;
+        }
+    }
+
+
+    private void createNewTransactionBasedOnRecurrence(Transaction transaction, LocalDate today) {
+        LocalDate newDate = LocalDate.now();
+        String insertQuery = "INSERT INTO transaction (name, amount, description, category, transactionDate, recurrencePeriod, userID, bankID) " +
+                "SELECT ?, ?, ?, ?, ?, ?, ?, (SELECT bankID FROM bank WHERE bankName = ?) AS bankID";
+
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(insertQuery)) {
+
+            stmt.setString(1, transaction.getName());
+            stmt.setDouble(2, transaction.getAmount());
+            stmt.setString(3, transaction.getDescription());
+            stmt.setString(4, transaction.getCategory());
+            stmt.setDate(5, java.sql.Date.valueOf(newDate));
+            stmt.setString(6, transaction.getRecurrencePeriod());
+            stmt.setInt(7, Main.getUserId());
+            stmt.setString(8, transaction.getBankName());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle exception
+        }
     }
 
     private void initializeAddFinanceForm() {

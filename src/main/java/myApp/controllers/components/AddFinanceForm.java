@@ -30,6 +30,7 @@ public class AddFinanceForm extends BorderPane {
     public MFXButton addButton;
     public MFXComboBox<String> categoryComboBox;
     public MFXComboBox<String> bankComboBox;
+    public MFXComboBox<String> recurrenceComboBox;
 
     public Button exitButton;
     private final ObservableList<String> categoryList = FXCollections.observableArrayList(
@@ -56,56 +57,62 @@ public class AddFinanceForm extends BorderPane {
         datePicker.setValue(LocalDate.now());
         exitButton.setOnAction(this::closeStage);
         addButton.setOnAction(this::addFinance);
+
+        recurrenceComboBox.getItems().clear();
+        recurrenceComboBox.getItems().addAll("None", "Weekly", "Monthly");
+        recurrenceComboBox.setValue("None");
     }
 
     private void addFinance(ActionEvent actionEvent) {
-        int userID = Main.getUserId();
         String category = categoryComboBox.getSelectedItem();
         String name = nameField.getText().trim();
         String amountText = amountField.getText().trim();
         LocalDate date = datePicker.getValue();
         String description = descriptionField.getText().trim();
         String bankName = bankComboBox.getSelectedItem();
+        String recurrencePeriod = recurrenceComboBox.getValue();
 
-        if (description.isEmpty()) {
-            description = "No description";
-        }
-        if (name.isEmpty() || amountText.isEmpty() || category.isEmpty() || date == null || bankName.isEmpty() ) {
-            new ManualAlert(Alert.AlertType.ERROR, "ERROR", "There are empty fields", "Please fill in all required fields!");
+        if (name.isEmpty() || amountText.isEmpty() || category.isEmpty() || date == null || bankName.isEmpty()) {
+            new ManualAlert(Alert.AlertType.ERROR, "ERROR", "There are empty fields", "Please fill in all required fields!").show();
             return;
         }
 
+        double amount;
         try {
-            double amount = Double.parseDouble(amountText);
-            int bankID = getBankIdByName(bankName);
+            amount = Double.parseDouble(amountText);
+        } catch (NumberFormatException e) {
+            new ManualAlert(Alert.AlertType.ERROR, "ERROR!", "Invalid amount", "Amount must be a number.").show();
+            return;
+        }
 
-            try (Connection con = ConnectionManager.getConnection();
-                 PreparedStatement statement = con.prepareStatement("INSERT INTO transaction (name, amount, description, category, bankID, transactionDate, userID) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+        try (Connection con = ConnectionManager.getConnection()) {
+            int bankID = getBankIdByName(bankName, con);
+
+            try (PreparedStatement statement = con.prepareStatement(
+                    "INSERT INTO transaction (name, amount, description, category, bankID, transactionDate, recurrencePeriod, userID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
 
                 statement.setString(1, name);
                 statement.setDouble(2, amount);
-                statement.setString(3, description);
+                statement.setString(3, description.isEmpty() ? "No description" : description);
                 statement.setString(4, category);
                 statement.setInt(5, bankID);
                 statement.setDate(6, Date.valueOf(date));
-                statement.setInt(7, userID);
+                statement.setString(7, "None".equals(recurrencePeriod) ? null : recurrencePeriod);
+                statement.setInt(8, Main.getUserId());
+
                 statement.execute();
                 new SuccessAlert("Finance added successfully!");
                 exit();
             }
-        } catch (NumberFormatException e) {
-            new ManualAlert(Alert.AlertType.ERROR, "ERROR!", "Invalid amount", "Amount must be a number.");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error adding the finance to the database.");
+            new ManualAlert(Alert.AlertType.ERROR, "Database Error", "Failed to add finance", "An error occurred while adding the finance.").show();
         }
     }
 
-    private int getBankIdByName(String bankName) {
+    private int getBankIdByName(String bankName, Connection con) {
         String query = "SELECT bankID FROM bank WHERE bankName = ?";
-        try (Connection conn = ConnectionManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
+        try (PreparedStatement pstmt = con.prepareStatement(query)) {
             pstmt.setString(1, bankName);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
@@ -117,6 +124,7 @@ public class AddFinanceForm extends BorderPane {
         }
         return -1;
     }
+
 
     private void loadBank() {
         ObservableList<String> bankList = FXCollections.observableArrayList();

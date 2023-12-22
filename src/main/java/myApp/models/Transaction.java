@@ -10,8 +10,9 @@ public class Transaction {
     private String category;
     private String bankName;
     private LocalDate date;
+    private String recurrencePeriod;
 
-    public Transaction(int transactionID, String name, double amount, String description, String category, String bankName, LocalDate date) {
+    public Transaction(int transactionID, String name, double amount, String description, String category, String bankName, LocalDate date,String recurrencePeriod) {
         this.transactionID = transactionID;
         this.name = name;
         this.amount = amount;
@@ -19,6 +20,7 @@ public class Transaction {
         this.category = category;
         this.bankName = bankName;
         this.date = date;
+        this.recurrencePeriod = recurrencePeriod;
     }
 
     public int getTransactionID() {
@@ -47,9 +49,16 @@ public class Transaction {
     public LocalDate getDate() {
         return date;
     }
+    public String getRecurrencePeriod() {
+        return recurrencePeriod;
+    }
+
+    public void setRecurrencePeriod(String recurrencePeriod) {
+        this.recurrencePeriod = recurrencePeriod;
+    }
 
     public String getDateString() {
-        return date.toString(); // Adjust the format as needed
+        return date.toString();
     }
     @Override
     public String toString() {
