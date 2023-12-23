@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/DashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController$TimeFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController$TimeFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -194,6 +192,8 @@
       <workItem from="1703259937866" duration="5526000" />
       <workItem from="1703298186243" duration="1786000" />
       <workItem from="1703307511531" duration="334000" />
+      <workItem from="1703316129624" duration="2555000" />
+      <workItem from="1703318715949" duration="2800000" />
     </task>
     <servers />
   </component>

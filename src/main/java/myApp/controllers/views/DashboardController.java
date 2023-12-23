@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import myApp.Main;
 
@@ -37,8 +38,12 @@ import java.util.List;
 public class DashboardController implements Initializable {
 
     public VBox transactionContainer;
-    public Label totalBalanceBox;
+    public Label totalBalanceLabel;
     public Hyperlink seeMoreLink;
+    public NumberAxis yAxis;
+    public CategoryAxis xAxis;
+    public ImageView userProfileImage;
+    public Label welcomeLabel;
 
     @FXML
     private PieChart categoryPieChart;
@@ -57,8 +62,8 @@ public class DashboardController implements Initializable {
         loadPieChartData();
         loadBudgetVsSpendingData();
         loadIncomeVsOutcomeData();
+        loadUserInfo();
         seeMoreLink.setOnAction(this::moveToTransaction);
-
     }
 
     private void loadTransactions() {
@@ -214,7 +219,7 @@ public class DashboardController implements Initializable {
         expensesSeries.setName("Cumulative Expenses");
 
         DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter chartFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        DateTimeFormatter chartFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         TreeMap<LocalDate, Double> incomeMap = new TreeMap<>();
         TreeMap<LocalDate, Double> expensesMap = new TreeMap<>();
@@ -267,6 +272,30 @@ public class DashboardController implements Initializable {
             incomeVsOutcomeChart.getData().clear();
             incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
         });
+    }
+
+    private void loadUserInfo() {
+        int userId = Main.getUserId();
+        Connection con = ConnectionManager.getConnection();
+        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT fname, lname, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = ? AND linked = true), 0) AS totalBalance FROM user WHERE userID = ?")) {
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    String fname = resultSet.getString("fname");
+                    String lname = resultSet.getString("lname");
+                    String fullName = fname + " " + lname;
+                    double totalBalance = resultSet.getDouble("totalBalance");
+                    welcomeLabel.setText("Welcome, " + fullName);
+                    totalBalanceLabel.setText(String.format("Total Balance: %.2f", totalBalance));
+                } else {
+                    System.out.println("User not found.");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void moveToTransaction(ActionEvent actionEvent) {
