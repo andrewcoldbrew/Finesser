@@ -224,10 +224,10 @@ public class DashboardController implements Initializable {
         TreeMap<LocalDate, Double> incomeMap = new TreeMap<>();
         TreeMap<LocalDate, Double> expensesMap = new TreeMap<>();
 
-        int userId = Main.getUserId(); // Replace with your method for getting the user ID.
+        int userId = Main.getUserId();
 
         String incomeQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category = 'Income' GROUP BY transactionDate ORDER BY transactionDate";
-        // Updated query to include only 'rent' and 'subscription' categories for expenses
+       
         String expensesQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Rent', 'Subscription') GROUP BY transactionDate ORDER BY transactionDate";
 
         updateTransactionMap(incomeQuery, userId, incomeMap, dbFormatter);
