@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="rootPane" stylesheets="@../css/menuBar.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.MenuBarController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="255.0" styleClass="rootPane" stylesheets="@../css/menuBar.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.MenuBarController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="850.0" prefWidth="255.0">
          <children>
@@ -22,7 +22,7 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <VBox alignment="TOP_CENTER" prefHeight="640.0" prefWidth="255.0" spacing="10.0">
+            <VBox alignment="TOP_CENTER" prefHeight="562.0" prefWidth="255.0" spacing="10.0">
                <children>
                   <MFXButton fx:id="accountButton" alignment="CENTER" buttonType="RAISED" onAction="#moveToAccount" prefHeight="60.0" prefWidth="200.0" text="My Account">
                      <VBox.margin>
@@ -116,7 +116,7 @@
                         <Font size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets top="20.0" />
                      </VBox.margin>
                   </MFXButton>
                </children>
