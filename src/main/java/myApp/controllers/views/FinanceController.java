@@ -110,12 +110,11 @@ public class FinanceController implements Initializable {
         loadOutcome(startDate, endDate);
     }
 
-
     private void loadIncome(LocalDate startDate, LocalDate endDate) {
         System.out.println("Loading income...");
 
         String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE category = 'Income' AND transactionDate BETWEEN ? AND ?";
-
+        Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setDate(1, java.sql.Date.valueOf(startDate));
             stmt.setDate(2, java.sql.Date.valueOf(endDate));
@@ -156,7 +155,7 @@ public class FinanceController implements Initializable {
         System.out.println("Loading outcome...");
 
         String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE category IN ('subscription', 'rent') AND transactionDate BETWEEN ? AND ?";
-
+        Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setDate(1, java.sql.Date.valueOf(startDate));
             stmt.setDate(2, java.sql.Date.valueOf(endDate));
@@ -249,38 +248,28 @@ public class FinanceController implements Initializable {
         LocalDate[] range = getYearlyDateRange();
         loadFinanceData(range[0], range[1]);
     }
-    private List<Transaction> handleTransactionRecurrences() {
+    private void handleTransactionRecurrences() {
         LocalDate today = LocalDate.now();
         String query = "SELECT * FROM transaction WHERE recurrencePeriod IS NOT NULL AND userID = ?";
 
-        List<Transaction> transactions = new ArrayList<>();
-        ResultSet rs = null;
-
-        try (PreparedStatement stmt = con.prepareStatement(query)) {
+        try (Connection con = ConnectionManager.getConnection();
+             PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setInt(1, Main.getUserId());
-            rs = stmt.executeQuery(); // Assign the ResultSet to rs
 
-            while (rs.next()) {  // Iterate through the ResultSet before closing it
-                transactions.add(extractTransactionFromResultSet(rs));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Consider logging the exception
-        } finally {
-            // Close the ResultSet in the finally block to ensure it's always closed, even if exceptions occur
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Transaction transaction = extractTransactionFromResultSet(con, rs);
+                    if (shouldCreateNewTransaction(transaction, today)) {
+                        createNewTransactionBasedOnRecurrence(transaction, today);
+                    }
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        return transactions;
     }
 
-
-    private Transaction extractTransactionFromResultSet(ResultSet rs) throws SQLException {
+    private Transaction extractTransactionFromResultSet(Connection con, ResultSet rs) throws SQLException {
         int transactionID = rs.getInt("transactionID");
         String name = rs.getString("name");
         double amount = rs.getDouble("amount");
@@ -288,16 +277,11 @@ public class FinanceController implements Initializable {
         String category = rs.getString("category");
         LocalDate date = rs.getDate("transactionDate").toLocalDate();
         String recurrencePeriod = rs.getString("recurrencePeriod");
-
-
         int bankID = rs.getInt("bankID");
 
         String bankName = null;
 
-
-        try (Connection conn = ConnectionManager.getConnection();
-             PreparedStatement bankStmt = conn.prepareStatement("SELECT bankName FROM bank WHERE bankID = ?")) {
-
+        try (PreparedStatement bankStmt = con.prepareStatement("SELECT bankName FROM bank WHERE bankID = ?")) {
             bankStmt.setInt(1, bankID);
 
             try (ResultSet bankRs = bankStmt.executeQuery()) {
@@ -305,15 +289,9 @@ public class FinanceController implements Initializable {
                     bankName = bankRs.getString("bankName");
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
         return new Transaction(transactionID, name, amount, description, category, bankName, date, recurrencePeriod);
     }
-
-
-
     private boolean shouldCreateNewTransaction(Transaction transaction, LocalDate today) {
         LocalDate lastDate = transaction.getDate();
         String recurrencePeriod = transaction.getRecurrencePeriod();
@@ -352,7 +330,7 @@ public class FinanceController implements Initializable {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle exception
+            e.printStackTrace();
         }
     }
 

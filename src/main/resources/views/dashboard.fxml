@@ -17,6 +17,8 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.AreaChart?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1200.0" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.DashboardController">
     <right>
         <VBox alignment="TOP_CENTER" maxWidth="250.0" prefHeight="850.0" prefWidth="210.0" spacing="30.0" BorderPane.alignment="CENTER">
@@ -96,14 +98,20 @@
                         </BarChart>
                     </children>
                 </HBox>
-                <AnchorPane prefHeight="289.0" prefWidth="861.0" styleClass="sideBox">
+                <AnchorPane prefHeight="589.0" prefWidth="861.0" styleClass="sideBox">
                     <children>
-                        <Label alignment="CENTER" layoutX="404.0" layoutY="143.0" prefHeight="17.0" prefWidth="72.0" text="Line Graph" />
+                        <AreaChart fx:id="incomeVsOutcomeChart" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
+                                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                            <xAxis>
+                                <CategoryAxis side="BOTTOM" label="Date"/>
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis label="Amount"/>
+                            </yAxis>
+                        </AreaChart>
                     </children>
-                    <VBox.margin>
-                        <Insets left="50.0" right="60.0" top="25.0" />
-                    </VBox.margin>
                 </AnchorPane>
+
             </children>
         </VBox>
     </center>
