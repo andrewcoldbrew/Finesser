@@ -2,7 +2,10 @@
     -fx-background-color: transparent;
 }
 
-#BorderPane {
-    -fx-background-radius: 20;
-    -fx-background-color: black;
+#linkBankForm {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, grey, 0, 0, 0, 3);
+    -fx-border-color: #9FE2BF;
+    -fx-border-radius: 10;
 }

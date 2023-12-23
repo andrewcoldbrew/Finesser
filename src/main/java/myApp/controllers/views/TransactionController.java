@@ -17,6 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import myApp.Main;
 import myApp.controllers.components.AddTransactionForm;
+import myApp.controllers.components.ManualAlert;
+import myApp.controllers.components.UpdateTransactionForm;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
@@ -38,7 +40,8 @@ public class TransactionController implements Initializable {
     @FXML private Label totalFood;
     @FXML private Label totalEntertainment;
     @FXML private Label totalMisc;
-    private final AddTransactionForm addForm = new AddTransactionForm();
+    private AddTransactionForm addForm;
+    private UpdateTransactionForm updateForm;
 
     private final Draggable draggable = new Draggable();
 
@@ -52,11 +55,13 @@ public class TransactionController implements Initializable {
         filteredTransactions = new FilteredList<>(transactionData, p -> true);
         setupTransactionTable();
         setupSearchBar();
+        transactionTable.getSelectionModel().setAllowsMultipleSelection(false);
         transactionTable.autosizeColumnsOnInitialization();
 
         When.onChanged(transactionTable.currentPageProperty())
                 .then((oldValue, newValue) -> transactionTable.autosizeColumns())
                 .listen();
+
     }
 
 
@@ -100,18 +105,20 @@ public class TransactionController implements Initializable {
     }
 
     private void loadTransactions() {
+        // Clear existing data to avoid duplicates
         transactionData.clear();
 
         // Database query
         String query = "SELECT t.transactionID, t.name, t.amount, t.description, t.category, COALESCE(b.bankName, 'Cash') AS bankName, t.transactionDate " +
                 "FROM transaction t " +
                 "LEFT JOIN bank b ON t.bankID = b.bankID " +
-                "WHERE t.userID = ? " +
+                "WHERE t.userID = ? AND b.linked = true " +  // Note the added space before ORDER BY
                 "ORDER BY t.transactionDate DESC";
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
+            // Set the user ID
             stmt.setInt(1, Main.getUserId());
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -156,6 +163,7 @@ public class TransactionController implements Initializable {
                     transaction.getName().toLowerCase().contains(searchText.toLowerCase())
             );
 
+            // Update the TableView with the filtered data
         }
         transactionTable.setItems(FXCollections.observableArrayList(filteredTransactions));
     }
@@ -181,22 +189,12 @@ public class TransactionController implements Initializable {
         return total;
     }
 
-    public void handleAddForm(ActionEvent actionEvent) {
-        if (!mainPane.getChildren().contains(addForm)) {
-            AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
-            AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
-
-            mainPane.getChildren().add(addForm);
-            draggable.makeDraggable(addForm);
-        }
-    }
-
     private HBox createButtonContainer(Transaction transaction) {
         HBox buttonContainer = new HBox();
         MFXButton updateButton = createButton("Update", "updateButton");
         MFXButton deleteButton = createButton("Delete", "deleteButton");
 
-        updateButton.setOnAction(actionEvent -> updateTransaction(transaction));
+        updateButton.setOnAction(actionEvent -> updateTransaction());
         deleteButton.setOnAction(actionEvent -> deleteTransaction(transaction));
 
         buttonContainer.getChildren().addAll(updateButton, deleteButton);
@@ -208,22 +206,21 @@ public class TransactionController implements Initializable {
 
 
     // Method to update a transaction in the database
-    private void updateTransactionInDatabase(Transaction transaction) {
+    public void updateTransactionInDatabase(String name, double amount, String description, String category, String bankName, LocalDate transactionDate, int transactionID) {
         // Assuming you have a method to get bank ID from bank name
-        int bankId = getBankIdByName(transaction.getBankName());
-
+        int bankID = getBankIdByName(bankName);
         String sql = "UPDATE transaction SET name = ?, amount = ?, description = ?, category = ?, bankID = ?, transactionDate = ? WHERE transactionID = ?";
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, transaction.getName());
-            stmt.setDouble(2, transaction.getAmount());
-            stmt.setString(3, transaction.getDescription());
-            stmt.setString(4, transaction.getCategory());
-            stmt.setInt(5, bankId);
-            stmt.setDate(6, Date.valueOf(transaction.getDate()));
-            stmt.setInt(7, transaction.getTransactionID());
+            stmt.setString(1, name);
+            stmt.setDouble(2, amount);
+            stmt.setString(3, description);
+            stmt.setString(4, category);
+            stmt.setInt(5, bankID);
+            stmt.setDate(6, Date.valueOf(transactionDate));
+            stmt.setInt(7, transactionID);
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -260,15 +257,27 @@ public class TransactionController implements Initializable {
         }
     }
 
-    private void updateTransaction(Transaction transaction) {
-        // Open a dialog to edit the transaction
-        updateTransactionInDatabase(transaction);
-        loadTransactions();
+    private void updateTransaction() {
+        Platform.runLater(() -> {
+            // get the selected transaction
+           Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedValues().getFirst();
+           // show the form
+           if (!mainPane.getChildren().contains(updateForm)) {
+               updateForm = new UpdateTransactionForm(selectedTransaction, this);
+               AnchorPane.setTopAnchor(updateForm, (mainPane.getHeight() - updateForm.getPrefHeight()) / 2);
+               AnchorPane.setLeftAnchor(updateForm, (mainPane.getWidth() - updateForm.getPrefWidth()) / 2);
+               mainPane.getChildren().add(updateForm);
+               draggable.makeDraggable(updateForm);
+           }
+        });
+
     }
 
     private void deleteTransaction(Transaction transaction) {
-        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION, "Delete this transaction?", ButtonType.YES, ButtonType.NO);
-        confirmDialog.showAndWait().ifPresent(response -> {
+        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
+                "Are you sure you want to delete this budget?",
+                "This action cannot be revert!");
+        confirm.showAndWait().ifPresent(response -> {
             if (response == ButtonType.YES) {
                 deleteTransactionFromDatabase(transaction);
                 loadTransactions();
@@ -285,6 +294,7 @@ public class TransactionController implements Initializable {
 
     public void handleAddTransactionForm(ActionEvent actionEvent) {
         if (!mainPane.getChildren().contains(addForm)) {
+            addForm = new AddTransactionForm();
             AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
             AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
 

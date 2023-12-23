@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="870.0" minWidth="1200.0" prefHeight="870.0" prefWidth="1200.0" stylesheets="@../css/testTransaction.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.TransactionController">
+<BorderPane fx:id="mainPane" maxHeight="830.0" maxWidth="1200.0" stylesheets="@../css/transaction.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.TransactionController">
    <center>
       <VBox styleClass="body" BorderPane.alignment="CENTER">
          <children>
             <BorderPane prefHeight="58.0" prefWidth="1100.0">
                <left>
-                  <MFXTextField fx:id="searchBar" floatingText="Enter what you want to search" floatingTextGap="0.0" minHeight="45.0" minWidth="770.0" prefColumnCount="30" prefWidth="770.0" BorderPane.alignment="CENTER">
+                  <MFXTextField fx:id="searchBar" floatMode="BORDER" floatingText="Enter what you want to search" floatingTextGap="0.0" minHeight="45.0" minWidth="770.0" prefColumnCount="30" prefWidth="770.0" styleClass="searchBar" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets bottom="10.0" left="10.0" top="20.0" />
                      </BorderPane.margin>
@@ -82,7 +82,7 @@
       </HBox>
    </bottom>
    <top>
-      <HBox alignment="CENTER" prefHeight="100.0" styleClass="titleBox" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="80.0" styleClass="titleBox" BorderPane.alignment="CENTER">
          <children>
             <Label text="Transaction History">
                <font>

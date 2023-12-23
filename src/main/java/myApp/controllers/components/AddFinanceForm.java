@@ -8,45 +8,32 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import myApp.Main;
 import myApp.utils.ConnectionManager;
 
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
 
 public class AddFinanceForm extends BorderPane {
     public MFXTextField nameField;
     public MFXTextField amountField;
-    public MFXTextField timeDurationField;
     public MFXTextField descriptionField;
-    public MFXDatePicker startDatePicker;
+    public MFXDatePicker datePicker;
     public MFXButton addButton;
     public MFXComboBox<String> categoryComboBox;
-    public MFXComboBox<String> typeComboBox;
-    public MFXComboBox<String> typeOfTimeComboBox;
+    public MFXComboBox<String> bankComboBox;
+
     public Button exitButton;
-    private final ObservableList<String> incomeTypeList = FXCollections.observableArrayList(
-            "Salary", "Rental Income", "Bonuses", "Alimony", "Others" /* Add more income types as needed */
-    );
-
-    private final ObservableList<String> outcomeTypeList = FXCollections.observableArrayList(
-            "Bills", "Expenses", "Taxes",
-            "Rent", "Loans", "Insurance", "Membership", "Subscriptions", "Others"
-    );
-
-        private final ObservableList<String> financeTypeList = FXCollections.observableArrayList(
-            "Income", "Outcome"
-    );
-    private final ObservableList<String> timeTypeList = FXCollections.observableArrayList(
-        "Days", "Weeks", "Months", "Years"
+    private final ObservableList<String> categoryList = FXCollections.observableArrayList(
+            "Income", "Rent", "Subscription", "Insurance", "Taxes", "Bills" /* Add more income types as needed */
     );
     private Stage stage;
 
@@ -64,73 +51,88 @@ public class AddFinanceForm extends BorderPane {
     }
 
     private void initialize() {
-        typeComboBox.setItems(financeTypeList);
-        typeComboBox.selectItem("Income");
-        categoryComboBox.setItems(incomeTypeList);
-        typeOfTimeComboBox.setItems(timeTypeList);
+        loadBank();
+        categoryComboBox.setItems(categoryList);
+        datePicker.setValue(LocalDate.now());
         exitButton.setOnAction(this::closeStage);
-        typeComboBox.setOnAction(this::updateCategory);
         addButton.setOnAction(this::addFinance);
     }
 
     private void addFinance(ActionEvent actionEvent) {
-        String type = typeComboBox.getSelectedItem();
+        int userID = Main.getUserId();
         String category = categoryComboBox.getSelectedItem();
         String name = nameField.getText().trim();
         String amountText = amountField.getText().trim();
-        LocalDate startDate = startDatePicker.getValue();
-        String timeDurationText = timeDurationField.getText();
-        String timeType = typeOfTimeComboBox.getSelectedItem();
+        LocalDate date = datePicker.getValue();
         String description = descriptionField.getText().trim();
+        String bankName = bankComboBox.getSelectedItem();
 
         if (description.isEmpty()) {
             description = "No description";
         }
-        if (name.isEmpty() || amountText.isEmpty() || category == null ) {
-            System.out.println("Please fill in all required fields dumbass.");
+        if (name.isEmpty() || amountText.isEmpty() || category.isEmpty() || date == null || bankName.isEmpty() ) {
+            new ManualAlert(Alert.AlertType.ERROR, "ERROR", "There are empty fields", "Please fill in all required fields!");
             return;
         }
 
         try {
             double amount = Double.parseDouble(amountText);
-            int timeDuration = Integer.parseInt(timeDurationText);
+            int bankID = getBankIdByName(bankName);
 
             try (Connection con = ConnectionManager.getConnection();
-                 PreparedStatement statement = con.prepareStatement("INSERT INTO finance (name, amount, time_duration, time_type, start_date, description, type, category) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")) {
+                 PreparedStatement statement = con.prepareStatement("INSERT INTO transaction (name, amount, description, category, bankID, transactionDate, userID) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
 
                 statement.setString(1, name);
                 statement.setDouble(2, amount);
-                statement.setInt(3, timeDuration);
-                statement.setString(4, timeType);
-                statement.setDate(5, Date.valueOf(startDate));
-                statement.setString(6, description);
-                statement.setString(7, type);
-                statement.setString(8, category);
-
+                statement.setString(3, description);
+                statement.setString(4, category);
+                statement.setInt(5, bankID);
+                statement.setDate(6, Date.valueOf(date));
+                statement.setInt(7, userID);
                 statement.execute();
-                System.out.println("Finance added!");
+                new SuccessAlert("Finance added successfully!");
                 exit();
             }
         } catch (NumberFormatException e) {
-            System.out.println("Invalid amount. Please enter a valid number.");
+            new ManualAlert(Alert.AlertType.ERROR, "ERROR!", "Invalid amount", "Amount must be a number.");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error adding the finance to the database.");
         }
     }
 
+    private int getBankIdByName(String bankName) {
+        String query = "SELECT bankID FROM bank WHERE bankName = ?";
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-
-    private void updateCategory(ActionEvent actionEvent) {
-        String type = typeComboBox.getSelectedItem();
-        categoryComboBox.clear();
-        if (type.equals("Income")) {
-            categoryComboBox.setItems(incomeTypeList);
-        } else if (type.equals("Outcome")) {
-            categoryComboBox.setItems(outcomeTypeList);
-        } else {
-            System.out.println("Type combo box is null");
+            pstmt.setString(1, bankName);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("bankID");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return -1;
+    }
+
+    private void loadBank() {
+        ObservableList<String> bankList = FXCollections.observableArrayList();
+        bankList.add("None");
+        Connection con = ConnectionManager.getConnection();
+        try (PreparedStatement stmt = con.prepareStatement("SELECT bankName FROM bank WHERE ownerID = ?")) {
+            stmt.setInt(1, Main.getUserId());
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String bankName = rs.getString("bankName");
+                bankList.add(bankName);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        bankComboBox.setItems(bankList);
     }
 
     private void closeStage(ActionEvent actionEvent) {
@@ -144,17 +146,6 @@ public class AddFinanceForm extends BorderPane {
         } else {
             System.out.println("STAGE NULL");
         }
-    }
-
-    public void clearData() {
-        nameField.clear();
-        amountField.clear();
-        typeComboBox.selectItem("Income");
-        categoryComboBox.setItems(incomeTypeList);
-        timeDurationField.clear();
-        startDatePicker.clear();
-        descriptionField.clear();
-        typeOfTimeComboBox.clear();
     }
 
     public void setStage(Stage stage) {

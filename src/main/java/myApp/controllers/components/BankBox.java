@@ -1,17 +1,26 @@
 package myApp.controllers.components;
 
+import animatefx.animation.GlowBackground;
+import animatefx.animation.GlowText;
+import animatefx.animation.JackInTheBox;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import myApp.utils.Animate;
 
 import java.io.IOException;
 
 public class BankBox extends BorderPane {
     public Label bankNameLabel;
-    public Label userNameLabel;
+    public Label fullNameLabel;
     public Label accountNumberLabel;
 
     public BankBox(String bankName, String userName, String accountNumber) {
@@ -22,7 +31,6 @@ public class BankBox extends BorderPane {
         try {
             fxmlLoader.load();
             initialize(bankName, userName, accountNumber);
-            addHoverScalingEffect();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -30,31 +38,19 @@ public class BankBox extends BorderPane {
 
     private void initialize(String bankName, String userName, String accountNumber) {
         bankNameLabel.setText(bankName);
-        userNameLabel.setText(userName);
+        fullNameLabel.setText(userName);
         accountNumberLabel.setText(accountNumber);
     }
 
-    private void addHoverScalingEffect() {
-        ScaleTransition scaleInTransition = createScaleTransition(1.0, 1.02);
-        ScaleTransition scaleOutTransition = createScaleTransition(1.02, 1.0);
-
-        setOnMouseEntered(event -> {
-            scaleInTransition.play();
-            setCursor(Cursor.HAND);
-        });
-
-        setOnMouseExited(event -> {
-            scaleOutTransition.play();
-            setCursor(Cursor.DEFAULT);
-        });
+    public Label getBankNameLabel() {
+        return bankNameLabel;
     }
 
-    private ScaleTransition createScaleTransition(double fromValue, double toValue) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200), this);
-        scaleTransition.setFromX(fromValue);
-        scaleTransition.setFromY(fromValue);
-        scaleTransition.setToX(toValue);
-        scaleTransition.setToY(toValue);
-        return scaleTransition;
+    public Label getFullNameLabel() {
+        return fullNameLabel;
+    }
+
+    public Label getAccountNumberLabel() {
+        return accountNumberLabel;
     }
 }

@@ -1,6 +1,9 @@
 package myApp.controllers.views;
 
+import animatefx.animation.Shake;
+import com.mysql.cj.util.StringUtils;
 import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.utils.DateTimeUtils;
 import io.github.palexdev.materialfx.validation.Constraint;
 import io.github.palexdev.materialfx.validation.Severity;
 import javafx.animation.FadeTransition;
@@ -29,6 +32,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static io.github.palexdev.materialfx.utils.StringUtils.containsAny;
+import static io.github.palexdev.materialfx.utils.StringUtils.startsWithIgnoreCase;
 
 public class NewSignupController implements Initializable {
     public AnchorPane leftSignup;
@@ -104,16 +108,51 @@ public class NewSignupController implements Initializable {
                 ))
                 .get();
 
+        Constraint emailConstraint = Constraint.Builder.build()
+                .setSeverity(Severity.ERROR)
+                .setMessage("Invalid email!")
+                .setCondition(Bindings.createBooleanBinding(
+                        () -> isValidEmail(emailField.getText()),
+                        emailField.textProperty()
+                ))
+                .get();
+
+        Constraint rePasswordConstraint = Constraint.Builder.build()
+                .setSeverity(Severity.ERROR)
+                .setMessage("Your password doesn't match!")
+                .setCondition(Bindings.createBooleanBinding(
+                        () -> !matchingPassword(passwordField.getText(), rePasswordField.getText()),
+                        passwordField.textProperty()
+                ))
+                .get();
+
         passwordField.getValidator()
                 .constraint(digitConstraint)
                 .constraint(charactersConstraint)
                 .constraint(specialCharactersConstraint)
                 .constraint(lengthConstraint);
 
+        emailField.getValidator().constraint(emailConstraint);
+        rePasswordField.getValidator().constraint(rePasswordConstraint);
+
         passwordField.getValidator().validProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 passwordValidation.setVisible(false);
                 passwordField.pseudoClassStateChanged(INVALID_PSEUDO_CLASS, false);
+            }
+        });
+
+        rePasswordField.getValidator().validProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                rePasswordValidation.setVisible(false);
+                rePasswordField.pseudoClassStateChanged(INVALID_PSEUDO_CLASS, false);
+            }
+        });
+
+        emailField.getValidator().validProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                emailValidation.setVisible(false);
+                emailField.pseudoClassStateChanged(INVALID_PSEUDO_CLASS, false);
             }
         });
 
@@ -125,6 +164,7 @@ public class NewSignupController implements Initializable {
                     passwordValidation.setText(constraints.get(0).getMessage());
                     passwordValidation.setVisible(true);
                     signupButton.setDisable(true);
+                    new Shake(passwordField).play();
                 } else {
                     signupButton.setDisable(false);
                 }
@@ -133,11 +173,14 @@ public class NewSignupController implements Initializable {
 
         rePasswordField.delegateFocusedProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue && !newValue) {
-                if (!matchingPassword(rePasswordField.getText(), passwordField.getText())) {
-                    rePasswordValidation.setText("Password doesn't match!");
+                List<Constraint> constraints = rePasswordField.validate();
+                if (!constraints.isEmpty()) {
+                    rePasswordField.pseudoClassStateChanged(INVALID_PSEUDO_CLASS, true);
+                    rePasswordValidation.setText(constraints.get(0).getMessage());
+                    rePasswordValidation.setVisible(true);
                     signupButton.setDisable(true);
+                    new Shake(rePasswordField).play();
                 } else {
-                    rePasswordValidation.setText("");
                     signupButton.setDisable(false);
                 }
             }
@@ -145,15 +188,44 @@ public class NewSignupController implements Initializable {
 
         emailField.delegateFocusedProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue && !newValue) {
-                if (!isValidEmail(emailField.getText())) {
-                    emailValidation.setText("Invalid email!");
+                List<Constraint> constraints = emailField.validate();
+                if (!constraints.isEmpty()) {
+                    emailField.pseudoClassStateChanged(INVALID_PSEUDO_CLASS, true);
+                    emailValidation.setText(constraints.get(0).getMessage());
+                    emailValidation.setVisible(true);
                     signupButton.setDisable(true);
+                    new Shake(emailField).play();
                 } else {
-                    emailValidation.setText("");
                     signupButton.setDisable(false);
                 }
             }
         });
+
+//        rePasswordField.delegateFocusedProperty().addListener((observable, oldValue, newValue) -> {
+//            if (oldValue && !newValue) {
+//                if (!matchingPassword(rePasswordField.getText(), passwordField.getText())) {
+//                    rePasswordValidation.setText("Password doesn't match!");
+//                    new Shake(rePasswordField);
+//                    signupButton.setDisable(true);
+//                } else {
+//                    rePasswordValidation.setText("");
+//                    signupButton.setDisable(false);
+//                }
+//            }
+//        });
+//
+//        emailField.delegateFocusedProperty().addListener((observable, oldValue, newValue) -> {
+//            if (oldValue && !newValue) {
+//                if (!isValidEmail(emailField.getText())) {
+//                    emailValidation.setText("Invalid email!");
+//                    new Shake(emailField);
+//                    signupButton.setDisable(true);
+//                } else {
+//                    emailValidation.setText("");
+//                    signupButton.setDisable(false);
+//                }
+//            }
+//        });
 
     }
 
