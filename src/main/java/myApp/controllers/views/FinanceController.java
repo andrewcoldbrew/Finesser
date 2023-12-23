@@ -45,6 +45,7 @@ public class FinanceController implements Initializable {
     private Scene dialogScene;
     public GridPane incomeGrid;
     public GridPane outcomeGrid;
+    private Connection con = ConnectionManager.getConnection();
 
     private double totalIncome = 0.0;
     private double totalOutcome = 0.0;
@@ -109,7 +110,6 @@ public class FinanceController implements Initializable {
         loadIncome(startDate, endDate);
         loadOutcome(startDate, endDate);
     }
-
 
     private void loadIncome(LocalDate startDate, LocalDate endDate) {
         System.out.println("Loading income...");
@@ -249,10 +249,9 @@ public class FinanceController implements Initializable {
         LocalDate[] range = getYearlyDateRange();
         loadFinanceData(range[0], range[1]);
     }
-    private List<Transaction> handleTransactionRecurrences() {
+    private void handleTransactionRecurrences() {
         LocalDate today = LocalDate.now();
         String query = "SELECT * FROM transaction WHERE recurrencePeriod IS NOT NULL AND userID = ?";
-        List<Transaction> transactions = new ArrayList<>();
 
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement stmt = con.prepareStatement(query)) {
@@ -260,14 +259,15 @@ public class FinanceController implements Initializable {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    transactions.add(extractTransactionFromResultSet(con, rs));
+                    Transaction transaction = extractTransactionFromResultSet(con, rs);
+                    if (shouldCreateNewTransaction(transaction, today)) {
+                        createNewTransactionBasedOnRecurrence(transaction, today);
+                    }
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Consider logging the exception
+            e.printStackTrace();
         }
-
-        return transactions;
     }
 
     private Transaction extractTransactionFromResultSet(Connection con, ResultSet rs) throws SQLException {
@@ -291,11 +291,8 @@ public class FinanceController implements Initializable {
                 }
             }
         }
-
         return new Transaction(transactionID, name, amount, description, category, bankName, date, recurrencePeriod);
     }
-
-
     private boolean shouldCreateNewTransaction(Transaction transaction, LocalDate today) {
         LocalDate lastDate = transaction.getDate();
         String recurrencePeriod = transaction.getRecurrencePeriod();

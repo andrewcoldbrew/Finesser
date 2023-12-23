@@ -1,30 +1,38 @@
 package myApp.controllers.views;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.css.converter.StringConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import myApp.Main;
+
+import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
+
 import myApp.controllers.components.DBTransaction;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.MainAppManager;
-
+import javafx.scene.text.Font;
+import java.awt.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 
 public class DashboardController implements Initializable {
 
@@ -38,13 +46,19 @@ public class DashboardController implements Initializable {
     @FXML
     private BarChart<String, Number> budgetVsSpendingChart;
 
+    @FXML
+    private AreaChart<String, Number> incomeVsOutcomeChart;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadTransactions();
         loadPieChartData();
         loadBudgetVsSpendingData();
+        loadIncomeVsOutcomeData();
         seeMoreLink.setOnAction(this::moveToTransaction);
+
     }
 
     private void loadTransactions() {
@@ -191,6 +205,68 @@ public class DashboardController implements Initializable {
                 }
             });
         }
+    }
+    private void loadIncomeVsOutcomeData() {
+        AreaChart.Series<String, Number> incomeSeries = new AreaChart.Series<>();
+        incomeSeries.setName("Cumulative Income");
+
+        AreaChart.Series<String, Number> expensesSeries = new AreaChart.Series<>();
+        expensesSeries.setName("Cumulative Expenses");
+
+        DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter chartFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+
+        TreeMap<LocalDate, Double> incomeMap = new TreeMap<>();
+        TreeMap<LocalDate, Double> expensesMap = new TreeMap<>();
+
+        String incomeQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category = 'income' GROUP BY transactionDate ORDER BY transactionDate";
+        String expensesQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category NOT IN ('income') GROUP BY transactionDate ORDER BY transactionDate";
+
+        //fml
+        BiConsumer<String, TreeMap<LocalDate, Double>> updateMap = (query, map) -> {
+            try (Connection conn = ConnectionManager.getConnection();
+                 PreparedStatement stmt = conn.prepareStatement(query)) {
+
+                stmt.setInt(1, Main.getUserId());
+                ResultSet rs = stmt.executeQuery();
+
+                double cumulativeTotal = 0;
+                while (rs.next()) {
+                    LocalDate date = LocalDate.parse(rs.getString("transactionDate"), dbFormatter);
+                    double amount = rs.getDouble("total");
+                    if (amount < 0) {
+                        continue;
+                    }
+                    cumulativeTotal += amount;
+                    map.put(date, cumulativeTotal);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        };
+
+        updateMap.accept(incomeQuery, incomeMap);
+        updateMap.accept(expensesQuery, expensesMap);
+
+        TreeSet<LocalDate> allDates = new TreeSet<>();
+        allDates.addAll(incomeMap.keySet());
+        allDates.addAll(expensesMap.keySet());
+
+        double lastIncome = 0;
+        double lastExpenses = 0;
+
+        for (LocalDate date : allDates) {
+            lastIncome = incomeMap.getOrDefault(date, lastIncome);
+            lastExpenses = expensesMap.getOrDefault(date, lastExpenses);
+
+            incomeSeries.getData().add(new AreaChart.Data<>(date.format(chartFormatter), lastIncome));
+            expensesSeries.getData().add(new AreaChart.Data<>(date.format(chartFormatter), lastExpenses));
+        }
+
+        Platform.runLater(() -> {
+            incomeVsOutcomeChart.getData().clear();
+            incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
+        });
     }
 
     private void moveToTransaction(ActionEvent actionEvent) {
