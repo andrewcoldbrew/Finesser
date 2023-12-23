@@ -18,6 +18,7 @@ import myApp.controllers.components.AddFinanceForm;
 import myApp.controllers.components.FinanceBox;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
+import myApp.utils.Draggable;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -330,30 +331,29 @@ public class FinanceController implements Initializable {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Handle exception
         }
     }
 
     private void initializeAddFinanceForm() {
         dialogStage = new Stage();
-
         addFinanceForm = new AddFinanceForm();
+
         dialogScene = new Scene(addFinanceForm, addFinanceForm.getPrefWidth(), addFinanceForm.getPrefHeight());
+        dialogScene.setFill(Color.TRANSPARENT);
+
         addFinanceForm.setStage(dialogStage);
 
-
-        System.out.println(addFinanceForm.getStage());
         dialogStage.setTitle("Add Budget Dialog");
         dialogStage.setScene(dialogScene);
 
         dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initStyle(StageStyle.UNDECORATED);
+        dialogStage.initStyle(StageStyle.TRANSPARENT);
         dialogScene.setFill(Color.TRANSPARENT);
 
         dialogStage.setResizable(false);
-
-
         dialogStage.show();
+        new Draggable().makeDraggable(dialogStage);
     }
 
     public void handleAddFinanceForm(ActionEvent actionEvent) {
