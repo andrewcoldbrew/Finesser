@@ -114,11 +114,16 @@ public class FinanceController implements Initializable {
     private void loadIncome(LocalDate startDate, LocalDate endDate) {
         System.out.println("Loading income...");
 
-        String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE category = 'Income' AND transactionDate BETWEEN ? AND ?";
+        int userID = Main.getUserId();
+
+        String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE userID = ? AND category = 'Income' AND transactionDate BETWEEN ? AND ? ORDER BY transactionDate ASC";
         Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement(query)) {
-            stmt.setDate(1, java.sql.Date.valueOf(startDate));
-            stmt.setDate(2, java.sql.Date.valueOf(endDate));
+
+            stmt.setInt(1, userID); // Set the userID parameter
+            stmt.setDate(2, java.sql.Date.valueOf(startDate));
+            stmt.setDate(3, java.sql.Date.valueOf(endDate));
+
 
             try (ResultSet rs = stmt.executeQuery()) {
                 int count = 0;
@@ -155,11 +160,14 @@ public class FinanceController implements Initializable {
     private void loadOutcome(LocalDate startDate, LocalDate endDate) {
         System.out.println("Loading outcome...");
 
-        String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE category IN ('subscription', 'rent') AND transactionDate BETWEEN ? AND ?";
+        int userID = Main.getUserId();
+
+        String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE userID = ? AND category IN ('subscription', 'rent') AND transactionDate BETWEEN ? AND ?";
         Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement(query)) {
-            stmt.setDate(1, java.sql.Date.valueOf(startDate));
-            stmt.setDate(2, java.sql.Date.valueOf(endDate));
+            stmt.setInt(1, userID); // Set the userID parameter
+            stmt.setDate(2, java.sql.Date.valueOf(startDate));
+            stmt.setDate(3, java.sql.Date.valueOf(endDate));
 
             try (ResultSet rs = stmt.executeQuery()) {
                 int count = 0;

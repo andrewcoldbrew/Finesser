@@ -66,7 +66,7 @@ public class TransactionController implements Initializable {
 
 
     private void setupTransactionTable() {
-        MFXTableColumn<Transaction> idCol = new MFXTableColumn<>("ID", false, Comparator.comparing(Transaction::getTransactionID));
+       // MFXTableColumn<Transaction> idCol = new MFXTableColumn<>("ID", false, Comparator.comparing(Transaction::getTransactionID));
         MFXTableColumn<Transaction> nameCol = new MFXTableColumn<>("Name", true, Comparator.comparing(Transaction::getName));
         MFXTableColumn<Transaction> amountCol = new MFXTableColumn<>("Amount", false, Comparator.comparing(Transaction::getAmount));
         MFXTableColumn<Transaction> descriptionCol = new MFXTableColumn<>("Description", true, Comparator.comparing(Transaction::getDescription));
@@ -74,7 +74,7 @@ public class TransactionController implements Initializable {
         MFXTableColumn<Transaction> bankCol = new MFXTableColumn<>("Bank", false, Comparator.comparing(Transaction::getBankName));
         MFXTableColumn<Transaction> dateCol = new MFXTableColumn<>("Date", false, Comparator.comparing(Transaction::getDate, new LocalDateComparator()));
         MFXTableColumn<Transaction> actionCol = new MFXTableColumn<>("Actions");
-        idCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getTransactionID));
+       // idCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getTransactionID));
         nameCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getName));
         amountCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getAmount));
         descriptionCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getDescription));
@@ -89,7 +89,7 @@ public class TransactionController implements Initializable {
             return cell;
         });
 
-        transactionTable.getTableColumns().addAll(idCol,nameCol, amountCol, descriptionCol, typeCol, bankCol, dateCol, actionCol);
+        transactionTable.getTableColumns().addAll(nameCol, amountCol, descriptionCol, typeCol, bankCol, dateCol, actionCol);
         transactionTable.getFilters().addAll(
 
                 new StringFilter<>("Name", Transaction::getName),
