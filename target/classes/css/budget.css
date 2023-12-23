@@ -1,22 +1,18 @@
-#flowPane {
-    -fx-hgap: 20;
-    -fx-vgap: 20;
-}
 
 #categoryLabel {
-    -fx-font-size: 10000px;
+    -fx-font-size: 24px;
     -fx-font-weight: bold;
 }
 
 #budgetBox {
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 7, 0.2, 0, 0);
     -fx-background-radius: 10;
-    -fx-background-color: #d3d3d3;
+    -fx-background-color: white;
 }
 
 #budgetBox:hover {
     -fx-translate-y: -5;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 25, 0.4, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 15, 0.3, 0, 0);
 }
 
 #updateButton, #deleteButton:hover {
@@ -35,4 +31,21 @@
     -fx-fill: #d92f2f;
 }
 
-.body
+.body {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);
+}
+
+#addBudgetButton {
+    -fx-border-color: #9FE2BF;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-size: 14;
+}
+
+#addBudgetButton:hover {
+    -fx-background-color:  #9FE2BF;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}

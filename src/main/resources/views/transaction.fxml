@@ -84,9 +84,9 @@
    <top>
       <HBox alignment="CENTER" prefHeight="80.0" styleClass="titleBox" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Transaction History">
+            <Label alignment="CENTER" text="Transaction History" HBox.hgrow="ALWAYS">
                <font>
-                  <Font name="Lucida Console" size="45.0" />
+                  <Font name="Arial" size="45.0" />
                </font>
                <HBox.margin>
                   <Insets left="10.0" />

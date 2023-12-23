@@ -2,9 +2,8 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
@@ -13,7 +12,17 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="1200.0" prefHeight="870.0" prefWidth="1200.0" stylesheets="@../css/budget.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.BudgetController">
    <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="body" BorderPane.alignment="CENTER" />
+      <HBox alignment="CENTER" prefHeight="80.0" styleClass="body" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" text="Budgets">
+               <font>
+                  <Font name="Arial" size="45.0" />
+               </font>
+            </Label>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+         </BorderPane.margin></HBox>
    </top>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="body" BorderPane.alignment="CENTER">
@@ -22,22 +31,21 @@
                <content>
                   <FlowPane fx:id="flowPane" hgap="15.0" prefHeight="497.0" prefWidth="926.0" vgap="15.0" />
                </content>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
             </MFXScrollPane>
          </center>
          <top>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <BorderPane prefHeight="49.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
                <right>
-                  <MFXButton fx:id="addBudgetButton" buttonType="RAISED" onAction="#handleAddBudgetForm" prefHeight="35.0" prefWidth="174.0" style="-fx-background-color: #9FE2BF;" text="Add Budget Plan" textAlignment="JUSTIFY" BorderPane.alignment="CENTER">
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/navbar/add.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
+                  <MFXButton fx:id="addBudgetButton" buttonType="RAISED" onAction="#handleAddBudgetForm" prefHeight="35.0" prefWidth="174.0" text="Add Budget Plan" textAlignment="JUSTIFY" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <BorderPane.margin>
+                        <Insets bottom="10.0" right="10.0" top="20.0" />
+                     </BorderPane.margin>
                   </MFXButton>
                </right>
                <left>
@@ -45,13 +53,37 @@
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
+                     <BorderPane.margin>
+                        <Insets bottom="10.0" left="10.0" top="20.0" />
+                     </BorderPane.margin>
                   </Label>
                </left>
             </BorderPane>
          </top>
+         <BorderPane.margin>
+            <Insets bottom="30.0" left="50.0" right="50.0" />
+         </BorderPane.margin>
       </BorderPane>
    </center>
    <right>
-      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="body" BorderPane.alignment="CENTER" />
+      <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="220.0" styleClass="body" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="30.0" right="50.0" />
+         </BorderPane.margin>
+         <children>
+            <Label text="Budget Alert" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <MFXScrollPane VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </MFXScrollPane>
+         </children></VBox>
    </right>
 </BorderPane>
