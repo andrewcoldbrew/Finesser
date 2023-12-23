@@ -224,37 +224,16 @@ public class DashboardController implements Initializable {
         TreeMap<LocalDate, Double> incomeMap = new TreeMap<>();
         TreeMap<LocalDate, Double> expensesMap = new TreeMap<>();
 
-        String incomeQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category = 'income' GROUP BY transactionDate ORDER BY transactionDate";
-        String expensesQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category NOT IN ('income') GROUP BY transactionDate ORDER BY transactionDate";
+        int userId = Main.getUserId();
 
-        //fml
-        BiConsumer<String, TreeMap<LocalDate, Double>> updateMap = (query, map) -> {
-            try (Connection conn = ConnectionManager.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement(query)) {
+        String incomeQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category = 'Income' GROUP BY transactionDate ORDER BY transactionDate";
+       
+        String expensesQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Rent', 'Subscription') GROUP BY transactionDate ORDER BY transactionDate";
 
-                stmt.setInt(1, Main.getUserId());
-                ResultSet rs = stmt.executeQuery();
+        updateTransactionMap(incomeQuery, userId, incomeMap, dbFormatter);
+        updateTransactionMap(expensesQuery, userId, expensesMap, dbFormatter);
 
-                double cumulativeTotal = 0;
-                while (rs.next()) {
-                    LocalDate date = LocalDate.parse(rs.getString("transactionDate"), dbFormatter);
-                    double amount = rs.getDouble("total");
-                    if (amount < 0) {
-                        continue;
-                    }
-                    cumulativeTotal += amount;
-                    map.put(date, cumulativeTotal);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        };
-
-        updateMap.accept(incomeQuery, incomeMap);
-        updateMap.accept(expensesQuery, expensesMap);
-
-        TreeSet<LocalDate> allDates = new TreeSet<>();
-        allDates.addAll(incomeMap.keySet());
+        TreeSet<LocalDate> allDates = new TreeSet<>(incomeMap.keySet());
         allDates.addAll(expensesMap.keySet());
 
         double lastIncome = 0;
@@ -273,6 +252,26 @@ public class DashboardController implements Initializable {
             incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
         });
     }
+
+    private void updateTransactionMap(String query, int userId, TreeMap<LocalDate, Double> map, DateTimeFormatter dbFormatter) {
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            double cumulativeTotal = 0;
+            while (rs.next()) {
+                LocalDate date = LocalDate.parse(rs.getString("transactionDate"), dbFormatter);
+                double amount = rs.getDouble("total");
+                cumulativeTotal += amount;
+                map.put(date, cumulativeTotal);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void loadUserInfo() {
         int userId = Main.getUserId();

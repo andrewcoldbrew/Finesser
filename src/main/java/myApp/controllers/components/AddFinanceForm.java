@@ -34,7 +34,7 @@ public class AddFinanceForm extends BorderPane {
 
     public Button exitButton;
     private final ObservableList<String> categoryList = FXCollections.observableArrayList(
-            "Income", "Rent", "Subscription", "Insurance", "Taxes", "Bills" /* Add more income types as needed */
+            "Income", "Dividend Income", "Investment", "Rent", "Subscription", "Insurance", "Bills" /* Add more income types as needed */
     );
     private Stage stage;
 
