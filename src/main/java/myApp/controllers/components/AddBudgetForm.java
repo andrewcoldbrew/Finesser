@@ -49,6 +49,7 @@ public class AddBudgetForm extends AnchorPane {
     }
 
     private void initialize() {
+
         categoryComboBox.setItems(categoryList);
         categoryComboBox.selectFirst(); // Select the first item by default
         startDatePicker.setValue(LocalDate.now());
