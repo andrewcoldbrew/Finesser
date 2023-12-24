@@ -8,22 +8,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="305.0" styleClass="background2" stylesheets="@../css/alert.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
-   <center>
-      <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+   <top>
+      <Label prefHeight="35.0" prefWidth="96.0" text="Success" textFill="WHITE" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Cambria" size="28.0" />
+         </font>
+      </Label>
+   </top>
+   <right>
+      <VBox alignment="CENTER" prefHeight="130.0" prefWidth="261.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fx:id="successIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/alert/check.png" />
                </image></ImageView>
-            <Label fx:id="messageLabel" maxWidth="300.0" text="Display success message here">
+            <Label fx:id="messageLabel" maxWidth="300.0" prefHeight="25.0" prefWidth="253.0" text="Your action has been completed" textFill="WHITE">
                <font>
                   <Font size="16.0" />
-               </font></Label>
+               </font>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin></Label>
          </children>
       </VBox>
-   </center>
+   </right>
 </fx:root>

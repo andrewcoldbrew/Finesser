@@ -6,6 +6,7 @@ import io.github.palexdev.materialfx.enums.ButtonType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -57,11 +58,18 @@ public class FinanceBox extends HBox {
     }
 
     private void deleteFinance(ActionEvent actionEvent) {
-
+        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
+                "Are you sure you want to delete this budget?",
+                "This action cannot be revert!");
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.YES) {
+                financeController.deleteFinanceFromDatabase(transaction);
+            }
+        });
     }
 
     private void updateFinace(ActionEvent actionEvent) {
-        
+        financeController.openUpdateFinanceForm(transaction);
     }
 
     public double getAmount() {

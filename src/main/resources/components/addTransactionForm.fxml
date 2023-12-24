@@ -18,40 +18,40 @@
         </font>
     </Label>
     <VBox layoutX="83.0" layoutY="76.0" prefHeight="327.0" prefWidth="337.0" spacing="20.0">
-      <MFXFilterComboBox fx:id="typeComboBox" floatMode="BORDER" floatingText="Type" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" styleClass="mfxcombobox" stylesheets="@../css/form.css" />
-      <MFXFilterComboBox fx:id="bankComboBox" floatMode="BORDER" floatingText="Bank" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" styleClass="mfxcombobox" stylesheets="@../css/form.css" />
+        <MFXFilterComboBox fx:id="typeComboBox" floatMode="BORDER" floatingText="Type" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" styleClass="mfxcombobox" stylesheets="@../css/form.css" />
+        <MFXFilterComboBox fx:id="bankComboBox" floatMode="BORDER" floatingText="Bank" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" styleClass="mfxcombobox" stylesheets="@../css/form.css" />
         <TextField fx:id="transactionNameField" prefHeight="39.0" prefWidth="337.0" promptText="Transaction name" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
             <padding>
                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
             </padding>
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor></TextField>
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor></TextField>
         <TextField fx:id="amountField" prefHeight="39.0" prefWidth="337.0" promptText="Amount" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
             <padding>
                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
             </padding>
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor></TextField>
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor></TextField>
         <TextField fx:id="descriptionField" prefHeight="39.0" prefWidth="337.0" promptText="Description" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
             <padding>
                 <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
             </padding>
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor></TextField>
-       <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="254.0" spacing="10.0">
-           <MFXButton fx:id="addButton" buttonType="RAISED" mnemonicParsing="false" prefHeight="32.0" prefWidth="148.0" stylesheets="@../css/form.css" text=" Add Transaction">
-               <font>
-                   <Font size="14.0" />
-               </font>
-         </MFXButton>
-           <MFXButton fx:id="cancelButton" buttonType="RAISED" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" stylesheets="@../css/form.css" text="Cancel">
-               <font>
-                   <Font size="14.0" />
-               </font>
-           </MFXButton>
-       </HBox>
+            <cursor>
+                <Cursor fx:constant="TEXT" />
+            </cursor></TextField>
+        <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="254.0" spacing="10.0">
+            <MFXButton fx:id="addButton" buttonType="RAISED" mnemonicParsing="false" prefHeight="32.0" prefWidth="148.0" stylesheets="@../css/form.css" text=" Add Transaction">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </MFXButton>
+            <MFXButton fx:id="cancelButton" buttonType="RAISED" mnemonicParsing="false" prefHeight="32.0" prefWidth="65.0" stylesheets="@../css/form.css" text="Cancel">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </MFXButton>
+        </HBox>
     </VBox>
 </fx:root>
