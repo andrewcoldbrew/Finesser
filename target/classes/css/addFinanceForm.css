@@ -1,0 +1,12 @@
+#financeForm {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-border-width: 3;
+}
+
+#exitButton {
+    -fx-background-color: transparent;
+}

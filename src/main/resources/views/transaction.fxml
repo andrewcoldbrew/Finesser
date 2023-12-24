@@ -86,7 +86,7 @@
          <children>
             <Label alignment="CENTER" text="Transaction History" HBox.hgrow="ALWAYS">
                <font>
-                  <Font name="Arial" size="45.0" />
+                  <Font name="Cambria" size="45.0" />
                </font>
                <HBox.margin>
                   <Insets left="10.0" />

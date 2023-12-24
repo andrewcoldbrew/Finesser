@@ -99,6 +99,8 @@ public class SignupController implements Initializable {
         statement.close();
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("INITIALIZE SIGNUP");

@@ -32,29 +32,65 @@
                      <children>
                         <Label fx:id="fullNameLabel" graphicTextGap="0.0" text="Full name">
                            <font>
-                              <Font name="System Bold" size="40.0" />
+                              <Font name="Cambria Bold" size="40.0" />
                            </font>
                         </Label>
-                        <Label fx:id="emailLabel" text="Email">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="genderLabel" text="Gender">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="dobLabel" text="Date of birth">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="countryLabel" text="Country">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
+                        <HBox>
+                           <children>
+                              <Label text="Email: ">
+                                 <font>
+                                    <Font name="Yu Gothic UI Semibold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="emailLabel" text="Email">
+                                 <font>
+                                    <Font name="Yu Gothic UI Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label text="Gender: ">
+                                 <font>
+                                    <Font name="Yu Gothic UI Semibold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="genderLabel" text="Gender">
+                                 <font>
+                                    <Font name="Yu Gothic UI Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label text="Date of Birth: ">
+                                 <font>
+                                    <Font name="Yu Gothic UI Semibold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="dobLabel" text="Date of birth">
+                                 <font>
+                                    <Font name="Yu Gothic UI Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label text="Country: ">
+                                 <font>
+                                    <Font name="Yu Gothic UI Semibold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="countryLabel" text="Country">
+                                 <font>
+                                    <Font name="Yu Gothic UI Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
                      </children>
                      <HBox.margin>
                         <Insets left="70.0" />

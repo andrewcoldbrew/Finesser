@@ -233,10 +233,10 @@ public class AccountController implements Initializable {
                     String fullname = fname + " " + lname;
 
                     fullNameLabel.setText(fullname);
-                    emailLabel.setText("Email: " + email);
-                    genderLabel.setText("Gender: " + gender);
-                    dobLabel.setText("Date of Birth: " + dob);
-                    countryLabel.setText("Country: " + country);
+                    emailLabel.setText(email);
+                    genderLabel.setText(gender);
+                    dobLabel.setText(String.valueOf(dob));
+                    countryLabel.setText(country);
                     walletBalanceLabel.setText(String.format("Your current wallet: %.2f", cashAmount));
                     bankBalanceLabel.setText(String.format("Your current banks' money: %.2f", bankAmount));
                     totalBalanceLabel.setText(String.format("Your total money: %.2f", totalBalance));

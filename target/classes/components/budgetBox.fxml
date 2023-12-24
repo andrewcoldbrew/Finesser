@@ -11,18 +11,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root fx:id="budgetBox" prefWidth="250.0" stylesheets="@../css/budget.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="budgetBox" maxWidth="320.0" style="-fx-border-color: #9FE2BF; -fx-border-width: 3;" stylesheets="@../css/budget.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 3; -fx-border-color: #9FE2BF;">
+      <VBox alignment="CENTER_LEFT" prefHeight="210.0" prefWidth="320.0" spacing="20.0">
          <children>
             <BorderPane>
                <left>
                   <Label fx:id="categoryLabel" text="Category" BorderPane.alignment="CENTER" />
                </left>
                <right>
-                  <HBox spacing="20.0" BorderPane.alignment="CENTER">
+                  <HBox BorderPane.alignment="CENTER_RIGHT">
                      <children>
-                        <MFXButton fx:id="updateButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY">
+                        <MFXButton fx:id="updateButton" contentDisplay="GRAPHIC_ONLY">
                            <graphic>
                               <ImageView fx:id="editIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -31,7 +31,7 @@
                               </ImageView>
                            </graphic>
                         </MFXButton>
-                        <MFXButton fx:id="deleteButton" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY">
+                        <MFXButton fx:id="deleteButton" contentDisplay="GRAPHIC_ONLY">
                            <graphic>
                               <ImageView fx:id="trashIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -66,12 +66,12 @@
             <HBox alignment="CENTER_LEFT" prefHeight="20.0" spacing="20.0">
                <children>
                   <Label fx:id="percentageLabel" text="Label" />
-                  <MFXProgressBar fx:id="progressBar" animationSpeed="0.0" maxWidth="180.0" progress="0.69" />
+                  <MFXProgressBar fx:id="progressBar" animationSpeed="0.0" prefWidth="220.0" progress="0.69" />
                </children>
             </HBox>
          </children>
          <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="10.0" left="10.0" top="10.0" />
          </padding>
       </VBox>
    </children>
