@@ -131,7 +131,9 @@ public class FinanceController implements Initializable {
                     String category = rs.getString("category");
                     int bankID = rs.getInt("bankID");
                     LocalDate transactionDate = rs.getDate("transactionDate").toLocalDate();
-                    Transaction transaction = new Transaction(financeID, name, amount, description, category, )
+                    String recurrencePeriod = rs.getString("recurrencePeriod");
+                    String bankName = getBankNameByID(bankID);
+                    Transaction transaction = new Transaction(financeID, name, amount, description, category, bankName, transactionDate, recurrencePeriod);
                     FinanceBox financeBox = new FinanceBox(name, amount, category, transactionDate);
                     incomeGrid.add(financeBox, 0, row++);
                 }
@@ -197,13 +199,14 @@ public class FinanceController implements Initializable {
         }
     }
 
-    private int getBankIdByName(String bankName) throws SQLException {
+    private String getBankNameByID(int bankID) throws SQLException {
         Connection con = ConnectionManager.getConnection();
-        try (PreparedStatement stmt = con.prepareStatement("SELECT bankID FROM bank WHERE bankName = ?")) {
-            stmt.setString(1, bankName);
+        try (PreparedStatement stmt = con.prepareStatement("SELECT bankName FROM bank WHERE bankID = ? AND ownerID = ?")) {
+            stmt.setInt(1, bankID);
+            stmt.setInt(2, Main.getUserId());
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt("bankID");
+                    return rs.getString("bankName");
                 } else {
                     throw new SQLException("Bank not found");
                 }
