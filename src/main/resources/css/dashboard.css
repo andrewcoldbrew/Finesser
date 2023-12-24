@@ -1,16 +1,12 @@
 .sideBox {
-    -fx-background-color: white;
-    -fx-padding:  28px 0px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0.2, 0, 0);
-    -fx-border-color: black;
-    -fx-border-width: 3px;
-    -fx-border-radius: 12px;
-    -fx-background-radius: 12px;
+    -fx-background-color: #f6ede6;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
 }
 
-.sideBox:hover {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);
-}
+/*.sideBox:hover {*/
+/*    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);*/
+/*}*/
 
 .budget-series .chart-bar {
     -fx-bar-fill: red;
@@ -18,4 +14,10 @@
 
 .spending-series .chart-bar {
     -fx-bar-fill: blue;
+}
+
+.rightSide {
+    -fx-background-color:  #FAF5F1;
+    -fx-border-radius: 20 0 0 20;
+    -fx-background-radius: 20 0 0 20;
 }
