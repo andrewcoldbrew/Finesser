@@ -1,10 +1,10 @@
 #updateButton {
-    -fx-background-color: #4CAF50; /* Green */
+    -fx-background-color: #9FE2BF; /* Green */
     -fx-text-fill: #ffffff; /* White text on green background */
 }
 
 #deleteButton {
-    -fx-background-color: #FF5252; /* Red */
+    -fx-background-color: #FF7F7F; /* Red */
     -fx-text-fill: #ffffff; /* White text on red background */
 }
 
@@ -36,4 +36,21 @@
     -fx-background-color:  #9FE2BF;
     -fx-text-fill: white;
     -fx-cursor: hand;
+}
+
+#searchBar {
+    -fx-border-color:  black;
+}
+
+#searchBar:focused {
+    -fx-background-color:  #9FE2BF;
+}
+
+#searchBar .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#transactionTable .mfx-page:selected {
+    -fx-background-color: #9FE2BF;
 }

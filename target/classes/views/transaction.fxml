@@ -18,7 +18,7 @@
          <children>
             <BorderPane prefHeight="58.0" prefWidth="1100.0">
                <left>
-                  <MFXTextField fx:id="searchBar" floatMode="BORDER" floatingText="Enter what you want to search" floatingTextGap="0.0" minHeight="45.0" minWidth="770.0" prefColumnCount="30" prefWidth="770.0" styleClass="searchBar" BorderPane.alignment="CENTER">
+                  <MFXTextField fx:id="searchBar" floatMode="BORDER" floatingText="Enter what you want to search" floatingTextGap="0.0" minHeight="45.0" minWidth="770.0" prefColumnCount="30" prefWidth="770.0" styleClass="searchBar" textLimit="0" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets bottom="10.0" left="10.0" top="20.0" />
                      </BorderPane.margin>
@@ -32,9 +32,9 @@
                   </MFXButton>
                </right>
             </BorderPane>
-            <MFXPaginatedTableView fx:id="transactionTable" pagesToShow="100" prefHeight="534.0" prefWidth="1100.0" rowsPerPage="10">
+            <MFXPaginatedTableView fx:id="transactionTable" pagesToShow="100" prefHeight="534.0" prefWidth="1100.0" rowsPerPage="10" style="-fx-border-color: black;">
                <VBox.margin>
-                  <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin></MFXPaginatedTableView>
          </children>
          <BorderPane.margin>
@@ -86,7 +86,7 @@
          <children>
             <Label alignment="CENTER" text="Transaction History" HBox.hgrow="ALWAYS">
                <font>
-                  <Font name="Arial" size="45.0" />
+                  <Font name="Cambria" size="45.0" />
                </font>
                <HBox.margin>
                   <Insets left="10.0" />
