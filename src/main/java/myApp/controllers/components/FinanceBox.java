@@ -50,6 +50,7 @@ public class FinanceBox extends HBox {
     }
 
     private void deleteFinance(ActionEvent actionEvent) {
+
     }
 
     private void updateFinace(ActionEvent actionEvent) {

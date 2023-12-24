@@ -77,7 +77,7 @@ public class FinanceController implements Initializable {
         LocalDate end = LocalDate.now();
 
         switch (timeFrame) {
-            case ALL_TIME:
+            case ALL_TIME, YEARLY:
                 start = start.withDayOfYear(1);
                 end = start.plusYears(1).withDayOfYear(1).minusDays(1);
                 break;
@@ -89,16 +89,10 @@ public class FinanceController implements Initializable {
                 start = start.withDayOfMonth(1);
                 end = start.plusMonths(1).withDayOfMonth(1).minusDays(1);
                 break;
-            case YEARLY:
-                start = start.withDayOfYear(1);
-                end = start.plusYears(1).withDayOfYear(1).minusDays(1);
-                break;
         }
-
 
         incomeGrid.getChildren().clear();
         outcomeGrid.getChildren().clear();
-
 
         loadIncome(start, end);
         loadOutcome(start, end);
@@ -116,7 +110,7 @@ public class FinanceController implements Initializable {
 
         int userID = Main.getUserId();
 
-        String query = "SELECT name, amount, transactionDate, category FROM transaction WHERE userID = ? AND category = 'Income' AND transactionDate BETWEEN ? AND ? ORDER BY transactionDate ASC";
+        String query = "SELECT * FROM transaction WHERE userID = ? AND category = 'Income' AND transactionDate BETWEEN ? AND ? ORDER BY transactionDate ASC";
         Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement(query)) {
 
@@ -130,12 +124,14 @@ public class FinanceController implements Initializable {
                 int row = 1;
                 while (rs.next()) {
                     count++;
+                    int financeID = rs.getInt("transactionID");
                     String name = rs.getString("name");
                     double amount = rs.getDouble("amount");
-                    LocalDate transactionDate = rs.getDate("transactionDate").toLocalDate();
+                    String description = rs.getString("description");
                     String category = rs.getString("category");
-
-                    System.out.println("Income #" + count + ": " + name + ", Amount: " + amount + ", Date: " + transactionDate + ", Category: " + category);
+                    int bankID = rs.getInt("bankID");
+                    LocalDate transactionDate = rs.getDate("transactionDate").toLocalDate();
+                    Transaction transaction = new Transaction(financeID, name, amount, description, category, )
                     FinanceBox financeBox = new FinanceBox(name, amount, category, transactionDate);
                     incomeGrid.add(financeBox, 0, row++);
                 }
@@ -198,6 +194,20 @@ public class FinanceController implements Initializable {
         } catch (SQLException e) {
             System.err.println("SQLException in loadOutcome: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    private int getBankIdByName(String bankName) throws SQLException {
+        Connection con = ConnectionManager.getConnection();
+        try (PreparedStatement stmt = con.prepareStatement("SELECT bankID FROM bank WHERE bankName = ?")) {
+            stmt.setString(1, bankName);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("bankID");
+                } else {
+                    throw new SQLException("Bank not found");
+                }
+            }
         }
     }
 
