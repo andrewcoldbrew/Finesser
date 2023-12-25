@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.Button?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="myApp.controllers.views.ReportController"
             prefHeight="400.0" prefWidth="600.0">
+
+    <VBox spacing="10" layoutX="50" layoutY="50">
+        <Label fx:id="usernameLabel" text="Username:"/>
+        <Label fx:id="emailLabel" text="Email:"/>
+        <Label fx:id="dobLabel" text="Date of Birth:"/>
+        <Label fx:id="countryLabel" text="Country:"/>
+        <Label fx:id="totalBudgetsLabel" text="Total Number of Budgets: "/>
+        <Label fx:id="totalIncomeFinancesLabel" text="Total Number of Income Finances: "/>
+        <Label fx:id="totalOutcomeFinancesLabel" text="Total Number of Outcome Finances: "/>
+        <Label fx:id="totalTransactionsLabel" text="Total Number of Transactions Made: "/>
+        <Label fx:id="topSpentCategoriesLabel" text="Top Spent Categories: "/>
+        <Button fx:id="generateReportButton" text="Generate Report" onAction="#handleGenerateReport"/>
+
+    </VBox>
 
 </AnchorPane>
