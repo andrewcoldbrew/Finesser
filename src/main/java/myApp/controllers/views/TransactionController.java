@@ -244,6 +244,7 @@ public class TransactionController implements Initializable {
     }
 
     private void deleteTransactionFromDatabase(Transaction transaction) {
+        System.out.println("Transadtion deleted: " + transaction.getName());
         String sql = "DELETE FROM transaction WHERE transactionID = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -255,6 +256,19 @@ public class TransactionController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    private void deleteTransaction(Transaction transaction) {
+        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
+                "Are you sure you want to delete this budget?",
+                "This action cannot be revert!");
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.YES) {
+                deleteTransactionFromDatabase(transaction);
+                loadTransactions();
+            }
+        });
+    }
+
 
     private void updateTransaction() {
         Platform.runLater(() -> {
@@ -272,17 +286,6 @@ public class TransactionController implements Initializable {
 
     }
 
-    private void deleteTransaction(Transaction transaction) {
-        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
-                "Are you sure you want to delete this budget?",
-                "This action cannot be revert!");
-        confirm.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.YES) {
-                deleteTransactionFromDatabase(transaction);
-                loadTransactions();
-            }
-        });
-    }
 
     private MFXButton createButton(String text, String id) {
         MFXButton button = new MFXButton(text);
