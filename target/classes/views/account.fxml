@@ -14,22 +14,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<StackPane fx:id="mainPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.AccountController">
+<StackPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="830.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.AccountController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="1200.0" stylesheets="@../css/testAccount.css">
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/testAccount.css">
          <top>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
                <children>
-                  <ImageView fx:id="profileImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profileImage" fitHeight="160.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/account/user.png" />
                      </image>
                      <HBox.margin>
-                        <Insets left="25.0" right="25.0" />
+                        <Insets left="20.0" right="20.0" />
                      </HBox.margin>
                   </ImageView>
-                  <VBox prefHeight="150.0" prefWidth="861.0" spacing="10.0">
+                  <VBox prefHeight="150.0" prefWidth="861.0" spacing="5.0">
                      <children>
                         <Label fx:id="fullNameLabel" graphicTextGap="0.0" text="Full name">
                            <font>
@@ -63,7 +62,7 @@
                   </VBox>
                </children>
                <BorderPane.margin>
-                  <Insets bottom="40.0" left="40.0" />
+                  <Insets bottom="30.0" />
                </BorderPane.margin>
             </HBox>
          </top>
@@ -71,7 +70,7 @@
             <Insets />
          </opaqueInsets>
          <center>
-            <HBox alignment="CENTER_LEFT" minHeight="620.0" prefWidth="1140.0" BorderPane.alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER_LEFT">
                <children>
                   <VBox alignment="CENTER_LEFT" spacing="20.0">
                      <children>
@@ -134,12 +133,12 @@
                         </VBox>
                      </children>
                      <HBox.margin>
-                        <Insets left="30.0" right="70.0" />
+                        <Insets right="70.0" />
                      </HBox.margin>
                   </VBox>
                   <BorderPane styleClass="moneyPane" HBox.hgrow="ALWAYS">
                      <HBox.margin>
-                        <Insets right="40.0" />
+                        <Insets />
                      </HBox.margin>
                      <top>
                         <Label text="Financial Holdings" BorderPane.alignment="CENTER">
@@ -151,9 +150,6 @@
                            </BorderPane.margin>
                         </Label>
                      </top>
-                     <padding>
-                        <Insets left="20.0" right="20.0" />
-                     </padding>
                      <center>
                         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                            <children>
@@ -250,7 +246,7 @@
             </HBox>
          </center>
          <padding>
-            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+            <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
          </padding>
       </BorderPane>
    </children>

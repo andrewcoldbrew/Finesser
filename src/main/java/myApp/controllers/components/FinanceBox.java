@@ -6,12 +6,15 @@ import io.github.palexdev.materialfx.enums.ButtonType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import myApp.controllers.views.FinanceController;
+import myApp.models.Transaction;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -27,15 +30,20 @@ public class FinanceBox extends HBox {
     public MFXButton deleteButton;
     public ImageView editIcon;
     public ImageView trashIcon;
+    private FinanceController financeController;
+    private Transaction transaction;
 
-    public FinanceBox(String name, double amount, String category, LocalDate transactionDate) {
+    public FinanceBox(Transaction transaction, FinanceController financeController) {
+        this.transaction = transaction;
+        this.financeController = financeController;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/financeBox.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
+
         try {
             fxmlLoader.load();
-            initialize(name, amount, category, transactionDate);
+            initialize(transaction);
 
             updateButton.setOnAction(this::updateFinace);
             deleteButton.setOnAction(this::deleteFinance);
@@ -50,10 +58,18 @@ public class FinanceBox extends HBox {
     }
 
     private void deleteFinance(ActionEvent actionEvent) {
+        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
+                "Are you sure you want to delete this budget?",
+                "This action cannot be revert!");
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == javafx.scene.control.ButtonType.YES) {
+                financeController.deleteFinanceFromDatabase(transaction);
+            }
+        });
     }
 
     private void updateFinace(ActionEvent actionEvent) {
-        
+        financeController.openUpdateFinanceForm(transaction);
     }
 
     public double getAmount() {
@@ -61,11 +77,11 @@ public class FinanceBox extends HBox {
     }
 
 
-    private void initialize(String name, double amount, String category, LocalDate transactionDate) {
-        nameLabel.setText(name);
-        amountLabel.setText(String.format("Amount: $%.2f", amount));
-        categoryLabel.setText(category);
-        dateLabel.setText(String.format("Date: %s", transactionDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+    private void initialize(Transaction transaction) {
+        nameLabel.setText(transaction.getName());
+        amountLabel.setText(String.format("Amount: $%.2f", transaction.getAmount()));
+        categoryLabel.setText(transaction.getCategory());
+        dateLabel.setText(String.format("Date: %s", transaction.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
         // this.getStyleClass().add("finance-box-" + category.toLowerCase());
     }
 

@@ -23,6 +23,8 @@ public class Transaction {
         this.recurrencePeriod = recurrencePeriod;
     }
 
+
+
     public int getTransactionID() {
         return transactionID;
     }

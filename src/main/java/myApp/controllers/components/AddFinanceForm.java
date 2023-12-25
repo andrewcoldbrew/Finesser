@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import myApp.Main;
 import myApp.utils.ConnectionManager;
@@ -22,7 +23,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 
-public class AddFinanceForm extends BorderPane {
+public class AddFinanceForm extends StackPane {
+    public StackPane stackPane;
     public MFXTextField nameField;
     public MFXTextField amountField;
     public MFXTextField descriptionField;
@@ -34,7 +36,7 @@ public class AddFinanceForm extends BorderPane {
 
     public Button exitButton;
     private final ObservableList<String> categoryList = FXCollections.observableArrayList(
-            "Income", "Rent", "Subscription", "Insurance", "Taxes", "Bills" /* Add more income types as needed */
+            "Income", "Dividend Income", "Investment", "Rent", "Subscription", "Insurance", "Bills" /* Add more income types as needed */
     );
     private Stage stage;
 
@@ -101,7 +103,7 @@ public class AddFinanceForm extends BorderPane {
                 statement.setInt(8, Main.getUserId());
 
                 statement.execute();
-                new SuccessAlert("Finance added successfully!");
+                new SuccessAlert(stackPane, "Finance added successfully!");
                 exit();
             }
         } catch (SQLException e) {
