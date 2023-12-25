@@ -12,16 +12,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <fx:root fx:id="stackPane" type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <javafx.scene.layout.AnchorPane prefHeight="437.0" prefWidth="500.0" style="-fx-background-color: white; -fx-border-color: #9FE2BF; -fx-border-width: 3; -fx-border-radius: 20; -fx-background-radius: 20;">
+      <javafx.scene.layout.AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="500.0" style="-fx-background-color: white; -fx-border-color: #9FE2BF; -fx-border-width: 3; -fx-border-radius: 20; -fx-background-radius: 20;">
           <Label layoutX="170.0" layoutY="32.0" text="Transaction Details">
               <font>
                   <Font name="System Bold" size="18.0" />
               </font>
           </Label>
-          <VBox layoutX="83.0" layoutY="76.0" prefHeight="327.0" prefWidth="337.0" spacing="20.0">
+          <VBox layoutX="83.0" layoutY="76.0" prefHeight="327.0" prefWidth="337.0" spacing="30.0">
               <MFXFilterComboBox fx:id="typeComboBox" floatMode="BORDER" floatingText="Type" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" styleClass="mfxcombobox" stylesheets="@../css/form.css" />
               <MFXFilterComboBox fx:id="bankComboBox" floatMode="BORDER" floatingText="Bank" prefHeight="39.0" prefWidth="337.0" style="-fx-border-color: #9FE2BF;" styleClass="mfxcombobox" stylesheets="@../css/form.css" />
               <TextField fx:id="transactionNameField" prefHeight="39.0" prefWidth="337.0" promptText="Transaction name" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">

@@ -22,6 +22,7 @@ public class MainAppManager {
         scenes.put("finance", "/views/finance.fxml");
         scenes.put("account", "/views/account.fxml");
         scenes.put("dashboard", "/views/dashboard.fxml");
+        scenes.put("report", "/views/report.fxml");
 //        scenes.put("testTransaction", "/views/testTransaction.fxml");
     }
 
@@ -37,7 +38,7 @@ public class MainAppManager {
 
 
         setupScene("account");
-        mainAppStage.setMaximized(true);
+        mainAppStage.setMaximized(false);
 
         Scene scene = new Scene(mainLayout);
         mainAppStage.setScene(scene);

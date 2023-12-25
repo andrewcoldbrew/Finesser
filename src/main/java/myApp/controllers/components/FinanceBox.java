@@ -58,14 +58,21 @@ public class FinanceBox extends HBox {
     }
 
     private void deleteFinance(ActionEvent actionEvent) {
-        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
-                "Are you sure you want to delete this budget?",
-                "This action cannot be revert!");
-        confirm.showAndWait().ifPresent(response -> {
-            if (response == javafx.scene.control.ButtonType.YES) {
-                financeController.deleteFinanceFromDatabase(transaction);
-            }
+//        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
+//                "Are you sure you want to delete this budget?",
+//                "This action cannot be revert!");
+//        confirm.showAndWait().ifPresent(response -> {
+//            if (response == javafx.scene.control.ButtonType.YES) {
+//                financeController.deleteFinanceFromDatabase(transaction);
+//            }
+//        });
+
+        NewManualAlert confirm = new NewManualAlert(NewManualAlert.Type.CONFIRMATION, "Confirm Deletion",
+                "Are you sure you want to delete this finance");
+        confirm.setYesAction(() -> {
+            financeController.deleteFinanceFromDatabase(transaction);
         });
+        confirm.show();
     }
 
     private void updateFinace(ActionEvent actionEvent) {

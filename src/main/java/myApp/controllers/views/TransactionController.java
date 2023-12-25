@@ -13,13 +13,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import myApp.Main;
-import myApp.controllers.components.AddTransactionForm;
-import myApp.controllers.components.ManualAlert;
-import myApp.controllers.components.NewManualAlert;
-import myApp.controllers.components.UpdateTransactionForm;
+import myApp.controllers.components.*;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
@@ -27,20 +25,21 @@ import myApp.utils.LocalDateComparator;
 
 import java.net.URL;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class TransactionController implements Initializable {
     public BorderPane mainPane;
     public MFXTextField searchBar;
     public MFXPaginatedTableView<Transaction> transactionTable;
+    public StackPane stackPane;
 
-    // Filter buttons
-    @FXML private Label totalFood;
-    @FXML private Label totalEntertainment;
-    @FXML private Label totalMisc;
+    @FXML private Label firstCategoryTotalLabel;
+    @FXML private Label secondCategoryTotalLabel;
+    @FXML private Label thirdCategoryTotalLabel;
     private AddTransactionForm addForm;
     private UpdateTransactionForm updateForm;
 
@@ -101,11 +100,10 @@ public class TransactionController implements Initializable {
                 );
 
 //        transactionTable.setItems(transactionData);
-        transactionTable.autosizeColumnsOnInitialization();
 //        transactionTable.setItems(filteredTransactions);
     }
 
-    private void loadTransactions() {
+    public void loadTransactions() {
 
         transactionData.clear();
 
@@ -136,6 +134,7 @@ public class TransactionController implements Initializable {
 
                     Transaction transaction = new Transaction(transactionId, name, amount, description, category, bankName, date, recurrencePeriod);
                     transactionData.add(transaction);
+                    calculateTopSpentCategories();
                 }
             }
         } catch (SQLException e) {
@@ -169,18 +168,6 @@ public class TransactionController implements Initializable {
         transactionTable.setItems(FXCollections.observableArrayList(filteredTransactions));
     }
 
-
-
-    private void updateTotals() {
-        double totalFoodAmount = calculateTotalForCategory("Food");
-        double totalEntertainmentAmount = calculateTotalForCategory("Entertainment");
-        double totalMiscAmount = calculateTotalForCategory("Miscellaneous");
-
-        totalFood.setText(String.format("Total: $%.2f", totalFoodAmount));
-        totalEntertainment.setText(String.format("Total: $%.2f", totalEntertainmentAmount));
-        totalMisc.setText(String.format("Total: $%.2f", totalMiscAmount));
-    }
-
     private double calculateTotalForCategory(String category) {
         double total = transactionData.stream()
                 .filter(tr -> tr.getCategory().equals(category))
@@ -188,6 +175,39 @@ public class TransactionController implements Initializable {
                 .sum();
 
         return total;
+    }
+    private void calculateTopSpentCategories() {
+        Set<String> excludedCategories = new HashSet<>(Arrays.asList("Income", "Dividend Income", "Investment", "Rent", "Subscription", "Insurance", "Bills"));
+
+        Map<String, Double> categoryTotals = transactionData.stream()
+                .filter(transaction -> !excludedCategories.contains(transaction.getCategory()))
+                .collect(Collectors.groupingBy(
+                        Transaction::getCategory,
+                        Collectors.summingDouble(Transaction::getAmount)
+                ));
+
+        List<Map.Entry<String, Double>> topCategories = categoryTotals.entrySet().stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .limit(3)
+                .collect(Collectors.toList());
+
+        Platform.runLater(() -> {
+            if (topCategories.size() > 0) {
+                firstCategoryTotalLabel.setText(topCategories.get(0).getKey() + ": $" + String.format("%.2f", topCategories.get(0).getValue()));
+            } else {
+                firstCategoryTotalLabel.setText("N/A");
+            }
+            if (topCategories.size() > 1) {
+                secondCategoryTotalLabel.setText(topCategories.get(1).getKey() + ": $" + String.format("%.2f", topCategories.get(1).getValue()));
+            } else {
+                secondCategoryTotalLabel.setText("N/A");
+            }
+            if (topCategories.size() > 2) {
+                thirdCategoryTotalLabel.setText(topCategories.get(2).getKey() + ": $" + String.format("%.2f", topCategories.get(2).getValue()));
+            } else {
+                thirdCategoryTotalLabel.setText("N/A");
+            }
+        });
     }
 
     private HBox createButtonContainer() {
@@ -245,6 +265,7 @@ public class TransactionController implements Initializable {
     }
 
     private void deleteTransactionFromDatabase(Transaction transaction) {
+        System.out.println("Transadtion deleted: " + transaction.getName());
         String sql = "DELETE FROM transaction WHERE transactionID = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -256,6 +277,19 @@ public class TransactionController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    private void deleteTransaction(Transaction transaction) {
+        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
+                "Are you sure you want to delete this budget?",
+                "This action cannot be revert!");
+        confirm.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.YES) {
+                deleteTransactionFromDatabase(transaction);
+                loadTransactions();
+            }
+        });
+    }
+
 
     private void updateTransaction() {
         Platform.runLater(() -> {
@@ -295,9 +329,7 @@ public class TransactionController implements Initializable {
 
                 confirm.show();
             }
-
         });
-
     }
 
     private MFXButton createButton(String text, String id) {
@@ -308,17 +340,40 @@ public class TransactionController implements Initializable {
     }
 
     public void handleAddTransactionForm(ActionEvent actionEvent) {
-        if (!mainPane.getChildren().contains(addForm)) {
-            addForm = new AddTransactionForm();
-            AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
-            AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
+        if (!isAddFormOpen()) {
+            stackPane.getChildren().add(new AddTransactionForm(this));
 
-            mainPane.getChildren().add(addForm);
-            draggable.makeDraggable(addForm);
         }
-
+//        if (!mainPane.getChildren().contains(addForm)) {
+//            addForm = new AddTransactionForm();
+//            AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
+//            AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
+//
+//            mainPane.getChildren().add(addForm);
+//            draggable.makeDraggable(addForm);
+//        }
     }
 
+    private void closeUpdateFinanceForm() {
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof AddTransactionForm) {
+                stackPane.getChildren().remove(node);
+                break;
+            }
+        }
+    }
 
+    private boolean isAddFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof AddTransactionForm) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public StackPane getStackPane() {
+        return stackPane;
+    }
 }

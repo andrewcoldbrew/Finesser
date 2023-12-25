@@ -50,36 +50,39 @@
          <bottom>
             <HBox alignment="CENTER" spacing="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="CENTER" styleClass="bottomBox">
-                     <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/account/key.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="something" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" styleClass="bottomBox">
-                     <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/account/key.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="something" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" styleClass="bottomBox">
-                     <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/account/key.png" />
-                           </image>
-                        </ImageView>
-                        <Label text="something" />
-                     </children>
-                  </VBox>
+                   <VBox alignment="CENTER" styleClass="bottomBox">
+                       <children>
+                           <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                               <image>
+                                   <Image url="@../images/account/key.png" />
+                               </image>
+                           </ImageView>
+                           <Label fx:id="firstCategoryTotalLabel" text="something" />
+                       </children>
+                   </VBox>
+      
+                   <VBox alignment="CENTER" styleClass="bottomBox">
+                       <children>
+                           <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                               <image>
+                                   <Image url="@../images/account/key.png" />
+                               </image>
+                           </ImageView>
+                           <Label fx:id="secondCategoryTotalLabel" text="something" />
+                       </children>
+                   </VBox>
+      
+                   <VBox alignment="CENTER" styleClass="bottomBox">
+                       <children>
+                           <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                               <image>
+                                   <Image url="@../images/account/key.png" />
+                               </image>
+                           </ImageView>
+                           <Label fx:id="thirdCategoryTotalLabel" text="something" />
+                       </children>
+                   </VBox>
+      
                </children>
                <BorderPane.margin>
                   <Insets bottom="30.0" left="50.0" right="50.0" />

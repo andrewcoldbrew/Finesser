@@ -110,7 +110,7 @@ public class FinanceController implements Initializable {
 
         int userID = Main.getUserId();
 
-        String query = "SELECT * FROM transaction WHERE userID = ? AND category = ? AND transactionDate BETWEEN ? AND ? ORDER BY transactionDate ASC";
+        String query = "SELECT * FROM transaction WHERE userID = ? AND category IN ? AND transactionDate BETWEEN ? AND ? ORDER BY transactionDate ASC";
         Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setInt(1, userID);
@@ -164,11 +164,11 @@ public class FinanceController implements Initializable {
     }
 
     private void loadIncome(LocalDate startDate, LocalDate endDate) {
-        loadFinances(startDate, endDate, "Income", incomeGrid);
+        loadFinances(startDate, endDate, "('Income')", incomeGrid);
     }
 
     private void loadOutcome(LocalDate startDate, LocalDate endDate) {
-        loadFinances(startDate, endDate, "('subscription', 'rent')", outcomeGrid);
+        loadFinances(startDate, endDate, "('Rent', 'Bills', 'Insurance', 'Subscription')", outcomeGrid);
     }
 
     public void updateFinanceInDatabase(String name, double amount, String description, String category, String bankName, LocalDate transactionDate, String recurrencePeriod, int transactionID) {
