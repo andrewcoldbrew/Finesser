@@ -1,82 +1,96 @@
 package myApp.controllers.components;
 
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.effects.DepthLevel;
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
+import animatefx.animation.FadeOut;
+import animatefx.animation.Shake;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
-import myApp.utils.ImageBlender;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 public class ErrorAlert extends BorderPane {
     public ImageView errorIcon;
     public Label errorTitle;
-    public Label errorMessage;
+    public Text errorMessage;
 
-    public ErrorAlert(String title, String message) {
+    public ErrorAlert(Pane pane, String title, String message) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/errorAlert.fxml"));
 
         try {
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
 
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
+            fxmlLoader.load();
+            initialize(pane, title, message);
 
-            errorTitle.setText(title);
-            errorMessage.setText(message);
 
-            showAlert(scene);
+//            showAlert(scene);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void showAlert(Scene scene) {
-        // Create a new undecorated stage
-        Stage stage = new Stage();
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
+    private void initialize(Pane pane, String title, String message) {
+        errorTitle.setText(title);
+        errorMessage.setText(message);
 
-        // Set initial transparency to 0 (fully transparent)
-        setOpacity(0);
+        if (!alertIsShown(pane)) {
+            pane.getChildren().add(this);
 
-        // Create a fade-in transition
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.3), this);
-        fadeIn.setToValue(1); // Set the target opacity to 1 (fully opaque)
-
-        stage.show();
-        fadeIn.play();
-
-        // Create a pause for 3 sec
-        PauseTransition pause = new PauseTransition(Duration.seconds(3));
-        pause.setOnFinished(event -> {
-            FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.3), this);
-            fadeOut.setToValue(0); // Set the target opacity to 0 (fully transparent)
-            // Set the action to be performed after the fade-out transition completes
-            fadeOut.setOnFinished(fadeEvent -> {
-                stage.close();
+            // Play Shake animation
+            Shake shakeAnimation = new Shake(this);
+            shakeAnimation.setSpeed(0.9);
+            shakeAnimation.setOnFinished(event -> {
+                // Play FadeOut animation after Shake finishes
+                FadeOut fadeOutAnimation = new FadeOut(this);
+                fadeOutAnimation.setDelay(Duration.seconds(3));
+                fadeOutAnimation.setOnFinished(fadeEvent -> {
+                    // Clear the alert after FadeOut finishes
+                    Platform.runLater(() -> clearAlert(pane));
+                });
+                fadeOutAnimation.play();
             });
-            fadeOut.play();
-        });
-
-        pause.play();
+            shakeAnimation.play();
+        }
     }
 
 
+    private boolean alertIsShown(Pane pane) {
+        for (Node node : pane.getChildren()) {
+            if (node instanceof ErrorAlert)
+                return true;
+        }
+        return false;
+    }
+
+    private void clearAlert(Pane pane) {
+        Iterator<Node> iterator = pane.getChildren().iterator();
+        while (iterator.hasNext()) {
+            Node child = iterator.next();
+            if (child instanceof ErrorAlert) {
+                iterator.remove(); // Remove the ErrorAlert from the children
+                System.out.println("Alert cleared");
+            }
+        }
+    }
+
+
+//    private void showAlert(Scene scene) {
+//        // Create a new undecorated stage
+//        Stage stage = new Stage();
+//        stage.initStyle(StageStyle.UNDECORATED);
+//        stage.setScene(scene);
+//        stage.show();
+//        new JackInTheBox(this).playOnFinished(new FadeOut(this)).play();
+//    }
 }

@@ -23,6 +23,8 @@ public class Transaction {
         this.recurrencePeriod = recurrencePeriod;
     }
 
+
+
     public int getTransactionID() {
         return transactionID;
     }
@@ -60,15 +62,18 @@ public class Transaction {
     public String getDateString() {
         return date.toString();
     }
+
     @Override
     public String toString() {
         return "Transaction{" +
-                "name='" + name + '\'' +
+                "transactionID=" + transactionID +
+                ", name='" + name + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
-                ", bankId='" + bankName + '\'' +
+                ", bankName='" + bankName + '\'' +
                 ", date=" + date +
+                ", recurrencePeriod='" + recurrencePeriod + '\'' +
                 '}';
     }
 }

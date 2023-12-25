@@ -2,11 +2,13 @@ package myApp.controllers.views;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXScrollPane;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -17,17 +19,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import myApp.Main;
-import myApp.controllers.components.AddBudgetForm;
-import myApp.controllers.components.BudgetBox;
+import myApp.controllers.components.*;
 import myApp.models.Budget;
+import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +37,7 @@ public class BudgetController implements Initializable {
     public MFXButton addBudgetButton;
     public MFXScrollPane scrollPane;
     public AnchorPane mainPane;
+    public StackPane stackPane;
     @FXML
     private FlowPane flowPane;
     private final AddBudgetForm addBudgetForm = new AddBudgetForm();
@@ -119,37 +119,26 @@ public class BudgetController implements Initializable {
         return budgets;
     }
 
-    public void openUpdateBudgetForm(Budget budget) {
-
-        TextInputDialog dialog = new TextInputDialog(String.valueOf(budget.getAllocatedAmount()));
-        dialog.setTitle("Update Budget");
-        dialog.setHeaderText("Update Budget for " + budget.getCategory());
-        dialog.setContentText("Enter new budget limit:");
-
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(newLimit -> {
-            try {
-                updateBudgetInDatabase(budget.getId(), Double.parseDouble(newLimit));
-                // Reload or refresh budget data to reflect changes
-                loadBudgetDataAsync();
-            } catch (NumberFormatException e) {
-                // Handle invalid number format
-            }
-        });
-    }
-
-    private void updateBudgetInDatabase(int id, double v) {
-        String sql = "UPDATE budget SET budgetLimit = ? WHERE budgetID = ?";
+    public void updateBudgetInDatabase(String category, double limit, LocalDate startDate, LocalDate endDate, int budgetID) {
+        String sql = "UPDATE budget SET category = ?, budgetLimit = ?, startDate = ?, endDate = ? WHERE budgetID = ?";
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setDouble(1, v);
-            pstmt.setInt(2, id);
+            pstmt.setString(1, category);
+            pstmt.setDouble(2, limit);
+            pstmt.setDate(3, Date.valueOf(startDate));
+            pstmt.setDate(4, Date.valueOf(endDate));
+            pstmt.setInt(5, budgetID);
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("Budget updated successfully.");
+                Platform.runLater(() -> {
+                    loadBudgetDataAsync();
+                    new SuccessAlert(stackPane, "Budget updated!");
+                    closeUpdateBudgetForm();
+                });
             }
         } catch (SQLException e) {
             showError(e);
@@ -157,7 +146,30 @@ public class BudgetController implements Initializable {
 
     }
 
+    public void openUpdateBudgetForm(Budget budget) {
+        if (!isUpdateFormOpen()) {
+            stackPane.getChildren().add(new UpdateBudgetForm(budget, this));
+        }
+    }
 
+    private void closeUpdateBudgetForm() {
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof UpdateBudgetForm) {
+                stackPane.getChildren().remove(node);
+                break;
+            }
+        }
+    }
+
+    private boolean isUpdateFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof UpdateFinanceForm) {
+                return true;
+            }
+        }
+        return false;
+    }
     private void showError(Throwable throwable) {
         System.err.println("Error: " + throwable.getMessage());
         throwable.printStackTrace();

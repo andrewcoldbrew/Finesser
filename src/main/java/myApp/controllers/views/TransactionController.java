@@ -18,6 +18,7 @@ import javafx.scene.layout.*;
 import myApp.Main;
 import myApp.controllers.components.AddTransactionForm;
 import myApp.controllers.components.ManualAlert;
+import myApp.controllers.components.NewManualAlert;
 import myApp.controllers.components.UpdateTransactionForm;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
@@ -82,7 +83,7 @@ public class TransactionController implements Initializable {
         bankCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getBankName));
         dateCol.setRowCellFactory(transaction -> new MFXTableRowCell<>(Transaction::getDate));
         actionCol.setRowCellFactory(transaction -> {
-            HBox buttonContainer = createButtonContainer(transaction); // Pass the transaction here
+            HBox buttonContainer = createButtonContainer(); // Pass the transaction here
 
             MFXTableRowCell<Transaction, HBox> cell = new MFXTableRowCell<>(value -> buttonContainer, value -> "");
             cell.setGraphic(buttonContainer);
@@ -189,13 +190,13 @@ public class TransactionController implements Initializable {
         return total;
     }
 
-    private HBox createButtonContainer(Transaction transaction) {
+    private HBox createButtonContainer() {
         HBox buttonContainer = new HBox();
         MFXButton updateButton = createButton("Update", "updateButton");
         MFXButton deleteButton = createButton("Delete", "deleteButton");
 
         updateButton.setOnAction(actionEvent -> updateTransaction());
-        deleteButton.setOnAction(actionEvent -> deleteTransaction(transaction));
+        deleteButton.setOnAction(actionEvent -> deleteTransaction());
 
         buttonContainer.getChildren().addAll(updateButton, deleteButton);
         buttonContainer.setAlignment(Pos.CENTER);
@@ -262,26 +263,41 @@ public class TransactionController implements Initializable {
            Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedValues().getFirst();
 
            if (!mainPane.getChildren().contains(updateForm)) {
-               updateForm = new UpdateTransactionForm(selectedTransaction, this);
-               AnchorPane.setTopAnchor(updateForm, (mainPane.getHeight() - updateForm.getPrefHeight()) / 2);
-               AnchorPane.setLeftAnchor(updateForm, (mainPane.getWidth() - updateForm.getPrefWidth()) / 2);
-               mainPane.getChildren().add(updateForm);
-               draggable.makeDraggable(updateForm);
+               if (selectedTransaction.getRecurrencePeriod() != null) {
+                   new NewManualAlert(NewManualAlert.Type.WARNING, "Warning!", "You cannot update a finance through the transaction table. Please navigate to the finance page").show();
+               } else {
+                   updateForm = new UpdateTransactionForm(selectedTransaction, this);
+                   AnchorPane.setTopAnchor(updateForm, (mainPane.getHeight() - updateForm.getPrefHeight()) / 2);
+                   AnchorPane.setLeftAnchor(updateForm, (mainPane.getWidth() - updateForm.getPrefWidth()) / 2);
+                   mainPane.getChildren().add(updateForm);
+                   draggable.makeDraggable(updateForm);
+               }
            }
         });
 
     }
 
-    private void deleteTransaction(Transaction transaction) {
-        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
-                "Are you sure you want to delete this budget?",
-                "This action cannot be revert!");
-        confirm.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.YES) {
-                deleteTransactionFromDatabase(transaction);
-                loadTransactions();
+    private void deleteTransaction() {
+
+        Platform.runLater(() -> {
+            Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedValues().getFirst();
+            System.out.println(selectedTransaction);
+            if (selectedTransaction.getRecurrencePeriod() != null) {
+                new NewManualAlert(NewManualAlert.Type.WARNING, "Warning!", "You cannot delete a finance through the transaction table. Please navigate to the finance page").show();
+            } else {
+                NewManualAlert confirm = new NewManualAlert(NewManualAlert.Type.CONFIRMATION, "Confirm Deletion",
+                        "Are you sure you want to delete this budget? This action cannot be revert");
+
+                confirm.setYesAction(() -> {
+                    deleteTransactionFromDatabase(selectedTransaction);
+                    Platform.runLater(this::loadTransactions);
+                });
+
+                confirm.show();
             }
+
         });
+
     }
 
     private MFXButton createButton(String text, String id) {

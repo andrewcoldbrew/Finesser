@@ -13,7 +13,7 @@
    <top>
       <HBox alignment="CENTER" prefHeight="80.0" styleClass="body" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" text="Budgets">
+            <Label alignment="CENTER" styleClass="bodyText" text="Budgets">
                <font>
                   <Font name="Cambria" size="45.0" />
                </font>
@@ -48,7 +48,7 @@
                   </MFXButton>
                </right>
                <left>
-                  <Label text="Current Budget Plans" BorderPane.alignment="CENTER">
+                  <Label styleClass="bodyText" text="Current Budget Plans" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="Yu Gothic UI Semibold" size="24.0" />
                      </font>

@@ -6,8 +6,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" type="BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="errorAlert" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="350.0" styleClass="background" stylesheets="@../css/alert.css" type="BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <ImageView fx:id="errorIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -19,20 +20,20 @@
       </ImageView>
    </center>
    <top>
-      <Label fx:id="errorTitle" text="Error Title" BorderPane.alignment="CENTER">
+      <Label fx:id="errorTitle" text="Error Warning" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
          <font>
-            <Font size="20.0" />
+            <Font name="Cambria" size="28.0" />
          </font>
       </Label>
    </top>
-   <bottom>
-      <Label fx:id="errorMessage" maxWidth="300.0" text="Display the error message here" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-   </bottom>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
+   <bottom>
+      <Text fx:id="errorMessage" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="250.0" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+   </bottom>
 </fx:root>

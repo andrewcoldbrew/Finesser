@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="financeBox" prefWidth="500.0" stylesheets="@../css/financeBox.css" type="HBox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="financeBox" prefHeight="151.0" prefWidth="411.0" style="-fx-background-color: FAF5F1;" stylesheets="@../css/financeBox.css" type="HBox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="20.0" HBox.hgrow="ALWAYS">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="433.0" spacing="20.0" HBox.hgrow="ALWAYS">
          <children>
             <HBox VBox.vgrow="NEVER">
                <VBox.margin>
@@ -39,7 +39,7 @@
                      <right>
                         <HBox spacing="20.0" BorderPane.alignment="CENTER">
                            <children>
-                              <MFXButton fx:id="updateButton" contentDisplay="GRAPHIC_ONLY">
+                              <MFXButton fx:id="updateButton" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: FAF5F1;">
                                  <graphic>
                                     <ImageView fx:id="editIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -48,7 +48,7 @@
                                     </ImageView>
                                  </graphic>
                               </MFXButton>
-                              <MFXButton fx:id="deleteButton" contentDisplay="GRAPHIC_ONLY">
+                              <MFXButton fx:id="deleteButton" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: FAF5F1;">
                                  <graphic>
                                     <ImageView fx:id="trashIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

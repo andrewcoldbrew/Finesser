@@ -10,3 +10,22 @@
 .timeFilter:focused{
     -fx-background-color: #9FE2BF;
 }
+
+#addButton {
+    -fx-border-color: #9FE2BF;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-size: 14;
+}
+
+#addButton:hover {
+    -fx-background-color:  #9FE2BF;
+    -fx-text-fill: white;
+}
+
+.totalLabel {
+    -fx-background-color: #f4f4f4;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}

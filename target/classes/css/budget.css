@@ -48,3 +48,7 @@
     -fx-text-fill: white;
     -fx-cursor: hand;
 }
+
+.bodyText {
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 3, 0.4, 0 , 1);
+}

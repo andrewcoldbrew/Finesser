@@ -237,9 +237,9 @@ public class AccountController implements Initializable {
                     genderLabel.setText(gender);
                     dobLabel.setText(String.valueOf(dob));
                     countryLabel.setText(country);
-                    walletBalanceLabel.setText(String.format("Your current wallet: %.2f", cashAmount));
-                    bankBalanceLabel.setText(String.format("Your current banks' money: %.2f", bankAmount));
-                    totalBalanceLabel.setText(String.format("Your total money: %.2f", totalBalance));
+                    walletBalanceLabel.setText(String.format("Your current wallet balance: %.2f", cashAmount));
+                    bankBalanceLabel.setText(String.format("Your current bank balance: %.2f", bankAmount));
+                    totalBalanceLabel.setText(String.format("Your total balance: %.2f", totalBalance));
                 } else {
                     System.out.println("User not found.");
                 }
@@ -250,45 +250,45 @@ public class AccountController implements Initializable {
     }
 
 
-    private void initializeLinkBankForm() {
-        linkBankDialog = new Stage(StageStyle.UNDECORATED);
-
-        LinkBankForm linkBankForm = new LinkBankForm(this);
-        dialogScene = new Scene(linkBankForm, linkBankForm.getPrefWidth(), linkBankForm.getPrefHeight());
-        linkBankDialog.setTitle("Link Bank");
-
-        linkBankForm.setStage(linkBankDialog);
-        System.out.println(linkBankForm.getStage());
-
-        linkBankDialog.setScene(dialogScene);
-
-        linkBankDialog.initModality(Modality.WINDOW_MODAL);
-        dialogScene.setFill(Color.TRANSPARENT);
-
-        linkBankDialog.setResizable(false);
-        linkBankDialog.show();
-    }
-
-    private void initializeAddWalletForm() {
-        addWalletDialog = new Stage(StageStyle.UNDECORATED);
-        AddWalletForm addWalletForm = new AddWalletForm();
-        dialogScene = new Scene(addWalletForm, addWalletForm.getPrefWidth(), addWalletForm.getPrefHeight());
-
-        addWalletDialog.setTitle("Link Bank");
-
-        addWalletForm.setStage(addWalletDialog);
-        System.out.println(addWalletForm.getStage());
-
-        addWalletDialog.setScene(dialogScene);
-
-        addWalletDialog.initModality(Modality.APPLICATION_MODAL);
-        addWalletDialog.initStyle(StageStyle.UNDECORATED);
-        addWalletDialog.setResizable(true);
-        dialogScene.setFill(Color.TRANSPARENT);
-
-        addWalletDialog.setResizable(false);
-        addWalletDialog.show();
-    }
+//    private void initializeLinkBankForm() {
+//        linkBankDialog = new Stage(StageStyle.UNDECORATED);
+//
+//        LinkBankForm linkBankForm = new LinkBankForm(this);
+//        dialogScene = new Scene(linkBankForm, linkBankForm.getPrefWidth(), linkBankForm.getPrefHeight());
+//        linkBankDialog.setTitle("Link Bank");
+//
+//        linkBankForm.setStage(linkBankDialog);
+//        System.out.println(linkBankForm.getStage());
+//
+//        linkBankDialog.setScene(dialogScene);
+//
+//        linkBankDialog.initModality(Modality.WINDOW_MODAL);
+//        dialogScene.setFill(Color.TRANSPARENT);
+//
+//        linkBankDialog.setResizable(false);
+//        linkBankDialog.show();
+//    }
+//
+//    private void initializeAddWalletForm() {
+//        addWalletDialog = new Stage(StageStyle.UNDECORATED);
+//        AddWalletForm addWalletForm = new AddWalletForm();
+//        dialogScene = new Scene(addWalletForm, addWalletForm.getPrefWidth(), addWalletForm.getPrefHeight());
+//
+//        addWalletDialog.setTitle("Link Bank");
+//
+//        addWalletForm.setStage(addWalletDialog);
+//        System.out.println(addWalletForm.getStage());
+//
+//        addWalletDialog.setScene(dialogScene);
+//
+//        addWalletDialog.initModality(Modality.APPLICATION_MODAL);
+//        addWalletDialog.initStyle(StageStyle.UNDECORATED);
+//        addWalletDialog.setResizable(true);
+//        dialogScene.setFill(Color.TRANSPARENT);
+//
+//        addWalletDialog.setResizable(false);
+//        addWalletDialog.show();
+//    }
 
     public void handleLinkBankForm(ActionEvent actionEvent) {
         // Check if a LinkBankForm is already present
@@ -300,7 +300,7 @@ public class AccountController implements Initializable {
     public void handleAddWalletForm(ActionEvent actionEvent) {
         // Check if an AddWalletForm is already present
         if (!isAddWalletFormOpen()) {
-            mainPane.getChildren().add(new AddWalletForm());
+            mainPane.getChildren().add(new AddWalletForm(this));
         }
     }
 
@@ -330,4 +330,7 @@ public class AccountController implements Initializable {
     public void handleChangePassword(ActionEvent actionEvent) {
     }
 
+    public StackPane getMainPane() {
+        return mainPane;
+    }
 }

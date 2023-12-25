@@ -15,10 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import myApp.Main;
@@ -33,7 +30,8 @@ import java.sql.SQLException;
 
 import static myApp.Main.getUserId;
 
-public class LinkBankForm extends BorderPane {
+public class LinkBankForm extends StackPane {
+    public StackPane stackPane;
     public MFXFilterComboBox<String> bankComboBox;
     public MFXTextField balanceField;
     public MFXButton linkBankButton;
@@ -48,7 +46,6 @@ public class LinkBankForm extends BorderPane {
     private Label balanceLabel;
     private MFXTextField accountKeyField;
     private final AccountController accountController;
-
 
     public LinkBankForm(AccountController accountController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/linkBankForm.fxml"));
@@ -78,10 +75,11 @@ public class LinkBankForm extends BorderPane {
                 statement.setInt(1, Main.getUserId());
                 statement.setString(2, bankName);
                 statement.execute();
-                exit();
-                PauseTransition pause = new PauseTransition(Duration.seconds(0.25));
+                new SuccessAlert(accountController.getMainPane(), "The bank has been linked successfully!");
+
+                PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                 pause.setOnFinished(event -> {
-                    new SuccessAlert("The bank has been linked successfully!");
+                    exit();
                     accountController.loadUserProfile();
                     Platform.runLater(accountController::loadCreditCard);
 
@@ -91,7 +89,7 @@ public class LinkBankForm extends BorderPane {
                 throw new RuntimeException(e);
             }
         } else {
-            new ErrorAlert("Wrong Key", "The entered account key is not correct!");
+//            new ErrorAlert("Wrong Key", "The entered account key is not correct!");
         }
     }
 

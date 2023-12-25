@@ -54,3 +54,7 @@
 #transactionTable .mfx-page:selected {
     -fx-background-color: #9FE2BF;
 }
+
+.bodyText {
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 3, 0.4, 0 , 1);
+}

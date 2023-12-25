@@ -1,73 +1,82 @@
 package myApp.controllers.components;
 
+import animatefx.animation.*;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 public class SuccessAlert extends BorderPane {
     public ImageView successIcon;
-    public Label messageLabel;
+    public Text messageLabel;
 
-    public SuccessAlert(String message) {
+    public SuccessAlert(Pane pane, String message) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/successAlert.fxml"));
 
         try {
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
-
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-
-            messageLabel.setText(message);
-
-
-            // Show the stage with a fade-in transition
-            showAlert(scene);
-
+            fxmlLoader.load();
+            initialize(pane, message);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void showAlert(Scene scene) {
-        // Create a new undecorated stage
-        Stage stage = new Stage();
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
+    private void initialize(Pane pane, String message) {
+        messageLabel.setText(message);
+        if (!alertIsShown(pane)) {
+            pane.getChildren().add(this);
 
-        // Set initial transparency to 0 (fully transparent)
-        setOpacity(0);
-
-        // Create a fade-in transition
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.1), this);
-        fadeIn.setToValue(1); // Set the target opacity to 1 (fully opaque)
-
-        stage.show();
-        fadeIn.play();
-
-        // Create a pause for 2 sec
-        PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(event -> {
-            FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.1), this);
-            fadeOut.setToValue(0); // Set the target opacity to 0 (fully transparent)
-            // Set the action to be performed after the fade-out transition completes
-            fadeOut.setOnFinished(fadeEvent -> {
-                stage.close();
+            // Play FadeIn animation
+            FadeIn fadeInAnimation = new FadeIn(this);
+            fadeInAnimation.setSpeed(1.25);
+            fadeInAnimation.setOnFinished(fadeInEvent -> {
+                // Play FadeOut animation after FadeIn finishes
+                FadeOut fadeOutAnimation = new FadeOut(this);
+                fadeOutAnimation.setDelay(Duration.seconds(3));
+                fadeOutAnimation.setSpeed(1.25);
+                fadeOutAnimation.setOnFinished(fadeOutEvent -> {
+                    // Clear the alert after FadeOut finishes
+                    Platform.runLater(() -> clearAlert(pane));
+                });
+                fadeOutAnimation.play();
             });
-            fadeOut.play();
-        });
-
-
-        pause.play();
+            fadeInAnimation.play();
+        }
     }
+
+    private boolean alertIsShown(Pane pane) {
+        for (Node node : pane.getChildren()) {
+            if (node instanceof ErrorAlert)
+                return true;
+        }
+        return false;
+    }
+
+    private void clearAlert(Pane pane) {
+        Iterator<Node> iterator = pane.getChildren().iterator();
+        while (iterator.hasNext()) {
+            Node child = iterator.next();
+            if (child instanceof ErrorAlert) {
+                iterator.remove(); // Remove the ErrorAlert from the children
+                System.out.println("Alert cleared");
+            }
+        }
+    }
+
 }

@@ -30,7 +30,7 @@
                   </ImageView>
                   <VBox prefHeight="150.0" prefWidth="861.0" spacing="5.0">
                      <children>
-                        <Label fx:id="fullNameLabel" graphicTextGap="0.0" text="Full name">
+                        <Label fx:id="fullNameLabel" graphicTextGap="0.0" styleClass="bodyText" text="Full name">
                            <font>
                               <Font name="Cambria Bold" size="40.0" />
                            </font>
@@ -177,9 +177,9 @@
                         <Insets />
                      </HBox.margin>
                      <top>
-                        <Label text="Financial Holdings" BorderPane.alignment="CENTER">
+                        <Label styleClass="bodyText" text="Financial Holdings" BorderPane.alignment="CENTER">
                            <font>
-                              <Font name="System Bold" size="24.0" />
+                              <Font name="Yu Gothic UI Semibold" size="24.0" />
                            </font>
                            <BorderPane.margin>
                               <Insets bottom="10.0" top="15.0" />

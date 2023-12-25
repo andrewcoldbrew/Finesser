@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import myApp.Main;
 import myApp.utils.ConnectionManager;
 
@@ -20,7 +21,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddTransactionForm extends AnchorPane {
+public class AddTransactionForm extends StackPane {
+    public StackPane stackPane;
     public MFXFilterComboBox<String> typeComboBox;
     public MFXFilterComboBox<String> bankComboBox;
     public TextField transactionNameField;
@@ -82,12 +84,12 @@ public class AddTransactionForm extends AnchorPane {
             if (bankName.equals("None")) {
                 addCashTransaction(name, amount, description, category, date, userId);
                 Platform.runLater(() -> updateCashAmount(userId, amount));
-                new SuccessAlert("Transaction added!");
+                new SuccessAlert(stackPane, "Transaction added!");
             } else {
                 int bankId = getBankIdByName(bankName); // Fetch bankId based on bank name
                 addBankTransaction(name, amount, description, category, bankId, date, userId);
                 Platform.runLater(() -> updateBankBalance(userId, amount));
-                new SuccessAlert("Transaction added!");
+                new SuccessAlert(stackPane, "Transaction added!");
             }
 
 
