@@ -26,9 +26,10 @@ import myApp.utils.LocalDateComparator;
 
 import java.net.URL;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class TransactionController implements Initializable {
@@ -36,10 +37,9 @@ public class TransactionController implements Initializable {
     public MFXTextField searchBar;
     public MFXPaginatedTableView<Transaction> transactionTable;
 
-    // Filter buttons
-    @FXML private Label totalFood;
-    @FXML private Label totalEntertainment;
-    @FXML private Label totalMisc;
+    @FXML private Label firstCategoryTotalLabel;
+    @FXML private Label secondCategoryTotalLabel;
+    @FXML private Label thirdCategoryTotalLabel;
     private AddTransactionForm addForm;
     private UpdateTransactionForm updateForm;
 
@@ -135,6 +135,7 @@ public class TransactionController implements Initializable {
 
                     Transaction transaction = new Transaction(transactionId, name, amount, description, category, bankName, date, recurrencePeriod);
                     transactionData.add(transaction);
+                    calculateTopSpentCategories();
                 }
             }
         } catch (SQLException e) {
@@ -168,26 +169,6 @@ public class TransactionController implements Initializable {
         transactionTable.setItems(FXCollections.observableArrayList(filteredTransactions));
     }
 
-
-
-    private void updateTotals() {
-        double totalFoodAmount = calculateTotalForCategory("Food");
-        double totalEntertainmentAmount = calculateTotalForCategory("Entertainment");
-        double totalMiscAmount = calculateTotalForCategory("Miscellaneous");
-
-        totalFood.setText(String.format("Total: $%.2f", totalFoodAmount));
-        totalEntertainment.setText(String.format("Total: $%.2f", totalEntertainmentAmount));
-        totalMisc.setText(String.format("Total: $%.2f", totalMiscAmount));
-    }
-
-    private double calculateTotalForCategory(String category) {
-        double total = transactionData.stream()
-                .filter(tr -> tr.getCategory().equals(category))
-                .mapToDouble(Transaction::getAmount)
-                .sum();
-
-        return total;
-    }
 
     private HBox createButtonContainer(Transaction transaction) {
         HBox buttonContainer = new HBox();
@@ -286,6 +267,40 @@ public class TransactionController implements Initializable {
 
     }
 
+    private void calculateTopSpentCategories() {
+        Set<String> excludedCategories = new HashSet<>(Arrays.asList("Income", "Dividend Income", "Investment", "Rent", "Subscription", "Insurance", "Bills"));
+
+        Map<String, Double> categoryTotals = transactionData.stream()
+                .filter(transaction -> !excludedCategories.contains(transaction.getCategory()))
+                .collect(Collectors.groupingBy(
+                        Transaction::getCategory,
+                        Collectors.summingDouble(Transaction::getAmount)
+                ));
+
+        List<Map.Entry<String, Double>> topCategories = categoryTotals.entrySet().stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .limit(3)
+                .collect(Collectors.toList());
+
+        Platform.runLater(() -> {
+            if (topCategories.size() > 0) {
+                firstCategoryTotalLabel.setText(topCategories.get(0).getKey() + ": $" + String.format("%.2f", topCategories.get(0).getValue()));
+            } else {
+                firstCategoryTotalLabel.setText("N/A");
+            }
+            if (topCategories.size() > 1) {
+                secondCategoryTotalLabel.setText(topCategories.get(1).getKey() + ": $" + String.format("%.2f", topCategories.get(1).getValue()));
+            } else {
+                secondCategoryTotalLabel.setText("N/A");
+            }
+            if (topCategories.size() > 2) {
+                thirdCategoryTotalLabel.setText(topCategories.get(2).getKey() + ": $" + String.format("%.2f", topCategories.get(2).getValue()));
+            } else {
+                thirdCategoryTotalLabel.setText("N/A");
+            }
+        });
+    }
+
 
     private MFXButton createButton(String text, String id) {
         MFXButton button = new MFXButton(text);
@@ -303,7 +318,6 @@ public class TransactionController implements Initializable {
             mainPane.getChildren().add(addForm);
             draggable.makeDraggable(addForm);
         }
-
     }
 
 
