@@ -253,7 +253,7 @@ public class NewSignupController implements Initializable {
                     new ErrorAlert(stackPane, "Username is taken", "Someone with this username already existed! Please choose a different username");
                 } else if (isStrongPassword(password)){
                     registerUser(con, username, password, fname, lname, email, dob, gender, country);
-                    new SuccessAlert("Your account has been created!");
+                    new SuccessAlert(stackPane, "Your account has been created!");
                     LoginStageManager.switchScene("login");
                 } else {
                     new ErrorAlert(stackPane, "Weak Password", "Your password is not strong enough! Please enter a new password.");

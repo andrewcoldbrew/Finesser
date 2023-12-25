@@ -5,27 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/NewManualAlert.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/components/manualAlert.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/manualAlert.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ErrorAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ErrorAlert.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LinkBankForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LinkBankForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/SuccessAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/SuccessAlert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateBudgetForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateBudgetForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateFinanceForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateFinanceForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateTransactionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateTransactionForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/addFinanceForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/addFinanceForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/addTransactionForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/addTransactionForm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/components/errorAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/errorAlert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/updateBudgetForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/updateBudgetForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/updateFinanceForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/updateFinanceForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/updateTransactionForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/updateTransactionForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/newSignup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/newSignup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/linkBankForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/linkBankForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/successAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/successAlert.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,7 +207,7 @@
       <workItem from="1703318715949" duration="2800000" />
       <workItem from="1703338165108" duration="5826000" />
       <workItem from="1703414686458" duration="12067000" />
-      <workItem from="1703469043415" duration="5603000" />
+      <workItem from="1703469043415" duration="6748000" />
     </task>
     <servers />
   </component>

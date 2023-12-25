@@ -21,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -31,7 +32,7 @@ import java.io.IOException;
 public class ErrorAlert extends BorderPane {
     public ImageView errorIcon;
     public Label errorTitle;
-    public Label errorMessage;
+    public Text errorMessage;
 
     public ErrorAlert(Pane pane, String title, String message) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/errorAlert.fxml"));

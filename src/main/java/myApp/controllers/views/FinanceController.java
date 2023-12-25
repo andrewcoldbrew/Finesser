@@ -194,7 +194,7 @@ public class FinanceController implements Initializable {
                 LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
                 LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
                 loadFinanceData(startOfMonth, endOfMonth);
-                new SuccessAlert("Finance successfully updated!");
+                new SuccessAlert(stackPane, "Finance successfully updated!");
             });
         } catch (SQLException e) {
             e.printStackTrace();
@@ -211,7 +211,7 @@ public class FinanceController implements Initializable {
             LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
             LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
             loadFinanceData(startOfMonth, endOfMonth);
-            new SuccessAlert("Finance successfully deleted!");
+            new SuccessAlert(stackPane, "Finance successfully deleted!");
             System.out.println("Deleted finance");
         } catch (SQLException e) {
             e.printStackTrace();

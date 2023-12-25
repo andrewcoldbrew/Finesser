@@ -84,7 +84,7 @@ public class UpdateTransactionForm extends StackPane {
             double amount = Double.parseDouble(amountText);
             // INVOKE THE FUNCTION HERE! ~UwU~
             transactionController.updateTransactionInDatabase(name, amount, description, category, transaction.getBankName(), date, transaction.getTransactionID());
-            new SuccessAlert("Your transaction has been updated successfully!");
+            new SuccessAlert(stackPane, "Your transaction has been updated successfully!");
 
         } catch (NumberFormatException e) {
             new ErrorAlert(stackPane, "Invalid input", "Amount must be a number");

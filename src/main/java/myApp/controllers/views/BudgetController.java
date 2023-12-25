@@ -136,7 +136,7 @@ public class BudgetController implements Initializable {
                 System.out.println("Budget updated successfully.");
                 Platform.runLater(() -> {
                     loadBudgetDataAsync();
-                    new SuccessAlert("Budget updated!");
+                    new SuccessAlert(stackPane, "Budget updated!");
                     closeUpdateBudgetForm();
                 });
             }
