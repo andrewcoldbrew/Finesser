@@ -47,7 +47,6 @@ public class LinkBankForm extends StackPane {
     private MFXTextField accountKeyField;
     private final AccountController accountController;
 
-
     public LinkBankForm(AccountController accountController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/linkBankForm.fxml"));
         fxmlLoader.setRoot(this);
@@ -76,10 +75,11 @@ public class LinkBankForm extends StackPane {
                 statement.setInt(1, Main.getUserId());
                 statement.setString(2, bankName);
                 statement.execute();
-                exit();
-                PauseTransition pause = new PauseTransition(Duration.seconds(0.25));
+                new SuccessAlert(accountController.getMainPane(), "The bank has been linked successfully!");
+
+                PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                 pause.setOnFinished(event -> {
-                    new SuccessAlert(stackPane, "The bank has been linked successfully!");
+                    exit();
                     accountController.loadUserProfile();
                     Platform.runLater(accountController::loadCreditCard);
 

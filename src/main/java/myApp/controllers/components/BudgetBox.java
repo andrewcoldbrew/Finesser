@@ -88,14 +88,11 @@ public class BudgetBox extends AnchorPane {
     }
 
     private void deleteBudget(ActionEvent actionEvent) {
-        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
-                "Are you sure you want to delete this budget?",
-                "This action cannot be revert!");
-
-        confirm.showAndWait().ifPresent(buttonType -> {
-            if (buttonType.equals(javafx.scene.control.ButtonType.YES)) {
-                String sql = "DELETE FROM budget WHERE budgetID = ?";
-
+        NewManualAlert confirm = new NewManualAlert(NewManualAlert.Type.CONFIRMATION, "Confirm Deletion",
+                "Are you sure you want to delete this budget? This action cannot be revert!");
+        confirm.setYesAction(() -> {
+            System.out.println("THIS CAN RUN!");
+            String sql = "DELETE FROM budget WHERE budgetID = ?";
                 try (Connection conn = ConnectionManager.getConnection();
                      PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -104,14 +101,35 @@ public class BudgetBox extends AnchorPane {
                     if (affectedRows > 0) {
                         this.setVisible(false);
                         this.setManaged(false);
+                        System.out.println("Budget deleted!");
                     }
                 } catch (SQLException e) {
                     showAlert("Error", "Failed to delete budget: " + e.getMessage());
                 }
-            }
         });
-
-
+        confirm.show();
+//        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
+//                "Are you sure you want to delete this budget?",
+//                "This action cannot be revert!");
+//
+//        confirm.showAndWait().ifPresent(buttonType -> {
+//            if (buttonType.equals(javafx.scene.control.ButtonType.YES)) {
+//                String sql = "DELETE FROM budget WHERE budgetID = ?";
+//
+//                try (Connection conn = ConnectionManager.getConnection();
+//                     PreparedStatement pstmt = conn.prepareStatement(sql)) {
+//
+//                    pstmt.setInt(1, budget.getId()); // Use ID here for the operation
+//                    int affectedRows = pstmt.executeUpdate();
+//                    if (affectedRows > 0) {
+//                        this.setVisible(false);
+//                        this.setManaged(false);
+//                    }
+//                } catch (SQLException e) {
+//                    showAlert("Error", "Failed to delete budget: " + e.getMessage());
+//                }
+//            }
+//        });
     }
 
     private void updateBudget(ActionEvent actionEvent) {

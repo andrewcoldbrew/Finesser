@@ -3,6 +3,7 @@ package myApp.controllers.components;
 import animatefx.animation.*;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -17,6 +18,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 public class SuccessAlert extends BorderPane {
     public ImageView successIcon;
@@ -39,8 +41,22 @@ public class SuccessAlert extends BorderPane {
         messageLabel.setText(message);
         if (!alertIsShown(pane)) {
             pane.getChildren().add(this);
-            new FadeInUpBig(this).setSpeed(0.9).play();
-            new FadeOut(this).setDelay(Duration.seconds(3)).play();
+
+            // Play FadeIn animation
+            FadeIn fadeInAnimation = new FadeIn(this);
+            fadeInAnimation.setSpeed(1.25);
+            fadeInAnimation.setOnFinished(fadeInEvent -> {
+                // Play FadeOut animation after FadeIn finishes
+                FadeOut fadeOutAnimation = new FadeOut(this);
+                fadeOutAnimation.setDelay(Duration.seconds(3));
+                fadeOutAnimation.setSpeed(1.25);
+                fadeOutAnimation.setOnFinished(fadeOutEvent -> {
+                    // Clear the alert after FadeOut finishes
+                    Platform.runLater(() -> clearAlert(pane));
+                });
+                fadeOutAnimation.play();
+            });
+            fadeInAnimation.play();
         }
     }
 
@@ -51,4 +67,16 @@ public class SuccessAlert extends BorderPane {
         }
         return false;
     }
+
+    private void clearAlert(Pane pane) {
+        Iterator<Node> iterator = pane.getChildren().iterator();
+        while (iterator.hasNext()) {
+            Node child = iterator.next();
+            if (child instanceof ErrorAlert) {
+                iterator.remove(); // Remove the ErrorAlert from the children
+                System.out.println("Alert cleared");
+            }
+        }
+    }
+
 }

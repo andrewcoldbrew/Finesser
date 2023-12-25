@@ -1,33 +1,21 @@
 package myApp.controllers.components;
 
 import animatefx.animation.FadeOut;
-import animatefx.animation.JackInTheBox;
-import animatefx.animation.Pulse;
 import animatefx.animation.Shake;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.effects.DepthLevel;
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import myApp.utils.ImageBlender;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 public class ErrorAlert extends BorderPane {
     public ImageView errorIcon;
@@ -55,12 +43,27 @@ public class ErrorAlert extends BorderPane {
     private void initialize(Pane pane, String title, String message) {
         errorTitle.setText(title);
         errorMessage.setText(message);
+
         if (!alertIsShown(pane)) {
             pane.getChildren().add(this);
-            new Shake(this).setSpeed(0.9).play();
-            new FadeOut(this).setDelay(Duration.seconds(3)).play();
+
+            // Play Shake animation
+            Shake shakeAnimation = new Shake(this);
+            shakeAnimation.setSpeed(0.9);
+            shakeAnimation.setOnFinished(event -> {
+                // Play FadeOut animation after Shake finishes
+                FadeOut fadeOutAnimation = new FadeOut(this);
+                fadeOutAnimation.setDelay(Duration.seconds(3));
+                fadeOutAnimation.setOnFinished(fadeEvent -> {
+                    // Clear the alert after FadeOut finishes
+                    Platform.runLater(() -> clearAlert(pane));
+                });
+                fadeOutAnimation.play();
+            });
+            shakeAnimation.play();
         }
     }
+
 
     private boolean alertIsShown(Pane pane) {
         for (Node node : pane.getChildren()) {
@@ -69,6 +72,18 @@ public class ErrorAlert extends BorderPane {
         }
         return false;
     }
+
+    private void clearAlert(Pane pane) {
+        Iterator<Node> iterator = pane.getChildren().iterator();
+        while (iterator.hasNext()) {
+            Node child = iterator.next();
+            if (child instanceof ErrorAlert) {
+                iterator.remove(); // Remove the ErrorAlert from the children
+                System.out.println("Alert cleared");
+            }
+        }
+    }
+
 
 //    private void showAlert(Scene scene) {
 //        // Create a new undecorated stage

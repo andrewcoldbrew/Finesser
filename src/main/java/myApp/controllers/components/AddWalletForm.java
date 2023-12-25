@@ -2,6 +2,7 @@ package myApp.controllers.components;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -9,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import myApp.Main;
+import myApp.controllers.views.AccountController;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
 
@@ -23,7 +25,9 @@ public class AddWalletForm extends BorderPane {
     public MFXButton addButton;
     private Connection con = ConnectionManager.getConnection();
     private Stage stage;
-    public AddWalletForm() {
+    private AccountController accountController;
+    public AddWalletForm(AccountController accountController) {
+        this.accountController = accountController;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/addWalletForm.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -58,6 +62,10 @@ public class AddWalletForm extends BorderPane {
 
                 updateStatement.executeUpdate();
                 System.out.println("User's cashAmount updated successfully!");
+                new SuccessAlert(accountController.getMainPane(), "Cash added successfully");
+                accountController.loadUserProfile();
+                Platform.runLater(this::exit);
+
             }
         } catch (NumberFormatException e) {
             System.out.println("Invalid amount. Please enter a valid number.");
@@ -73,12 +81,6 @@ public class AddWalletForm extends BorderPane {
 
     private void exit() {
         ((Pane) getParent()).getChildren().remove(this);
-//        if (stage != null) {
-//            System.out.println("CLOSING STAGE!");
-//            stage.close();
-//        } else {
-//            System.out.println("STAGE NULL");
-//        }
     }
 
     public Stage getStage() {

@@ -52,13 +52,12 @@ public class LoginController implements Initializable {
                     LoginStageManager.getLoginStage().close();
                     MainAppManager.setupMainApp();
                 } else {
-                    new NewManualAlert(NewManualAlert.Type.CONFIRMATION, "Error", "Password is incorrect!").show();
-//                    new ErrorAlert("WRONG PASSWORD", "The password you entered is incorrect! Please try again");
+
+                    new ErrorAlert(stackPane, "Incorrect password", "The password you entered is incorrect! Please try again");
                     System.out.println("INCORRECT PASSWORD");
                 }
             } else {
-//                new NewManualAlert(NewManualAlert.Type.CONFIRMATION, "Error", "Account not found!").show();
-                new ErrorAlert(stackPane,"ACCOUNT NOT FOUND", "This username doesn't exists! Please enter another one");
+                new ErrorAlert(stackPane,"User not found", "This username doesn't exists! Please enter another one");
                 System.out.println("USER NOT FOUND");
             }
             resultSet.close();
