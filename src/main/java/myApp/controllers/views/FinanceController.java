@@ -110,14 +110,13 @@ public class FinanceController implements Initializable {
 
         int userID = Main.getUserId();
 
-        String query = "SELECT * FROM transaction WHERE userID = ? AND category IN ? AND transactionDate BETWEEN ? AND ? ORDER BY transactionDate ASC";
+        String query = "SELECT * FROM transaction WHERE userID = ? AND category IN (" + categoryFilter + ") AND transactionDate BETWEEN ? AND ? ORDER BY transactionDate ASC";
         Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setInt(1, userID);
-            stmt.setString(2, categoryFilter);
-            stmt.setDate(3, java.sql.Date.valueOf(startDate));
-            stmt.setDate(4, java.sql.Date.valueOf(endDate));
-
+            stmt.setDate(2, java.sql.Date.valueOf(startDate));
+            stmt.setDate(3, java.sql.Date.valueOf(endDate));
+            System.out.println(stmt);
             try (ResultSet rs = stmt.executeQuery()) {
                 int count = 0;
                 int row = 1;
@@ -164,11 +163,11 @@ public class FinanceController implements Initializable {
     }
 
     private void loadIncome(LocalDate startDate, LocalDate endDate) {
-        loadFinances(startDate, endDate, "('Income')", incomeGrid);
+        loadFinances(startDate, endDate, "'Income', 'Dividend Income', 'Investment'", incomeGrid);
     }
 
     private void loadOutcome(LocalDate startDate, LocalDate endDate) {
-        loadFinances(startDate, endDate, "('Rent', 'Bills', 'Insurance', 'Subscription')", outcomeGrid);
+        loadFinances(startDate, endDate, "'Rent', 'Bills', 'Insurance', 'Subscription'", outcomeGrid);
     }
 
     public void updateFinanceInDatabase(String name, double amount, String description, String category, String bankName, LocalDate transactionDate, String recurrencePeriod, int transactionID) {
