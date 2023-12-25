@@ -1,10 +1,15 @@
 package myApp.controllers.components;
 
+import animatefx.animation.FadeOut;
+import animatefx.animation.JackInTheBox;
+import animatefx.animation.Pulse;
+import animatefx.animation.Shake;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.effects.DepthLevel;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -14,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -27,56 +33,48 @@ public class ErrorAlert extends BorderPane {
     public Label errorTitle;
     public Label errorMessage;
 
-    public ErrorAlert(String title, String message) {
+    public ErrorAlert(Pane pane, String title, String message) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/errorAlert.fxml"));
 
         try {
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
 
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
+            fxmlLoader.load();
+            initialize(pane, title, message);
 
-            errorTitle.setText(title);
-            errorMessage.setText(message);
 
-            showAlert(scene);
+//            showAlert(scene);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void showAlert(Scene scene) {
-        // Create a new undecorated stage
-        Stage stage = new Stage();
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
-
-        // Set initial transparency to 0 (fully transparent)
-        setOpacity(0);
-
-        // Create a fade-in transition
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.3), this);
-        fadeIn.setToValue(1); // Set the target opacity to 1 (fully opaque)
-
-        stage.show();
-        fadeIn.play();
-
-        // Create a pause for 3 sec
-        PauseTransition pause = new PauseTransition(Duration.seconds(3));
-        pause.setOnFinished(event -> {
-            FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.3), this);
-            fadeOut.setToValue(0); // Set the target opacity to 0 (fully transparent)
-            // Set the action to be performed after the fade-out transition completes
-            fadeOut.setOnFinished(fadeEvent -> {
-                stage.close();
-            });
-            fadeOut.play();
-        });
-
-        pause.play();
+    private void initialize(Pane pane, String title, String message) {
+        errorTitle.setText(title);
+        errorMessage.setText(message);
+        if (!alertIsShown(pane)) {
+            pane.getChildren().add(this);
+            new Shake(this).setSpeed(0.9).play();
+            new FadeOut(this).setDelay(Duration.seconds(3)).play();
+        }
     }
 
+    private boolean alertIsShown(Pane pane) {
+        for (Node node : pane.getChildren()) {
+            if (node instanceof ErrorAlert)
+                return true;
+        }
+        return false;
+    }
 
+//    private void showAlert(Scene scene) {
+//        // Create a new undecorated stage
+//        Stage stage = new Stage();
+//        stage.initStyle(StageStyle.UNDECORATED);
+//        stage.setScene(scene);
+//        stage.show();
+//        new JackInTheBox(this).playOnFinished(new FadeOut(this)).play();
+//    }
 }

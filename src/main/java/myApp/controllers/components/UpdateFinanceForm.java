@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import myApp.controllers.views.FinanceController;
 import myApp.controllers.views.TransactionController;
 import myApp.models.Transaction;
@@ -18,7 +19,8 @@ import myApp.utils.Draggable;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class UpdateFinanceForm extends BorderPane {
+public class UpdateFinanceForm extends StackPane {
+    public StackPane stackPane;
     public MFXFilterComboBox<String> typeComboBox;
     public TextField financeNameField;
     public MFXFilterComboBox<String> recurrencePeriodComboBox;
@@ -83,7 +85,7 @@ public class UpdateFinanceForm extends BorderPane {
             description = "No description";
         }
         if (name.isEmpty() || amountText.isEmpty() || category.isEmpty() || recurrencePeriod.isEmpty() || date == null) {
-            new ErrorAlert("Update declined", "Please fill in all fields!");
+            new ErrorAlert(stackPane, "Update declined", "Please fill in all fields!");
             return;
         }
 
@@ -93,7 +95,7 @@ public class UpdateFinanceForm extends BorderPane {
             financeController.updateFinanceInDatabase(name, amount, description, category, transaction.getBankName(), date, recurrencePeriod, transaction.getTransactionID());
 
         } catch (NumberFormatException e) {
-            new ErrorAlert("Invalid input", "Amount must be a number");
+            new ErrorAlert(stackPane, "Invalid input", "Amount must be a number");
         }
     }
 }

@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import myApp.controllers.components.ErrorAlert;
@@ -61,6 +62,7 @@ public class NewSignupController implements Initializable {
     public Label emailValidation;
     public MFXButton signupButton;
     public Tooltip toolTip;
+    public StackPane stackPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -241,26 +243,26 @@ public class NewSignupController implements Initializable {
         String rePassword = rePasswordField.getText();
 
         if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || Objects.isNull(dob) || country.isEmpty()) {
-            new ErrorAlert("Invalid Information", "Please fill in all fields before creating your account!");
+            new ErrorAlert(stackPane, "Invalid Information", "Please fill in all fields before creating your account!");
             return;
         }
 
         if (password.equals(rePassword)) {
             try {
                 if (isUsernameTaken(con, username)) {
-                    new ErrorAlert("Username is taken", "Someone with this username already existed! Please choose a different username");
+                    new ErrorAlert(stackPane, "Username is taken", "Someone with this username already existed! Please choose a different username");
                 } else if (isStrongPassword(password)){
                     registerUser(con, username, password, fname, lname, email, dob, gender, country);
                     new SuccessAlert("Your account has been created!");
                     LoginStageManager.switchScene("login");
                 } else {
-                    new ErrorAlert("Weak Password", "Your password is not strong enough! Please enter a new password.");
+                    new ErrorAlert(stackPane, "Weak Password", "Your password is not strong enough! Please enter a new password.");
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else {
-            new ErrorAlert("Password unmatched", "Your password is not matching. Please re-enter your password!");
+            new ErrorAlert(stackPane, "Password unmatched", "Your password is not matching. Please re-enter your password!");
         }
     }
 

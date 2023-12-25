@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import myApp.Main;
 import myApp.controllers.views.TransactionController;
 import myApp.models.Transaction;
@@ -17,7 +18,8 @@ import myApp.models.Transaction;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class UpdateTransactionForm extends BorderPane {
+public class UpdateTransactionForm extends StackPane {
+    public StackPane stackPane;
     public MFXFilterComboBox<String> typeComboBox;
     public TextField transactionNameField;
     public MFXButton updateButton;
@@ -74,7 +76,7 @@ public class UpdateTransactionForm extends BorderPane {
             description = "No description";
         }
         if (name.isEmpty() || amountText.isEmpty() || category.isEmpty() || date == null) {
-            new ErrorAlert("Update declined", "Please fill in all fields!");
+            new ErrorAlert(stackPane, "Update declined", "Please fill in all fields!");
             return;
         }
 
@@ -85,7 +87,7 @@ public class UpdateTransactionForm extends BorderPane {
             new SuccessAlert("Your transaction has been updated successfully!");
 
         } catch (NumberFormatException e) {
-            new ErrorAlert("Invalid input", "Amount must be a number");
+            new ErrorAlert(stackPane, "Invalid input", "Amount must be a number");
         }
     }
 }

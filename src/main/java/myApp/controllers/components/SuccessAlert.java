@@ -1,5 +1,8 @@
 package myApp.controllers.components;
 
+import animatefx.animation.AnimationFX;
+import animatefx.animation.FadeOut;
+import animatefx.animation.JackInTheBox;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
@@ -44,30 +47,6 @@ public class SuccessAlert extends BorderPane {
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
-
-        // Set initial transparency to 0 (fully transparent)
-        setOpacity(0);
-
-        // Create a fade-in transition
-        FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.1), this);
-        fadeIn.setToValue(1); // Set the target opacity to 1 (fully opaque)
-
-        stage.show();
-        fadeIn.play();
-
-        // Create a pause for 2 sec
-        PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(event -> {
-            FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.1), this);
-            fadeOut.setToValue(0); // Set the target opacity to 0 (fully transparent)
-            // Set the action to be performed after the fade-out transition completes
-            fadeOut.setOnFinished(fadeEvent -> {
-                stage.close();
-            });
-            fadeOut.play();
-        });
-
-
-        pause.play();
+        new JackInTheBox(this).playOnFinished(new FadeOut(this)).play();
     }
 }

@@ -91,7 +91,7 @@ public class LinkBankForm extends BorderPane {
                 throw new RuntimeException(e);
             }
         } else {
-            new ErrorAlert("Wrong Key", "The entered account key is not correct!");
+//            new ErrorAlert("Wrong Key", "The entered account key is not correct!");
         }
     }
 

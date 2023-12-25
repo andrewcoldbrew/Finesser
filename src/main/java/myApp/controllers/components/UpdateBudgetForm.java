@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import myApp.controllers.views.BudgetController;
 import myApp.models.Budget;
 import myApp.utils.Draggable;
@@ -17,7 +18,8 @@ import myApp.utils.Draggable;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class UpdateBudgetForm extends BorderPane {
+public class UpdateBudgetForm extends StackPane {
+    public StackPane stackPane;
     public MFXFilterComboBox<String> categoryComboBox;
     public MFXTextField limitField;
     public MFXDatePicker startDatePicker;
@@ -68,7 +70,7 @@ public class UpdateBudgetForm extends BorderPane {
         LocalDate endDate = endDatePicker.getValue();
 
         if (limitText.isEmpty() || category.isEmpty() || startDate == null || endDate == null) {
-            new ErrorAlert("Update declined", "Please fill in all fields!");
+            new ErrorAlert(stackPane, "Update declined", "Please fill in all fields!");
             return;
         }
 
@@ -78,7 +80,7 @@ public class UpdateBudgetForm extends BorderPane {
             budgetController.updateBudgetInDatabase(category, limit, startDate, endDate, budget.getId());
 
         } catch (NumberFormatException e) {
-            new ErrorAlert("Invalid input", "Amount must be a number");
+            new ErrorAlert(stackPane, "Invalid input", "Amount must be a number");
         }
     }
 }

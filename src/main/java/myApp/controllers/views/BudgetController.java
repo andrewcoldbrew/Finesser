@@ -137,7 +137,7 @@ public class BudgetController implements Initializable {
                 Platform.runLater(() -> {
                     loadBudgetDataAsync();
                     new SuccessAlert("Budget updated!");
-                    closeUpdateFinanceForm();
+                    closeUpdateBudgetForm();
                 });
             }
         } catch (SQLException e) {
