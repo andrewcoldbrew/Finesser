@@ -377,7 +377,7 @@ public class AccountController implements Initializable {
                 imagePath = rs.getString("profileImagePath");
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Log this exception
+            e.printStackTrace(); 
         }
         return imagePath;
     }
@@ -391,11 +391,9 @@ public class AccountController implements Initializable {
             pst.setInt(2, userId);
             pst.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace(); // Log this exception
+            e.printStackTrace();
         }
     }
-
-
 
 
     private Window getWindow() {
