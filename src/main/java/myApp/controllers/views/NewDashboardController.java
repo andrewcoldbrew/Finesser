@@ -1,28 +1,26 @@
 package myApp.controllers.views;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.css.converter.StringConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import myApp.Main;
 
 import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
 
 import myApp.controllers.components.DBTransaction;
-import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.MainAppManager;
-import javafx.scene.text.Font;
-import java.awt.*;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,12 +28,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 
-public class DashboardController implements Initializable {
+public class NewDashboardController implements Initializable {
 
     public VBox transactionContainer;
     public Label totalBalanceLabel;
@@ -53,7 +48,9 @@ public class DashboardController implements Initializable {
 
     @FXML
     private AreaChart<String, Number> incomeVsOutcomeChart;
-
+    private Tooltip pieChartToolTip;
+    private Tooltip barChartToolTip;
+    private Tooltip areaChartToolTip;
 
 
     @Override
@@ -64,6 +61,42 @@ public class DashboardController implements Initializable {
         loadIncomeVsOutcomeData();
         loadUserInfo();
         seeMoreLink.setOnAction(this::moveToTransaction);
+
+        initializeToolTips();
+        Platform.runLater(this::addHoverToAllCharts);
+
+    }
+
+    private void initializeToolTips() {
+        pieChartToolTip = new Tooltip("");
+        pieChartToolTip.setShowDelay(Duration.millis(0));
+        pieChartToolTip.setHideDelay(Duration.millis(0));
+        barChartToolTip = new Tooltip("");
+        barChartToolTip.setShowDelay(Duration.millis(0));
+        barChartToolTip.setHideDelay(Duration.millis(0));
+        areaChartToolTip = new Tooltip("");
+        areaChartToolTip.setShowDelay(Duration.millis(0));
+        areaChartToolTip.setHideDelay(Duration.millis(0));
+    }
+
+    private void addHoverToAllCharts() {
+        for (final PieChart.Data data : categoryPieChart.getData()) {
+            Tooltip.install(data.getNode(), pieChartToolTip);
+            addHoverToPieChart(data);
+        }
+        for (final XYChart.Series<String, Number> series : budgetVsSpendingChart.getData()) {
+            for (final XYChart.Data<String, Number> data : series.getData()) {
+                Tooltip.install(data.getNode(), barChartToolTip);
+                addHoverToBarChart(data, series);
+            }
+        }
+
+        for (final XYChart.Series<String, Number> series : incomeVsOutcomeChart.getData()) {
+            for (final XYChart.Data<String, Number> data : series.getData()) {
+                Tooltip.install(data.getNode(), areaChartToolTip);
+                addHoverToAreaChart(data, series);
+            }
+        }
     }
 
     private void loadTransactions() {
@@ -117,34 +150,22 @@ public class DashboardController implements Initializable {
         });
     }
 
-        /*private void loadPieChartData() {
+    private void addHoverToPieChart(final PieChart.Data data) {
 
-            Map<String, Double> categoryTotals = new HashMap<>();
+        final Node node = data.getNode();
 
-            String query = "SELECT category, SUM(amount) AS totalAmount FROM transaction WHERE userID = ? GROUP BY category";
-            try (Connection conn = ConnectionManager.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement(query)) {
+        node.setOnMouseEntered(arg0 -> {
+            node.setEffect(new Glow());
+            String styleString = "-fx-border-color: white; -fx-border-width: 2; -fx-border-style: dashed;";
+            node.setStyle(styleString);
+            pieChartToolTip.setText(data.getName() + "\n" + "Spending: " + data.getPieValue());
+        });
 
-                stmt.setInt(1, Main.getUserId());
-
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                    String category = rs.getString("category");
-                    double amount = rs.getDouble("totalAmount");
-                    categoryTotals.put(category, amount);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace(); // Handle the exception appropriately
-            }
-
-
-            Platform.runLater(() -> {
-                for (Map.Entry<String, Double> entry : categoryTotals.entrySet()) {
-                    categoryPieChart.getData().add(new PieChart.Data(entry.getKey(), entry.getValue()));
-                }
-            });
-        }*/
-
+        node.setOnMouseExited(arg0 -> {
+            node.setEffect(null);
+            node.setStyle("");
+        });
+    }
 
     private void loadBudgetVsSpendingData() {
         Map<String, Double> budgetData = new HashMap<>();
@@ -211,34 +232,50 @@ public class DashboardController implements Initializable {
             });
         }
     }
+
+    private void addHoverToBarChart(final XYChart.Data data, XYChart.Series<String, Number> series) {
+        final Node node = data.getNode();
+
+        node.setOnMouseEntered(arg0 -> {
+            node.setEffect(new Glow());
+            String styleString = "-fx-border-color: white; -fx-border-width: 2; -fx-border-style: dashed;";
+            node.setStyle(styleString);
+            barChartToolTip.setText(series.getName() + "\n"
+                    + "Category: " + data.getXValue().toString() + "\n"
+                    + "Amount: $" + data.getYValue().toString());
+        });
+
+        node.setOnMouseExited(arg0 -> {
+            node.setEffect(null);
+            node.setStyle("");
+        });
+    }
+
     private void loadIncomeVsOutcomeData() {
-        AreaChart.Series<String, Number> incomeSeries = new AreaChart.Series<>();
+        XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
         incomeSeries.setName("Cumulative Income");
 
-        AreaChart.Series<String, Number> expensesSeries = new AreaChart.Series<>();
+        XYChart.Series<String, Number> expensesSeries = new XYChart.Series<>();
         expensesSeries.setName("Cumulative Expenses");
 
         DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter chartFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-        TreeMap<LocalDate, Double> incomeMap = new TreeMap<>();
-        TreeMap<LocalDate, Double> expensesMap = new TreeMap<>();
+        Map<LocalDate, Double> incomeMap = new HashMap<>();
+        Map<LocalDate, Double> expensesMap = new HashMap<>();
 
         int userId = Main.getUserId();
 
-        String incomeQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category = 'Income' GROUP BY transactionDate ORDER BY transactionDate";
-       
-        String expensesQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Rent', 'Subscription') GROUP BY transactionDate ORDER BY transactionDate";
+        String incomeQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Income', 'Dividend Income', 'Investment') GROUP BY transactionDate ORDER BY transactionDate";
+
+        String expensesQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Rent', 'Subscription', 'Insurance', 'Bills') GROUP BY transactionDate ORDER BY transactionDate";
 
         updateTransactionMap(incomeQuery, userId, incomeMap, dbFormatter);
         updateTransactionMap(expensesQuery, userId, expensesMap, dbFormatter);
 
-        TreeSet<LocalDate> allDates = new TreeSet<>(incomeMap.keySet());
+        Set<LocalDate> allDates = new TreeSet<>(incomeMap.keySet());
         allDates.addAll(expensesMap.keySet());
 
-        System.out.println(incomeMap);
-        System.out.println(expensesMap);
-        System.out.println(allDates);
         double lastIncome = 0;
         double lastExpenses = 0;
 
@@ -246,17 +283,18 @@ public class DashboardController implements Initializable {
             lastIncome = incomeMap.getOrDefault(date, lastIncome);
             lastExpenses = expensesMap.getOrDefault(date, lastExpenses);
 
-            incomeSeries.getData().add(new AreaChart.Data<>(date.format(chartFormatter), lastIncome));
-            expensesSeries.getData().add(new AreaChart.Data<>(date.format(chartFormatter), lastExpenses));
+            incomeSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastIncome));
+            expensesSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastExpenses));
         }
-
+        incomeVsOutcomeChart.getData().clear();
+        incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
         Platform.runLater(() -> {
-            incomeVsOutcomeChart.getData().clear();
-            incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
+
+
         });
     }
 
-    private void updateTransactionMap(String query, int userId, TreeMap<LocalDate, Double> map, DateTimeFormatter dbFormatter) {
+    private void updateTransactionMap(String query, int userId, Map<LocalDate, Double> map, DateTimeFormatter dbFormatter) {
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
@@ -273,6 +311,25 @@ public class DashboardController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void addHoverToAreaChart(final XYChart.Data data, XYChart.Series<String, Number> series) {
+        final Node node = data.getNode();
+
+        node.setOnMouseEntered(arg0 -> {
+            node.setEffect(new Glow());
+            String styleString = "-fx-background-color: red;";
+            node.setStyle(styleString);
+            areaChartToolTip.setText(series.getName() + "\n"
+                    + "Date: " + data.getXValue().toString() + "\n"
+                    + "Amount: " + data.getYValue().toString());
+        });
+
+        node.setOnMouseExited(arg0 -> {
+            node.setEffect(null);
+            node.setStyle("");
+        });
+
     }
 
 

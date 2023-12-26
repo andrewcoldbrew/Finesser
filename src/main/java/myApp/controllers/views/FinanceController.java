@@ -63,9 +63,10 @@ public class FinanceController implements Initializable {
         yearlyButton.setOnAction(event -> filterFinances(TimeFrame.YEARLY));
 
         Platform.runLater(() -> {
-            LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
-            LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
-            loadFinanceData(startOfMonth, endOfMonth);
+//            LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
+//            LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+//            loadFinanceData(startOfMonth, endOfMonth);
+            filterFinances(TimeFrame.ALL_TIME);
             handleTransactionRecurrences();
         });
 
@@ -190,9 +191,7 @@ public class FinanceController implements Initializable {
             closeUpdateFinanceForm();
 
             Platform.runLater(() -> {
-                LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
-                LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
-                loadFinanceData(startOfMonth, endOfMonth);
+                filterFinances(TimeFrame.ALL_TIME);
                 new SuccessAlert(stackPane, "Finance successfully updated!");
             });
         } catch (SQLException e) {
@@ -207,9 +206,7 @@ public class FinanceController implements Initializable {
 
             pstmt.setInt(1, transaction.getTransactionID());
             pstmt.executeUpdate();
-            LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
-            LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
-            loadFinanceData(startOfMonth, endOfMonth);
+            filterFinances(TimeFrame.ALL_TIME);
             new SuccessAlert(stackPane, "Finance successfully deleted!");
             System.out.println("Deleted finance");
         } catch (SQLException e) {
