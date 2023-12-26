@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +33,7 @@ public class AddTransactionForm extends StackPane {
     public TextField descriptionField;
     public TextField amountField;
     public MFXButton cancelButton;
+    public Button exitButton;
 
     private final ObservableList<String> typeList = FXCollections.observableArrayList(
             "Clothes", "Education", "Entertainment", "Food", "Groceries",
@@ -66,6 +68,7 @@ public class AddTransactionForm extends StackPane {
 
         addButton.setOnAction(this::addTransaction);
         cancelButton.setOnAction(this::closeTransactionForm);
+        exitButton.setOnAction(this::closeTransactionForm);
     }
 
     private void addTransaction(ActionEvent actionEvent) {

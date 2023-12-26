@@ -91,7 +91,6 @@ public class TransactionController implements Initializable {
 
         transactionTable.getTableColumns().addAll(nameCol, amountCol, descriptionCol, typeCol, bankCol, dateCol, actionCol);
         transactionTable.getFilters().addAll(
-
                 new StringFilter<>("Name", Transaction::getName),
                 new DoubleFilter<>("Amount", Transaction::getAmount),
                 new StringFilter<>("Description", Transaction::getDescription),
@@ -99,8 +98,7 @@ public class TransactionController implements Initializable {
                 new StringFilter<>("Bank", Transaction::getBankName)
                 );
 
-//        transactionTable.setItems(transactionData);
-//        transactionTable.setItems(filteredTransactions);
+        Platform.runLater(() -> transactionTable.autosizeColumns());
     }
 
     public void loadTransactions() {
@@ -108,11 +106,11 @@ public class TransactionController implements Initializable {
         transactionData.clear();
 
 
-        String query = "SELECT t.transactionID, t.name, t.amount, t.description, t.category, COALESCE(b.bankName, 'Cash') AS bankName, t.transactionDate, t.recurrencePeriod " +
-                "FROM transaction t " +
-                "LEFT JOIN bank b ON t.bankID = b.bankID " +
-                "WHERE t.userID = ? AND b.linked = true " +
-                "ORDER BY t.transactionDate DESC";
+        String query = "SELECT t.transactionID, t.name, t.amount, t.description, t.category, COALESCE(b.bankName, 'Cash') AS bankName, t.transactionDate, t.recurrencePeriod\n" +
+                "FROM transaction t\n" +
+                "LEFT JOIN bank b ON t.bankID = b.bankID\n" +
+                "WHERE t.userID = ? AND (b.linked = true OR b.linked IS NULL)\n" +
+                "ORDER BY t.transactionDate DESC;";
 
 
         try (Connection conn = ConnectionManager.getConnection();
@@ -145,6 +143,7 @@ public class TransactionController implements Initializable {
 
         Platform.runLater(() -> {
             transactionTable.setItems(FXCollections.observableArrayList(transactionData));
+            transactionTable.setCurrentPage(1);
         });
     }
 
@@ -241,8 +240,13 @@ public class TransactionController implements Initializable {
             stmt.setInt(5, bankID);
             stmt.setDate(6, Date.valueOf(transactionDate));
             stmt.setInt(7, transactionID);
-
             stmt.executeUpdate();
+
+            Platform.runLater(() -> {
+                loadTransactions();
+                closeUpdateForm();
+                new SuccessAlert(stackPane, "Your transaction has been updated successfully!");
+            });
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -278,19 +282,6 @@ public class TransactionController implements Initializable {
         }
     }
 
-    private void deleteTransaction(Transaction transaction) {
-        ManualAlert confirm = new ManualAlert(Alert.AlertType.CONFIRMATION, "Confirm Deletion",
-                "Are you sure you want to delete this budget?",
-                "This action cannot be revert!");
-        confirm.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.YES) {
-                deleteTransactionFromDatabase(transaction);
-                loadTransactions();
-            }
-        });
-    }
-
-
     private void updateTransaction() {
         Platform.runLater(() -> {
 
@@ -300,11 +291,7 @@ public class TransactionController implements Initializable {
                if (selectedTransaction.getRecurrencePeriod() != null) {
                    new NewManualAlert(NewManualAlert.Type.WARNING, "Warning!", "You cannot update a finance through the transaction table. Please navigate to the finance page").show();
                } else {
-                   updateForm = new UpdateTransactionForm(selectedTransaction, this);
-                   AnchorPane.setTopAnchor(updateForm, (mainPane.getHeight() - updateForm.getPrefHeight()) / 2);
-                   AnchorPane.setLeftAnchor(updateForm, (mainPane.getWidth() - updateForm.getPrefWidth()) / 2);
-                   mainPane.getChildren().add(updateForm);
-                   draggable.makeDraggable(updateForm);
+                   openUpdateForm(selectedTransaction);
                }
            }
         });
@@ -342,31 +329,35 @@ public class TransactionController implements Initializable {
     public void handleAddTransactionForm(ActionEvent actionEvent) {
         if (!isAddFormOpen()) {
             stackPane.getChildren().add(new AddTransactionForm(this));
-
         }
-//        if (!mainPane.getChildren().contains(addForm)) {
-//            addForm = new AddTransactionForm();
-//            AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
-//            AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
-//
-//            mainPane.getChildren().add(addForm);
-//            draggable.makeDraggable(addForm);
-//        }
     }
-
-    private void closeUpdateFinanceForm() {
+    private boolean isAddFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
         for (Node node : stackPane.getChildren()) {
             if (node instanceof AddTransactionForm) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void openUpdateForm(Transaction transaction) {
+        if (!isUpdateFormOpen()) {
+            stackPane.getChildren().add(new UpdateTransactionForm(transaction, this));
+        }
+    }
+    private void closeUpdateForm() {
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof UpdateTransactionForm) {
                 stackPane.getChildren().remove(node);
                 break;
             }
         }
     }
-
-    private boolean isAddFormOpen() {
+    private boolean isUpdateFormOpen() {
         // Check if a LinkBankForm is already present in mainPane
         for (Node node : stackPane.getChildren()) {
-            if (node instanceof AddTransactionForm) {
+            if (node instanceof UpdateTransactionForm) {
                 return true;
             }
         }
