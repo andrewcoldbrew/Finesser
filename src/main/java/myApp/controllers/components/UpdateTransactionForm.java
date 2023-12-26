@@ -32,7 +32,7 @@ public class UpdateTransactionForm extends StackPane {
     private Transaction transaction;
     private final ObservableList<String> typeList = FXCollections.observableArrayList(
             "Clothes", "Education", "Entertainment", "Food", "Groceries",
-            "Healthcare", "Transportation", "Travel", "Utilities", "Miscellaneous", "Other"
+            "Healthcare", "Transportation", "Travel", "Other"
     );
     public UpdateTransactionForm(Transaction transaction, TransactionController transactionController) {
         this.transactionController = transactionController;

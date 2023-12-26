@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.*;
@@ -75,7 +74,7 @@ public class LinkBankForm extends StackPane {
                 statement.setInt(1, Main.getUserId());
                 statement.setString(2, bankName);
                 statement.execute();
-                new SuccessAlert(accountController.getMainPane(), "The bank has been linked successfully!");
+                new SuccessAlert(accountController.getStackPane(), "The bank has been linked successfully!");
 
                 PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                 pause.setOnFinished(event -> {

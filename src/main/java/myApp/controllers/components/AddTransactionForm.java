@@ -37,7 +37,7 @@ public class AddTransactionForm extends StackPane {
 
     private final ObservableList<String> typeList = FXCollections.observableArrayList(
             "Clothes", "Education", "Entertainment", "Food", "Groceries",
-            "Healthcare", "Transportation", "Travel", "Utilities", "Miscellaneous", "Other"
+            "Healthcare", "Transportation", "Travel", "Other"
     );
     private ObservableList<String> bankList;
     private TransactionController transactionController;

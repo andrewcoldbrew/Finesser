@@ -42,6 +42,7 @@ public class BudgetController implements Initializable {
     private FlowPane flowPane;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        new LoadingScreen(stackPane);
         loadBudgetDataAsync();
         flowPane.setPadding(new Insets(30, 0, 30, 30));
     }

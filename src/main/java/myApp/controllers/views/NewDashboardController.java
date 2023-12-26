@@ -1,6 +1,7 @@
 package myApp.controllers.views;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import myApp.Main;
@@ -18,6 +20,7 @@ import myApp.Main;
 import java.util.*;
 
 import myApp.controllers.components.DBTransaction;
+import myApp.controllers.components.LoadingScreen;
 import myApp.utils.ConnectionManager;
 import myApp.utils.MainAppManager;
 
@@ -35,14 +38,12 @@ public class NewDashboardController implements Initializable {
     public VBox transactionContainer;
     public Label totalBalanceLabel;
     public Hyperlink seeMoreLink;
-    public NumberAxis yAxis;
-    public CategoryAxis xAxis;
     public ImageView userProfileImage;
     public Label welcomeLabel;
+    public StackPane stackPane;
 
     @FXML
     private PieChart categoryPieChart;
-
     @FXML
     private BarChart<String, Number> budgetVsSpendingChart;
 
@@ -55,15 +56,50 @@ public class NewDashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadTransactions();
-        loadPieChartData();
-        loadBudgetVsSpendingData();
-        loadIncomeVsOutcomeData();
-        loadUserInfo();
-        seeMoreLink.setOnAction(this::moveToTransaction);
+//        new LoadingScreen(stackPane);
+//        Platform.runLater(() -> {
+//            loadTransactions();
+//            Platform.runLater(this::loadPieChartData);
+//            Platform.runLater(this::loadBudgetVsSpendingData);
+//            Platform.runLater(this::loadIncomeVsOutcomeData);
+//            Platform.runLater(this::addHoverToAllCharts);
+////            loadPieChartData();
+////            loadBudgetVsSpendingData();
+////            loadIncomeVsOutcomeData();
+//            loadUserInfo();
+//            seeMoreLink.setOnAction(this::moveToTransaction);
+//            initializeToolTips();
+//
+//        });
 
-        initializeToolTips();
-        Platform.runLater(this::addHoverToAllCharts);
+        new LoadingScreen(stackPane);
+
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                loadTransactions();
+                // Perform heavy tasks in the background
+                loadPieChartData();
+                loadBudgetVsSpendingData();
+                loadIncomeVsOutcomeData();
+                return null;
+            }
+        };
+
+        task.setOnSucceeded(event -> {
+            // Update UI after background tasks are complete
+            addHoverToAllCharts();
+            loadUserInfo();
+            seeMoreLink.setOnAction(this::moveToTransaction);
+            initializeToolTips();
+        });
+
+        Platform.runLater(() -> {
+            // Start the task on the JavaFX Application Thread
+            new Thread(task).start();
+        });
+
+
 
     }
 

@@ -37,7 +37,7 @@ public class AddBudgetForm extends BorderPane {
     private Stage stage;
     private final ObservableList<String> categoryList = FXCollections.observableArrayList(
             "Clothes", "Education", "Entertainment", "Food", "Groceries",
-            "Healthcare", "Transportation", "Travel", "Utilities", "Miscellaneous", "Other"
+            "Healthcare", "Transportation", "Travel", "Other"
     );
 
     private BudgetController budgetController;

@@ -56,6 +56,7 @@ public class FinanceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        new LoadingScreen(stackPane);
 
         allTimeButton.setOnAction(event -> filterFinances(TimeFrame.ALL_TIME));
         weeklyButton.setOnAction(event -> filterFinances(TimeFrame.WEEKLY));

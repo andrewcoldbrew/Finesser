@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root fx:id="loadingScreen" stylesheets="@../css/loadingScreen.css" type="BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="logoContainer" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Logo.png" />
+               </image>
+            </ImageView>
+            <MFXProgressBar fx:id="progressBar" />
+         </children>
+      </VBox>
+   </center>
+</fx:root>

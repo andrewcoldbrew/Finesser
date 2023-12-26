@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import myApp.Main;
 import myApp.controllers.components.*;
@@ -36,6 +38,9 @@ public class TransactionController implements Initializable {
     public MFXTextField searchBar;
     public MFXPaginatedTableView<Transaction> transactionTable;
     public StackPane stackPane;
+    public ImageView firstCategoryIcon;
+    public ImageView secondCategoryIcon;
+    public ImageView thirdCategoryIcon;
 
     @FXML private Label firstCategoryTotalLabel;
     @FXML private Label secondCategoryTotalLabel;
@@ -48,13 +53,26 @@ public class TransactionController implements Initializable {
     private final ObservableList<Transaction> transactionData = FXCollections.observableArrayList();
     private FilteredList<Transaction> filteredTransactions;
 
+    private static final Map<String, String> icons = Map.of(
+            "Clothes", "/images/category/clothes.png",
+            "Education", "/images/category/education.png",
+            "Entertainment", "/images/category/entertainment.png",
+            "Food", "/images/category/food.png",
+            "Groceries", "/images/category/groceries.png",
+            "Healthcare", "/images/category/healthcare.png",
+            "Transportation", "/images/category/transportation.png",
+            "Travel", "/images/category/travel.png",
+            "Other", "/images/category/other.png"
+    );
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        loadTransactions();
-        filteredTransactions = new FilteredList<>(transactionData, p -> true);
-        setupTransactionTable();
-        setupSearchBar();
+        new LoadingScreen(stackPane);
+        Platform.runLater(() -> {
+            loadTransactions();
+            filteredTransactions = new FilteredList<>(transactionData, p -> true);
+            setupTransactionTable();
+            setupSearchBar();
+        });
         transactionTable.getSelectionModel().setAllowsMultipleSelection(false);
         transactionTable.autosizeColumnsOnInitialization();
 
@@ -192,17 +210,23 @@ public class TransactionController implements Initializable {
 
         Platform.runLater(() -> {
             if (topCategories.size() > 0) {
-                firstCategoryTotalLabel.setText(topCategories.get(0).getKey() + ": $" + String.format("%.2f", topCategories.get(0).getValue()));
+                String category = topCategories.get(0).getKey();
+                firstCategoryTotalLabel.setText(category + ": $" + String.format("%.2f", topCategories.get(0).getValue()));
+                firstCategoryIcon.setImage(new Image(icons.get(category)));
             } else {
                 firstCategoryTotalLabel.setText("N/A");
             }
             if (topCategories.size() > 1) {
-                secondCategoryTotalLabel.setText(topCategories.get(1).getKey() + ": $" + String.format("%.2f", topCategories.get(1).getValue()));
+                String category = topCategories.get(1).getKey();
+                secondCategoryTotalLabel.setText(category + ": $" + String.format("%.2f", topCategories.get(1).getValue()));
+                secondCategoryIcon.setImage(new Image(icons.get(category)));
             } else {
                 secondCategoryTotalLabel.setText("N/A");
             }
             if (topCategories.size() > 2) {
-                thirdCategoryTotalLabel.setText(topCategories.get(2).getKey() + ": $" + String.format("%.2f", topCategories.get(2).getValue()));
+                String category = topCategories.get(2).getKey();
+                thirdCategoryTotalLabel.setText(category + ": $" + String.format("%.2f", topCategories.get(2).getValue()));
+                thirdCategoryIcon.setImage(new Image(icons.get(category)));
             } else {
                 thirdCategoryTotalLabel.setText("N/A");
             }

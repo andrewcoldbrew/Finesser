@@ -10,6 +10,7 @@ import javafx.scene.chart.*;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import myApp.Main;
 
@@ -18,6 +19,7 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import myApp.controllers.components.DBTransaction;
+import myApp.controllers.components.LoadingScreen;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.MainAppManager;
@@ -44,6 +46,7 @@ public class DashboardController implements Initializable {
     public CategoryAxis xAxis;
     public ImageView userProfileImage;
     public Label welcomeLabel;
+    public StackPane stackPane;
 
     @FXML
     private PieChart categoryPieChart;
@@ -58,11 +61,13 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        new LoadingScreen(stackPane);
         loadTransactions();
         loadPieChartData();
         loadBudgetVsSpendingData();
         loadIncomeVsOutcomeData();
         loadUserInfo();
+
         seeMoreLink.setOnAction(this::moveToTransaction);
     }
 

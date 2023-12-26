@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root stylesheets="@../css/addTransactionForm.css" fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/addTransactionForm.css" type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <javafx.scene.layout.BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: white; -fx-border-color: #9FE2BF; -fx-border-width: 3; -fx-border-radius: 20; -fx-background-radius: 20;">
           <VBox layoutX="83.0" layoutY="76.0" prefHeight="327.0" prefWidth="337.0" spacing="30.0">
