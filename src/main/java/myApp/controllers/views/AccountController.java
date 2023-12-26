@@ -31,6 +31,18 @@ import myApp.controllers.components.LinkBankForm;
 import myApp.utils.Animate;
 import myApp.utils.ConnectionManager;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+
+
+import javafx.event.ActionEvent;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
+import java.io.File;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,6 +53,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 public class AccountController implements Initializable {
     public HBox creditCardContainer;
@@ -67,13 +80,19 @@ public class AccountController implements Initializable {
     private List<Button> paginationList;
     private Label noBankLabel;
 
+    private static final String IMAGE_SAVE_DIRECTORY = "src/main/resources/images";
+    private static final String PROFILE_IMAGE_KEY = "profileImagePath";
+    private Preferences prefs;
     public AccountController() {
+        prefs = Preferences.userNodeForPackage(AccountController.class);
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadUserProfile();
         loadCreditCard();
+        loadProfilePicture();
         rightButton.setOnAction(this::moveToRightCard);
         leftButton.setOnAction(this::moveToLeftCard);
         Animate.addHoverScalingEffect(leftButton, 1.1);
@@ -291,21 +310,18 @@ public class AccountController implements Initializable {
     }
 
     public void handleLinkBankForm(ActionEvent actionEvent) {
-        // Check if a LinkBankForm is already present
         if (!isLinkBankFormOpen()) {
             mainPane.getChildren().add(new LinkBankForm(this));
         }
     }
 
     public void handleAddWalletForm(ActionEvent actionEvent) {
-        // Check if an AddWalletForm is already present
         if (!isAddWalletFormOpen()) {
             mainPane.getChildren().add(new AddWalletForm());
         }
     }
 
     private boolean isLinkBankFormOpen() {
-        // Check if a LinkBankForm is already present in mainPane
         for (Node node : mainPane.getChildren()) {
             if (node instanceof LinkBankForm) {
                 return true;
@@ -315,7 +331,6 @@ public class AccountController implements Initializable {
     }
 
     private boolean isAddWalletFormOpen() {
-        // Check if an AddWalletForm is already present in mainPane
         for (Node node : mainPane.getChildren()) {
             if (node instanceof AddWalletForm) {
                 return true;
@@ -323,7 +338,69 @@ public class AccountController implements Initializable {
         }
         return false;
     }
+    private void loadProfilePicture() {
+        String imagePath = getUserProfileImagePath(Main.getUserId());
+        if (imagePath != null && !imagePath.isEmpty()) {
+            File file = new File(imagePath);
+            if (file.exists()) {
+                Image image = new Image(file.toURI().toString());
+                profileImage.setImage(image);
+            }
+        }
+    }
 
+    public void handleUploadProfilePicture(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        File selectedFile = fileChooser.showOpenDialog(getWindow());
+
+        if (selectedFile != null) {
+            Image selectedImage = new Image(selectedFile.toURI().toString());
+            profileImage.setImage(selectedImage);
+
+            updateUserProfileImagePath(Main.getUserId(), selectedFile.getAbsolutePath());
+        }
+    }
+
+    private String getUserProfileImagePath(int userId) {
+        String imagePath = null;
+        String query = "SELECT profileImagePath FROM user WHERE userID = ?";
+
+        try (Connection con = ConnectionManager.getConnection();
+             PreparedStatement pst = con.prepareStatement(query)) {
+
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                imagePath = rs.getString("profileImagePath");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log this exception
+        }
+        return imagePath;
+    }
+    private void updateUserProfileImagePath(int userId, String imagePath) {
+        String query = "UPDATE user SET profileImagePath = ? WHERE userID = ?";
+
+        try (Connection con = ConnectionManager.getConnection();
+             PreparedStatement pst = con.prepareStatement(query)) {
+
+            pst.setString(1, imagePath);
+            pst.setInt(2, userId);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Log this exception
+        }
+    }
+
+
+
+
+    private Window getWindow() {
+        return profileImage.getScene().getWindow();
+    }
     public void handleUpdateInfo(ActionEvent actionEvent) {
     }
 
