@@ -73,7 +73,8 @@ public class NewDashboardController implements Initializable {
 //        });
 
         new LoadingScreen(stackPane);
-
+        seeMoreLink.setOnAction(this::moveToTransaction);
+        initializeToolTips();
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -82,17 +83,16 @@ public class NewDashboardController implements Initializable {
                 loadPieChartData();
                 loadBudgetVsSpendingData();
                 loadIncomeVsOutcomeData();
+                addHoverToAllCharts();
+                loadUserInfo();
                 return null;
             }
         };
 
-        task.setOnSucceeded(event -> {
-            // Update UI after background tasks are complete
-            addHoverToAllCharts();
-            loadUserInfo();
-            seeMoreLink.setOnAction(this::moveToTransaction);
-            initializeToolTips();
-        });
+//        task.setOnSucceeded(event -> {
+//            // Update UI after background tasks are complete
+//
+//        });
 
         Platform.runLater(() -> {
             // Start the task on the JavaFX Application Thread
