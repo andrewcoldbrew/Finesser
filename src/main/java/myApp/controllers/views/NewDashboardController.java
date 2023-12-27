@@ -57,23 +57,24 @@ public class NewDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new LoadingScreen(stackPane);
-        seeMoreLink.setOnAction(this::moveToTransaction);
         initializeToolTips();
-        loadUserInfo();
-        loadTransactions();
+        seeMoreLink.setOnAction(this::moveToTransaction);
+        loadIncomeVsOutcomeData();
+        
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 // Perform heavy tasks in the background
                 loadPieChartData();
                 loadBudgetVsSpendingData();
-                loadIncomeVsOutcomeData();
                 return null;
             }
         };
 
         task.setOnSucceeded(event -> {
             addHoverToAllCharts();
+            loadTransactions();
+            loadUserInfo();
         });
 
         // Start the task on the JavaFX Application Thread
@@ -136,35 +137,39 @@ public class NewDashboardController implements Initializable {
         }
     }
     private void loadPieChartData() {
-            Map<String, Double> categoryTotals = new HashMap<>();
-            double totalAmount = 0;
+        Map<String, Double> categoryTotals = new HashMap<>();
+        double totalAmount = 0;
 
-            String query = "SELECT category, SUM(amount) AS totalAmount FROM transaction WHERE userID = ? GROUP BY category";
-            try (Connection conn = ConnectionManager.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement(query)) {
+        String query = "SELECT category, SUM(amount) AS totalAmount FROM transaction WHERE userID = ? GROUP BY category";
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
 
-                stmt.setInt(1, Main.getUserId());
+            stmt.setInt(1, Main.getUserId());
 
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                    String category = rs.getString("category");
-                    double amount = rs.getDouble("totalAmount");
-                    totalAmount += amount;
-                    categoryTotals.put(category, amount);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String category = rs.getString("category");
+                double amount = rs.getDouble("totalAmount");
+                totalAmount += amount;
+                categoryTotals.put(category, amount);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-            final double finalTotalAmount = totalAmount;
-            //lambda shit that I hate
-            Platform.runLater(() -> {
-                for (Map.Entry<String, Double> entry : categoryTotals.entrySet()) {
-                    double percentage = (entry.getValue() / finalTotalAmount) * 100;
-                    String label = String.format("%s: %.2f%%", entry.getKey(), percentage);
-                    categoryPieChart.getData().add(new PieChart.Data(label, entry.getValue()));
-                }
-            });
+        final double finalTotalAmount = totalAmount;
+        //lambda shit that I hate
+        Platform.runLater(() -> {
+            for (Map.Entry<String, Double> entry : categoryTotals.entrySet()) {
+                double percentage = (entry.getValue() / finalTotalAmount) * 100;
+                String label = String.format("%s: %.2f%%", entry.getKey(), percentage);
+                categoryPieChart.getData().add(new PieChart.Data(label, entry.getValue()));
+            }
+//            for (final PieChart.Data data : categoryPieChart.getData()) {
+//                Tooltip.install(data.getNode(), pieChartToolTip);
+//                addHoverToPieChart(data);
+//            }
+        });
 
     }
 
@@ -186,35 +191,43 @@ public class NewDashboardController implements Initializable {
     }
 
     private void loadBudgetVsSpendingData() {
-            Map<String, Double> budgetData = new HashMap<>();
-            Map<String, Double> actualSpendingData = new HashMap<>();
+        Map<String, Double> budgetData = new HashMap<>();
+        Map<String, Double> actualSpendingData = new HashMap<>();
 
-            String query = "SELECT b.category, b.budgetLimit AS allocatedAmount, IFNULL(SUM(t.amount), 0) AS spentAmount " +
-                    "FROM budget b " +
-                    "LEFT JOIN transaction t ON b.category = t.category AND t.transactionDate BETWEEN b.startDate AND b.endDate " +
-                    "WHERE b.userID = ? " +
-                    "GROUP BY b.category, b.budgetLimit";
+        String query = "SELECT b.category, b.budgetLimit AS allocatedAmount, IFNULL(SUM(t.amount), 0) AS spentAmount " +
+                "FROM budget b " +
+                "LEFT JOIN transaction t ON b.category = t.category AND t.transactionDate BETWEEN b.startDate AND b.endDate " +
+                "WHERE b.userID = ? " +
+                "GROUP BY b.category, b.budgetLimit";
 
-            try (Connection con = ConnectionManager.getConnection();
-                 PreparedStatement stmt = con.prepareStatement(query)) {
+        try (Connection con = ConnectionManager.getConnection();
+             PreparedStatement stmt = con.prepareStatement(query)) {
 
-                stmt.setInt(1, Main.getUserId());
+            stmt.setInt(1, Main.getUserId());
 
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                    String category = rs.getString("category");
-                    double allocatedAmount = rs.getDouble("allocatedAmount");
-                    double spentAmount = rs.getDouble("spentAmount");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String category = rs.getString("category");
+                double allocatedAmount = rs.getDouble("allocatedAmount");
+                double spentAmount = rs.getDouble("spentAmount");
 
-                    budgetData.put(category, allocatedAmount);
-                    actualSpendingData.put(category, spentAmount);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                budgetData.put(category, allocatedAmount);
+                actualSpendingData.put(category, spentAmount);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
-            populateBarChart(budgetData, actualSpendingData);
+        populateBarChart(budgetData, actualSpendingData);
+//        Platform.runLater(() -> {
+//            for (final XYChart.Series<String, Number> series : budgetVsSpendingChart.getData()) {
+//                for (final XYChart.Data<String, Number> data : series.getData()) {
+//                    Tooltip.install(data.getNode(), barChartToolTip);
+//                    addHoverToBarChart(data, series);
+//                }
+//            }
+//        });
 
     }
 
@@ -305,11 +318,17 @@ public class NewDashboardController implements Initializable {
             incomeSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastIncome));
             expensesSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastExpenses));
         }
-        Platform.runLater(() -> {
-            incomeVsOutcomeChart.getData().clear();
-            incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
-        });
+        incomeVsOutcomeChart.getData().clear();
+        incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
 
+//        Platform.runLater(() -> {
+//            for (final XYChart.Series<String, Number> series : incomeVsOutcomeChart.getData()) {
+//                for (final XYChart.Data<String, Number> data : series.getData()) {
+//                    Tooltip.install(data.getNode(), areaChartToolTip);
+//                    addHoverToAreaChart(data, series);
+//                }
+//            }
+//        });
     }
 
     private void updateTransactionMap(String query, int userId, Map<LocalDate, Double> map, DateTimeFormatter dbFormatter) {
