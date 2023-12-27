@@ -1,12 +1,17 @@
 package myApp.controllers.views;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import myApp.Main;
 import myApp.controllers.components.ErrorAlert;
 import myApp.controllers.components.ManualAlert;
+import myApp.controllers.components.NewManualAlert;
 import myApp.utils.*;
 
 import java.net.URL;
@@ -20,13 +25,23 @@ public class LoginController implements Initializable {
 
     public Button loginButton;
     public Button signupButton;
+    public StackPane stackPane;
     @FXML
     private TextField usernameField;
 
     @FXML
     private PasswordField passwordField;
 
-    public void login(ActionEvent actionEvent) {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        passwordField.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+                login();
+            }
+        });
+    }
+
+    public void login() {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -49,11 +64,12 @@ public class LoginController implements Initializable {
                     LoginStageManager.getLoginStage().close();
                     MainAppManager.setupMainApp();
                 } else {
-                    new ErrorAlert("WRONG PASSWORD", "The password you entered is incorrect! Please try again");
+
+                    new ErrorAlert(stackPane, "Incorrect password", "The password you entered is incorrect! Please try again");
                     System.out.println("INCORRECT PASSWORD");
                 }
             } else {
-                new ErrorAlert("ACCOUNT NOT FOUND", "This username doesn't exists! Please enter another one");
+                new ErrorAlert(stackPane,"User not found", "This username doesn't exists! Please enter another one");
                 System.out.println("USER NOT FOUND");
             }
             resultSet.close();
@@ -64,12 +80,7 @@ public class LoginController implements Initializable {
     }
 
 
-    public void moveToSignup(ActionEvent actionEvent) {
-        LoginStageManager.switchScene("testSignup");
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("INITIALIZE LOGIN");
+    public void moveToSignup() {
+        LoginStageManager.switchScene("signup");
     }
 }

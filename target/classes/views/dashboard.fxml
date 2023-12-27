@@ -9,103 +9,118 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.DashboardController">
-    <right>
-        <VBox alignment="TOP_CENTER" maxWidth="250.0" prefHeight="850.0" prefWidth="210.0" spacing="30.0" BorderPane.alignment="CENTER">
-            <children>
-                <Label fx:id="totalBalanceLabel" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="sideBox" text="Total Balance" />
-                <VBox alignment="TOP_CENTER" spacing="30.0" styleClass="sideBox" VBox.vgrow="ALWAYS">
-                    <VBox.margin>
-                        <Insets />
-                    </VBox.margin>
-               <children>
-                  <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Most Recent Transactions" textAlignment="CENTER" wrappingWidth="200.0">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
-                     <content>
-                        <VBox fx:id="transactionContainer" alignment="TOP_CENTER" spacing="20.0">
-                           <padding>
-                              <Insets bottom="5.0" />
-                           </padding>
-                        </VBox>
-                     </content>
-                     <VBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </VBox.margin>
-                  </MFXScrollPane>
-                  <Hyperlink fx:id="seeMoreLink" text="See more..." />
-               </children>
-                </VBox>
-            </children>
-        </VBox>
-    </right>
-    <center>
-        <VBox spacing="30.0" BorderPane.alignment="CENTER">
-            <children>
-                <HBox alignment="CENTER" spacing="100.0">
-                    <children>
-                        <Label fx:id="welcomeLabel" alignment="CENTER" text="Welcome Mr/Ms" HBox.hgrow="ALWAYS">
-                            <font>
-                                <Font size="48.0" />
-                            </font>
-                            <HBox.margin>
-                                <Insets />
-                            </HBox.margin>
+<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.NewDashboardController">
+   <children>
+      <BorderPane maxHeight="820.0" maxWidth="1200.0" minHeight="820.0" minWidth="1200.0" prefHeight="820.0" prefWidth="1200.0" stylesheets="@../css/dashboard.css">
+          <center>
+              <VBox prefHeight="818.0" prefWidth="982.0" spacing="30.0" BorderPane.alignment="CENTER">
+                  <children>
+                      <HBox alignment="CENTER" prefHeight="125.0" prefWidth="943.0" spacing="100.0">
+                          <children>
+                              <Label fx:id="welcomeLabel" alignment="CENTER" text="Welcome Mr/Ms" HBox.hgrow="ALWAYS">
+                                  <font>
+                                      <Font name="Candara" size="48.0" />
+                                  </font>
+                                  <HBox.margin>
+                                      <Insets />
+                                  </HBox.margin>
+                              </Label>
+                          </children>
+                      </HBox>
+                      <HBox spacing="50.0">
+                          <children>
+                              <PieChart fx:id="categoryPieChart">
+                                  <HBox.margin>
+                                      <Insets top="10.0" />
+                                  </HBox.margin>
+                              </PieChart>
+                              <BarChart fx:id="budgetVsSpendingChart" animated="false" legendVisible="true">
+                                  <xAxis>
+                                      <CategoryAxis label="Category" />
+                                  </xAxis>
+                                  <yAxis>
+                                      <NumberAxis label="Amount" />
+                                  </yAxis>
+                                  <HBox.margin>
+                                      <Insets right="10.0" top="25.0" />
+                                  </HBox.margin>
+                              </BarChart>
+                          </children>
+                      </HBox>
+                      <AreaChart fx:id="incomeVsOutcomeChart">
+                          <xAxis>
+                              <CategoryAxis label="Date" side="BOTTOM" fx:id="xAxis" />
+                          </xAxis>
+                          <yAxis>
+                              <NumberAxis fx:id="yAxis" label="Amount" />
+                          </yAxis>
+                          <VBox.margin>
+                              <Insets top="10.0" />
+                          </VBox.margin>
+                      </AreaChart>
+      
+                  </children>
+                  <BorderPane.margin>
+                      <Insets right="20.0" />
+                  </BorderPane.margin>
+              </VBox>
+          </center>
+          <right>
+              <BorderPane prefHeight="816.0" prefWidth="237.0" styleClass="rightSide" BorderPane.alignment="CENTER">
+                  <center>
+                      <VBox alignment="TOP_CENTER" spacing="25.0" style="-fx-border-radius: 20 0  20  0;" BorderPane.alignment="CENTER">
+                          <children>
+                              <Label fx:id="totalBalanceLabel" alignment="CENTER" prefHeight="110.0" prefWidth="235.0" styleClass="sideBox" text="Total Balance: ">
+                                  <VBox.margin>
+                                      <Insets left="10.0" right="10.0" top="15.0" />
+                                  </VBox.margin>
+                           <font>
+                              <Font name="Cambria" size="18.0" />
+                           </font>
                         </Label>
-                        <ImageView fx:id="userProfileImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="sideBox" HBox.hgrow="ALWAYS">
-                            <image>
-                                <Image url="@../images/account/user.png" />
-                            </image>
-                            <HBox.margin>
-                                <Insets />
-                            </HBox.margin>
-                        </ImageView>
-                    </children>
-                </HBox>
-                <HBox spacing="50.0">
-                    <children>
-                        <PieChart fx:id="categoryPieChart" prefHeight="300.0" prefWidth="500.0">
-                            <HBox.margin>
-                                <Insets />
-                            </HBox.margin>
-                        </PieChart>
-                        <BarChart fx:id="budgetVsSpendingChart" animated="false" legendVisible="true" prefHeight="300.0" prefWidth="500.0">
-                            <xAxis>
-                                <CategoryAxis label="Category" />
-                            </xAxis>
-                            <yAxis>
-                                <NumberAxis label="Amount" />
-                            </yAxis>
-                        </BarChart>
-                    </children>
-                </HBox>
-                  <AreaChart fx:id="incomeVsOutcomeChart" prefHeight="300.0">
-                      <xAxis>
-                          <CategoryAxis label="Date" side="BOTTOM" fx:id="xAxis" />
-                      </xAxis>
-                      <yAxis>
-                          <NumberAxis fx:id="yAxis" label="Amount" />
-                      </yAxis>
-                  </AreaChart>
-
-            </children>
-         <BorderPane.margin>
-            <Insets right="20.0" />
-         </BorderPane.margin>
-        </VBox>
-    </center>
-   <padding>
-      <Insets bottom="20.0" />
-   </padding>
-</BorderPane>
+                              <VBox alignment="TOP_CENTER" spacing="20.0" styleClass="sideBox" VBox.vgrow="ALWAYS">
+                                  <VBox.margin>
+                                      <Insets bottom="15.0" left="10.0" right="10.0" />
+                                  </VBox.margin>
+                                  <children>
+                                      <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Most Recent Transactions" textAlignment="CENTER" wrappingWidth="200.0">
+                                          <font>
+                                              <Font name="Cambria" size="20.0" />
+                                          </font>
+                                          <VBox.margin>
+                                              <Insets top="10.0" />
+                                          </VBox.margin>
+                                      </Text>
+                                      <MFXScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" style="-fx-background-color: f6ede6;" VBox.vgrow="ALWAYS">
+                                          <content>
+                                              <VBox fx:id="transactionContainer" alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: f6ede6;" />
+                                          </content>
+                                          <VBox.margin>
+                                              <Insets left="5.0" right="5.0" />
+                                          </VBox.margin>
+                                      </MFXScrollPane>
+                                      <Hyperlink fx:id="seeMoreLink" text="See more...">
+                                          <VBox.margin>
+                                              <Insets bottom="15.0" />
+                                          </VBox.margin>
+                              </Hyperlink>
+                                  </children>
+                              </VBox>
+                          </children>
+                          <BorderPane.margin>
+                              <Insets />
+                          </BorderPane.margin>
+                      </VBox>
+                  </center>
+              </BorderPane>
+          </right>
+      </BorderPane>
+   </children>
+</StackPane>

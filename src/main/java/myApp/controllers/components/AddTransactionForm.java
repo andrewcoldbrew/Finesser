@@ -7,12 +7,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import myApp.Main;
+import myApp.controllers.views.TransactionController;
 import myApp.utils.ConnectionManager;
+import myApp.utils.Draggable;
 
 import java.io.IOException;
 import java.sql.*;
@@ -20,7 +24,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddTransactionForm extends AnchorPane {
+public class AddTransactionForm extends StackPane {
+    public StackPane stackPane;
     public MFXFilterComboBox<String> typeComboBox;
     public MFXFilterComboBox<String> bankComboBox;
     public TextField transactionNameField;
@@ -28,15 +33,18 @@ public class AddTransactionForm extends AnchorPane {
     public TextField descriptionField;
     public TextField amountField;
     public MFXButton cancelButton;
+    public Button exitButton;
 
     private final ObservableList<String> typeList = FXCollections.observableArrayList(
             "Clothes", "Education", "Entertainment", "Food", "Groceries",
-            "Healthcare", "Transportation", "Travel", "Utilities", "Miscellaneous", "Other"
+            "Healthcare", "Transportation", "Travel", "Other"
     );
     private ObservableList<String> bankList;
-//    private Connection con; // Database connection
+    private TransactionController transactionController;
 
-    public AddTransactionForm() {
+
+    public AddTransactionForm(TransactionController transactionController) {
+        this.transactionController = transactionController;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/addTransactionForm.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -44,6 +52,7 @@ public class AddTransactionForm extends AnchorPane {
         try {
             fxmlLoader.load();
             initialize();
+            new Draggable().makeDraggable(this);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -59,6 +68,7 @@ public class AddTransactionForm extends AnchorPane {
 
         addButton.setOnAction(this::addTransaction);
         cancelButton.setOnAction(this::closeTransactionForm);
+        exitButton.setOnAction(this::closeTransactionForm);
     }
 
     private void addTransaction(ActionEvent actionEvent) {
@@ -82,17 +92,23 @@ public class AddTransactionForm extends AnchorPane {
             if (bankName.equals("None")) {
                 addCashTransaction(name, amount, description, category, date, userId);
                 Platform.runLater(() -> updateCashAmount(userId, amount));
-                new SuccessAlert("Transaction added!");
+                new SuccessAlert(transactionController.getStackPane(), "Transaction added!");
+                exit();
+                Platform.runLater(() -> transactionController.loadTransactions());
             } else {
                 int bankId = getBankIdByName(bankName); // Fetch bankId based on bank name
                 addBankTransaction(name, amount, description, category, bankId, date, userId);
                 Platform.runLater(() -> updateBankBalance(userId, amount));
-                new SuccessAlert("Transaction added!");
+                new SuccessAlert(transactionController.getStackPane(), "Transaction added!");
+                exit();
+                Platform.runLater(() -> transactionController.loadTransactions());
             }
 
 
         } catch (NumberFormatException e) {
-            System.out.println("Invalid amount. Please enter a valid number.");
+            new ErrorAlert(transactionController.getStackPane(), "Invalid Amount",
+                    "The amount that you entered is not valid, please enter a number"
+                   );
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error adding the transaction to the database.");
@@ -117,6 +133,10 @@ public class AddTransactionForm extends AnchorPane {
 
     private void closeTransactionForm(ActionEvent actionEvent) {
         // Remove the form from its parent
+        exit();
+    }
+
+    private void exit() {
         ((Pane) getParent()).getChildren().remove(this);
     }
 

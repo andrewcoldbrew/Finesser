@@ -5,14 +5,122 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LoadingScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/NewManualAlert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateBudgetForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateFinanceForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewDashboardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/loadingScreen.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/manualAlert.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/updateBudgetForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/updateFinanceForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/addTransactionForm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/loadingScreen.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/manualAlert.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/report.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/components/reportForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/UpdateFinanceForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/io_github_palexdev_materialfx.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/io_github_palexdev_materialfx.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/io_github_palexdev_materialfx1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/io_github_palexdev_materialfx2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddBudgetForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddBudgetForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddWalletForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddWalletForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/BudgetBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/BudgetBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ErrorAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ErrorAlert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/FinanceBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/FinanceBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LinkBankForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LinkBankForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/SuccessAlert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/SuccessAlert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateTransactionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateTransactionForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/BudgetController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/MenuBarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/MenuBarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/models/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/models/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/LoginStageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/LoginStageManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/addBudgetForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/addBudgetForm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/components/addFinanceForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/addFinanceForm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/components/addTransactionForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/addTransactionForm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/components/errorAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/errorAlert.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/financeBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/financeBox.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/linkBankForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/linkBankForm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/components/successAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/successAlert.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/components/testFinanceBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/testFinanceBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/bankBox.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/bankBox.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/updateTransactionForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/updateTransactionForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/account.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/account.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/addBudgetForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/addBudgetForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/budget.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/budget.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/testTransaction.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/transaction.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/transaction.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/alert/check.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/alert/check.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/alert/error.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/alert/error.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/account.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/budget.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/budget.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/menuBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/menuBar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/newSignup.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/report.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/report.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/signup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/transaction.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/transaction.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/FinanceBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/FinanceBox.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/addBudgetForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/addBudgetForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/addFinanceForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/addFinanceForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/addTransactionForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/addTransactionForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/errorAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/errorAlert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/linkBankForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/linkBankForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/successAlert.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/successAlert.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/updateTransactionForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/updateTransactionForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/account.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/account.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/addBudgetForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/addBudgetForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/budget.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/budget.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/dashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/finance.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/finance.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/financeBox.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/financeBox.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/menuBar.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/menuBar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/testTransaction.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/transaction.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/transaction.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/alert/check.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/alert/check.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/images/alert/error.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/alert/error.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddBudgetForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddBudgetForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddFinanceForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddFinanceForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddTransactionForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddTransactionForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddWalletForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddWalletForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/BudgetBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/BudgetBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/ErrorAlert.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/ErrorAlert.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/FinanceBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/FinanceBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/LinkBankForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/LinkBankForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/SuccessAlert.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/SuccessAlert.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/UpdateTransactionForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/UpdateTransactionForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/BudgetController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/DashboardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/MenuBarController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/MenuBarController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewSignupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewSignupController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/models/Transaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/models/Transaction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/LoginStageManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/LoginStageManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/account.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/budget.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/budget.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/finance.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/finance.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/menuBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/menuBar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/newSignup.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/signup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/transaction.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/transaction.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +131,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
-        <option value="CSS File" />
         <option value="FxmlFile" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -80,13 +188,13 @@
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
     "git-widget-placeholder": "ThaiNgx",
-    "last_opened_file_path": "C:/Users/vinhh/Documents/GitHub/BITS_Group12/src/main/resources/images/account",
+    "last_opened_file_path": "C:/Users/thai2/Downloads/pdfbox-app-3.0.1.jar",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.5443038",
     "settings.editor.selected.configurable": "preferences.pluginManager",
@@ -107,7 +215,7 @@
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\exitButton" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Unnamed">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="ImageCarouselWithButtons" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="myApp.controllers.ImageCarouselWithButtons" />
       <module name="BITS_GROUP12" />
@@ -122,16 +230,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="myApp.Main" />
       <module name="BITS_GROUP12" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Users\vinhh\JavaFX\javafx-sdk-21.0.1\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\thai2\Downloads\openjfx-21.0.1_windows-x64_bin-sdk\javafx-sdk-21.0.1\lib --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Unnamed" />
+      <item itemvalue="Application.Main" />
       <item itemvalue="Application.ImageCarouselWithButtons" />
     </list>
     <recent_temporary>
@@ -199,6 +307,7 @@
       <workItem from="1703318715949" duration="2800000" />
       <workItem from="1703338165108" duration="5826000" />
       <workItem from="1703414686458" duration="1338000" />
+      <workItem from="1703666694465" duration="10269000" />
     </task>
     <servers />
   </component>

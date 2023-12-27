@@ -13,6 +13,12 @@ public class MenuBarController {
     public MFXButton financeButton;
     public MFXButton logoutButton;
 
+    public MFXButton reportButton;
+
+    public void moveToReport(ActionEvent actionEvent) {
+        MainAppManager.switchScene("report");
+    }
+
     public void moveToDashBoard(ActionEvent actionEvent) {
         MainAppManager.switchScene("dashboard");
     }

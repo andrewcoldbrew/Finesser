@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="255.0" styleClass="rootPane" stylesheets="@../css/menuBar.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.MenuBarController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="255.0" styleClass="rootPane" stylesheets="@../css/menuBar.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.MenuBarController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="850.0" prefWidth="255.0">
          <children>
-            <ImageView fitHeight="201.0" fitWidth="223.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/LogoNav.png" />
                </image>
@@ -22,14 +22,14 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <VBox alignment="TOP_CENTER" prefHeight="562.0" prefWidth="255.0" spacing="10.0">
+            <VBox alignment="TOP_CENTER" prefHeight="562.0" prefWidth="255.0" spacing="35.0">
                <children>
-                  <MFXButton fx:id="accountButton" alignment="CENTER" buttonType="RAISED" onAction="#moveToAccount" prefHeight="60.0" prefWidth="200.0" text="My Account">
+                  <MFXButton fx:id="accountButton" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="15.0" onAction="#moveToAccount" prefWidth="200.0" text="My Account">
                      <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets left="15.0" />
                      </VBox.margin>
                      <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/navbar/user.png" />
                            </image>
@@ -39,12 +39,12 @@
                         <Font size="15.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton fx:id="dashBoardButton" alignment="CENTER" buttonType="RAISED" onAction="#moveToDashBoard" prefHeight="60.0" prefWidth="200.0" text="   Dashbroad">
+                  <MFXButton fx:id="dashBoardButton" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="15.0" onAction="#moveToDashBoard" prefWidth="200.0" text="Dashboard">
                      <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                        <Insets left="15.0" />
                      </VBox.margin>
                      <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/navbar/dashboard-interface.png" />
                            </image>
@@ -54,12 +54,12 @@
                         <Font size="15.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton fx:id="financeButton" alignment="CENTER" buttonType="RAISED" onAction="#moveToFinance" prefHeight="60.0" prefWidth="200.0" text="     Finance">
+                  <MFXButton fx:id="financeButton" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="15.0" onAction="#moveToFinance" prefWidth="200.0" text="Finance">
                      <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                        <Insets left="15.0" />
                      </VBox.margin>
                      <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/navbar/money.png" />
                            </image>
@@ -69,12 +69,12 @@
                         <Font size="15.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton fx:id="budgetButton" alignment="CENTER" buttonType="RAISED" onAction="#moveToBudget" prefHeight="60.0" prefWidth="200.0" text="       Budget">
+                  <MFXButton fx:id="budgetButton" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="15.0" onAction="#moveToBudget" prefWidth="200.0" text="Budget">
                      <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                        <Insets left="15.0" />
                      </VBox.margin>
                      <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/navbar/money-bag.png" />
                            </image>
@@ -84,12 +84,12 @@
                         <Font size="15.0" />
                      </font>
                   </MFXButton>
-                  <MFXButton fx:id="transactionButton" alignment="CENTER" buttonType="RAISED" onAction="#moveToTransaction" prefHeight="60.0" prefWidth="200.0" text="   Transaction">
+                  <MFXButton fx:id="transactionButton" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="15.0" onAction="#moveToTransaction" prefWidth="200.0" text="Transaction">
                      <VBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" />
+                        <Insets left="15.0" />
                      </VBox.margin>
                      <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/navbar/transaction.png" />
                            </image>
@@ -99,14 +99,29 @@
                         <Font size="15.0" />
                      </font>
                   </MFXButton>
+                   <MFXButton fx:id="reportButton" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="15.0" onAction="#moveToReport" prefWidth="200.0" text="Report">
+                       <VBox.margin>
+                           <Insets left="15.0" />
+                       </VBox.margin>
+                       <graphic>
+                           <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                               <image>
+                                   <Image url="@../images/navbar/transaction.png" />
+                               </image>
+                           </ImageView>
+                       </graphic>
+                       <font>
+                           <Font size="15.0" />
+                       </font>
+                   </MFXButton>
                   <Separator prefWidth="200.0">
                      <VBox.margin>
                         <Insets left="50.0" right="50.0" top="30.0" />
                      </VBox.margin>
                   </Separator>
-                  <MFXButton fx:id="logoutButton" alignment="CENTER" buttonType="RAISED" onAction="#moveToLogin" prefHeight="60.0" prefWidth="200.0" text="Log Out">
+                  <MFXButton fx:id="logoutButton" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="15.0" onAction="#moveToLogin" prefWidth="200.0" text="Log Out">
                      <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/navbar/logout.png" />
                            </image>
@@ -116,7 +131,7 @@
                         <Font size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets left="15.0" />
                      </VBox.margin>
                   </MFXButton>
                </children>
