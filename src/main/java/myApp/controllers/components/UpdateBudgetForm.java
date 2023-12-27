@@ -30,7 +30,7 @@ public class UpdateBudgetForm extends StackPane {
     private BudgetController budgetController;
     private final ObservableList<String> categoryList = FXCollections.observableArrayList(
             "Clothes", "Education", "Entertainment", "Food", "Groceries",
-            "Healthcare", "Transportation", "Travel", "Utilities", "Miscellaneous", "Other"
+            "Healthcare", "Transportation", "Travel", "Other"
     );
 
     public UpdateBudgetForm(Budget budget, BudgetController budgetController) {

@@ -56,6 +56,7 @@ public class FinanceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        new LoadingScreen(stackPane);
 
         allTimeButton.setOnAction(event -> filterFinances(TimeFrame.ALL_TIME));
         weeklyButton.setOnAction(event -> filterFinances(TimeFrame.WEEKLY));
@@ -63,9 +64,10 @@ public class FinanceController implements Initializable {
         yearlyButton.setOnAction(event -> filterFinances(TimeFrame.YEARLY));
 
         Platform.runLater(() -> {
-            LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
-            LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
-            loadFinanceData(startOfMonth, endOfMonth);
+//            LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
+//            LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
+//            loadFinanceData(startOfMonth, endOfMonth);
+            filterFinances(TimeFrame.ALL_TIME);
             handleTransactionRecurrences();
         });
 
@@ -110,14 +112,13 @@ public class FinanceController implements Initializable {
 
         int userID = Main.getUserId();
 
-        String query = "SELECT * FROM transaction WHERE userID = ? AND category = ? AND transactionDate BETWEEN ? AND ? ORDER BY transactionDate ASC";
+        String query = "SELECT * FROM transaction WHERE userID = ? AND category IN (" + categoryFilter + ") AND transactionDate BETWEEN ? AND ? ORDER BY transactionDate ASC";
         Connection con = ConnectionManager.getConnection();
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setInt(1, userID);
-            stmt.setString(2, categoryFilter);
-            stmt.setDate(3, java.sql.Date.valueOf(startDate));
-            stmt.setDate(4, java.sql.Date.valueOf(endDate));
-
+            stmt.setDate(2, java.sql.Date.valueOf(startDate));
+            stmt.setDate(3, java.sql.Date.valueOf(endDate));
+            System.out.println(stmt);
             try (ResultSet rs = stmt.executeQuery()) {
                 int count = 0;
                 int row = 1;
@@ -164,11 +165,11 @@ public class FinanceController implements Initializable {
     }
 
     private void loadIncome(LocalDate startDate, LocalDate endDate) {
-        loadFinances(startDate, endDate, "Income", incomeGrid);
+        loadFinances(startDate, endDate, "'Income', 'Dividend Income', 'Investment'", incomeGrid);
     }
 
     private void loadOutcome(LocalDate startDate, LocalDate endDate) {
-        loadFinances(startDate, endDate, "('subscription', 'rent')", outcomeGrid);
+        loadFinances(startDate, endDate, "'Rent', 'Bills', 'Insurance', 'Subscription'", outcomeGrid);
     }
 
     public void updateFinanceInDatabase(String name, double amount, String description, String category, String bankName, LocalDate transactionDate, String recurrencePeriod, int transactionID) {
@@ -191,9 +192,7 @@ public class FinanceController implements Initializable {
             closeUpdateFinanceForm();
 
             Platform.runLater(() -> {
-                LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
-                LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
-                loadFinanceData(startOfMonth, endOfMonth);
+                filterFinances(TimeFrame.ALL_TIME);
                 new SuccessAlert(stackPane, "Finance successfully updated!");
             });
         } catch (SQLException e) {
@@ -208,9 +207,7 @@ public class FinanceController implements Initializable {
 
             pstmt.setInt(1, transaction.getTransactionID());
             pstmt.executeUpdate();
-            LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
-            LocalDate endOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
-            loadFinanceData(startOfMonth, endOfMonth);
+            filterFinances(TimeFrame.ALL_TIME);
             new SuccessAlert(stackPane, "Finance successfully deleted!");
             System.out.println("Deleted finance");
         } catch (SQLException e) {

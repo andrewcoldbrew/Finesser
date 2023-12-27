@@ -13,13 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import myApp.Main;
-import myApp.controllers.components.AddTransactionForm;
-import myApp.controllers.components.ManualAlert;
-import myApp.controllers.components.NewManualAlert;
-import myApp.controllers.components.UpdateTransactionForm;
+import myApp.controllers.components.*;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
@@ -27,20 +27,24 @@ import myApp.utils.LocalDateComparator;
 
 import java.net.URL;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class TransactionController implements Initializable {
     public BorderPane mainPane;
     public MFXTextField searchBar;
     public MFXPaginatedTableView<Transaction> transactionTable;
+    public StackPane stackPane;
+    public ImageView firstCategoryIcon;
+    public ImageView secondCategoryIcon;
+    public ImageView thirdCategoryIcon;
 
-    // Filter buttons
-    @FXML private Label totalFood;
-    @FXML private Label totalEntertainment;
-    @FXML private Label totalMisc;
+    @FXML private Label firstCategoryTotalLabel;
+    @FXML private Label secondCategoryTotalLabel;
+    @FXML private Label thirdCategoryTotalLabel;
     private AddTransactionForm addForm;
     private UpdateTransactionForm updateForm;
 
@@ -49,13 +53,26 @@ public class TransactionController implements Initializable {
     private final ObservableList<Transaction> transactionData = FXCollections.observableArrayList();
     private FilteredList<Transaction> filteredTransactions;
 
+    private static final Map<String, String> icons = Map.of(
+            "Clothes", "/images/category/clothes.png",
+            "Education", "/images/category/education.png",
+            "Entertainment", "/images/category/entertainment.png",
+            "Food", "/images/category/food.png",
+            "Groceries", "/images/category/groceries.png",
+            "Healthcare", "/images/category/healthcare.png",
+            "Transportation", "/images/category/transportation.png",
+            "Travel", "/images/category/travel.png",
+            "Other", "/images/category/other.png"
+    );
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        loadTransactions();
-        filteredTransactions = new FilteredList<>(transactionData, p -> true);
-        setupTransactionTable();
-        setupSearchBar();
+        new LoadingScreen(stackPane);
+        Platform.runLater(() -> {
+            loadTransactions();
+            filteredTransactions = new FilteredList<>(transactionData, p -> true);
+            setupTransactionTable();
+            setupSearchBar();
+        });
         transactionTable.getSelectionModel().setAllowsMultipleSelection(false);
         transactionTable.autosizeColumnsOnInitialization();
 
@@ -92,7 +109,6 @@ public class TransactionController implements Initializable {
 
         transactionTable.getTableColumns().addAll(nameCol, amountCol, descriptionCol, typeCol, bankCol, dateCol, actionCol);
         transactionTable.getFilters().addAll(
-
                 new StringFilter<>("Name", Transaction::getName),
                 new DoubleFilter<>("Amount", Transaction::getAmount),
                 new StringFilter<>("Description", Transaction::getDescription),
@@ -100,21 +116,19 @@ public class TransactionController implements Initializable {
                 new StringFilter<>("Bank", Transaction::getBankName)
                 );
 
-//        transactionTable.setItems(transactionData);
-        transactionTable.autosizeColumnsOnInitialization();
-//        transactionTable.setItems(filteredTransactions);
+        Platform.runLater(() -> transactionTable.autosizeColumns());
     }
 
-    private void loadTransactions() {
+    public void loadTransactions() {
 
         transactionData.clear();
 
 
-        String query = "SELECT t.transactionID, t.name, t.amount, t.description, t.category, COALESCE(b.bankName, 'Cash') AS bankName, t.transactionDate, t.recurrencePeriod " +
-                "FROM transaction t " +
-                "LEFT JOIN bank b ON t.bankID = b.bankID " +
-                "WHERE t.userID = ? AND b.linked = true " +
-                "ORDER BY t.transactionDate DESC";
+        String query = "SELECT t.transactionID, t.name, t.amount, t.description, t.category, COALESCE(b.bankName, 'Cash') AS bankName, t.transactionDate, t.recurrencePeriod\n" +
+                "FROM transaction t\n" +
+                "LEFT JOIN bank b ON t.bankID = b.bankID\n" +
+                "WHERE t.userID = ? AND (b.linked = true OR b.linked IS NULL)\n" +
+                "ORDER BY t.transactionDate DESC;";
 
 
         try (Connection conn = ConnectionManager.getConnection();
@@ -136,6 +150,7 @@ public class TransactionController implements Initializable {
 
                     Transaction transaction = new Transaction(transactionId, name, amount, description, category, bankName, date, recurrencePeriod);
                     transactionData.add(transaction);
+                    calculateTopSpentCategories();
                 }
             }
         } catch (SQLException e) {
@@ -146,6 +161,7 @@ public class TransactionController implements Initializable {
 
         Platform.runLater(() -> {
             transactionTable.setItems(FXCollections.observableArrayList(transactionData));
+            transactionTable.setCurrentPage(1);
         });
     }
 
@@ -169,18 +185,6 @@ public class TransactionController implements Initializable {
         transactionTable.setItems(FXCollections.observableArrayList(filteredTransactions));
     }
 
-
-
-    private void updateTotals() {
-        double totalFoodAmount = calculateTotalForCategory("Food");
-        double totalEntertainmentAmount = calculateTotalForCategory("Entertainment");
-        double totalMiscAmount = calculateTotalForCategory("Miscellaneous");
-
-        totalFood.setText(String.format("Total: $%.2f", totalFoodAmount));
-        totalEntertainment.setText(String.format("Total: $%.2f", totalEntertainmentAmount));
-        totalMisc.setText(String.format("Total: $%.2f", totalMiscAmount));
-    }
-
     private double calculateTotalForCategory(String category) {
         double total = transactionData.stream()
                 .filter(tr -> tr.getCategory().equals(category))
@@ -188,6 +192,45 @@ public class TransactionController implements Initializable {
                 .sum();
 
         return total;
+    }
+    private void calculateTopSpentCategories() {
+        Set<String> excludedCategories = new HashSet<>(Arrays.asList("Income", "Dividend Income", "Investment", "Rent", "Subscription", "Insurance", "Bills"));
+
+        Map<String, Double> categoryTotals = transactionData.stream()
+                .filter(transaction -> !excludedCategories.contains(transaction.getCategory()))
+                .collect(Collectors.groupingBy(
+                        Transaction::getCategory,
+                        Collectors.summingDouble(Transaction::getAmount)
+                ));
+
+        List<Map.Entry<String, Double>> topCategories = categoryTotals.entrySet().stream()
+                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+                .limit(3)
+                .collect(Collectors.toList());
+
+        Platform.runLater(() -> {
+            if (topCategories.size() > 0) {
+                String category = topCategories.get(0).getKey();
+                firstCategoryTotalLabel.setText(category + ": $" + String.format("%.2f", topCategories.get(0).getValue()));
+                firstCategoryIcon.setImage(new Image(icons.get(category)));
+            } else {
+                firstCategoryTotalLabel.setText("N/A");
+            }
+            if (topCategories.size() > 1) {
+                String category = topCategories.get(1).getKey();
+                secondCategoryTotalLabel.setText(category + ": $" + String.format("%.2f", topCategories.get(1).getValue()));
+                secondCategoryIcon.setImage(new Image(icons.get(category)));
+            } else {
+                secondCategoryTotalLabel.setText("N/A");
+            }
+            if (topCategories.size() > 2) {
+                String category = topCategories.get(2).getKey();
+                thirdCategoryTotalLabel.setText(category + ": $" + String.format("%.2f", topCategories.get(2).getValue()));
+                thirdCategoryIcon.setImage(new Image(icons.get(category)));
+            } else {
+                thirdCategoryTotalLabel.setText("N/A");
+            }
+        });
     }
 
     private HBox createButtonContainer() {
@@ -221,8 +264,13 @@ public class TransactionController implements Initializable {
             stmt.setInt(5, bankID);
             stmt.setDate(6, Date.valueOf(transactionDate));
             stmt.setInt(7, transactionID);
-
             stmt.executeUpdate();
+
+            Platform.runLater(() -> {
+                loadTransactions();
+                closeUpdateForm();
+                new SuccessAlert(stackPane, "Your transaction has been updated successfully!");
+            });
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -245,6 +293,7 @@ public class TransactionController implements Initializable {
     }
 
     private void deleteTransactionFromDatabase(Transaction transaction) {
+        System.out.println("Transadtion deleted: " + transaction.getName());
         String sql = "DELETE FROM transaction WHERE transactionID = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -266,11 +315,7 @@ public class TransactionController implements Initializable {
                if (selectedTransaction.getRecurrencePeriod() != null) {
                    new NewManualAlert(NewManualAlert.Type.WARNING, "Warning!", "You cannot update a finance through the transaction table. Please navigate to the finance page").show();
                } else {
-                   updateForm = new UpdateTransactionForm(selectedTransaction, this);
-                   AnchorPane.setTopAnchor(updateForm, (mainPane.getHeight() - updateForm.getPrefHeight()) / 2);
-                   AnchorPane.setLeftAnchor(updateForm, (mainPane.getWidth() - updateForm.getPrefWidth()) / 2);
-                   mainPane.getChildren().add(updateForm);
-                   draggable.makeDraggable(updateForm);
+                   openUpdateForm(selectedTransaction);
                }
            }
         });
@@ -295,9 +340,7 @@ public class TransactionController implements Initializable {
 
                 confirm.show();
             }
-
         });
-
     }
 
     private MFXButton createButton(String text, String id) {
@@ -308,17 +351,44 @@ public class TransactionController implements Initializable {
     }
 
     public void handleAddTransactionForm(ActionEvent actionEvent) {
-        if (!mainPane.getChildren().contains(addForm)) {
-            addForm = new AddTransactionForm();
-            AnchorPane.setTopAnchor(addForm, (mainPane.getHeight() - addForm.getPrefHeight()) / 2);
-            AnchorPane.setLeftAnchor(addForm, (mainPane.getWidth() - addForm.getPrefWidth()) / 2);
-
-            mainPane.getChildren().add(addForm);
-            draggable.makeDraggable(addForm);
+        if (!isAddFormOpen()) {
+            stackPane.getChildren().add(new AddTransactionForm(this));
         }
-
+    }
+    private boolean isAddFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof AddTransactionForm) {
+                return true;
+            }
+        }
+        return false;
     }
 
+    private void openUpdateForm(Transaction transaction) {
+        if (!isUpdateFormOpen()) {
+            stackPane.getChildren().add(new UpdateTransactionForm(transaction, this));
+        }
+    }
+    private void closeUpdateForm() {
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof UpdateTransactionForm) {
+                stackPane.getChildren().remove(node);
+                break;
+            }
+        }
+    }
+    private boolean isUpdateFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof UpdateTransactionForm) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-
+    public StackPane getStackPane() {
+        return stackPane;
+    }
 }

@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import myApp.Main;
 import myApp.controllers.views.TransactionController;
 import myApp.models.Transaction;
+import myApp.utils.Draggable;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -31,7 +32,7 @@ public class UpdateTransactionForm extends StackPane {
     private Transaction transaction;
     private final ObservableList<String> typeList = FXCollections.observableArrayList(
             "Clothes", "Education", "Entertainment", "Food", "Groceries",
-            "Healthcare", "Transportation", "Travel", "Utilities", "Miscellaneous", "Other"
+            "Healthcare", "Transportation", "Travel", "Other"
     );
     public UpdateTransactionForm(Transaction transaction, TransactionController transactionController) {
         this.transactionController = transactionController;
@@ -59,6 +60,7 @@ public class UpdateTransactionForm extends StackPane {
 
         updateButton.setOnAction(this::updateTransaction);
         cancelButton.setOnAction(this::cancel);
+        new Draggable().makeDraggable(this);
     }
 
     private void cancel(ActionEvent actionEvent) {
@@ -84,7 +86,7 @@ public class UpdateTransactionForm extends StackPane {
             double amount = Double.parseDouble(amountText);
             // INVOKE THE FUNCTION HERE! ~UwU~
             transactionController.updateTransactionInDatabase(name, amount, description, category, transaction.getBankName(), date, transaction.getTransactionID());
-            new SuccessAlert(stackPane, "Your transaction has been updated successfully!");
+
 
         } catch (NumberFormatException e) {
             new ErrorAlert(stackPane, "Invalid input", "Amount must be a number");

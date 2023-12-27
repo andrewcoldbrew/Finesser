@@ -62,7 +62,7 @@ public class AddWalletForm extends BorderPane {
 
                 updateStatement.executeUpdate();
                 System.out.println("User's cashAmount updated successfully!");
-                new SuccessAlert(accountController.getMainPane(), "Cash added successfully");
+                new SuccessAlert(accountController.getStackPane(), "Cash added successfully");
                 accountController.loadUserProfile();
                 Platform.runLater(this::exit);
 

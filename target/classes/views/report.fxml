@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="myApp.controllers.views.ReportController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.ReportController">
+
+    <VBox layoutX="50" layoutY="50" spacing="10">
+        <Label fx:id="usernameLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" text="Username:" wrapText="true" />
+        <Label fx:id="emailLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" text="Email:" wrapText="true" />
+        <Label fx:id="dobLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" text="Date of Birth:" wrapText="true" />
+        <Label fx:id="countryLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" text="Country:" wrapText="true" />
+        <Label fx:id="totalBudgetsLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" text="Total Number of Budgets: " wrapText="true" />
+        <Label fx:id="totalIncomeFinancesLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" text="Total Number of Income Finances: " wrapText="true" />
+        <Label fx:id="totalOutcomeFinancesLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" text="Total Number of Outcome Finances: " wrapText="true" />
+        <Label fx:id="totalTransactionsLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" text="Total Number of Transactions Made: " wrapText="true" />
+        <Label fx:id="topSpentCategoriesLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="800.0" text="Top Spent Categories: " wrapText="true" />
+        <Button fx:id="generateReportButton" onAction="#handleGenerateReport" text="Generate Report" />
+
+    </VBox>
 
 </AnchorPane>
