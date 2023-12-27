@@ -36,8 +36,8 @@ public class MainAppManager {
         mainLayout.setLeft(leftMenuBar);
 
 
-        setupScene("account");
-        mainAppStage.setMaximized(true);
+        setupScene("dashboard");
+        mainAppStage.setMaximized(false);
 
         Scene scene = new Scene(mainLayout);
         mainAppStage.setScene(scene);
