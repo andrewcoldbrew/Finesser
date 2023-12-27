@@ -7,7 +7,7 @@
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewDashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -203,7 +203,7 @@
       <workItem from="1703579342243" duration="5623000" />
       <workItem from="1703596512685" duration="8420000" />
       <workItem from="1703667727079" duration="476000" />
-      <workItem from="1703668234366" duration="4033000" />
+      <workItem from="1703668234366" duration="4960000" />
     </task>
     <servers />
   </component>

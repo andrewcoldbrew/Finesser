@@ -60,7 +60,7 @@ public class NewDashboardController implements Initializable {
         initializeToolTips();
         seeMoreLink.setOnAction(this::moveToTransaction);
         loadIncomeVsOutcomeData();
-        
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
