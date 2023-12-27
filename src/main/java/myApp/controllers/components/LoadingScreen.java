@@ -62,4 +62,7 @@ public class LoadingScreen extends BorderPane {
         a1.play();
     }
 
+    public MFXProgressBar getProgressBar() {
+        return progressBar;
+    }
 }

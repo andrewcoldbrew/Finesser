@@ -56,52 +56,33 @@ public class NewDashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        new LoadingScreen(stackPane);
-//        Platform.runLater(() -> {
-//            loadTransactions();
-//            Platform.runLater(this::loadPieChartData);
-//            Platform.runLater(this::loadBudgetVsSpendingData);
-//            Platform.runLater(this::loadIncomeVsOutcomeData);
-//            Platform.runLater(this::addHoverToAllCharts);
-////            loadPieChartData();
-////            loadBudgetVsSpendingData();
-////            loadIncomeVsOutcomeData();
-//            loadUserInfo();
-//            seeMoreLink.setOnAction(this::moveToTransaction);
-//            initializeToolTips();
-//
-//        });
-
         new LoadingScreen(stackPane);
         seeMoreLink.setOnAction(this::moveToTransaction);
         initializeToolTips();
+        loadUserInfo();
+        loadTransactions();
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                loadTransactions();
                 // Perform heavy tasks in the background
                 loadPieChartData();
                 loadBudgetVsSpendingData();
                 loadIncomeVsOutcomeData();
-                addHoverToAllCharts();
-                loadUserInfo();
+
                 return null;
             }
         };
 
-//        task.setOnSucceeded(event -> {
-//            // Update UI after background tasks are complete
-//
-//        });
-
-        Platform.runLater(() -> {
-            // Start the task on the JavaFX Application Thread
-            new Thread(task).start();
+        task.setOnSucceeded(event -> {
+            addHoverToAllCharts();
         });
 
-
-
+        // Start the task on the JavaFX Application Thread
+        Platform.runLater(() -> {
+            new Thread(task).start();
+        });
     }
+
 
     private void initializeToolTips() {
         pieChartToolTip = new Tooltip("");
@@ -116,23 +97,26 @@ public class NewDashboardController implements Initializable {
     }
 
     private void addHoverToAllCharts() {
-        for (final PieChart.Data data : categoryPieChart.getData()) {
-            Tooltip.install(data.getNode(), pieChartToolTip);
-            addHoverToPieChart(data);
-        }
-        for (final XYChart.Series<String, Number> series : budgetVsSpendingChart.getData()) {
-            for (final XYChart.Data<String, Number> data : series.getData()) {
-                Tooltip.install(data.getNode(), barChartToolTip);
-                addHoverToBarChart(data, series);
+        Platform.runLater(() -> {
+            for (final PieChart.Data data : categoryPieChart.getData()) {
+                Tooltip.install(data.getNode(), pieChartToolTip);
+                addHoverToPieChart(data);
             }
-        }
+            for (final XYChart.Series<String, Number> series : budgetVsSpendingChart.getData()) {
+                for (final XYChart.Data<String, Number> data : series.getData()) {
+                    Tooltip.install(data.getNode(), barChartToolTip);
+                    addHoverToBarChart(data, series);
+                }
+            }
 
-        for (final XYChart.Series<String, Number> series : incomeVsOutcomeChart.getData()) {
-            for (final XYChart.Data<String, Number> data : series.getData()) {
-                Tooltip.install(data.getNode(), areaChartToolTip);
-                addHoverToAreaChart(data, series);
+            for (final XYChart.Series<String, Number> series : incomeVsOutcomeChart.getData()) {
+                for (final XYChart.Data<String, Number> data : series.getData()) {
+                    Tooltip.install(data.getNode(), areaChartToolTip);
+                    addHoverToAreaChart(data, series);
+                }
             }
-        }
+        });
+
     }
 
     private void loadTransactions() {
@@ -155,35 +139,38 @@ public class NewDashboardController implements Initializable {
         }
     }
     private void loadPieChartData() {
-        Map<String, Double> categoryTotals = new HashMap<>();
-        double totalAmount = 0;
-
-        String query = "SELECT category, SUM(amount) AS totalAmount FROM transaction WHERE userID = ? GROUP BY category";
-        try (Connection conn = ConnectionManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-
-            stmt.setInt(1, Main.getUserId());
-
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                String category = rs.getString("category");
-                double amount = rs.getDouble("totalAmount");
-                totalAmount += amount;
-                categoryTotals.put(category, amount);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        final double finalTotalAmount = totalAmount;
-        //lambda shit that I hate
         Platform.runLater(() -> {
-            for (Map.Entry<String, Double> entry : categoryTotals.entrySet()) {
-                double percentage = (entry.getValue() / finalTotalAmount) * 100;
-                String label = String.format("%s: %.2f%%", entry.getKey(), percentage);
-                categoryPieChart.getData().add(new PieChart.Data(label, entry.getValue()));
+            Map<String, Double> categoryTotals = new HashMap<>();
+            double totalAmount = 0;
+
+            String query = "SELECT category, SUM(amount) AS totalAmount FROM transaction WHERE userID = ? GROUP BY category";
+            try (Connection conn = ConnectionManager.getConnection();
+                 PreparedStatement stmt = conn.prepareStatement(query)) {
+
+                stmt.setInt(1, Main.getUserId());
+
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    String category = rs.getString("category");
+                    double amount = rs.getDouble("totalAmount");
+                    totalAmount += amount;
+                    categoryTotals.put(category, amount);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+
+            final double finalTotalAmount = totalAmount;
+            //lambda shit that I hate
+            Platform.runLater(() -> {
+                for (Map.Entry<String, Double> entry : categoryTotals.entrySet()) {
+                    double percentage = (entry.getValue() / finalTotalAmount) * 100;
+                    String label = String.format("%s: %.2f%%", entry.getKey(), percentage);
+                    categoryPieChart.getData().add(new PieChart.Data(label, entry.getValue()));
+                }
+            });
         });
+
     }
 
     private void addHoverToPieChart(final PieChart.Data data) {
@@ -204,35 +191,38 @@ public class NewDashboardController implements Initializable {
     }
 
     private void loadBudgetVsSpendingData() {
-        Map<String, Double> budgetData = new HashMap<>();
-        Map<String, Double> actualSpendingData = new HashMap<>();
+        Platform.runLater(() -> {
+            Map<String, Double> budgetData = new HashMap<>();
+            Map<String, Double> actualSpendingData = new HashMap<>();
 
-        String query = "SELECT b.category, b.budgetLimit AS allocatedAmount, IFNULL(SUM(t.amount), 0) AS spentAmount " +
-                "FROM budget b " +
-                "LEFT JOIN transaction t ON b.category = t.category AND t.transactionDate BETWEEN b.startDate AND b.endDate " +
-                "WHERE b.userID = ? " +
-                "GROUP BY b.category, b.budgetLimit";
+            String query = "SELECT b.category, b.budgetLimit AS allocatedAmount, IFNULL(SUM(t.amount), 0) AS spentAmount " +
+                    "FROM budget b " +
+                    "LEFT JOIN transaction t ON b.category = t.category AND t.transactionDate BETWEEN b.startDate AND b.endDate " +
+                    "WHERE b.userID = ? " +
+                    "GROUP BY b.category, b.budgetLimit";
 
-        try (Connection con = ConnectionManager.getConnection();
-             PreparedStatement stmt = con.prepareStatement(query)) {
+            try (Connection con = ConnectionManager.getConnection();
+                 PreparedStatement stmt = con.prepareStatement(query)) {
 
-            stmt.setInt(1, Main.getUserId());
+                stmt.setInt(1, Main.getUserId());
 
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                String category = rs.getString("category");
-                double allocatedAmount = rs.getDouble("allocatedAmount");
-                double spentAmount = rs.getDouble("spentAmount");
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    String category = rs.getString("category");
+                    double allocatedAmount = rs.getDouble("allocatedAmount");
+                    double spentAmount = rs.getDouble("spentAmount");
 
-                budgetData.put(category, allocatedAmount);
-                actualSpendingData.put(category, spentAmount);
+                    budgetData.put(category, allocatedAmount);
+                    actualSpendingData.put(category, spentAmount);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
 
-        populateBarChart(budgetData, actualSpendingData);
+            populateBarChart(budgetData, actualSpendingData);
+        });
+
     }
 
     private void populateBarChart(Map<String, Double> budgetData, Map<String, Double> actualSpendingData) {
@@ -288,46 +278,45 @@ public class NewDashboardController implements Initializable {
     }
 
     private void loadIncomeVsOutcomeData() {
-        XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
-        incomeSeries.setName("Cumulative Income");
-
-        XYChart.Series<String, Number> expensesSeries = new XYChart.Series<>();
-        expensesSeries.setName("Cumulative Expenses");
-
-        DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter chartFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-        Map<LocalDate, Double> incomeMap = new HashMap<>();
-        Map<LocalDate, Double> expensesMap = new HashMap<>();
-
-        int userId = Main.getUserId();
-
-        String incomeQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Income', 'Dividend Income', 'Investment') GROUP BY transactionDate ORDER BY transactionDate";
-
-        String expensesQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Rent', 'Subscription', 'Insurance', 'Bills') GROUP BY transactionDate ORDER BY transactionDate";
-
-        updateTransactionMap(incomeQuery, userId, incomeMap, dbFormatter);
-        updateTransactionMap(expensesQuery, userId, expensesMap, dbFormatter);
-
-        Set<LocalDate> allDates = new TreeSet<>(incomeMap.keySet());
-        allDates.addAll(expensesMap.keySet());
-
-        double lastIncome = 0;
-        double lastExpenses = 0;
-
-        for (LocalDate date : allDates) {
-            lastIncome = incomeMap.getOrDefault(date, lastIncome);
-            lastExpenses = expensesMap.getOrDefault(date, lastExpenses);
-
-            incomeSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastIncome));
-            expensesSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastExpenses));
-        }
-        incomeVsOutcomeChart.getData().clear();
-        incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
         Platform.runLater(() -> {
+            XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
+            incomeSeries.setName("Cumulative Income");
 
+            XYChart.Series<String, Number> expensesSeries = new XYChart.Series<>();
+            expensesSeries.setName("Cumulative Expenses");
 
+            DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter chartFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+            Map<LocalDate, Double> incomeMap = new HashMap<>();
+            Map<LocalDate, Double> expensesMap = new HashMap<>();
+
+            int userId = Main.getUserId();
+
+            String incomeQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Income', 'Dividend Income', 'Investment') GROUP BY transactionDate ORDER BY transactionDate";
+
+            String expensesQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Rent', 'Subscription', 'Insurance', 'Bills') GROUP BY transactionDate ORDER BY transactionDate";
+
+            updateTransactionMap(incomeQuery, userId, incomeMap, dbFormatter);
+            updateTransactionMap(expensesQuery, userId, expensesMap, dbFormatter);
+
+            Set<LocalDate> allDates = new TreeSet<>(incomeMap.keySet());
+            allDates.addAll(expensesMap.keySet());
+
+            double lastIncome = 0;
+            double lastExpenses = 0;
+
+            for (LocalDate date : allDates) {
+                lastIncome = incomeMap.getOrDefault(date, lastIncome);
+                lastExpenses = expensesMap.getOrDefault(date, lastExpenses);
+
+                incomeSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastIncome));
+                expensesSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastExpenses));
+            }
+            incomeVsOutcomeChart.getData().clear();
+            incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
         });
+
     }
 
     private void updateTransactionMap(String query, int userId, Map<LocalDate, Double> map, DateTimeFormatter dbFormatter) {
@@ -370,27 +359,30 @@ public class NewDashboardController implements Initializable {
 
 
     private void loadUserInfo() {
-        int userId = Main.getUserId();
-        Connection con = ConnectionManager.getConnection();
-        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT fname, lname, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = ? AND linked = true), 0) AS totalBalance FROM user WHERE userID = ?")) {
-            preparedStatement.setInt(1, userId);
-            preparedStatement.setInt(2, userId);
+        Platform.runLater(() -> {
+            int userId = Main.getUserId();
+            Connection con = ConnectionManager.getConnection();
+            try (PreparedStatement preparedStatement = con.prepareStatement("SELECT fname, lname, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = ? AND linked = true), 0) AS totalBalance FROM user WHERE userID = ?")) {
+                preparedStatement.setInt(1, userId);
+                preparedStatement.setInt(2, userId);
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    String fname = resultSet.getString("fname");
-                    String lname = resultSet.getString("lname");
-                    String fullName = fname + " " + lname;
-                    double totalBalance = resultSet.getDouble("totalBalance");
-                    welcomeLabel.setText("Welcome, " + fullName);
-                    totalBalanceLabel.setText(String.format("Total Balance: %.2f", totalBalance));
-                } else {
-                    System.out.println("User not found.");
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        String fname = resultSet.getString("fname");
+                        String lname = resultSet.getString("lname");
+                        String fullName = fname + " " + lname;
+                        double totalBalance = resultSet.getDouble("totalBalance");
+                        welcomeLabel.setText("Welcome, " + fullName);
+                        totalBalanceLabel.setText(String.format("Total Balance: %.2f", totalBalance));
+                    } else {
+                        System.out.println("User not found.");
+                    }
                 }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        });
+
     }
 
     private void moveToTransaction(ActionEvent actionEvent) {
