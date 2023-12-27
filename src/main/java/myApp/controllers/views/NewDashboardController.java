@@ -68,7 +68,6 @@ public class NewDashboardController implements Initializable {
                 loadPieChartData();
                 loadBudgetVsSpendingData();
                 loadIncomeVsOutcomeData();
-
                 return null;
             }
         };
@@ -97,7 +96,6 @@ public class NewDashboardController implements Initializable {
     }
 
     private void addHoverToAllCharts() {
-        Platform.runLater(() -> {
             for (final PieChart.Data data : categoryPieChart.getData()) {
                 Tooltip.install(data.getNode(), pieChartToolTip);
                 addHoverToPieChart(data);
@@ -115,7 +113,6 @@ public class NewDashboardController implements Initializable {
                     addHoverToAreaChart(data, series);
                 }
             }
-        });
 
     }
 
@@ -139,7 +136,6 @@ public class NewDashboardController implements Initializable {
         }
     }
     private void loadPieChartData() {
-        Platform.runLater(() -> {
             Map<String, Double> categoryTotals = new HashMap<>();
             double totalAmount = 0;
 
@@ -169,7 +165,6 @@ public class NewDashboardController implements Initializable {
                     categoryPieChart.getData().add(new PieChart.Data(label, entry.getValue()));
                 }
             });
-        });
 
     }
 
@@ -191,7 +186,6 @@ public class NewDashboardController implements Initializable {
     }
 
     private void loadBudgetVsSpendingData() {
-        Platform.runLater(() -> {
             Map<String, Double> budgetData = new HashMap<>();
             Map<String, Double> actualSpendingData = new HashMap<>();
 
@@ -221,7 +215,6 @@ public class NewDashboardController implements Initializable {
 
 
             populateBarChart(budgetData, actualSpendingData);
-        });
 
     }
 
@@ -278,41 +271,41 @@ public class NewDashboardController implements Initializable {
     }
 
     private void loadIncomeVsOutcomeData() {
+        XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
+        incomeSeries.setName("Cumulative Income");
+
+        XYChart.Series<String, Number> expensesSeries = new XYChart.Series<>();
+        expensesSeries.setName("Cumulative Expenses");
+
+        DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter chartFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        Map<LocalDate, Double> incomeMap = new HashMap<>();
+        Map<LocalDate, Double> expensesMap = new HashMap<>();
+
+        int userId = Main.getUserId();
+
+        String incomeQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Income', 'Dividend Income', 'Investment') GROUP BY transactionDate ORDER BY transactionDate";
+
+        String expensesQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Rent', 'Subscription', 'Insurance', 'Bills') GROUP BY transactionDate ORDER BY transactionDate";
+
+        updateTransactionMap(incomeQuery, userId, incomeMap, dbFormatter);
+        updateTransactionMap(expensesQuery, userId, expensesMap, dbFormatter);
+
+        Set<LocalDate> allDates = new TreeSet<>(incomeMap.keySet());
+        allDates.addAll(expensesMap.keySet());
+
+        double lastIncome = 0;
+        double lastExpenses = 0;
+
+        for (LocalDate date : allDates) {
+            lastIncome = incomeMap.getOrDefault(date, lastIncome);
+            lastExpenses = expensesMap.getOrDefault(date, lastExpenses);
+
+            incomeSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastIncome));
+            expensesSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastExpenses));
+        }
         Platform.runLater(() -> {
-            XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
-            incomeSeries.setName("Cumulative Income");
-
-            XYChart.Series<String, Number> expensesSeries = new XYChart.Series<>();
-            expensesSeries.setName("Cumulative Expenses");
-
-            DateTimeFormatter dbFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            DateTimeFormatter chartFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-            Map<LocalDate, Double> incomeMap = new HashMap<>();
-            Map<LocalDate, Double> expensesMap = new HashMap<>();
-
-            int userId = Main.getUserId();
-
-            String incomeQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Income', 'Dividend Income', 'Investment') GROUP BY transactionDate ORDER BY transactionDate";
-
-            String expensesQuery = "SELECT transactionDate, SUM(amount) AS total FROM transaction WHERE userID = ? AND category IN ('Rent', 'Subscription', 'Insurance', 'Bills') GROUP BY transactionDate ORDER BY transactionDate";
-
-            updateTransactionMap(incomeQuery, userId, incomeMap, dbFormatter);
-            updateTransactionMap(expensesQuery, userId, expensesMap, dbFormatter);
-
-            Set<LocalDate> allDates = new TreeSet<>(incomeMap.keySet());
-            allDates.addAll(expensesMap.keySet());
-
-            double lastIncome = 0;
-            double lastExpenses = 0;
-
-            for (LocalDate date : allDates) {
-                lastIncome = incomeMap.getOrDefault(date, lastIncome);
-                lastExpenses = expensesMap.getOrDefault(date, lastExpenses);
-
-                incomeSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastIncome));
-                expensesSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastExpenses));
-            }
             incomeVsOutcomeChart.getData().clear();
             incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
         });
