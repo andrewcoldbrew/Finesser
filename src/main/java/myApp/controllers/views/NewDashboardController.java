@@ -53,7 +53,6 @@ public class NewDashboardController implements Initializable {
     private Tooltip barChartToolTip;
     private Tooltip areaChartToolTip;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new LoadingScreen(stackPane);

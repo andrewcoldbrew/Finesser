@@ -1,5 +1,7 @@
 package myApp.controllers.components;
 
+import animatefx.animation.FadeIn;
+import animatefx.animation.FadeOut;
 import io.github.palexdev.materialfx.beans.NumberRange;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
 import io.github.palexdev.materialfx.effects.Interpolators;
@@ -29,8 +31,8 @@ public class LoadingScreen extends BorderPane {
         fxmlLoader.setController(this);
         try {
             fxmlLoader.load();
-            stackPane.getChildren().add(this);
             initialize();
+            stackPane.getChildren().add(this);
             createAndPlayAnimation(stackPane);
 
         } catch (IOException e) {
@@ -55,7 +57,9 @@ public class LoadingScreen extends BorderPane {
 
         a1.setOnFinished(end -> AnimationUtils.PauseBuilder.build()
                 .setDuration(Duration.seconds(1))
-                .setOnFinished(event -> stackPane.getChildren().remove(this))
+                .setOnFinished(event -> {
+                    stackPane.getChildren().remove(this);
+                })
                 .getAnimation()
                 .play()
         );
