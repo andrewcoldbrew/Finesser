@@ -31,7 +31,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import java.io.File;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -64,8 +67,7 @@ public class AccountController implements Initializable {
     private List<BankBox> creditCardList;
     private Label noBankLabel;
 
-    private static final String IMAGE_SAVE_DIRECTORY = "src/main/resources/images";
-    private static final String PROFILE_IMAGE_KEY = "profileImagePath";
+    private static final String IMAGE_SAVE_DIRECTORY = "src/main/resources/images/profiles";
     private Preferences prefs;
     public AccountController() {
         prefs = Preferences.userNodeForPackage(AccountController.class);
@@ -279,7 +281,6 @@ public class AccountController implements Initializable {
     }
 
     private boolean isAddWalletFormOpen() {
-        // Check if an AddWalletForm is already present in mainPane
         for (Node node : stackPane.getChildren()) {
             if (node instanceof AddWalletForm) {
                 return true;
@@ -308,10 +309,28 @@ public class AccountController implements Initializable {
             Image selectedImage = new Image(selectedFile.toURI().toString());
             profileImage.setImage(selectedImage);
 
-            updateUserProfileImagePath(Main.getUserId(), selectedFile.getAbsolutePath());
+            saveUserProfileImage(Main.getUserId(), selectedFile);
         }
     }
 
+    private void saveUserProfileImage(int userId, File sourceFile) {
+        String storageDirectory = IMAGE_SAVE_DIRECTORY;
+
+        File destinationDir = new File(storageDirectory);
+        if (!destinationDir.exists()) {
+            destinationDir.mkdirs();
+        }
+
+        String destinationPath = storageDirectory + File.separator + "user_" + userId + ".png";
+
+        try {
+            Files.copy(sourceFile.toPath(), new File(destinationPath).toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        updateUserProfileImagePath(userId, destinationPath);
+    }
     private String getUserProfileImagePath(int userId) {
         String imagePath = null;
         String query = "SELECT profileImagePath FROM user WHERE userID = ?";
@@ -330,6 +349,7 @@ public class AccountController implements Initializable {
         }
         return imagePath;
     }
+
     private void updateUserProfileImagePath(int userId, String imagePath) {
         String query = "UPDATE user SET profileImagePath = ? WHERE userID = ?";
 
