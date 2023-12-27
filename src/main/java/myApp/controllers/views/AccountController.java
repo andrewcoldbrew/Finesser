@@ -2,12 +2,9 @@ package myApp.controllers.views;
 
 import animatefx.animation.*;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -19,26 +16,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import myApp.Main;
 import myApp.controllers.components.AddWalletForm;
 import myApp.controllers.components.BankBox;
 import myApp.controllers.components.LinkBankForm;
+import myApp.controllers.components.LoadingScreen;
 import myApp.utils.Animate;
 import myApp.utils.ConnectionManager;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 
-
-import javafx.event.ActionEvent;
-import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import java.io.File;
@@ -51,7 +39,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
@@ -61,7 +48,7 @@ public class AccountController implements Initializable {
     public Button rightButton;
     public HBox paginationContainer;
     public BorderPane creditCardWrapper;
-    public StackPane mainPane;
+    public StackPane stackPane;
     private Stage linkBankDialog;
     private Stage addWalletDialog;
     public Label emailLabel;
@@ -74,10 +61,7 @@ public class AccountController implements Initializable {
     public ImageView profileImage;
     public Label fullNameLabel;
     public MFXButton linkBankButton;
-
     private List<BankBox> creditCardList;
-    private Scene dialogScene;
-    private List<Button> paginationList;
     private Label noBankLabel;
 
     private static final String IMAGE_SAVE_DIRECTORY = "src/main/resources/images";
@@ -90,6 +74,7 @@ public class AccountController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        new LoadingScreen(stackPane);
         loadUserProfile();
         loadCreditCard();
         loadProfilePicture();
@@ -269,60 +254,23 @@ public class AccountController implements Initializable {
     }
 
 
-    private void initializeLinkBankForm() {
-        linkBankDialog = new Stage(StageStyle.UNDECORATED);
-
-        LinkBankForm linkBankForm = new LinkBankForm(this);
-        dialogScene = new Scene(linkBankForm, linkBankForm.getPrefWidth(), linkBankForm.getPrefHeight());
-        linkBankDialog.setTitle("Link Bank");
-
-        linkBankForm.setStage(linkBankDialog);
-        System.out.println(linkBankForm.getStage());
-
-        linkBankDialog.setScene(dialogScene);
-
-        linkBankDialog.initModality(Modality.WINDOW_MODAL);
-        dialogScene.setFill(Color.TRANSPARENT);
-
-        linkBankDialog.setResizable(false);
-        linkBankDialog.show();
-    }
-
-    private void initializeAddWalletForm() {
-        addWalletDialog = new Stage(StageStyle.UNDECORATED);
-        AddWalletForm addWalletForm = new AddWalletForm();
-        dialogScene = new Scene(addWalletForm, addWalletForm.getPrefWidth(), addWalletForm.getPrefHeight());
-
-        addWalletDialog.setTitle("Link Bank");
-
-        addWalletForm.setStage(addWalletDialog);
-        System.out.println(addWalletForm.getStage());
-
-        addWalletDialog.setScene(dialogScene);
-
-        addWalletDialog.initModality(Modality.APPLICATION_MODAL);
-        addWalletDialog.initStyle(StageStyle.UNDECORATED);
-        addWalletDialog.setResizable(true);
-        dialogScene.setFill(Color.TRANSPARENT);
-
-        addWalletDialog.setResizable(false);
-        addWalletDialog.show();
-    }
-
     public void handleLinkBankForm(ActionEvent actionEvent) {
+        // Check if a LinkBankForm is already present
         if (!isLinkBankFormOpen()) {
-            mainPane.getChildren().add(new LinkBankForm(this));
+            stackPane.getChildren().add(new LinkBankForm(this));
         }
     }
 
     public void handleAddWalletForm(ActionEvent actionEvent) {
+        // Check if an AddWalletForm is already present
         if (!isAddWalletFormOpen()) {
-            mainPane.getChildren().add(new AddWalletForm());
+            stackPane.getChildren().add(new AddWalletForm(this));
         }
     }
 
     private boolean isLinkBankFormOpen() {
-        for (Node node : mainPane.getChildren()) {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
             if (node instanceof LinkBankForm) {
                 return true;
             }
@@ -331,7 +279,8 @@ public class AccountController implements Initializable {
     }
 
     private boolean isAddWalletFormOpen() {
-        for (Node node : mainPane.getChildren()) {
+        // Check if an AddWalletForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
             if (node instanceof AddWalletForm) {
                 return true;
             }
@@ -377,7 +326,7 @@ public class AccountController implements Initializable {
                 imagePath = rs.getString("profileImagePath");
             }
         } catch (SQLException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
         return imagePath;
     }
@@ -405,4 +354,7 @@ public class AccountController implements Initializable {
     public void handleChangePassword(ActionEvent actionEvent) {
     }
 
+    public StackPane getStackPane() {
+        return stackPane;
+    }
 }

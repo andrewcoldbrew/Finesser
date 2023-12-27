@@ -40,17 +40,11 @@ public class BudgetController implements Initializable {
     public StackPane stackPane;
     @FXML
     private FlowPane flowPane;
-    private final AddBudgetForm addBudgetForm = new AddBudgetForm();
-    private final Stage dialogStage = new Stage();
-    private final Scene dialogScene = new Scene(addBudgetForm, addBudgetForm.getPrefWidth(), addBudgetForm.getPrefHeight());
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        new LoadingScreen(stackPane);
         loadBudgetDataAsync();
-        initializeAddBudgetForm();
         flowPane.setPadding(new Insets(30, 0, 30, 30));
-        Draggable draggable = new Draggable();
-        draggable.makeDraggable(dialogStage);
     }
 
     private void loadBudgetDataAsync() {
@@ -175,24 +169,55 @@ public class BudgetController implements Initializable {
         throwable.printStackTrace();
     }
 
-    private void initializeAddBudgetForm() {
-        dialogStage.setTitle("Add Budget Dialog");
+    public void addBudgetInDataBase(String category, double limit, LocalDate startDate, LocalDate endDate) {
+        Connection con = ConnectionManager.getConnection();
+        PreparedStatement statement = null;
+        try {
+            statement = con.prepareStatement("INSERT INTO budget (userID, category, budgetLimit, startDate, endDate) VALUES (?, ?, ?, ?, ?)");
+            statement.setInt(1, Main.getUserId());
+            statement.setString(2, category);
+            statement.setDouble(3, limit);
+            statement.setDate(4, Date.valueOf(startDate));
+            statement.setDate(5, Date.valueOf(endDate));
+            statement.execute();
+            Platform.runLater(() -> {
+                loadBudgetDataAsync();
+                closeAddForm();
+                new SuccessAlert(stackPane, "Budget successfully added!");
+                System.out.println("Budget added");
+            });
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-        addBudgetForm.setStage(dialogStage);
-        System.out.println(addBudgetForm.getStage());
-
-        dialogStage.setScene(dialogScene);
-
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initStyle(StageStyle.UNDECORATED);
-        dialogScene.setFill(Color.TRANSPARENT);
-
-        dialogStage.setResizable(false);
     }
     @FXML
     private void handleAddBudgetForm() {
-        dialogStage.hide();
-        dialogStage.show();
+        if (!isAddFormOpen()) {
+            stackPane.getChildren().add(new AddBudgetForm(this));
+        }
     }
 
+    private void closeAddForm() {
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof AddBudgetForm) {
+                stackPane.getChildren().remove(node);
+                break;
+            }
+        }
+    }
+
+    private boolean isAddFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof AddBudgetForm) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public StackPane getStackPane() {
+        return stackPane;
+    }
 }

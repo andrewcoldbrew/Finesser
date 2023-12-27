@@ -1,3 +1,7 @@
 #addBudgetButton {
     -fx-background-color: transparent;
 }
+
+#exitIcon {
+    -fx-background-color: transparent;
+}

@@ -1,6 +1,8 @@
 package myApp.controllers.components;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.effects.DepthLevel;
+import io.github.palexdev.materialfx.enums.ButtonType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -16,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import myApp.utils.Draggable;
 
 import java.io.IOException;
 import java.util.Map;
@@ -76,6 +79,10 @@ public class NewManualAlert extends VBox {
         buttonContainer.getChildren().clear();
         MFXButton yesButton = new MFXButton("Yes");
         MFXButton noButton = new MFXButton("No");
+        yesButton.setButtonType(ButtonType.RAISED);
+        noButton.setButtonType(ButtonType.RAISED);
+        yesButton.setDepthLevel(DepthLevel.LEVEL2);
+        noButton.setDepthLevel(DepthLevel.LEVEL2);
         yesButton.setPadding(new Insets(10, 30, 10, 30));
         noButton.setPadding(new Insets(10, 30, 10, 30));
         buttonContainer.getChildren().addAll(yesButton, noButton);
@@ -87,12 +94,7 @@ public class NewManualAlert extends VBox {
             close(event);
         });
 
-        noButton.setOnAction(event -> {
-            if (noAction != null) {
-                noAction.run();
-            }
-            close(event);
-        });
+        noButton.setOnAction(this::close);
     }
 
     private void close(ActionEvent actionEvent) {
@@ -108,6 +110,7 @@ public class NewManualAlert extends VBox {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(this));
         stage.showAndWait();
+        new Draggable().makeDraggable(stage);
     }
 
     public Stage getStage() {

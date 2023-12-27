@@ -2,10 +2,8 @@ package myApp.controllers.views;
 
 import java.io.IOException;
 import java.io.File;
-import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Base64;
 import java.util.HashMap;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,8 +12,6 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
-import com.sendgrid.*;
 import javafx.event.ActionEvent;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -56,7 +52,7 @@ public class ReportController {
     }
 
     private void loadUserData(int userId) {
-        String query = "SELECT fname, email, DOB, country FROM user WHERE userID = ?";
+        String query = "SELECT username, email, DOB, country FROM user WHERE userID = ?";
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -65,7 +61,7 @@ public class ReportController {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                String username = rs.getString("fname");
+                String username = rs.getString("username");
                 String email = rs.getString("email");
                 LocalDate dob = rs.getDate("DOB").toLocalDate();
                 String country = rs.getString("country");
@@ -77,8 +73,8 @@ public class ReportController {
         }
     }
 
-    public void updateReportDetails(String fname, String email, LocalDate dob, String country) {
-        usernameLabel.setText(fname);
+    public void updateReportDetails(String username, String email, LocalDate dob, String country) {
+        usernameLabel.setText(username);
         emailLabel.setText(email);
         dobLabel.setText(dob.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         countryLabel.setText(country);
@@ -192,25 +188,17 @@ public class ReportController {
     private void handleGenerateReport(ActionEvent event) {
         String desktopPath = System.getProperty("user.home") + "/Desktop";
         String filename = desktopPath + File.separator + "report.pdf";
-        try {
-            generatePdfReport(filename);
-            String recipientEmail = emailLabel.getText();
-            String subject = "Your Report";
-            String body = "Please find attached your report.";
-            File attachment = new File(filename);
-
-            sendEmailWithAttachment(recipientEmail, subject, body, attachment);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Error generating and sending the report: " + e.getMessage());
-        }
+        generatePdfReport(filename);
     }
 
+    @SuppressWarnings("all")
     public void generatePdfReport(String filename) {
         try (PDDocument document = new PDDocument()) {
             PDPage page = new PDPage();
             document.addPage(page);
+            String currentDirectory = System.getProperty("user.dir");
+            System.out.println("The current working directory is: " + currentDirectory);
+
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
                 contentStream.beginText();
@@ -227,62 +215,11 @@ public class ReportController {
                 contentStream.endText();
             }
 
-            File file = new File(filename);
-            File parentDir = file.getParentFile();
-            if (!parentDir.exists()) {
-                parentDir.mkdirs();
-            }
-
-            document.save(file);
-            System.out.println("PDF created: " + filename);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error generating PDF: " + e.getMessage());
-        }
-    }
-    @SuppressWarnings("all")
-    public void sendEmailWithAttachment(String recipientEmail, String subject, String body, File attachment) {
-        String apiKey = "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";
-
-        Email from = new Email("finess.rmit@gmail.com");
-        Email to = new Email(recipientEmail);
-        Content content = new Content("text/plain", body);
-        Mail mail = new Mail(from, subject, to, content);
-
-        Personalization personalization = new Personalization();
-        personalization.addTo(to);
-        mail.addPersonalization(personalization);
-
-        Attachments attachments = new Attachments();
-        attachments.setFilename(attachment.getName());
-        attachments.setType("application/pdf");
-
-        try {
-
-            byte[] pdfBytes = Files.readAllBytes(attachment.toPath());
-            attachments.setContent(Base64.getEncoder().encodeToString(pdfBytes));
-            mail.addAttachments(attachments);
+            document.save(filename);
+            System.out.println("PDF created");
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        SendGrid sg = new SendGrid(apiKey);
-        Request request = new Request();
-
-        try {
-            request.setMethod(Method.POST);
-            request.setEndpoint("mail/send");
-            request.setBody(mail.build());
-
-            Response response = sg.api(request);
-
-            System.out.println("Email sent successfully. Status code: " + response.getStatusCode());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
-
-
 
 }
