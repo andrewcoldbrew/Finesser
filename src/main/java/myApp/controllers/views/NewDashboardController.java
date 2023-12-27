@@ -322,11 +322,9 @@ public class NewDashboardController implements Initializable {
             incomeSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastIncome));
             expensesSeries.getData().add(new XYChart.Data<>(date.format(chartFormatter), lastExpenses));
         }
-        incomeVsOutcomeChart.getData().clear();
-        incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
         Platform.runLater(() -> {
-
-
+            incomeVsOutcomeChart.getData().clear();
+            incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
         });
     }
 
