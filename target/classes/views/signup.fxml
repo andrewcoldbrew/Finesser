@@ -151,7 +151,7 @@
                         <Font size="14.0" />
                      </font>
                   </MFXButton>
-                  <MFXDatePicker fx:id="dateOfBirthPicker" floatMode="BORDER" floatingText="Date of Birth" layoutX="95.0" layoutY="222.0" prefHeight="38.0" prefWidth="280.0" style="-fx-border-color: #9FE2BF;" textLimit="0" />
+                  <MFXDatePicker fx:id="dateOfBirthPicker" allowEdit="false" floatMode="BORDER" floatingText="Date of Birth" layoutX="95.0" layoutY="222.0" prefHeight="38.0" prefWidth="280.0" style="-fx-border-color: #9FE2BF;" />
                   <Label layoutX="26.0" layoutY="339.0" style="-fx-font-weight: bold;" text="Occupation &amp; Intended Use:">
                      <font>
                         <Font size="20.0" />

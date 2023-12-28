@@ -213,6 +213,8 @@ public class NewDashboardController implements Initializable {
                 budgetData.put(category, allocatedAmount);
                 actualSpendingData.put(category, spentAmount);
             }
+            System.out.println(budgetData);
+            System.out.println(actualSpendingData);
         } catch (SQLException e) {
             e.printStackTrace();
         }

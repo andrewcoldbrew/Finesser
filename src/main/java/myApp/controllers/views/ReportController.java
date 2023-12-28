@@ -12,7 +12,11 @@ import java.sql.SQLException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.scene.layout.StackPane;
+import myApp.controllers.components.LoadingScreen;
+import myApp.controllers.components.ReportLoading;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -24,7 +28,10 @@ import myApp.Main;
 import myApp.utils.ConnectionManager;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 
+import javax.swing.*;
+
 public class ReportController {
+    public StackPane stackPane;
     @FXML
     private Label usernameLabel;
     @FXML
@@ -47,8 +54,13 @@ public class ReportController {
     private Button generateReportButton;
 
     public void initialize() {
-        updateLabels();
-        loadUserData(Main.getUserId());
+        new LoadingScreen(stackPane);
+
+        Platform.runLater(() -> {
+            loadUserData(Main.getUserId());
+            updateLabels();
+        });
+
     }
 
     private void loadUserData(int userId) {
@@ -185,14 +197,41 @@ public class ReportController {
     }
     @SuppressWarnings("all")
     @FXML
-    private void handleGenerateReport(ActionEvent event) {
-        String desktopPath = System.getProperty("user.home") + "/Desktop";
-        String filename = desktopPath + File.separator + "report.pdf";
-        generatePdfReport(filename);
+    public   void handleGenerateReport(ActionEvent event) {
+//        String desktopPath = System.getProperty("user.home") + "/Desktop";
+//        String filename = desktopPath + File.separator + "report.pdf";
+//        generatePdfReport(filename);
+//        ReportLoading reportLoading = new ReportLoading(stackPane); // Assuming mainPane is the StackPane
+//        ReportGeneratorSwingWorker worker = new ReportGeneratorSwingWorker(reportLoading);
+//        worker.execute();
+
+        ReportLoading reportLoading = new ReportLoading(stackPane); // Assuming stackPane is the StackPane
+        generatePdfReportInBackground(reportLoading);
+    }
+
+    private void generatePdfReportInBackground(ReportLoading reportLoading) {
+        SwingWorker<Void, Void> worker = new SwingWorker<>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                String desktopPath = System.getProperty("user.home") + "/Desktop";
+                String filename = desktopPath + File.separator + "report.pdf";
+                generatePdfReport(filename);
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                // This method is called on the EDT when the background task is done
+                Platform.runLater(reportLoading::changeState);
+            }
+        };
+
+        // Execute the SwingWorker in a separate thread
+        worker.execute();
     }
 
     @SuppressWarnings("all")
-    public void generatePdfReport(String filename) {
+    private void generatePdfReport(String filename) {
         try (PDDocument document = new PDDocument()) {
             PDPage page = new PDPage();
             document.addPage(page);
@@ -220,6 +259,7 @@ public class ReportController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 }

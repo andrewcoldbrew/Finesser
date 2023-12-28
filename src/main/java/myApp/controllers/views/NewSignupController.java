@@ -56,7 +56,6 @@ public class NewSignupController implements Initializable {
     public Label passwordValidation;
     public MFXPasswordField passwordField;
     public MFXPasswordField rePasswordField;
-    private final Connection con = ConnectionManager.getConnection();
     public MFXComboBox<String> genderComboBox;
     public Label rePasswordValidation;
     public Label emailValidation;
@@ -123,8 +122,8 @@ public class NewSignupController implements Initializable {
                 .setSeverity(Severity.ERROR)
                 .setMessage("Your password doesn't match!")
                 .setCondition(Bindings.createBooleanBinding(
-                        () -> !matchingPassword(passwordField.getText(), rePasswordField.getText()),
-                        passwordField.textProperty()
+                        () -> matchingPassword(passwordField.getText(), rePasswordField.getText()),
+                        rePasswordField.textProperty()
                 ))
                 .get();
 
@@ -135,6 +134,7 @@ public class NewSignupController implements Initializable {
                 .constraint(lengthConstraint);
 
         emailField.getValidator().constraint(emailConstraint);
+
         rePasswordField.getValidator().constraint(rePasswordConstraint);
 
         passwordField.getValidator().validProperty().addListener((observable, oldValue, newValue) -> {
@@ -249,12 +249,12 @@ public class NewSignupController implements Initializable {
 
         if (password.equals(rePassword)) {
             try {
-                if (isUsernameTaken(con, username)) {
+                if (isUsernameTaken(username)) {
                     new ErrorAlert(stackPane, "Username is taken", "Someone with this username already existed! Please choose a different username");
+                } else if (isEmailTaken(email)) {
+                    new ErrorAlert(stackPane, "Email is taken", "There's already an account with this email! Please choose a different email");
                 } else if (isStrongPassword(password)){
-                    registerUser(con, username, password, fname, lname, email, dob, gender, country);
-                    new SuccessAlert(stackPane, "Your account has been created!");
-                    LoginStageManager.switchScene("login");
+                    registerUser(username, password, fname, lname, email, dob, gender, country);
                 } else {
                     new ErrorAlert(stackPane, "Weak Password", "Your password is not strong enough! Please enter a new password.");
                 }
@@ -266,8 +266,9 @@ public class NewSignupController implements Initializable {
         }
     }
 
-    private void registerUser(Connection con, String username, String password, String fname, String lname, String email, LocalDate dob, String gender, String country) {
+    private void registerUser(String username, String password, String fname, String lname, String email, LocalDate dob, String gender, String country) {
         String hashedPassword = HashManager.hashPassword(password);
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement statement = null;
         try {
             statement = con.prepareStatement("INSERT INTO user (username, password, fname, lname, email, gender, DOB, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
@@ -280,6 +281,8 @@ public class NewSignupController implements Initializable {
             statement.setDate(7, Date.valueOf(dob));
             statement.setString(8, country);
             statement.execute();
+            new SuccessAlert(stackPane, "Your account has been created!");
+            LoginStageManager.switchScene("login");
             statement.close();
         } catch (SQLException e) {
             System.out.println("ACCOUNT CREATE FAILED!");
@@ -293,9 +296,21 @@ public class NewSignupController implements Initializable {
         return password.matches(regex);
     }
 
-    private boolean isUsernameTaken(Connection con, String username) throws Exception {
+    private boolean isUsernameTaken(String username) throws Exception {
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement statement = con.prepareStatement("SELECT * FROM user WHERE username = ?");
         statement.setString(1, username);
+        ResultSet resultSet = statement.executeQuery();
+        boolean isTaken = resultSet.next();
+        resultSet.close();
+        statement.close();
+        return isTaken;
+    }
+
+    private boolean isEmailTaken(String email) throws Exception {
+        Connection con = ConnectionManager.getConnection();
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM user WHERE email = ?");
+        statement.setString(1, email);
         ResultSet resultSet = statement.executeQuery();
         boolean isTaken = resultSet.next();
         resultSet.close();

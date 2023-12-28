@@ -16,7 +16,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.NewDashboardController">
    <children>
       <BorderPane maxHeight="820.0" maxWidth="1200.0" minHeight="820.0" minWidth="1200.0" prefHeight="820.0" prefWidth="1200.0" stylesheets="@../css/dashboard.css">
@@ -78,10 +77,13 @@
                   <center>
                       <VBox alignment="TOP_CENTER" spacing="25.0" style="-fx-border-radius: 20 0  20  0;" BorderPane.alignment="CENTER">
                           <children>
-                              <Label fx:id="totalBalanceLabel" alignment="CENTER" prefHeight="110.0" prefWidth="235.0" styleClass="sideBox" text="Total Balance">
+                              <Label fx:id="totalBalanceLabel" alignment="CENTER" prefHeight="110.0" prefWidth="235.0" styleClass="sideBox" text="Total Balance: ">
                                   <VBox.margin>
                                       <Insets left="10.0" right="10.0" top="15.0" />
                                   </VBox.margin>
+                           <font>
+                              <Font name="Cambria" size="18.0" />
+                           </font>
                         </Label>
                               <VBox alignment="TOP_CENTER" spacing="20.0" styleClass="sideBox" VBox.vgrow="ALWAYS">
                                   <VBox.margin>
@@ -90,7 +92,7 @@
                                   <children>
                                       <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Most Recent Transactions" textAlignment="CENTER" wrappingWidth="200.0">
                                           <font>
-                                              <Font size="20.0" />
+                                              <Font name="Cambria" size="20.0" />
                                           </font>
                                           <VBox.margin>
                                               <Insets top="10.0" />

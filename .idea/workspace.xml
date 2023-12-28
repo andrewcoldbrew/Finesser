@@ -5,23 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/profiles/user_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/profiles/user_11.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/profiles/user_5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/profiles/user_7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ReportLoading.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/LoadingScreenUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/report.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/reportLoading.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/report/report.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LoadingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LoadingScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewDashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/HashManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/HashManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/updateFinanceForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/updateFinanceForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/reportForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/reportLoading.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/report.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/report.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/views/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/signup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/reportForm.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/LoadingScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/LoadingScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController$TimeFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController$TimeFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/FinanceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewSignupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewSignupController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/report.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/report.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/signup.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +38,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -89,7 +95,7 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;NguyenTheVinh&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/vinhh/Documents/GitHub/BITS_Group12/src/main/resources/images/category&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/vinhh/Documents/GitHub/BITS_Group12/src/main/resources/images/report&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -104,11 +110,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\report" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\category" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\alert" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\account" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\views" />
-      <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\gif" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\gif" />
@@ -140,8 +146,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Unnamed" />
       <item itemvalue="Application.ImageCarouselWithButtons" />
+      <item itemvalue="Application.Unnamed" />
     </list>
     <recent_temporary>
       <list>
@@ -218,6 +224,7 @@
       <workItem from="1703667727079" duration="476000" />
       <workItem from="1703668234366" duration="4960000" />
       <workItem from="1703682695817" duration="8582000" />
+      <workItem from="1703728781247" duration="9673000" />
     </task>
     <servers />
   </component>
