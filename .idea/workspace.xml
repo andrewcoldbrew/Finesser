@@ -5,29 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ReportLoading.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/LoadingScreenUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/report.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/reportLoading.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/report/report.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateInfoForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/updateInfoForm.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/updateInfoForm.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LoadingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/LoadingScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewDashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/reportForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/reportLoading.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/report.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/report.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/signup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/reportForm.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/LoadingScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/LoadingScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewDashboardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/account.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewSignupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewSignupController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/report.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/report.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/signup.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/models/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/account.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="CSS File" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -146,8 +135,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.ImageCarouselWithButtons" />
       <item itemvalue="Application.Unnamed" />
+      <item itemvalue="Application.ImageCarouselWithButtons" />
     </list>
     <recent_temporary>
       <list>
@@ -225,6 +214,7 @@
       <workItem from="1703668234366" duration="4960000" />
       <workItem from="1703682695817" duration="8582000" />
       <workItem from="1703728781247" duration="9673000" />
+      <workItem from="1703861703161" duration="4043000" />
     </task>
     <servers />
   </component>

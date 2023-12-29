@@ -242,7 +242,7 @@ public class NewSignupController implements Initializable {
         String password = passwordField.getText();
         String rePassword = rePasswordField.getText();
 
-        if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || Objects.isNull(dob) || country.isEmpty()) {
+        if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || gender == null || dob == null || country == null) {
             new ErrorAlert(stackPane, "Invalid Information", "Please fill in all fields before creating your account!");
             return;
         }
