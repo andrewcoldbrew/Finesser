@@ -23,22 +23,7 @@
          <children>
             <HBox alignment="CENTER">
                <children>
-                  <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" text="Generating your report. Please wait">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="dot1" strokeType="OUTSIDE" strokeWidth="0.0" text=".">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="dot2" strokeType="OUTSIDE" strokeWidth="0.0" text=".">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="dot3" strokeType="OUTSIDE" strokeWidth="0.0" text=".">
+                  <Text fx:id="message" strokeType="OUTSIDE" strokeWidth="0.0" text="Generating your report. Please wait...">
                      <font>
                         <Font size="20.0" />
                      </font>

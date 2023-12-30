@@ -5,18 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateInfoForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/components/updateInfoForm.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/css/updateInfoForm.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/NewSignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/account.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewSignupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/NewSignupController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/models/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/account.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/LoadingScreenUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/reportLoading.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/reportLoading.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/budget.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/budget.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/report.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/report.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/reportLoading.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/reportLoading.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/DashboardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/LoadingScreenUtil$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/LoadingScreenUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/views/report.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/report.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,6 +217,7 @@
       <workItem from="1703682695817" duration="8582000" />
       <workItem from="1703728781247" duration="9673000" />
       <workItem from="1703861703161" duration="4043000" />
+      <workItem from="1703943247059" duration="2141000" />
     </task>
     <servers />
   </component>

@@ -4,16 +4,21 @@ import java.io.IOException;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+import java.util.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.layout.StackPane;
 import myApp.controllers.components.LoadingScreen;
 import myApp.controllers.components.ReportLoading;
@@ -23,6 +28,7 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
+import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
 import myApp.Main;
 import myApp.utils.ConnectionManager;
@@ -52,6 +58,10 @@ public class ReportController {
     private Label topSpentCategoriesLabel;
     @FXML
     private Button generateReportButton;
+    @FXML
+    private Label dateLabel;
+    @FXML
+    private BarChart<String, Number> categoryAmountBarChart;
 
     public void initialize() {
         new LoadingScreen(stackPane);
@@ -59,8 +69,68 @@ public class ReportController {
         Platform.runLater(() -> {
             loadUserData(Main.getUserId());
             updateLabels();
+            loadCategoryAmountData();
         });
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        dateLabel.setText("Date: " + currentDate.format(formatter));
+    }
+    private void loadCategoryAmountData() {
+        String query = "SELECT category, SUM(amount) AS total FROM transaction WHERE userID = ? GROUP BY category ORDER BY total DESC";
 
+        ObservableList<XYChart.Series<String, Number>> barChartData = FXCollections.observableArrayList();
+        Set<String> excludedCategories = new HashSet<>(Arrays.asList(
+                "Income", "Dividend Income", "Investment", "Rent", "Subscription", "Insurance", "Bills"
+        ));
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, Main.getUserId());
+            ResultSet rs = stmt.executeQuery();
+
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Transaction Amounts by Category");
+
+            while (rs.next()) {
+                String category = rs.getString("category");
+                if (excludedCategories.contains(category)) {
+                    continue;
+                }
+                double total = rs.getDouble("total");
+                series.getData().add(new XYChart.Data<>(category, total));
+            }
+
+            barChartData.add(series);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Platform.runLater(() -> {
+            categoryAmountBarChart.setData(barChartData);
+            for (XYChart.Series<String, Number> serie : categoryAmountBarChart.getData()) {
+                for (XYChart.Data<String, Number> item : serie.getData()) {
+                    Node node = item.getNode();
+                    String color = getCategoryColor(item.getXValue());
+                    node.setStyle("-fx-bar-fill: " + color + ";");
+                }
+            }
+        });
+    }
+
+    private String getCategoryColor(String category) {
+        Map<String, String> categoryColors = new HashMap<>();
+        categoryColors.put("Clothes", "#1f77b4");
+        categoryColors.put("Education", "#ff7f0e");
+        categoryColors.put("Entertainment", "#2ca02c");
+        categoryColors.put("Food", "#d62728");
+        categoryColors.put("Groceries", "#9467bd");
+        categoryColors.put("Healthcare", "#8c564b");
+        categoryColors.put("Transportation", "#e377c2");
+        categoryColors.put("Travel", "#7f7f7f");
+        categoryColors.put("Other", "#bcbd22");
+
+        return categoryColors.getOrDefault(category, "#17becf");
     }
 
     private void loadUserData(int userId) {

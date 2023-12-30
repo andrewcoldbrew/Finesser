@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import myApp.Main;
 
+import java.io.File;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
@@ -24,6 +25,8 @@ import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.MainAppManager;
 import javafx.scene.text.Font;
+
+import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 import java.sql.Connection;
@@ -62,13 +65,33 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new LoadingScreen(stackPane);
-        loadTransactions();
-        loadPieChartData();
-        loadBudgetVsSpendingData();
-        loadIncomeVsOutcomeData();
-        loadUserInfo();
-
         seeMoreLink.setOnAction(this::moveToTransaction);
+        Platform.runLater(() -> {
+            SwingWorker<Void, Void> worker = new SwingWorker<>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    loadIncomeVsOutcomeData();
+                    loadPieChartData();
+                    loadBudgetVsSpendingData();
+                    return null;
+                }
+
+                @Override
+                protected void done() {
+                    loadTransactions();
+                    loadUserInfo();
+                }
+            };
+
+            worker.execute();
+        });
+
+        //        Platform.runLater(() -> {
+//            loadPieChartData();
+//            loadBudgetVsSpendingData();
+//            loadIncomeVsOutcomeData();
+//        });
+
     }
 
     private void loadTransactions() {
