@@ -110,7 +110,7 @@
                              <graphic>
                                  <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                      <image>
-                                         <Image url="@../images/navbar/transaction.png" />
+                                         <Image url="@../images/navbar/report.png" />
                                      </image>
                                  </ImageView>
                              </graphic>

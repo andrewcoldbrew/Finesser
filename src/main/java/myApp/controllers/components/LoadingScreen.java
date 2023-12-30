@@ -1,5 +1,7 @@
 package myApp.controllers.components;
 
+import animatefx.animation.FadeIn;
+import animatefx.animation.FadeOut;
 import io.github.palexdev.materialfx.beans.NumberRange;
 import io.github.palexdev.materialfx.controls.MFXProgressBar;
 import io.github.palexdev.materialfx.effects.Interpolators;
@@ -8,6 +10,7 @@ import javafx.animation.Animation;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
@@ -16,11 +19,10 @@ import java.io.IOException;
 
 public class LoadingScreen extends BorderPane {
 
-    @FXML
-    private MFXProgressBar progressBar;
+    public MFXProgressBar progressBar;
 
     private Runnable dataLoadingLogic;
-    private StackPane stackPane;
+    public StackPane stackPane;
 
     public LoadingScreen(StackPane stackPane) {
         this.stackPane = stackPane;
@@ -29,9 +31,9 @@ public class LoadingScreen extends BorderPane {
         fxmlLoader.setController(this);
         try {
             fxmlLoader.load();
-            stackPane.getChildren().add(this);
             initialize();
-            createAndPlayAnimation(stackPane);
+            stackPane.getChildren().add(this);
+            createAndPlayAnimation(progressBar, stackPane);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -44,18 +46,28 @@ public class LoadingScreen extends BorderPane {
         progressBar.getRanges3().add(NumberRange.of(0.61, 1.0));
     }
 
-    private void createAndPlayAnimation(StackPane stackPane) {
+    public void show() {
+        stackPane.getChildren().add(this);
+    }
+
+    public void close() {
+        stackPane.getChildren().remove(this);
+    }
+
+    private void createAndPlayAnimation(ProgressIndicator indicator, StackPane stackPane) {
         Animation a1 = AnimationUtils.TimelineBuilder.build()
                 .add(
-                        AnimationUtils.KeyFrames.of(1000, progressBar.progressProperty(), 0.3, Interpolators.INTERPOLATOR_V1),
-                        AnimationUtils.KeyFrames.of(1500, progressBar.progressProperty(), 0.6, Interpolators.INTERPOLATOR_V1),
-                        AnimationUtils.KeyFrames.of(2000, progressBar.progressProperty(), 1.0, Interpolators.INTERPOLATOR_V1)
+                        AnimationUtils.KeyFrames.of(1000, indicator.progressProperty(), 0.3, Interpolators.INTERPOLATOR_V1),
+                        AnimationUtils.KeyFrames.of(1500, indicator.progressProperty(), 0.6, Interpolators.INTERPOLATOR_V1),
+                        AnimationUtils.KeyFrames.of(2000, indicator.progressProperty(), 1.0, Interpolators.INTERPOLATOR_V1)
                 )
                 .getAnimation();
 
         a1.setOnFinished(end -> AnimationUtils.PauseBuilder.build()
                 .setDuration(Duration.seconds(1))
-                .setOnFinished(event -> stackPane.getChildren().remove(this))
+                .setOnFinished(event -> {
+                    stackPane.getChildren().remove(this);
+                })
                 .getAnimation()
                 .play()
         );

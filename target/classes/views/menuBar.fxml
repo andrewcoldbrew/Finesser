@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="255.0" styleClass="rootPane" stylesheets="@../css/menuBar.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.MenuBarController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="830.0" prefWidth="255.0" styleClass="rootPane" stylesheets="@../css/menuBar.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.MenuBarController">
    <children>
-      <HBox maxWidth="255.0">
+      <HBox maxHeight="830.0" maxWidth="255.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="850.0" prefWidth="255.0">
                <children>
@@ -110,7 +110,7 @@
                              <graphic>
                                  <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                      <image>
-                                         <Image url="@../images/navbar/transaction.png" />
+                                         <Image url="@../images/navbar/report.png" />
                                      </image>
                                  </ImageView>
                              </graphic>
@@ -142,7 +142,7 @@
                   </VBox>
                </children>
             </VBox>
-            <StackPane prefWidth="50.0" style="-fx-background-color: #f4f4f4;" styleClass="body" />
+            <StackPane minHeight="830.0" prefHeight="830.0" prefWidth="50.0" style="-fx-background-color: #f4f4f4;" styleClass="body" />
          </children>
       </HBox>
    </children>
