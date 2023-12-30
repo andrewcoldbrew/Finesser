@@ -52,27 +52,24 @@
                      </HBox>
                      <BorderPane>
                         <left>
-                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Annual Financial Report page provides users with a brief yet detailed snapshot of their financial performance, including trends, budget adherence, and investment insights. It offers strategic recommendations, goal tracking, forecasts, and ensures data security. Customization options make it a versatile tool for informed decision-making and personalized financial planning." wrappingWidth="469.13671875" BorderPane.alignment="CENTER">
-                              <font>
-                                 <Font name="Cambria" size="18.0" />
-                              </font>
-                              <BorderPane.margin>
-                                 <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                              </BorderPane.margin>
-                           </Text>
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This chart illustrates the distribution of financial transactions across various categories. Categories such as Income and Bills dominate the expenditure, indicating a focus on essential expenses and earnings. The varied heights of the bars represent the amount spent or earned, providing a quick visual summary of financial activity." wrappingWidth="469.13671875" BorderPane.alignment="CENTER">
+                                <font>
+                                    <Font name="Cambria" size="18.0" />
+                                </font>
+                                <BorderPane.margin>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                </BorderPane.margin>
+                            </Text>
                         </left>
                         <right>
-                           <BarChart prefHeight="150.0" prefWidth="621.0" BorderPane.alignment="CENTER">
-                             <xAxis>
-                               <CategoryAxis side="BOTTOM" />
-                             </xAxis>
-                             <yAxis>
-                               <NumberAxis side="LEFT" />
-                             </yAxis>
-                              <BorderPane.margin>
-                                 <Insets bottom="15.0" left="15.0" right="35.0" top="15.0" />
-                              </BorderPane.margin>
-                           </BarChart>
+                            <BarChart fx:id="categoryAmountBarChart" animated="false" legendVisible="false" title="Transaction Categories" BorderPane.alignment="CENTER">
+                                <xAxis>
+                                    <CategoryAxis label="Category" fx:id="categoryAxis"/>
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis label="Amount" fx:id="amountAxis"/>
+                                </yAxis>
+                            </BarChart>
                         </right>
                      </BorderPane>
                      <Separator>
@@ -197,7 +194,7 @@
                <children>
                   <HBox>
                      <children>
-                        <Label prefHeight="17.0" prefWidth="580.0" text="Date:">
+                        <Label fx:id="dateLabel" prefHeight="17.0" prefWidth="580.0" text="Date:">
                            <font>
                               <Font name="Cambria" size="25.0" />
                            </font>
@@ -205,7 +202,7 @@
                               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                            </HBox.margin>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="741.0" text="Report Number:">
+                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="741.0" text="Report Number: 1">
                            <font>
                               <Font name="Cambria" size="25.0" />
                            </font>
