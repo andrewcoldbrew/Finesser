@@ -73,7 +73,6 @@ public class FinanceController implements Initializable {
 
     }
 
-
     private void filterFinances(TimeFrame timeFrame) {
         LocalDate start = LocalDate.now();
         LocalDate end = LocalDate.now();
@@ -309,19 +308,16 @@ public class FinanceController implements Initializable {
         LocalDate[] range = getAllTimeDateRange();
         loadFinanceData(range[0], range[1]);
     }
-
     @FXML
     private void handleWeeklyFilter(ActionEvent event) {
         LocalDate[] range = getWeeklyDateRange();
         loadFinanceData(range[0], range[1]);
     }
-
     @FXML
     private void handleMonthlyFilter(ActionEvent event) {
         LocalDate[] range = getMonthlyDateRange();
         loadFinanceData(range[0], range[1]);
     }
-
     @FXML
     private void handleYearlyFilter(ActionEvent event) {
         LocalDate[] range = getYearlyDateRange();

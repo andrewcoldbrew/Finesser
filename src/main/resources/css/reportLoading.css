@@ -1,0 +1,16 @@
+#reportLoading {
+    -fx-background-color:  linear-gradient(to bottom right, #c9e29f, #1f8585);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 7, 0.2, 0, 0);
+    -fx-background-radius: 10;
+}
+#progressBar:range1 .bar1 {
+    -fx-fill: #07b907;
+}
+
+#progressBar:range2 .bar1 {
+    -fx-fill: #b6b61e;
+}
+
+#progressBar:range3 .bar1 {
+    -fx-fill: #d92f2f;
+}

@@ -1,0 +1,7 @@
+#exitButton {
+    -fx-background-color: transparent;
+}
+
+#stackPane {
+    -fx-background-color: grey;
+}

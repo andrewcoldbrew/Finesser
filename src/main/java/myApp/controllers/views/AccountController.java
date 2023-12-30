@@ -2,6 +2,7 @@ package myApp.controllers.views;
 
 import animatefx.animation.*;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -19,10 +20,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import myApp.Main;
-import myApp.controllers.components.AddWalletForm;
-import myApp.controllers.components.BankBox;
-import myApp.controllers.components.LinkBankForm;
-import myApp.controllers.components.LoadingScreen;
+import myApp.controllers.components.*;
+import myApp.models.Transaction;
+import myApp.models.User;
 import myApp.utils.Animate;
 import myApp.utils.ConnectionManager;
 
@@ -35,10 +35,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -255,6 +252,84 @@ public class AccountController implements Initializable {
         }
     }
 
+    public void updateInfoInDatabase(String fname, String lname, String email, String gender, LocalDate dob, String country) {
+        String sql = "UPDATE user SET fname = ?, lname = ?, email = ?, gender = ?, DOB = ?, country = ? WHERE userID = ?";
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, fname);
+            stmt.setString(2, lname);
+            stmt.setString(3, email);
+            stmt.setString(4, gender);
+            stmt.setDate(5, Date.valueOf(dob));
+            stmt.setString(6, country);
+            stmt.setInt(7, Main.getUserId());
+            stmt.executeUpdate();
+
+            closeUpdateInfoForm();
+
+            Platform.runLater(() -> {
+                loadUserProfile();
+                new SuccessAlert(stackPane, "Finance successfully updated!");
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private User getUserFromDatabase() {
+        int userId = Main.getUserId();
+        Connection con = ConnectionManager.getConnection();
+        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT fname, lname, email, gender, DOB, country FROM user WHERE userID = ?")) {
+            preparedStatement.setInt(1, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    String fname = resultSet.getString("fname");
+                    String lname = resultSet.getString("lname");
+                    String email = resultSet.getString("email");
+                    String gender = resultSet.getString("gender");
+                    LocalDate dob = resultSet.getDate("DOB").toLocalDate();
+                    String country = resultSet.getString("country");
+                    User user = new User(userId, fname, lname, email, gender, dob, country);
+                    return user;
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public void openUpdateInfoForm(ActionEvent actionEvent) {
+        if (!isUpdateFormOpen()) {
+            stackPane.getChildren().add(new UpdateInfoForm(this, getUserFromDatabase()));
+        }
+    }
+
+    private void closeUpdateInfoForm() {
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof UpdateInfoForm) {
+                stackPane.getChildren().remove(node);
+                break;
+            }
+        }
+    }
+
+    private boolean isUpdateFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof UpdateFinanceForm) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public void handleLinkBankForm(ActionEvent actionEvent) {
         // Check if a LinkBankForm is already present
@@ -367,8 +442,6 @@ public class AccountController implements Initializable {
 
     private Window getWindow() {
         return profileImage.getScene().getWindow();
-    }
-    public void handleUpdateInfo(ActionEvent actionEvent) {
     }
 
     public void handleChangePassword(ActionEvent actionEvent) {
