@@ -15,6 +15,7 @@ import myApp.Main;
 import myApp.controllers.views.TransactionController;
 import myApp.models.Transaction;
 import myApp.utils.Draggable;
+import myApp.utils.NotificationCenter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -78,7 +79,7 @@ public class UpdateTransactionForm extends StackPane {
             description = "No description";
         }
         if (name.isEmpty() || amountText.isEmpty() || category.isEmpty() || date == null) {
-            new ErrorAlert(stackPane, "Update declined", "Please fill in all fields!");
+            NotificationCenter.errorAlert("Empty fields!", "Please fill in all fields before proceed");
             return;
         }
 
@@ -89,7 +90,7 @@ public class UpdateTransactionForm extends StackPane {
 
 
         } catch (NumberFormatException e) {
-            new ErrorAlert(stackPane, "Invalid input", "Amount must be a number");
+            NotificationCenter.errorAlert("Invalid Amount", "Entered amount must be a number");
         }
     }
 }

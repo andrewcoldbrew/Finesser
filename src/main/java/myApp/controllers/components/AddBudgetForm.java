@@ -18,6 +18,7 @@ import myApp.Main;
 import myApp.controllers.views.BudgetController;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
+import myApp.utils.NotificationCenter;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -82,7 +83,7 @@ public class AddBudgetForm extends BorderPane {
             double limit = Double.parseDouble(limitField.getText());
             budgetController.addBudgetInDataBase(category, limit, startDate, endDate);
         } catch (NumberFormatException e) {
-            new ErrorAlert(budgetController.getStackPane(), "Error", "Limit must be a number!");
+            NotificationCenter.errorAlert("Invalid Amount", "Entered amount must be a number");
         }
     }
 

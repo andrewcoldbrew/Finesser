@@ -21,6 +21,7 @@ import myApp.controllers.components.*;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
+import myApp.utils.NotificationCenter;
 
 import java.net.URL;
 import java.sql.*;
@@ -206,7 +207,7 @@ public class FinanceController implements Initializable {
 
             Platform.runLater(() -> {
                 filterFinances(TimeFrame.ALL_TIME);
-                new SuccessAlert(stackPane, "Finance successfully updated!");
+                NotificationCenter.successAlert("Finance updated!", "Your finance has been updated successfully");
             });
         } catch (SQLException e) {
             e.printStackTrace();
@@ -221,7 +222,7 @@ public class FinanceController implements Initializable {
             pstmt.setInt(1, transaction.getTransactionID());
             pstmt.executeUpdate();
             filterFinances(TimeFrame.ALL_TIME);
-            new SuccessAlert(stackPane, "Finance successfully deleted!");
+//            new SuccessAlert(stackPane, "Finance successfully deleted!");
             System.out.println("Deleted finance");
         } catch (SQLException e) {
             e.printStackTrace();

@@ -24,6 +24,7 @@ import myApp.controllers.components.SuccessAlert;
 import myApp.utils.ConnectionManager;
 import myApp.utils.HashManager;
 import myApp.utils.LoginStageManager;
+import myApp.utils.NotificationCenter;
 
 import java.net.URL;
 import java.sql.*;
@@ -243,26 +244,30 @@ public class NewSignupController implements Initializable {
         String rePassword = rePasswordField.getText();
 
         if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || gender == null || dob == null || country == null) {
-            new ErrorAlert(stackPane, "Invalid Information", "Please fill in all fields before creating your account!");
+            NotificationCenter.errorAlert("Empty fields!", "Please fill in all fields before proceed");
             return;
         }
 
         if (password.equals(rePassword)) {
             try {
                 if (isUsernameTaken(username)) {
-                    new ErrorAlert(stackPane, "Username is taken", "Someone with this username already existed! Please choose a different username");
+                    NotificationCenter.errorAlert("Username is taken!",
+                            "Someone with this username already exists. Please choose a different username");
                 } else if (isEmailTaken(email)) {
-                    new ErrorAlert(stackPane, "Email is taken", "There's already an account with this email! Please choose a different email");
+                    NotificationCenter.errorAlert("Email is taken!",
+                            "This email is already in used. Please choose a different email");
                 } else if (isStrongPassword(password)){
                     registerUser(username, password, fname, lname, email, dob, gender, country);
                 } else {
-                    new ErrorAlert(stackPane, "Weak Password", "Your password is not strong enough! Please enter a new password.");
+                    NotificationCenter.errorAlert("Weak password!",
+                            "Your password is not strong enough");
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else {
-            new ErrorAlert(stackPane, "Password unmatched", "Your password is not matching. Please re-enter your password!");
+            NotificationCenter.errorAlert("Unmatched passwords!",
+                    "The re-entered password must be matching your original password");
         }
     }
 
@@ -281,7 +286,7 @@ public class NewSignupController implements Initializable {
             statement.setDate(7, Date.valueOf(dob));
             statement.setString(8, country);
             statement.execute();
-            new SuccessAlert(stackPane, "Your account has been created!");
+//            new SuccessAlert(stackPane, "Your account has been created!");
             LoginStageManager.switchScene("login");
             statement.close();
         } catch (SQLException e) {

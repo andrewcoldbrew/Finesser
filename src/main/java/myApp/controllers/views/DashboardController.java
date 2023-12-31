@@ -86,12 +86,6 @@ public class DashboardController implements Initializable {
             worker.execute();
         });
 
-        //        Platform.runLater(() -> {
-//            loadPieChartData();
-//            loadBudgetVsSpendingData();
-//            loadIncomeVsOutcomeData();
-//        });
-
     }
 
     private void loadTransactions() {
@@ -144,34 +138,6 @@ public class DashboardController implements Initializable {
             }
         });
     }
-
-        /*private void loadPieChartData() {
-
-            Map<String, Double> categoryTotals = new HashMap<>();
-
-            String query = "SELECT category, SUM(amount) AS totalAmount FROM transaction WHERE userID = ? GROUP BY category";
-            try (Connection conn = ConnectionManager.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement(query)) {
-
-                stmt.setInt(1, Main.getUserId());
-
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                    String category = rs.getString("category");
-                    double amount = rs.getDouble("totalAmount");
-                    categoryTotals.put(category, amount);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace(); // Handle the exception appropriately
-            }
-
-
-            Platform.runLater(() -> {
-                for (Map.Entry<String, Double> entry : categoryTotals.entrySet()) {
-                    categoryPieChart.getData().add(new PieChart.Data(entry.getKey(), entry.getValue()));
-                }
-            });
-        }*/
 
 
     private void loadBudgetVsSpendingData() {

@@ -24,6 +24,7 @@ import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
 import myApp.utils.LocalDateComparator;
+import myApp.utils.NotificationCenter;
 
 import java.net.URL;
 import java.sql.*;
@@ -269,7 +270,7 @@ public class TransactionController implements Initializable {
             Platform.runLater(() -> {
                 loadTransactions();
                 closeUpdateForm();
-                new SuccessAlert(stackPane, "Your transaction has been updated successfully!");
+                NotificationCenter.successAlert("Transaction Updated!", "Your transaction has been updated successfully");
             });
         } catch (SQLException e) {
             e.printStackTrace();

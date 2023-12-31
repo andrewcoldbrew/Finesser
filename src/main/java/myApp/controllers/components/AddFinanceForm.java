@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import myApp.Main;
 import myApp.controllers.views.FinanceController;
 import myApp.utils.ConnectionManager;
+import myApp.utils.NotificationCenter;
 
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
@@ -106,7 +107,7 @@ public class AddFinanceForm extends StackPane {
 
                 statement.execute();
                 financeController.loadFinanceData();
-                new SuccessAlert(financeController.stackPane, "Finance added successfully!");
+                NotificationCenter.successAlert("Finance added!", "Your finance has been added successfully");
                 exit();
             }
         } catch (SQLException e) {
