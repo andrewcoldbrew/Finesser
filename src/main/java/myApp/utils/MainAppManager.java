@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class MainAppManager {
 
-    private static Stage mainAppStage = new Stage();
+    private static Stage mainAppStage;
     private static BorderPane mainLayout;
     private static final Map<String, String> scenes = new HashMap<>();
 
@@ -27,6 +27,7 @@ public class MainAppManager {
     }
 
     public static void setupMainApp() {
+        mainAppStage = new Stage();
         mainAppStage.setMaximized(false);
 
 
@@ -42,6 +43,9 @@ public class MainAppManager {
 
         Scene scene = new Scene(mainLayout);
         mainAppStage.setScene(scene);
+
+        NotificationCenter.initalizeNotification(mainAppStage);
+
         mainAppStage.show();
     }
 

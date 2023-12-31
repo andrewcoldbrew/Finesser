@@ -22,9 +22,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class SuccessAlert extends MFXSimpleNotification {
-    @FXML
-    private BorderPane successAlert;
+public class SuccessAlert extends BorderPane {
     public ImageView successIcon;
     public Text messageLabel;
 
@@ -44,14 +42,14 @@ public class SuccessAlert extends MFXSimpleNotification {
     private void initialize(Pane pane, String message) {
         messageLabel.setText(message);
         if (!alertIsShown(pane)) {
-            pane.getChildren().add(successAlert);
+            pane.getChildren().add(this);
 
             // Play FadeIn animation
-            FadeIn fadeInAnimation = new FadeIn(successAlert);
+            FadeIn fadeInAnimation = new FadeIn(this);
             fadeInAnimation.setSpeed(1.25);
             fadeInAnimation.setOnFinished(fadeInEvent -> {
                 // Play FadeOut animation after FadeIn finishes
-                FadeOut fadeOutAnimation = new FadeOut(successAlert);
+                FadeOut fadeOutAnimation = new FadeOut(this);
                 fadeOutAnimation.setDelay(Duration.seconds(3));
                 fadeOutAnimation.setSpeed(1.25);
                 fadeOutAnimation.setOnFinished(fadeOutEvent -> {

@@ -13,6 +13,7 @@ import myApp.Main;
 import myApp.controllers.views.AccountController;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
+import myApp.utils.NotificationCenter;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -62,7 +63,8 @@ public class AddWalletForm extends BorderPane {
 
                 updateStatement.executeUpdate();
                 System.out.println("User's cashAmount updated successfully!");
-                new SuccessAlert(accountController.getStackPane(), "Cash added successfully");
+//                new SuccessAlert(accountController.getStackPane(), "Cash added successfully");
+                NotificationCenter.successAlert("Hello");
                 accountController.loadUserProfile();
                 Platform.runLater(this::exit);
 
