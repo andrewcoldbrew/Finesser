@@ -16,10 +16,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<fx:root fx:id="stackPane" type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="400.0" type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <javafx.scene.layout.BorderPane fx:id="financeForm" stylesheets="@../css/addFinanceForm.css">
+      <javafx.scene.layout.BorderPane fx:id="financeForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="400.0" stylesheets="@../css/addFinanceForm.css">
          <top>
             <BorderPane BorderPane.alignment="CENTER">
                <left>

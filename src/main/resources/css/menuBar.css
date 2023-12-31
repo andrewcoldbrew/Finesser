@@ -1,9 +1,16 @@
 .rootPane {
     -fx-background-color:  linear-gradient(to bottom right, #c9e29f, #1f8585);
-    -fx-background-radius: 0 20 20 0;
+
     -fx-border-color: #ebebeb;
-    -fx-border-radius: 0 20 20 0;
+
     -fx-font-size: 15px;
+}
+
+.body {
+    -fx-background-radius:  20 0 0 20;
+    -fx-border-radius: 20 0 0 20;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2), 4, 0.3, -1,0);
+
 }
 
 .rootPane .button {

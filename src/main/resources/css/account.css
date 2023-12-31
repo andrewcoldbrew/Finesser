@@ -8,17 +8,17 @@
 
 .sideBox {
     -fx-background-color: white;
-    -fx-padding:  30px 0px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 4, 0.2, 0, 0);;
 }
 
 .sideBox:hover {
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 15, 0.3, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.3, 0, 0);
 }
 
 .moneyPane {
     -fx-background-color: white;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 4, 0.2, 0, 0);
 }
 
 #linkBankButton {

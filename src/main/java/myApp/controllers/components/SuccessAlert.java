@@ -1,9 +1,11 @@
 package myApp.controllers.components;
 
 import animatefx.animation.*;
+import io.github.palexdev.materialfx.controls.MFXSimpleNotification;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -20,7 +22,9 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class SuccessAlert extends BorderPane {
+public class SuccessAlert extends MFXSimpleNotification {
+    @FXML
+    private BorderPane successAlert;
     public ImageView successIcon;
     public Text messageLabel;
 
@@ -40,14 +44,14 @@ public class SuccessAlert extends BorderPane {
     private void initialize(Pane pane, String message) {
         messageLabel.setText(message);
         if (!alertIsShown(pane)) {
-            pane.getChildren().add(this);
+            pane.getChildren().add(successAlert);
 
             // Play FadeIn animation
-            FadeIn fadeInAnimation = new FadeIn(this);
+            FadeIn fadeInAnimation = new FadeIn(successAlert);
             fadeInAnimation.setSpeed(1.25);
             fadeInAnimation.setOnFinished(fadeInEvent -> {
                 // Play FadeOut animation after FadeIn finishes
-                FadeOut fadeOutAnimation = new FadeOut(this);
+                FadeOut fadeOutAnimation = new FadeOut(successAlert);
                 fadeOutAnimation.setDelay(Duration.seconds(3));
                 fadeOutAnimation.setSpeed(1.25);
                 fadeOutAnimation.setOnFinished(fadeOutEvent -> {

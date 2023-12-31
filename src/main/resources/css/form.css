@@ -74,19 +74,19 @@
     -fx-cursor: hand;
 }
 
-/*#addBudgetButton {*/
-/*    -fx-background-color: transparent;*/
-/*    -fx-border-color:  #9FE2BF;*/
-/*    -fx-border-radius: 5;*/
+#addBudgetButton {
+    -fx-background-color: transparent;
+    -fx-border-color:  #9FE2BF;
+    -fx-border-radius: 5;
 
-/*}*/
+}
 
-/*#addBudgetButton:hover {*/
-/*    -fx-background-color:  #9FE2BF;*/
-/*    -fx-background-radius: 5;*/
-/*    -fx-text-fill: white;*/
-/*    -fx-font-size: 14;*/
-/*}*/
+#addBudgetButton:hover {
+    -fx-background-color:  #9FE2BF;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}
 
 #exitButton {
     -fx-background-color: transparent;

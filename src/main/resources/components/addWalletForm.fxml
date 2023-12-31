@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <fx:root fx:id="addWalletForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/addWalletForm.css" type="BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
@@ -21,7 +22,10 @@
                   <MFXTextField fx:id="balanceField" floatMode="DISABLED" prefHeight="39.0" prefWidth="216.0" style="-fx-border-color: #9FE2BF;" />
                </children>
             </VBox>
-            <MFXButton fx:id="addButton" buttonType="RAISED" prefHeight="32.0" text="Add to wallet" />
+            <MFXButton fx:id="addButton" buttonType="RAISED" prefHeight="32.0" prefWidth="127.0" stylesheets="@../css/form.css" text="Add to wallet">
+               <font>
+                  <Font size="14.0" />
+               </font></MFXButton>
          </children>
          <BorderPane.margin>
             <Insets />
