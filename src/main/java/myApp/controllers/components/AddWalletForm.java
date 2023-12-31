@@ -48,7 +48,7 @@ public class AddWalletForm extends BorderPane {
         int userId = Main.getUserId();
 
         if (balanceText == null) {
-            System.out.println("Please enter all fields first.");
+            NotificationCenter.errorAlert("Empty fields!", "Please fill in all fields before proceed");
             return;
         }
 

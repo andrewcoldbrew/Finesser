@@ -4,6 +4,7 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -106,7 +107,7 @@ public class AddFinanceForm extends StackPane {
                 statement.setInt(8, Main.getUserId());
 
                 statement.execute();
-                financeController.loadFinanceData();
+                Platform.runLater(() -> financeController.loadFinanceData());
                 NotificationCenter.successAlert("Finance added!", "Your finance has been added successfully");
                 exit();
             }
