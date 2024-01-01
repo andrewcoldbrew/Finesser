@@ -366,6 +366,23 @@ public class AccountController implements Initializable {
         }
         return false;
     }
+
+    public void openChangePWForm(ActionEvent actionEvent) {
+        if (!isChangePWFormOpen()) {
+            stackPane.getChildren().add(new ChangePasswordForm());
+        }
+    }
+
+    private boolean isChangePWFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof ChangePasswordForm) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void loadProfilePicture() {
         String imagePath = getUserProfileImagePath(Main.getUserId());
         if (imagePath != null && !imagePath.isEmpty()) {
@@ -445,9 +462,6 @@ public class AccountController implements Initializable {
 
     private Window getWindow() {
         return profileImage.getScene().getWindow();
-    }
-
-    public void handleChangePassword(ActionEvent actionEvent) {
     }
 
     public StackPane getStackPane() {

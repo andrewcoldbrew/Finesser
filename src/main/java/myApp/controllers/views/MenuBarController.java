@@ -64,12 +64,12 @@ public class MenuBarController {
         // Apply the style to the active button
         if (activeButton != null) {
             activeButton.getStyleClass().add("active-button");
-            System.out.println("Account Button: " + accountButton.getStyleClass());
-            System.out.println("Dashboard Button: " + dashBoardButton.getStyleClass());
-            System.out.println("Budget Button: " + budgetButton.getStyleClass());
-            System.out.println("Finance Button: " + financeButton.getStyleClass());
-            System.out.println("Transaction Button: " + transactionButton.getStyleClass());
-            System.out.println("Report Button: " + reportButton.getStyleClass());
+//            System.out.println("Account Button: " + accountButton.getStyleClass());
+//            System.out.println("Dashboard Button: " + dashBoardButton.getStyleClass());
+//            System.out.println("Budget Button: " + budgetButton.getStyleClass());
+//            System.out.println("Finance Button: " + financeButton.getStyleClass());
+//            System.out.println("Transaction Button: " + transactionButton.getStyleClass());
+//            System.out.println("Report Button: " + reportButton.getStyleClass());
         }
     }
 
