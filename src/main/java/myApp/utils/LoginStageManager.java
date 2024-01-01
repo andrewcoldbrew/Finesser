@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class LoginStageManager {
 
-    private static Stage loginStage = new Stage();
+    private static Stage loginStage;
     private static final Map<String, String> scenes = Map.of(
             "login", "/views/login.fxml",
             "signup", "/views/signup.fxml"
@@ -18,12 +18,9 @@ public class LoginStageManager {
 
     public static void setupLoginStage() {
         // Create a new stage
-
-
+        loginStage = new Stage();
         // Set up the login page on the new stage
         switchScene("login");
-
-        // You can add additional setup for the stage if needed
 
         // Show the stage
         loginStage.show();

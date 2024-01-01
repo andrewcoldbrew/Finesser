@@ -51,7 +51,7 @@
                <center>
                   <HBox prefHeight="107.0" prefWidth="1172.0" spacing="20.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label fx:id="totalLabel" contentDisplay="CENTER" prefHeight="66.0" prefWidth="185.0" styleClass="totalLabel" text="Surplus Funds:">
+                        <Label fx:id="totalLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="66.0" prefWidth="175.0" styleClass="totalLabel" text="Surplus Funds:">
                            <font>
                               <Font name="Candara" size="18.0" />
                            </font>
@@ -66,7 +66,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                                  <HBox.margin>
-                                    <Insets bottom="15.0" right="15.0" top="15.0" />
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                  </HBox.margin>
                               </MFXButton>
                               <MFXButton fx:id="weeklyButton" buttonType="RAISED" prefHeight="30.0" prefWidth="65.0" style="-fx-border-color: #9FE2BF; -fx-background-radius: 5; -fx-border-radius: 5;" styleClass="timeFilter" stylesheets="@../css/finance.css" text="Weekly">
@@ -95,7 +95,7 @@
                               </MFXButton>
                            </children>
                         </HBox>
-                        <MFXButton fx:id="addButton" alignment="CENTER" buttonType="RAISED" graphicTextGap="10.0" onAction="#handleAddFinanceForm" prefHeight="50.0" prefWidth="201.0" text="Add Recurring Finances" textAlignment="JUSTIFY">
+                        <MFXButton fx:id="addButton" alignment="CENTER" buttonType="RAISED" graphicTextGap="10.0" onAction="#openAddFinanceForm" prefHeight="50.0" prefWidth="201.0" text="Add Recurring Finances" textAlignment="JUSTIFY">
                            <font>
                               <Font size="13.0" />
                            </font>

@@ -53,55 +53,35 @@ public class NewDashboardController implements Initializable {
     private Tooltip barChartToolTip;
     private Tooltip areaChartToolTip;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        new LoadingScreen(stackPane);
-//        Platform.runLater(() -> {
-//            loadTransactions();
-//            Platform.runLater(this::loadPieChartData);
-//            Platform.runLater(this::loadBudgetVsSpendingData);
-//            Platform.runLater(this::loadIncomeVsOutcomeData);
-//            Platform.runLater(this::addHoverToAllCharts);
-////            loadPieChartData();
-////            loadBudgetVsSpendingData();
-////            loadIncomeVsOutcomeData();
-//            loadUserInfo();
-//            seeMoreLink.setOnAction(this::moveToTransaction);
-//            initializeToolTips();
-//
-//        });
-
         new LoadingScreen(stackPane);
+        initializeToolTips();
+        seeMoreLink.setOnAction(this::moveToTransaction);
+        loadIncomeVsOutcomeData();
 
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                loadTransactions();
                 // Perform heavy tasks in the background
                 loadPieChartData();
                 loadBudgetVsSpendingData();
-                loadIncomeVsOutcomeData();
                 return null;
             }
         };
 
         task.setOnSucceeded(event -> {
-            // Update UI after background tasks are complete
             addHoverToAllCharts();
+            loadTransactions();
             loadUserInfo();
-            seeMoreLink.setOnAction(this::moveToTransaction);
-            initializeToolTips();
         });
 
+        // Start the task on the JavaFX Application Thread
         Platform.runLater(() -> {
-            // Start the task on the JavaFX Application Thread
             new Thread(task).start();
         });
-
-
-
     }
+
 
     private void initializeToolTips() {
         pieChartToolTip = new Tooltip("");
@@ -116,23 +96,24 @@ public class NewDashboardController implements Initializable {
     }
 
     private void addHoverToAllCharts() {
-        for (final PieChart.Data data : categoryPieChart.getData()) {
-            Tooltip.install(data.getNode(), pieChartToolTip);
-            addHoverToPieChart(data);
-        }
-        for (final XYChart.Series<String, Number> series : budgetVsSpendingChart.getData()) {
-            for (final XYChart.Data<String, Number> data : series.getData()) {
-                Tooltip.install(data.getNode(), barChartToolTip);
-                addHoverToBarChart(data, series);
+            for (final PieChart.Data data : categoryPieChart.getData()) {
+                Tooltip.install(data.getNode(), pieChartToolTip);
+                addHoverToPieChart(data);
             }
-        }
+            for (final XYChart.Series<String, Number> series : budgetVsSpendingChart.getData()) {
+                for (final XYChart.Data<String, Number> data : series.getData()) {
+                    Tooltip.install(data.getNode(), barChartToolTip);
+                    addHoverToBarChart(data, series);
+                }
+            }
 
-        for (final XYChart.Series<String, Number> series : incomeVsOutcomeChart.getData()) {
-            for (final XYChart.Data<String, Number> data : series.getData()) {
-                Tooltip.install(data.getNode(), areaChartToolTip);
-                addHoverToAreaChart(data, series);
+            for (final XYChart.Series<String, Number> series : incomeVsOutcomeChart.getData()) {
+                for (final XYChart.Data<String, Number> data : series.getData()) {
+                    Tooltip.install(data.getNode(), areaChartToolTip);
+                    addHoverToAreaChart(data, series);
+                }
             }
-        }
+
     }
 
     private void loadTransactions() {
@@ -183,7 +164,12 @@ public class NewDashboardController implements Initializable {
                 String label = String.format("%s: %.2f%%", entry.getKey(), percentage);
                 categoryPieChart.getData().add(new PieChart.Data(label, entry.getValue()));
             }
+//            for (final PieChart.Data data : categoryPieChart.getData()) {
+//                Tooltip.install(data.getNode(), pieChartToolTip);
+//                addHoverToPieChart(data);
+//            }
         });
+
     }
 
     private void addHoverToPieChart(final PieChart.Data data) {
@@ -227,12 +213,23 @@ public class NewDashboardController implements Initializable {
                 budgetData.put(category, allocatedAmount);
                 actualSpendingData.put(category, spentAmount);
             }
+            System.out.println(budgetData);
+            System.out.println(actualSpendingData);
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
 
         populateBarChart(budgetData, actualSpendingData);
+//        Platform.runLater(() -> {
+//            for (final XYChart.Series<String, Number> series : budgetVsSpendingChart.getData()) {
+//                for (final XYChart.Data<String, Number> data : series.getData()) {
+//                    Tooltip.install(data.getNode(), barChartToolTip);
+//                    addHoverToBarChart(data, series);
+//                }
+//            }
+//        });
+
     }
 
     private void populateBarChart(Map<String, Double> budgetData, Map<String, Double> actualSpendingData) {
@@ -324,10 +321,15 @@ public class NewDashboardController implements Initializable {
         }
         incomeVsOutcomeChart.getData().clear();
         incomeVsOutcomeChart.getData().addAll(incomeSeries, expensesSeries);
-        Platform.runLater(() -> {
 
-
-        });
+//        Platform.runLater(() -> {
+//            for (final XYChart.Series<String, Number> series : incomeVsOutcomeChart.getData()) {
+//                for (final XYChart.Data<String, Number> data : series.getData()) {
+//                    Tooltip.install(data.getNode(), areaChartToolTip);
+//                    addHoverToAreaChart(data, series);
+//                }
+//            }
+//        });
     }
 
     private void updateTransactionMap(String query, int userId, Map<LocalDate, Double> map, DateTimeFormatter dbFormatter) {
@@ -370,27 +372,30 @@ public class NewDashboardController implements Initializable {
 
 
     private void loadUserInfo() {
-        int userId = Main.getUserId();
-        Connection con = ConnectionManager.getConnection();
-        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT fname, lname, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = ? AND linked = true), 0) AS totalBalance FROM user WHERE userID = ?")) {
-            preparedStatement.setInt(1, userId);
-            preparedStatement.setInt(2, userId);
+        Platform.runLater(() -> {
+            int userId = Main.getUserId();
+            Connection con = ConnectionManager.getConnection();
+            try (PreparedStatement preparedStatement = con.prepareStatement("SELECT fname, lname, cashAmount + COALESCE((SELECT SUM(balance) FROM bank WHERE ownerID = ? AND linked = true), 0) AS totalBalance FROM user WHERE userID = ?")) {
+                preparedStatement.setInt(1, userId);
+                preparedStatement.setInt(2, userId);
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    String fname = resultSet.getString("fname");
-                    String lname = resultSet.getString("lname");
-                    String fullName = fname + " " + lname;
-                    double totalBalance = resultSet.getDouble("totalBalance");
-                    welcomeLabel.setText("Welcome, " + fullName);
-                    totalBalanceLabel.setText(String.format("Total Balance: %.2f", totalBalance));
-                } else {
-                    System.out.println("User not found.");
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        String fname = resultSet.getString("fname");
+                        String lname = resultSet.getString("lname");
+                        String fullName = fname + " " + lname;
+                        double totalBalance = resultSet.getDouble("totalBalance");
+                        welcomeLabel.setText("Welcome, " + fullName);
+                        totalBalanceLabel.setText(String.format("Total Balance: %.2f", totalBalance));
+                    } else {
+                        System.out.println("User not found.");
+                    }
                 }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        });
+
     }
 
     private void moveToTransaction(ActionEvent actionEvent) {

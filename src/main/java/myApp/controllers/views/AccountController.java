@@ -2,6 +2,7 @@ package myApp.controllers.views;
 
 import animatefx.animation.*;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -19,23 +20,24 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import myApp.Main;
-import myApp.controllers.components.AddWalletForm;
-import myApp.controllers.components.BankBox;
-import myApp.controllers.components.LinkBankForm;
-import myApp.controllers.components.LoadingScreen;
+import myApp.controllers.components.*;
+import myApp.models.Transaction;
+import myApp.models.User;
 import myApp.utils.Animate;
 import myApp.utils.ConnectionManager;
 
 
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import myApp.utils.NotificationCenter;
+
 import java.io.File;
 
+import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,8 +66,7 @@ public class AccountController implements Initializable {
     private List<BankBox> creditCardList;
     private Label noBankLabel;
 
-    private static final String IMAGE_SAVE_DIRECTORY = "src/main/resources/images";
-    private static final String PROFILE_IMAGE_KEY = "profileImagePath";
+    private static final String IMAGE_SAVE_DIRECTORY = "src/main/resources/images/profiles";
     private Preferences prefs;
     public AccountController() {
         prefs = Preferences.userNodeForPackage(AccountController.class);
@@ -237,10 +238,10 @@ public class AccountController implements Initializable {
                     String fullname = fname + " " + lname;
 
                     fullNameLabel.setText(fullname);
-                    emailLabel.setText("Email: " + email);
-                    genderLabel.setText("Gender: " + gender);
-                    dobLabel.setText("Date of Birth: " + dob);
-                    countryLabel.setText("Country: " + country);
+                    emailLabel.setText(email);
+                    genderLabel.setText(gender);
+                    dobLabel.setText(String.valueOf(dob));
+                    countryLabel.setText(country);
                     walletBalanceLabel.setText(String.format("Your current wallet: %.2f", cashAmount));
                     bankBalanceLabel.setText(String.format("Your current banks' money: %.2f", bankAmount));
                     totalBalanceLabel.setText(String.format("Your total money: %.2f", totalBalance));
@@ -251,6 +252,84 @@ public class AccountController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void updateInfoInDatabase(String fname, String lname, String email, String gender, LocalDate dob, String country) {
+        String sql = "UPDATE user SET fname = ?, lname = ?, email = ?, gender = ?, DOB = ?, country = ? WHERE userID = ?";
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, fname);
+            stmt.setString(2, lname);
+            stmt.setString(3, email);
+            stmt.setString(4, gender);
+            stmt.setDate(5, Date.valueOf(dob));
+            stmt.setString(6, country);
+            stmt.setInt(7, Main.getUserId());
+            stmt.executeUpdate();
+
+            closeUpdateInfoForm();
+
+            Platform.runLater(() -> {
+                loadUserProfile();
+                NotificationCenter.successAlert("Information Updated!", "Your information has been updated");
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private User getUserFromDatabase() {
+        int userId = Main.getUserId();
+        Connection con = ConnectionManager.getConnection();
+        try (PreparedStatement preparedStatement = con.prepareStatement("SELECT fname, lname, email, gender, DOB, country FROM user WHERE userID = ?")) {
+            preparedStatement.setInt(1, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    String fname = resultSet.getString("fname");
+                    String lname = resultSet.getString("lname");
+                    String email = resultSet.getString("email");
+                    String gender = resultSet.getString("gender");
+                    LocalDate dob = resultSet.getDate("DOB").toLocalDate();
+                    String country = resultSet.getString("country");
+                    User user = new User(userId, fname, lname, email, gender, dob, country);
+                    return user;
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public void openUpdateInfoForm(ActionEvent actionEvent) {
+        if (!isUpdateFormOpen()) {
+            stackPane.getChildren().add(new UpdateInfoForm(this, getUserFromDatabase()));
+        }
+    }
+
+    private void closeUpdateInfoForm() {
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof UpdateInfoForm) {
+                stackPane.getChildren().remove(node);
+                break;
+            }
+        }
+    }
+
+    private boolean isUpdateFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof UpdateFinanceForm) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -287,6 +366,23 @@ public class AccountController implements Initializable {
         }
         return false;
     }
+
+    public void openChangePWForm(ActionEvent actionEvent) {
+        if (!isChangePWFormOpen()) {
+            stackPane.getChildren().add(new ChangePasswordForm());
+        }
+    }
+
+    private boolean isChangePWFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof ChangePasswordForm) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void loadProfilePicture() {
         String imagePath = getUserProfileImagePath(Main.getUserId());
         if (imagePath != null && !imagePath.isEmpty()) {
@@ -308,10 +404,28 @@ public class AccountController implements Initializable {
             Image selectedImage = new Image(selectedFile.toURI().toString());
             profileImage.setImage(selectedImage);
 
-            updateUserProfileImagePath(Main.getUserId(), selectedFile.getAbsolutePath());
+            saveUserProfileImage(Main.getUserId(), selectedFile);
         }
     }
 
+    private void saveUserProfileImage(int userId, File sourceFile) {
+        String storageDirectory = IMAGE_SAVE_DIRECTORY;
+
+        File destinationDir = new File(storageDirectory);
+        if (!destinationDir.exists()) {
+            destinationDir.mkdirs();
+        }
+
+        String destinationPath = storageDirectory + File.separator + "user_" + userId + ".png";
+
+        try {
+            Files.copy(sourceFile.toPath(), new File(destinationPath).toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        updateUserProfileImagePath(userId, destinationPath);
+    }
     private String getUserProfileImagePath(int userId) {
         String imagePath = null;
         String query = "SELECT profileImagePath FROM user WHERE userID = ?";
@@ -330,6 +444,7 @@ public class AccountController implements Initializable {
         }
         return imagePath;
     }
+
     private void updateUserProfileImagePath(int userId, String imagePath) {
         String query = "UPDATE user SET profileImagePath = ? WHERE userID = ?";
 
@@ -347,11 +462,6 @@ public class AccountController implements Initializable {
 
     private Window getWindow() {
         return profileImage.getScene().getWindow();
-    }
-    public void handleUpdateInfo(ActionEvent actionEvent) {
-    }
-
-    public void handleChangePassword(ActionEvent actionEvent) {
     }
 
     public StackPane getStackPane() {

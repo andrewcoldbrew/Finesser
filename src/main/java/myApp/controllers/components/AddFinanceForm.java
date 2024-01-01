@@ -4,6 +4,7 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,10 +12,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import myApp.Main;
+import myApp.controllers.views.FinanceController;
 import myApp.utils.ConnectionManager;
+import myApp.utils.NotificationCenter;
 
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
@@ -38,9 +42,9 @@ public class AddFinanceForm extends StackPane {
     private final ObservableList<String> categoryList = FXCollections.observableArrayList(
             "Income", "Dividend Income", "Investment", "Rent", "Subscription", "Insurance", "Bills" /* Add more income types as needed */
     );
-    private Stage stage;
-
-    public AddFinanceForm() {
+    private FinanceController financeController;
+    public AddFinanceForm(FinanceController financeController) {
+        this.financeController = financeController;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/addFinanceForm.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -103,12 +107,12 @@ public class AddFinanceForm extends StackPane {
                 statement.setInt(8, Main.getUserId());
 
                 statement.execute();
-                new SuccessAlert(stackPane, "Finance added successfully!");
+                Platform.runLater(() -> financeController.loadFinanceData());
+                NotificationCenter.successAlert("Finance added!", "Your finance has been added successfully");
                 exit();
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            new ManualAlert(Alert.AlertType.ERROR, "Database Error", "Failed to add finance", "An error occurred while adding the finance.").show();
         }
     }
 
@@ -150,18 +154,8 @@ public class AddFinanceForm extends StackPane {
     }
 
     private void exit() {
-        if (stage != null) {
-            System.out.println("CLOSING STAGE!");
-            stage.close();
-        } else {
-            System.out.println("STAGE NULL");
-        }
+        ((Pane) getParent()).getChildren().remove(this);
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-    public Stage getStage() {
-        return stage;
-    }
+
 }

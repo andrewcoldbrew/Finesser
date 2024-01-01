@@ -1,7 +1,6 @@
 package myApp.controllers.views;
 
 import animatefx.animation.Shake;
-import com.mysql.cj.util.StringUtils;
 import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.utils.DateTimeUtils;
 import io.github.palexdev.materialfx.validation.Constraint;
@@ -24,6 +23,7 @@ import myApp.controllers.components.SuccessAlert;
 import myApp.utils.ConnectionManager;
 import myApp.utils.HashManager;
 import myApp.utils.LoginStageManager;
+import myApp.utils.NotificationCenter;
 
 import java.net.URL;
 import java.sql.*;
@@ -56,7 +56,6 @@ public class NewSignupController implements Initializable {
     public Label passwordValidation;
     public MFXPasswordField passwordField;
     public MFXPasswordField rePasswordField;
-    private final Connection con = ConnectionManager.getConnection();
     public MFXComboBox<String> genderComboBox;
     public Label rePasswordValidation;
     public Label emailValidation;
@@ -123,8 +122,8 @@ public class NewSignupController implements Initializable {
                 .setSeverity(Severity.ERROR)
                 .setMessage("Your password doesn't match!")
                 .setCondition(Bindings.createBooleanBinding(
-                        () -> !matchingPassword(passwordField.getText(), rePasswordField.getText()),
-                        passwordField.textProperty()
+                        () -> matchingPassword(passwordField.getText(), rePasswordField.getText()),
+                        rePasswordField.textProperty()
                 ))
                 .get();
 
@@ -135,6 +134,7 @@ public class NewSignupController implements Initializable {
                 .constraint(lengthConstraint);
 
         emailField.getValidator().constraint(emailConstraint);
+
         rePasswordField.getValidator().constraint(rePasswordConstraint);
 
         passwordField.getValidator().validProperty().addListener((observable, oldValue, newValue) -> {
@@ -242,32 +242,37 @@ public class NewSignupController implements Initializable {
         String password = passwordField.getText();
         String rePassword = rePasswordField.getText();
 
-        if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || Objects.isNull(dob) || country.isEmpty()) {
-            new ErrorAlert(stackPane, "Invalid Information", "Please fill in all fields before creating your account!");
+        if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || gender == null || dob == null || country == null) {
+            NotificationCenter.errorAlert("Empty fields!", "Please fill in all fields before proceed");
             return;
         }
 
         if (password.equals(rePassword)) {
             try {
-                if (isUsernameTaken(con, username)) {
-                    new ErrorAlert(stackPane, "Username is taken", "Someone with this username already existed! Please choose a different username");
+                if (isUsernameTaken(username)) {
+                    NotificationCenter.errorAlert("Username is taken!",
+                            "Someone with this username already exists. Please choose a different username");
+                } else if (isEmailTaken(email)) {
+                    NotificationCenter.errorAlert("Email is taken!",
+                            "This email is already in used. Please choose a different email");
                 } else if (isStrongPassword(password)){
-                    registerUser(con, username, password, fname, lname, email, dob, gender, country);
-                    new SuccessAlert(stackPane, "Your account has been created!");
-                    LoginStageManager.switchScene("login");
+                    registerUser(username, password, fname, lname, email, dob, gender, country);
                 } else {
-                    new ErrorAlert(stackPane, "Weak Password", "Your password is not strong enough! Please enter a new password.");
+                    NotificationCenter.errorAlert("Weak password!",
+                            "Your password is not strong enough");
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else {
-            new ErrorAlert(stackPane, "Password unmatched", "Your password is not matching. Please re-enter your password!");
+            NotificationCenter.errorAlert("Unmatched passwords!",
+                    "The re-entered password must be matching your original password");
         }
     }
 
-    private void registerUser(Connection con, String username, String password, String fname, String lname, String email, LocalDate dob, String gender, String country) {
+    private void registerUser(String username, String password, String fname, String lname, String email, LocalDate dob, String gender, String country) {
         String hashedPassword = HashManager.hashPassword(password);
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement statement = null;
         try {
             statement = con.prepareStatement("INSERT INTO user (username, password, fname, lname, email, gender, DOB, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
@@ -280,6 +285,8 @@ public class NewSignupController implements Initializable {
             statement.setDate(7, Date.valueOf(dob));
             statement.setString(8, country);
             statement.execute();
+//            new SuccessAlert(stackPane, "Your account has been created!");
+            LoginStageManager.switchScene("login");
             statement.close();
         } catch (SQLException e) {
             System.out.println("ACCOUNT CREATE FAILED!");
@@ -293,9 +300,21 @@ public class NewSignupController implements Initializable {
         return password.matches(regex);
     }
 
-    private boolean isUsernameTaken(Connection con, String username) throws Exception {
+    private boolean isUsernameTaken(String username) throws Exception {
+        Connection con = ConnectionManager.getConnection();
         PreparedStatement statement = con.prepareStatement("SELECT * FROM user WHERE username = ?");
         statement.setString(1, username);
+        ResultSet resultSet = statement.executeQuery();
+        boolean isTaken = resultSet.next();
+        resultSet.close();
+        statement.close();
+        return isTaken;
+    }
+
+    private boolean isEmailTaken(String email) throws Exception {
+        Connection con = ConnectionManager.getConnection();
+        PreparedStatement statement = con.prepareStatement("SELECT * FROM user WHERE email = ?");
+        statement.setString(1, email);
         ResultSet resultSet = statement.executeQuery();
         boolean isTaken = resultSet.next();
         resultSet.close();

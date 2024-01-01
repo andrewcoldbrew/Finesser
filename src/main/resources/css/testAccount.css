@@ -23,6 +23,8 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);
 }
 
+
+
 #linkBankButton {
     -fx-border-color: #9FE2BF;
     -fx-border-width: 3;

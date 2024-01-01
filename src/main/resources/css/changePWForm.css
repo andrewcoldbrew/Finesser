@@ -1,0 +1,29 @@
+#changePWForm {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0.4, 0, 0);
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+}
+
+#changeButton {
+    -fx-background-color: transparent;
+    -fx-border-color:  #9FE2BF;
+    -fx-border-radius: 5;
+}
+
+#changeButton:hover {
+    -fx-background-color:  #9FE2BF;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}
+
+#oldPasswordField, #newPasswordField, #reNewPasswordField {
+    -fx-border-color:  #9FE2BF;
+}
+
+#oldPasswordField .floating-text, #newPasswordField .floating-text, #reNewPasswordField .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}

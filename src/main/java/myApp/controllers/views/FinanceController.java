@@ -21,6 +21,7 @@ import myApp.controllers.components.*;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
+import myApp.utils.NotificationCenter;
 
 import java.net.URL;
 import java.sql.*;
@@ -39,14 +40,8 @@ public class FinanceController implements Initializable {
     public MFXButton yearlyButton;
     public StackPane stackPane;
 
-
-    private AddFinanceForm addFinanceForm;
-    private Stage dialogStage;
-    private Scene dialogScene;
     public GridPane incomeGrid;
     public GridPane outcomeGrid;
-    private Connection con = ConnectionManager.getConnection();
-
     private double totalIncome = 0.0;
     private double totalOutcome = 0.0;
 
@@ -72,7 +67,6 @@ public class FinanceController implements Initializable {
         });
 
     }
-
 
     private void filterFinances(TimeFrame timeFrame) {
         LocalDate start = LocalDate.now();
@@ -105,6 +99,10 @@ public class FinanceController implements Initializable {
         outcomeGrid.getChildren().clear();
         loadIncome(startDate, endDate);
         loadOutcome(startDate, endDate);
+    }
+
+    public void loadFinanceData() {
+        filterFinances(TimeFrame.ALL_TIME);
     }
 
     private void loadFinances(LocalDate startDate, LocalDate endDate, String categoryFilter, GridPane targetGrid) {
@@ -172,6 +170,22 @@ public class FinanceController implements Initializable {
         loadFinances(startDate, endDate, "'Rent', 'Bills', 'Insurance', 'Subscription'", outcomeGrid);
     }
 
+    public void openAddFinanceForm() {
+        if (!isAddFormOpen()) {
+            stackPane.getChildren().add(new AddFinanceForm(this));
+        }
+    }
+
+    private boolean isAddFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof AddFinanceForm) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void updateFinanceInDatabase(String name, double amount, String description, String category, String bankName, LocalDate transactionDate, String recurrencePeriod, int transactionID) {
         int bankID = getBankIdByName(bankName);
         String sql = "UPDATE transaction SET name = ?, amount = ?, description = ?, category = ?, bankID = ?, transactionDate = ?, recurrencePeriod = ? WHERE transactionID = ?";
@@ -193,7 +207,7 @@ public class FinanceController implements Initializable {
 
             Platform.runLater(() -> {
                 filterFinances(TimeFrame.ALL_TIME);
-                new SuccessAlert(stackPane, "Finance successfully updated!");
+                NotificationCenter.successAlert("Finance updated!", "Your finance has been updated successfully");
             });
         } catch (SQLException e) {
             e.printStackTrace();
@@ -208,7 +222,7 @@ public class FinanceController implements Initializable {
             pstmt.setInt(1, transaction.getTransactionID());
             pstmt.executeUpdate();
             filterFinances(TimeFrame.ALL_TIME);
-            new SuccessAlert(stackPane, "Finance successfully deleted!");
+//            new SuccessAlert(stackPane, "Finance successfully deleted!");
             System.out.println("Deleted finance");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -309,19 +323,16 @@ public class FinanceController implements Initializable {
         LocalDate[] range = getAllTimeDateRange();
         loadFinanceData(range[0], range[1]);
     }
-
     @FXML
     private void handleWeeklyFilter(ActionEvent event) {
         LocalDate[] range = getWeeklyDateRange();
         loadFinanceData(range[0], range[1]);
     }
-
     @FXML
     private void handleMonthlyFilter(ActionEvent event) {
         LocalDate[] range = getMonthlyDateRange();
         loadFinanceData(range[0], range[1]);
     }
-
     @FXML
     private void handleYearlyFilter(ActionEvent event) {
         LocalDate[] range = getYearlyDateRange();
@@ -411,30 +422,5 @@ public class FinanceController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace(); // Handle exception
         }
-    }
-
-    private void initializeAddFinanceForm() {
-        dialogStage = new Stage();
-        addFinanceForm = new AddFinanceForm();
-
-        dialogScene = new Scene(addFinanceForm, addFinanceForm.getPrefWidth(), addFinanceForm.getPrefHeight());
-        dialogScene.setFill(Color.TRANSPARENT);
-
-        addFinanceForm.setStage(dialogStage);
-
-        dialogStage.setTitle("Add Budget Dialog");
-        dialogStage.setScene(dialogScene);
-
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initStyle(StageStyle.TRANSPARENT);
-        dialogScene.setFill(Color.TRANSPARENT);
-
-        dialogStage.setResizable(false);
-        dialogStage.show();
-        new Draggable().makeDraggable(dialogStage);
-    }
-
-    public void handleAddFinanceForm(ActionEvent actionEvent) {
-        initializeAddFinanceForm();
     }
 }
