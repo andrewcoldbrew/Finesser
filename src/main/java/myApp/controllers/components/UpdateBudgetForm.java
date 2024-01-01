@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import myApp.controllers.views.BudgetController;
 import myApp.models.Budget;
 import myApp.utils.Draggable;
+import myApp.utils.NotificationCenter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -70,7 +71,7 @@ public class UpdateBudgetForm extends StackPane {
         LocalDate endDate = endDatePicker.getValue();
 
         if (limitText.isEmpty() || category.isEmpty() || startDate == null || endDate == null) {
-            new ErrorAlert(stackPane, "Update declined", "Please fill in all fields!");
+            NotificationCenter.errorAlert("Empty fields!", "Please fill in all fields before proceed");
             return;
         }
 
@@ -80,7 +81,7 @@ public class UpdateBudgetForm extends StackPane {
             budgetController.updateBudgetInDatabase(category, limit, startDate, endDate, budget.getId());
 
         } catch (NumberFormatException e) {
-            new ErrorAlert(stackPane, "Invalid input", "Amount must be a number");
+            NotificationCenter.errorAlert("Invalid Amount", "Entered amount must be a number");
         }
     }
 }

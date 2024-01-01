@@ -15,7 +15,6 @@
 <?import javafx.scene.text.Text?>
 
 
-<?import javafx.scene.text.TextFlow?>
 <StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.ReportController">
    <children>
       <BorderPane prefHeight="795.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../css/report.css">
@@ -53,12 +52,14 @@
                      </HBox>
                      <BorderPane>
                         <left>
-                            <TextFlow fx:id="chartDescriptionTextFlow" maxWidth="469.13671875" BorderPane.alignment="CENTER">
+                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This chart illustrates the distribution of financial transactions across various categories. Categories such as Income and Bills dominate the expenditure, indicating a focus on essential expenses and earnings. The varied heights of the bars represent the amount spent or earned, providing a quick visual summary of financial activity." wrappingWidth="469.13671875" BorderPane.alignment="CENTER">
+                                <font>
+                                    <Font name="Cambria" size="18.0" />
+                                </font>
                                 <BorderPane.margin>
                                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                 </BorderPane.margin>
-                            </TextFlow>
-
+                            </Text>
                         </left>
                         <right>
                             <BarChart fx:id="categoryAmountBarChart" animated="false" legendVisible="false" title="Transaction Categories" BorderPane.alignment="CENTER">

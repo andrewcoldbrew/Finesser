@@ -1,36 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="350.0" styleClass="background2" stylesheets="@../css/alert.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<javafx.scene.layout.BorderPane fx:id="successAlert" maxWidth="-Infinity" minHeight="200.0" minWidth="-Infinity" prefWidth="400.0" styleClass="background2" stylesheets="@../css/alert.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.components.SuccessAlert">
    <padding>
       <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
    </padding>
    <top>
-      <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Success" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="Cambria" size="28.0" />
-         </font>
-      </Label>
+      <BorderPane BorderPane.alignment="CENTER">
+         <right>
+            <ImageView fx:id="successIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../images/alert/check.png" />
+               </image>
+            </ImageView>
+         </right>
+         <left>
+            <Label fx:id="title" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Title" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Cambria" size="20.0" />
+               </font>
+            </Label>
+         </left>
+      </BorderPane>
    </top>
    <center>
-      <ImageView fx:id="successIcon" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../images/alert/check.png" />
-         </image>
-      </ImageView>
-   </center>
-   <bottom>
-      <Text fx:id="messageLabel" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="250.0" BorderPane.alignment="CENTER">
+      <Text fx:id="content" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="250.0" BorderPane.alignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
+         <BorderPane.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </BorderPane.margin>
       </Text>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+         <children>
+            <MFXButton fx:id="closeButton" buttonType="RAISED" text="OK">
+               <padding>
+                  <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
+               </padding>
+            </MFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
    </bottom>
-</fx:root>
+</javafx.scene.layout.BorderPane>

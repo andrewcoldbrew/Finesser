@@ -74,7 +74,7 @@ public class LinkBankForm extends StackPane {
                 statement.setInt(1, Main.getUserId());
                 statement.setString(2, bankName);
                 statement.execute();
-                new SuccessAlert(accountController.getStackPane(), "The bank has been linked successfully!");
+//                new SuccessAlert(accountController.getStackPane(), "The bank has been linked successfully!");
 
                 PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                 pause.setOnFinished(event -> {

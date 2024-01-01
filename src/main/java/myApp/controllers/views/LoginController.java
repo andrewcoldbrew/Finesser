@@ -64,12 +64,11 @@ public class LoginController implements Initializable {
                     LoginStageManager.getLoginStage().close();
                     MainAppManager.setupMainApp();
                 } else {
-
-                    new ErrorAlert(stackPane, "Incorrect password", "The password you entered is incorrect! Please try again");
+                    NotificationCenter.errorAlert("Incorrect password!", "The password you entered is incorrect! Please try again");
                     System.out.println("INCORRECT PASSWORD");
                 }
             } else {
-                new ErrorAlert(stackPane,"User not found", "This username doesn't exists! Please enter another one");
+                NotificationCenter.errorAlert("User not found!", "This username doesn't exist. Please enter an existing username");
                 System.out.println("USER NOT FOUND");
             }
             resultSet.close();

@@ -29,6 +29,8 @@ import myApp.utils.ConnectionManager;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import myApp.utils.NotificationCenter;
+
 import java.io.File;
 
 import java.io.IOException;
@@ -236,10 +238,10 @@ public class AccountController implements Initializable {
                     String fullname = fname + " " + lname;
 
                     fullNameLabel.setText(fullname);
-                    emailLabel.setText("Email: " + email);
-                    genderLabel.setText("Gender: " + gender);
-                    dobLabel.setText("Date of Birth: " + dob);
-                    countryLabel.setText("Country: " + country);
+                    emailLabel.setText(email);
+                    genderLabel.setText(gender);
+                    dobLabel.setText(String.valueOf(dob));
+                    countryLabel.setText(country);
                     walletBalanceLabel.setText(String.format("Your current wallet: %.2f", cashAmount));
                     bankBalanceLabel.setText(String.format("Your current banks' money: %.2f", bankAmount));
                     totalBalanceLabel.setText(String.format("Your total money: %.2f", totalBalance));
@@ -271,7 +273,7 @@ public class AccountController implements Initializable {
 
             Platform.runLater(() -> {
                 loadUserProfile();
-                new SuccessAlert(stackPane, "Finance successfully updated!");
+                NotificationCenter.successAlert("Information Updated!", "Your information has been updated");
             });
         } catch (SQLException e) {
             e.printStackTrace();
@@ -363,6 +365,23 @@ public class AccountController implements Initializable {
         }
         return false;
     }
+
+    public void openChangePWForm(ActionEvent actionEvent) {
+        if (!isChangePWFormOpen()) {
+            stackPane.getChildren().add(new ChangePasswordForm());
+        }
+    }
+
+    private boolean isChangePWFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof ChangePasswordForm) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void loadProfilePicture() {
         String imagePath = getUserProfileImagePath(Main.getUserId());
         if (imagePath != null && !imagePath.isEmpty()) {
@@ -442,9 +461,6 @@ public class AccountController implements Initializable {
 
     private Window getWindow() {
         return profileImage.getScene().getWindow();
-    }
-
-    public void handleChangePassword(ActionEvent actionEvent) {
     }
 
     public StackPane getStackPane() {

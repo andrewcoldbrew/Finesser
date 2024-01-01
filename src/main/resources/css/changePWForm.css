@@ -1,0 +1,7 @@
+.root {
+    -fx-background-color: lightgrey;
+}
+
+#closeButton {
+    -fx-background-color: transparent;
+}
