@@ -82,8 +82,6 @@ public class BudgetBox extends AnchorPane {
     }
 
     private void animateUpdate(MouseEvent mouseEvent) {
-        updateButton.setButtonType(ButtonType.RAISED);
-        updateButton.setDepthLevel(DepthLevel.LEVEL2);
         editIcon.setImage(new Image("/images/gif/edit.gif"));
     }
 

@@ -1,12 +1,29 @@
 #financeForm {
     -fx-background-color: white;
-    -fx-background-radius: 10px;
-
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0.4, 0, 0);
     -fx-border-color: black;
-    -fx-border-radius: 10px;
-    -fx-border-width: 3;
+    -fx-border-radius: 10;
 }
 
-#exitButton {
+#addButton {
     -fx-background-color: transparent;
+    -fx-border-color:  #9FE2BF;
+    -fx-border-radius: 5;
+}
+
+#addButton:hover {
+    -fx-background-color:  #9FE2BF;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}
+
+#categoryComboBox, #nameField, #amountField, #datePicker, #bankComboBox, #descriptionField, #recurrenceComboBox {
+    -fx-border-color:  #9FE2BF;
+}
+
+#categoryComboBox .floating-text, #nameField .floating-text, #amountField .floating-text, #datePicker .floating-text, #bankComboBox .floating-text, #descriptionField .floating-text, #recurrenceComboBox .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
 }
