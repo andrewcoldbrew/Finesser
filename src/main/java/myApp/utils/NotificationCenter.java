@@ -29,11 +29,14 @@ public class NotificationCenter {
         FXMLLoader fxmlLoader = new FXMLLoader(NotificationCenter.class.getResource("/components/successAlert.fxml"));
         try {
             Parent root = fxmlLoader.load();
+            Stage alertStage = createStage(root);
             SuccessAlert successAlert = fxmlLoader.getController();
             successAlert.setTitle(title);
             successAlert.setContent(content);
-
-            Stage alertStage = createStage(root);
+            successAlert.getCloseButton().setOnAction(actionEvent -> {
+                alertStage.close();
+                alertShowing = false;
+            });
 
             // Animation
             playAlertAnimation(root, alertStage);
@@ -53,12 +56,14 @@ public class NotificationCenter {
         FXMLLoader fxmlLoader = new FXMLLoader(NotificationCenter.class.getResource("/components/errorAlert.fxml"));
         try {
             Parent root = fxmlLoader.load();
+            Stage alertStage = createStage(root);
             ErrorAlert errorAlert = fxmlLoader.getController();
             errorAlert.setTitle(title);
             errorAlert.setContent(content);
-
-            Stage alertStage = createStage(root);
-
+            errorAlert.getCloseButton().setOnAction(actionEvent -> {
+                alertStage.close();
+                alertShowing = false;
+            });
             // Animation
             playAlertAnimation(root, alertStage);
 
