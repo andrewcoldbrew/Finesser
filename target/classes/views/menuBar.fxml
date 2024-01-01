@@ -26,23 +26,8 @@
                         <Rectangle2D />
                      </viewport>
                   </ImageView>
-                  <VBox alignment="TOP_CENTER" prefHeight="562.0" prefWidth="255.0" spacing="35.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="562.0" prefWidth="255.0" spacing="30.0">
                      <children>
-                        <MFXButton fx:id="accountButton" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="15.0" onAction="#moveToAccount" prefWidth="200.0" text="My Account">
-                           <VBox.margin>
-                              <Insets left="15.0" />
-                           </VBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/navbar/user.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </MFXButton>
                         <MFXButton fx:id="dashBoardButton" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="15.0" onAction="#moveToDashBoard" prefWidth="200.0" text="Dashboard">
                            <VBox.margin>
                               <Insets left="15.0" />
@@ -96,6 +81,21 @@
                               <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/navbar/transaction.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </MFXButton>
+                        <MFXButton fx:id="accountButton" alignment="TOP_LEFT" buttonType="RAISED" graphicTextGap="15.0" onAction="#moveToAccount" prefWidth="200.0" text="My Account">
+                           <VBox.margin>
+                              <Insets left="15.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/navbar/user.png" />
                                  </image>
                               </ImageView>
                            </graphic>

@@ -11,7 +11,9 @@
 
 .sideBox {
     -fx-background-color: white;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 4, 0.2, 0, 0);;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 4, 0.2, 0, 0);
+    -fx-padding: 20 0;
+
 }
 
 .sideBox:hover {
@@ -53,4 +55,16 @@
 
 .bodyText {
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.4) , 3, 0.4, 0 , 1);
+}
+
+.updatePFP {
+    -fx-text-fill: #1b9eda;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.profilePic {
+    -fx-border-color: black;
+    -fx-padding: 2;
+    -fx-border-width: 3;
 }
