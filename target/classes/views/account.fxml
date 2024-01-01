@@ -89,11 +89,6 @@
                                     <Font name="Yu Gothic UI Regular" size="14.0" />
                                  </font>
                               </Label>
-                              <MFXButton onAction="#handleUploadProfilePicture" text="Upload Profile Picture">
-                                 <HBox.margin>
-                                    <Insets left="20.0" right="20.0" />
-                                 </HBox.margin>
-                              </MFXButton>
                            </children>
                         </HBox>
                      </children>

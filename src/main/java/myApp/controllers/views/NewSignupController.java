@@ -1,7 +1,6 @@
 package myApp.controllers.views;
 
 import animatefx.animation.Shake;
-import com.mysql.cj.util.StringUtils;
 import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.utils.DateTimeUtils;
 import io.github.palexdev.materialfx.validation.Constraint;
