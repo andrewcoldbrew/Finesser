@@ -7,6 +7,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
@@ -35,6 +36,12 @@
                               <Font size="28.0" />
                            </font>
                         </Label>
+                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="326.0">
+                           <children>
+                              <Label text="Have an account? " />
+                              <Hyperlink onAction="#moveToLogin" style="-fx-background-color: transparent; -fx-border-color: #f4f4f4;" text="Login" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                   <Label layoutX="32.0" layoutY="180.0" style="-fx-font-weight: bold;" text="Account Information:">
