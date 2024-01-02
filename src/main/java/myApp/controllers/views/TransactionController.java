@@ -121,21 +121,18 @@ public class TransactionController implements Initializable {
     }
 
     public void loadTransactions() {
-
         transactionData.clear();
-
 
         String query = "SELECT t.transactionID, t.name, t.amount, t.description, t.category, COALESCE(b.bankName, 'Cash') AS bankName, t.transactionDate, t.recurrencePeriod\n" +
                 "FROM transaction t\n" +
                 "LEFT JOIN bank b ON t.bankID = b.bankID\n" +
                 "WHERE t.userID = ? AND (b.linked = true OR b.linked IS NULL)\n" +
+                "AND t.category NOT IN ('Income', 'Dividend Income', 'Investment', 'Rent', 'Subscription', 'Insurance', 'Bills')\n" +
                 "ORDER BY t.transactionDate DESC;";
 
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-
-
             stmt.setInt(1, Main.getUserId());
 
             try (ResultSet rs = stmt.executeQuery()) {

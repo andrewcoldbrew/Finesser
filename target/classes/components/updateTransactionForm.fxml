@@ -13,13 +13,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+
+<fx:root fx:id="stackPane" type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <javafx.scene.layout.BorderPane style="-fx-background-color: white; -fx-border-color: #9FE2BF; -fx-border-width: 3; -fx-border-radius: 20; -fx-background-radius: 20;">
          <center>
-             <VBox alignment="CENTER" layoutX="83.0" layoutY="76.0" spacing="20.0">
-                 <MFXFilterComboBox fx:id="typeComboBox" floatMode="BORDER" floatingText="Type" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" style="-fx-border-color: #9FE2BF;" styleClass="mfxcombobox" stylesheets="@../css/form.css" />
-                 <TextField fx:id="transactionNameField" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Transaction name" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
+             <VBox layoutX="83.0" layoutY="76.0" spacing="20.0">
+                 <MFXFilterComboBox fx:id="typeComboBox" floatMode="BORDER" floatingText="Type" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" style="-fx-border-color: #9FE2BF;" styleClass="mfxcombobox" stylesheets="@../css/form.css" />
+                 <TextField fx:id="transactionNameField" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Transaction name" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
                      <padding>
                          <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                      </padding>
@@ -27,7 +28,7 @@
                          <Cursor fx:constant="TEXT" />
                      </cursor>
                </TextField>
-                 <TextField fx:id="amountField" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Amount" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
+                 <TextField fx:id="amountField" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Amount" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
                      <padding>
                          <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                      </padding>
@@ -35,7 +36,7 @@
                          <Cursor fx:constant="TEXT" />
                      </cursor>
                </TextField>
-                 <TextField fx:id="descriptionField" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Description" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
+                 <TextField fx:id="descriptionField" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Description" style="-fx-border-color: #9FE2BF; -fx-border-radius: 5; -fx-background-radius: 5;">
                      <padding>
                          <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                      </padding>
@@ -43,7 +44,7 @@
                          <Cursor fx:constant="TEXT" />
                      </cursor>
                </TextField>
-               <MFXDatePicker fx:id="datePicker" floatMode="BORDER" floatingText="Transaction date" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" />
+               <MFXDatePicker fx:id="datePicker" floatMode="BORDER" floatingText="Transaction date" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" />
                  <HBox alignment="CENTER_RIGHT" minWidth="300.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="300.0" spacing="10.0">
                      <MFXButton fx:id="updateButton" buttonType="RAISED" mnemonicParsing="false" stylesheets="@../css/form.css" text="Update">
                          <font>
