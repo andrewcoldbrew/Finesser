@@ -2,6 +2,55 @@
     -fx-background-color: transparent;
 }
 
-#stackPane {
-    -fx-background-color: grey;
+
+.body {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0.4, 0, 0);
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+}
+
+#genderComboBox .caret .mfx-font-icon {
+    -mfx-color:  #9FE2BF;
+    -fx-cursor: hand;
+}
+
+#genderComboBox .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#countryComboBox .caret .mfx-font-icon {
+    -mfx-color:  #9FE2BF;
+    -fx-cursor: hand;
+}
+
+#countryComboBox .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+#updateButton {
+    -fx-background-color: transparent;
+    -fx-border-color:  #9FE2BF;
+    -fx-border-radius: 5;
+
+}
+
+#updateButton:hover {
+    -fx-background-color:  #9FE2BF;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-size: 14;
+}
+
+#datePicker .floating-text {
+    -fx-background-color: white;
+    -fx-text-fill: #1E152A;
+}
+
+.mfx-date-picker:focus-within .icon {
+    -mfx-color: #1E152A;
+    -fx-cursor: hand;
 }

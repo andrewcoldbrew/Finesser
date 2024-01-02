@@ -10,25 +10,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/FinanceBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/FinanceBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/financeBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/financeBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/financeBox.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/financeBox.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/report.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/report.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/FinanceBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/FinanceBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/changePasswordForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/changePasswordForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/addBudgetForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/addBudgetForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/addTransactionForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/addTransactionForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/updateInfoForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/updateInfoForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/updateTransactionForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/updateTransactionForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/addBudgetForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/addBudgetForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/addTransactionForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/addTransactionForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/addWalletForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/addWalletForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/updateInfoForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/updateInfoForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/addBudgetForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/addBudgetForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/addTransactionForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/addTransactionForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/updateInfoForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/updateInfoForm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/components/updateTransactionForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/updateTransactionForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/addFinanceForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/addFinanceForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/changePWForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/changePWForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/financeBox.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/financeBox.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/linkBankForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/linkBankForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/report.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/report.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/FinanceBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/FinanceBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/TransactionController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/finance.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/finance.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/addBudgetForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/addBudgetForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/addTransactionForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/addTransactionForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/addWalletForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/addWalletForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/form.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/form.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/updateInfoForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/updateInfoForm.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,6 +240,7 @@
       <workItem from="1704077049472" duration="3946000" />
       <workItem from="1704093169291" duration="4252000" />
       <workItem from="1704156979649" duration="2892000" />
+      <workItem from="1704160288910" duration="1004000" />
     </task>
     <servers />
   </component>
