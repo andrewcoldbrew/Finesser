@@ -10,22 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/account/updateImage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Alice_AI_from_Google.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ChatBot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/chatbot.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/pdfbox_app_3_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/pdfbox_app_3_0_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/loadingScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/loadingScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/loadingScreen.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/loadingScreen.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/profiles/user_11.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/profiles/user_11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/account.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/menuBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/menuBar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/report.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/report.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/loadingScreen.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/loadingScreen.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/profiles/user_11.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/profiles/user_11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddFinanceForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddFinanceForm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/account.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/menuBar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/menuBar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/report.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/report.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,9 +25,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
-        <option value="Class" />
-        <option value="FxmlFile" />
         <option value="CSS File" />
+        <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -94,7 +83,7 @@
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
     "git-widget-placeholder": "NguyenTheVinh",
-    "last_opened_file_path": "C:/Users/vinhh/Documents/GitHub/BITS_Group12/src/main/resources/images/account",
+    "last_opened_file_path": "C:/Users/vinhh/Chatbot APIs/program-ab-0.0.4.3/lib",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -239,6 +228,7 @@
       <workItem from="1704156979649" duration="2892000" />
       <workItem from="1704160288910" duration="1004000" />
       <workItem from="1704161330118" duration="6664000" />
+      <workItem from="1704506282484" duration="1108000" />
     </task>
     <servers />
   </component>
