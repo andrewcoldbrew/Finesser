@@ -1,10 +1,14 @@
 package myApp.utils;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import myApp.controllers.components.ChatScreen;
+import myApp.controllers.components.Chatbot;
 import myApp.controllers.views.MenuBarController;
 
 import java.io.IOException;
@@ -17,6 +21,9 @@ public class MainAppManager {
     private static BorderPane mainLayout;
     private static final Map<String, String> scenes = new HashMap<>();
 
+    private static Chatbot chatbot;
+    private static ChatScreen chatScreen;
+
     static {
         scenes.put("transaction", "/views/transaction.fxml");
         scenes.put("budget", "/views/budget.fxml");
@@ -28,10 +35,13 @@ public class MainAppManager {
 
     private static MenuBarController menuBarController;
     public static void setupMainApp() {
+        chatbot = new Chatbot();
+        chatScreen = new ChatScreen();
+
+        ChatbotManager.initializeBot();
+
         mainAppStage = new Stage();
         mainAppStage.setMaximized(false);
-
-
         mainLayout = new BorderPane();
 
 
@@ -50,7 +60,6 @@ public class MainAppManager {
 
     private static void setupScene(String name) {
         try {
-
             FXMLLoader loader = new FXMLLoader(MainAppManager.class.getResource(scenes.get(name)));
             Parent content = loader.load();
             mainLayout.setCenter(content);
@@ -79,5 +88,10 @@ public class MainAppManager {
     public static void switchScene(String name) {
         setupScene(name);
         menuBarController.setActiveButtonForScene(name);
+    }
+
+    public static void addChatBot(StackPane stackPane) {
+        stackPane.getChildren().add(chatbot);
+        stackPane.setAlignment(Pos.BOTTOM_RIGHT);
     }
 }

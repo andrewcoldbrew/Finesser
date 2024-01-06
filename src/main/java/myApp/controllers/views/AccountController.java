@@ -29,6 +29,7 @@ import myApp.utils.ConnectionManager;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import myApp.utils.MainAppManager;
 import myApp.utils.NotificationCenter;
 
 import java.io.File;
@@ -76,6 +77,7 @@ public class AccountController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new LoadingScreen(stackPane);
+        MainAppManager.addChatBot(stackPane);
         loadUserProfile();
         loadCreditCard();
         loadProfilePicture();

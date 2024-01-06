@@ -73,6 +73,13 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>8.0.33</version>
         </dependency>
+        <dependency>
+            <artifactId>com.google</artifactId>
+            <groupId>Ab</groupId>
+            <version>0.0.4.3</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/lib/Ab.jar</systemPath>
+        </dependency>
 
     </dependencies>
 

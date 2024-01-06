@@ -10,11 +10,100 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Alice_AI_from_Google.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ChatBot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/components/chatbot.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/pdfbox_app_3_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/pdfbox_app_3_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ChatScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/ChatbotManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/bot_profile.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/client_profile.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/contactaction.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/custom.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/date.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/dialog.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/familiar.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/help.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/inappropriate.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/inquiry.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/insults.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/ontology.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/oob.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/personality.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/picture.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/profanity.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/reductions1.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/reductions_update.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/save.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/sraix.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/testjp.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/that.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/train.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/udc.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/update.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/update.save" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/utilities.aiml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/bot_profile.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/client_profile.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/contactaction.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/date.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/dialog.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/familiar.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/help.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/inappropriate.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/inquiry.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/insults.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/ontology.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/oob.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/personality.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/picture.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/profanity.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/reductions1.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/reductions_update.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/sraix.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/testjp.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/that.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/train.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/udc.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/update.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/utilities.aiml.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/config/copyright.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/config/denormal.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/config/gender.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/config/normal.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/config/person.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/config/person2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/config/predicates.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/config/properties.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/maps/familiarpredicate.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/maps/gendername.external" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/maps/gendername.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/maps/number2ordinal.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/maps/ordinal2number.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/maps/profile2predicate.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/maps/verb2sp2verb1sp.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/bird.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/color.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/digit.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/familiarname.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/fastfood.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/language.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/mammal.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/mammalfeature.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/name.external" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/name.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/ordinal.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/place.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/preposition.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/profile.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/verb2sp.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/sets/verb2st.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/components/chatScreen.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/chatbot.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/images/chatbot/chatbot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/lib/Ab.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ChatBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/Chatbot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/chatbot.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/chatbot.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,13 +172,13 @@
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
     "git-widget-placeholder": "NguyenTheVinh",
-    "last_opened_file_path": "C:/Users/vinhh/Chatbot APIs/program-ab-0.0.4.3/lib",
+    "last_opened_file_path": "C:/Users/vinhh/Documents/GitHub/BITS_Group12/src/main/resources",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Problems",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.5443038",
     "settings.editor.selected.configurable": "preferences.pluginManager",
@@ -98,13 +187,14 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\account" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\report" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\category" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\alert" />
-      <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\views" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\chatbot" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\gif" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\finance" />
       <recent name="C:\Users\vinhh\Documents\GitHub\BITS_Group12\src\main\resources\images\exitButton" />
@@ -229,6 +319,7 @@
       <workItem from="1704160288910" duration="1004000" />
       <workItem from="1704161330118" duration="6664000" />
       <workItem from="1704506282484" duration="1108000" />
+      <workItem from="1704507624915" duration="6395000" />
     </task>
     <servers />
   </component>

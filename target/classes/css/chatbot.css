@@ -1,0 +1,15 @@
+#chatButton {
+    -fx-background-color: transparent;
+}
+
+#closeButton {
+    -fx-background-color: transparent;
+}
+
+.user-message-label {
+    -fx-background-color: #DCF8C6; /* Light green background color */
+    -fx-padding: 5px; /* Padding around the label */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-max-width: 200px; /* Maximum width of the label */
+    -fx-wrap-text: true; /* Enable text wrapping */
+}
