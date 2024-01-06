@@ -117,9 +117,10 @@ public class AddFinanceForm extends StackPane {
     }
 
     private int getBankIdByName(String bankName, Connection con) {
-        String query = "SELECT bankID FROM bank WHERE bankName = ?";
+        String query = "SELECT bankID FROM bank WHERE bankName = ? AND ownerID = ?";
         try (PreparedStatement pstmt = con.prepareStatement(query)) {
             pstmt.setString(1, bankName);
+            pstmt.setInt(2, Main.getUserId());
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt("bankID");

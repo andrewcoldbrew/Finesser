@@ -48,7 +48,7 @@
                                  <children>
                                     <Label text="Email: ">
                                        <font>
-                                          <Font name="Yu Gothic UI Semibold" size="12.0" />
+                                          <Font name="Yu Gothic UI Semibold" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="emailLabel" text="Email">
@@ -62,7 +62,7 @@
                                  <children>
                                     <Label text="Gender: ">
                                        <font>
-                                          <Font name="Yu Gothic UI Semibold" size="12.0" />
+                                          <Font name="Yu Gothic UI Semibold" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="genderLabel" text="Gender">
@@ -76,7 +76,7 @@
                                  <children>
                                     <Label text="Date of Birth: ">
                                        <font>
-                                          <Font name="Yu Gothic UI Semibold" size="12.0" />
+                                          <Font name="Yu Gothic UI Semibold" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="dobLabel" text="Date of birth">
@@ -90,7 +90,7 @@
                                  <children>
                                     <Label text="Country: ">
                                        <font>
-                                          <Font name="Yu Gothic UI Semibold" size="12.0" />
+                                          <Font name="Yu Gothic UI Semibold" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="countryLabel" text="Country">
@@ -235,7 +235,7 @@
                         </Label>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/account/edit.png" />
+                              <Image url="@../images/account/updateImage.png" />
                            </image>
                            <VBox.margin>
                               <Insets bottom="2.0" top="2.0" />

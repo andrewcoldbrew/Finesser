@@ -34,37 +34,72 @@
                               </Label>
                           </children>
                       </HBox>
-                      <HBox spacing="50.0">
+                      <HBox alignment="CENTER" spacing="50.0">
                           <children>
-                              <PieChart fx:id="categoryPieChart">
-                                  <HBox.margin>
-                                      <Insets top="10.0" />
-                                  </HBox.margin>
-                              </PieChart>
-                              <BarChart fx:id="budgetVsSpendingChart" animated="false" legendVisible="true">
-                                  <xAxis>
-                                      <CategoryAxis label="Category" />
-                                  </xAxis>
-                                  <yAxis>
-                                      <NumberAxis label="Amount" />
-                                  </yAxis>
-                                  <HBox.margin>
-                                      <Insets right="10.0" top="25.0" />
-                                  </HBox.margin>
-                              </BarChart>
+                        <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="360.0" spacing="10.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <children>
+                              <Label text="Highest Expense Category">
+                                 <font>
+                                    <Font name="Yu Gothic UI Semibold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                                    <PieChart fx:id="categoryPieChart" />
+                           </children>
+                        </VBox>
+                        <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="360.0" spacing="10.0">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <children>
+                              <Label text="Budget VS Spending">
+                                 <font>
+                                    <Font name="Yu Gothic UI Semibold" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                                    <BarChart fx:id="budgetVsSpendingChart" animated="false" legendVisible="true">
+                                        <xAxis>
+                                            <CategoryAxis label="Category" />
+                                        </xAxis>
+                                        <yAxis>
+                                            <NumberAxis label="Amount" />
+                                        </yAxis>
+                                    </BarChart>
+                           </children>
+                        </VBox>
                           </children>
                       </HBox>
-                      <AreaChart fx:id="incomeVsOutcomeChart">
-                          <xAxis>
-                              <CategoryAxis label="Date" side="BOTTOM" fx:id="xAxis" />
-                          </xAxis>
-                          <yAxis>
-                              <NumberAxis fx:id="yAxis" label="Amount" />
-                          </yAxis>
-                          <VBox.margin>
-                              <Insets top="10.0" />
-                          </VBox.margin>
-                      </AreaChart>
+                  <VBox>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Income VS Expense">
+                           <font>
+                              <Font name="Yu Gothic UI Semibold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </Label>
+                            <AreaChart fx:id="incomeVsOutcomeChart">
+                                <xAxis>
+                                    <CategoryAxis label="Date" side="BOTTOM" fx:id="xAxis" />
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis fx:id="yAxis" label="Amount" />
+                                </yAxis>
+                            </AreaChart>
+                     </children>
+                  </VBox>
       
                   </children>
                   <BorderPane.margin>

@@ -13,9 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
-
 <?import javafx.scene.text.TextFlow?>
+
 <StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.ReportController">
     <children>
         <BorderPane prefHeight="795.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../css/report.css">
@@ -63,10 +62,10 @@
                                 <right>
                                     <BarChart fx:id="categoryAmountBarChart" animated="false" legendVisible="false" title="Transaction Categories" BorderPane.alignment="CENTER">
                                         <xAxis>
-                                            <CategoryAxis label="Category" fx:id="categoryAxis"/>
+                                            <CategoryAxis fx:id="categoryAxis" label="Category" />
                                         </xAxis>
                                         <yAxis>
-                                            <NumberAxis label="Amount" fx:id="amountAxis"/>
+                                            <NumberAxis fx:id="amountAxis" label="Amount" />
                                         </yAxis>
                                     </BarChart>
                                 </right>
