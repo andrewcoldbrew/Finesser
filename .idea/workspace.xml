@@ -10,71 +10,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2dbfccdd-421e-4d19-8b56-15a164be3be8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/commands.aiml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/components/actionMessage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ActionMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/application.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddWalletForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddWalletForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ChatScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ChatScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/Chatbot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/Chatbot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/ChatbotManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/ChatbotManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/bot_profile.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/bot_profile.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/client_profile.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/client_profile.aiml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/commands.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/commands.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/contactaction.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/contactaction.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/custom.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/custom.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/date.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/date.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/dialog.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/dialog.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/familiar.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/familiar.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/help.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/help.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/inappropriate.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/inappropriate.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/inquiry.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/inquiry.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/insults.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/insults.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/ontology.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/ontology.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/oob.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/oob.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/personality.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/personality.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/picture.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/picture.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/profanity.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/profanity.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/reductions1.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/reductions1.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/reductions_update.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/reductions_update.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/sraix.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/sraix.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/testjp.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/testjp.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/that.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/that.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/train.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/train.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/udc.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/udc.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/update.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/update.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/utilities.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/utilities.aiml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/commands.aiml.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/commands.aiml.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/update.aiml.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/update.aiml.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/components/actionMessage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/actionMessage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/components/chatScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/chatScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/chatbot.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/chatbot.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/bot_profile.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/bot_profile.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/client_profile.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/client_profile.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/contactaction.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/contactaction.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/custom.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/custom.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/date.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/date.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/dialog.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/dialog.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/familiar.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/familiar.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/help.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/help.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/inappropriate.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/inappropriate.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/inquiry.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/inquiry.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/insults.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/insults.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/ontology.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/ontology.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/oob.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/oob.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/personality.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/personality.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/picture.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/picture.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/profanity.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/profanity.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/reductions1.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/reductions1.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/reductions_update.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/reductions_update.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/sraix.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/sraix.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/testjp.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/testjp.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/that.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/that.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/train.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/train.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/udc.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/udc.aiml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/account.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/account.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/commands.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/commands.aiml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/update.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/update.aiml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/utilities.aiml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aiml/utilities.aiml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/commands.aiml.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aimlif/commands.aiml.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/update.aiml.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/bots/super/aimlif/update.aiml.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/components/chatScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/components/chatScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/css/chatbot.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/chatbot.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/components/userMessage.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/css/account.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/css/account.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddWalletForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddWalletForm.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/ChatScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/ChatScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/Chatbot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/Chatbot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/AccountController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/views/ReportController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/ChatbotManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/ChatbotManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" afterDir="false" />
     </list>
@@ -87,9 +64,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
-        <option value="CSS File" />
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -294,6 +271,7 @@
       <workItem from="1704506282484" duration="1108000" />
       <workItem from="1704507624915" duration="6395000" />
       <workItem from="1704592570456" duration="8607000" />
+      <workItem from="1704612702259" duration="4340000" />
     </task>
     <servers />
   </component>

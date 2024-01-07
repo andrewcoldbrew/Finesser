@@ -18,7 +18,7 @@
             <Insets top="20.0" />
          </BorderPane.margin>
          <content>
-            <VBox fx:id="chatContainer" spacing="15.0" />
+            <VBox fx:id="chatContainer" alignment="TOP_CENTER" spacing="15.0" />
          </content>
       </MFXScrollPane>
    </center>

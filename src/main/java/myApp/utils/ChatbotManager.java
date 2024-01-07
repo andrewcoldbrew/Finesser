@@ -1,6 +1,7 @@
 package myApp.utils;
 
 import myApp.controllers.components.ChatScreen;
+import myApp.controllers.components.Chatbot;
 import org.alicebot.ab.Bot;
 import org.alicebot.ab.Chat;
 import org.alicebot.ab.MagicBooleans;
@@ -14,7 +15,7 @@ public class ChatbotManager {
     static String botName = "super";
     private static Bot bot;
     private static Chat chatSession;
-
+    private static Chatbot chatbot;
     private static ChatScreen chatScreen;
 
     public static void initializeBot() {
@@ -26,6 +27,7 @@ public class ChatbotManager {
             bot.writeAIMLFiles();
             bot.brain.nodeStats();
 
+            chatbot = new Chatbot();
             chatScreen = new ChatScreen();
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,5 +64,9 @@ public class ChatbotManager {
 
     public static ChatScreen getChatScreen() {
         return chatScreen;
+    }
+
+    public static Chatbot getChatbot() {
+        return chatbot;
     }
 }

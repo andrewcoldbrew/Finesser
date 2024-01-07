@@ -16,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 import myApp.controllers.views.ReportController;
 import myApp.utils.ChatbotManager;
 import myApp.utils.Draggable;
+import myApp.utils.MainAppManager;
 
 import java.io.IOException;
 
@@ -33,6 +34,7 @@ public class ChatScreen extends BorderPane {
 
         try {
             fxmlLoader.load();
+            initialize();
             sendButton.setOnAction(this::addBotResponse);
             closeButton.setOnAction(this::close);
         } catch (IOException e) {
@@ -40,26 +42,57 @@ public class ChatScreen extends BorderPane {
         }
     }
 
+    private void initialize() {
+        chatContainer.getChildren().add(new ActionMessage(this));
+    }
+
     private void close(ActionEvent actionEvent) {
         ((Pane) getParent()).getChildren().remove(this);
     }
 
-    private void addBotResponse(ActionEvent actionEvent) {
+    public void addBotResponse(ActionEvent actionEvent) {
         String input = textField.getText().trim();
-        if (input.equalsIgnoreCase("/report"))
-            chatContainer.getChildren().add(createBotResponse(new ReportController().formatReportAsString()));
-        else {
-            System.out.println("You entered: " + input);
-            String response = ChatbotManager.getBotResponse(input);
-            System.out.println("Bot said: " + response);
-            chatContainer.getChildren().add(createUserMessage(input));
-            chatContainer.getChildren().add(createBotResponse(response));
+        String response;
+        if (input.equalsIgnoreCase("guide me")) {
+            chatContainer.getChildren().add(createUserMessage("What is this page about?"));
+            response = ChatbotManager.getBotResponse("guide " + MainAppManager.getCurrentPage());
         }
+        else {
+            response = ChatbotManager.getBotResponse(input);
+            chatContainer.getChildren().add(createUserMessage(input));
+        }
+        chatContainer.getChildren().add(createBotResponse(response));
+        System.out.println("You entered: " + input);
+        System.out.println("Bot said: " + response);
+    }
+
+    public void addBotResponse(String input) {
+        String response;
+        if (input.equalsIgnoreCase("guide me")) {
+            chatContainer.getChildren().add(createUserMessage("What is this page about?"));
+            response = ChatbotManager.getBotResponse("guide " + MainAppManager.getCurrentPage());
+        }
+        else {
+            response = ChatbotManager.getBotResponse(input);
+            chatContainer.getChildren().add(createUserMessage(input));
+        }
+        chatContainer.getChildren().add(createBotResponse(response));
+        System.out.println("You entered: " + input);
+        System.out.println("Bot said: " + response);
+
 
     }
 
-    private HBox createUserMessage(String input) {
+    public void customResponse(String input, String response) {
+        System.out.println("You entered: " + input);
+        System.out.println("Bot said: " + response);
+        chatContainer.getChildren().add(createUserMessage(input));
+        chatContainer.getChildren().add(createBotResponse(response));
+    }
+
+    public HBox createUserMessage(String input) {
         HBox messageBox = new HBox(10); // Adjust spacing as needed
+        messageBox.setMaxWidth(350);
         messageBox.setAlignment(Pos.CENTER_RIGHT);
         // Create and set up the profile image
         ImageView profileImage = new ImageView(new Image("/images/profiles/user_11.png")); // Set the path to your profile image
@@ -86,6 +119,7 @@ public class ChatScreen extends BorderPane {
 
     private HBox createBotResponse(String response) {
         HBox messageBox = new HBox(10); // Adjust spacing as needed
+        messageBox.setMaxWidth(350);
         messageBox.setAlignment(Pos.CENTER_LEFT);
         // Create and set up the profile image
         ImageView profileImage = new ImageView(new Image("/images/chatbot/chatbot.png")); // Set the path to your profile image

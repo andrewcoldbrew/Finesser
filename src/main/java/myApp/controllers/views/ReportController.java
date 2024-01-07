@@ -70,7 +70,6 @@ public class ReportController {
     @FXML
     private TextFlow chartDescriptionTextFlow;
 
-
     public void initialize() {
         new LoadingScreen(stackPane);
         Platform.runLater(() -> {

@@ -17,10 +17,9 @@
 <!-- For more information see http://www.alicebot.org -->
 <category><pattern>HELP</pattern>
 <template>Sure, here are some commands you can use:
-        <li>help - Display this help message.</li>
-        <li>guide - Get a general guide on how to use the current page.</li>
-        <li>guide * - "*" is the current page name</li>
-        <li>report - Generate a financial report.</li></template>
+    help - Display this help message.
+    guide me - Get a general guide on how to use the current page.
+    guide * - "*" is the page name.</template>
 </category>
 <category><pattern>GUIDE TRANSACTION</pattern>
 <template>In transaction page, you can...</template>
@@ -38,7 +37,7 @@
 <template>In dashboard page, you can...</template>
 </category>
 <category><pattern>GUIDE ACCOUNT</pattern>
-<template>In account page, you can...</template>
+<template>In account page, you can freely customize your personal information using the update feature. You can also link with your bank account or add money to your wallet.</template>
 </category>
 <category><pattern>REPORT</pattern>
 <template>Generating your financial report. Please wait...</template>

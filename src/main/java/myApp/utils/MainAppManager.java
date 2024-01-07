@@ -20,9 +20,6 @@ public class MainAppManager {
     private static Stage mainAppStage;
     private static BorderPane mainLayout;
     private static final Map<String, String> scenes = new HashMap<>();
-
-    private static Chatbot chatbot;
-    private static ChatScreen chatScreen;
     private static String currentPage;
 
     static {
@@ -36,8 +33,6 @@ public class MainAppManager {
 
     private static MenuBarController menuBarController;
     public static void setupMainApp() {
-        chatbot = new Chatbot();
-        chatScreen = new ChatScreen();
 
         ChatbotManager.initializeBot();
 
@@ -93,7 +88,7 @@ public class MainAppManager {
     }
 
     public static void addChatBot(StackPane stackPane) {
-        stackPane.getChildren().add(chatbot);
+        stackPane.getChildren().add(ChatbotManager.getChatbot());
         stackPane.setAlignment(Pos.BOTTOM_RIGHT);
     }
 
