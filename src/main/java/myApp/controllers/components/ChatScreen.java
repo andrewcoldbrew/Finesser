@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import myApp.controllers.views.ReportController;
 import myApp.utils.ChatbotManager;
 import myApp.utils.Draggable;
 
@@ -45,22 +46,32 @@ public class ChatScreen extends BorderPane {
 
     private void addBotResponse(ActionEvent actionEvent) {
         String input = textField.getText().trim();
-        String response = ChatbotManager.getBotResponse(input);
-        chatContainer.getChildren().add(createUserMessage(input));
-        chatContainer.getChildren().add(createBotResponse(response));
+        if (input.equalsIgnoreCase("/report"))
+            chatContainer.getChildren().add(createBotResponse(new ReportController().formatReportAsString()));
+        else {
+            System.out.println("You entered: " + input);
+            String response = ChatbotManager.getBotResponse(input);
+            System.out.println("Bot said: " + response);
+            chatContainer.getChildren().add(createUserMessage(input));
+            chatContainer.getChildren().add(createBotResponse(response));
+        }
+
     }
 
     private HBox createUserMessage(String input) {
         HBox messageBox = new HBox(10); // Adjust spacing as needed
         messageBox.setAlignment(Pos.CENTER_RIGHT);
         // Create and set up the profile image
-        ImageView profileImage = new ImageView(new Image("/images/account/user.png")); // Set the path to your profile image
+        ImageView profileImage = new ImageView(new Image("/images/profiles/user_11.png")); // Set the path to your profile image
         profileImage.setFitWidth(40); // Adjust the width as needed
         profileImage.setFitHeight(40); // Adjust the height as needed
 
-        Rectangle clip = new Rectangle(40, 40);
+        Rectangle clip = new Rectangle(
+                profileImage.getFitWidth(), profileImage.getFitHeight()
+        );
+        clip.setArcWidth(50);
+        clip.setArcHeight(50);
         profileImage.setClip(clip);
-        profileImage.setPreserveRatio(false); // Disable image ratio preservation
 
         // Create and set up the label for the message text
         Label messageLabel = new Label(input);

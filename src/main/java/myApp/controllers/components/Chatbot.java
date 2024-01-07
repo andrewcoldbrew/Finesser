@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import myApp.utils.ChatbotManager;
@@ -27,7 +28,18 @@ public class Chatbot extends HBox {
     }
 
     private void openChatScreen(ActionEvent actionEvent) {
-        chatbotContainer.getChildren().add(0, new ChatScreen());
+        if (!isChatScreenOpen()) {
+            chatbotContainer.getChildren().add(0, ChatbotManager.getChatScreen());
+        }
+    }
+
+    private boolean isChatScreenOpen(){
+        for (Node node : chatbotContainer.getChildren()) {
+            if (node instanceof ChatScreen) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

@@ -6,10 +6,19 @@
     -fx-background-color: transparent;
 }
 
+#profileImg {}
 .user-message-label {
     -fx-background-color: #DCF8C6; /* Light green background color */
-    -fx-padding: 5px; /* Padding around the label */
+    -fx-padding: 10px 20px; /* Padding around the label */
     -fx-border-radius: 5px; /* Rounded corners */
-    -fx-max-width: 200px; /* Maximum width of the label */
+    -fx-max-width: 300px; /* Maximum width of the label */
     -fx-wrap-text: true; /* Enable text wrapping */
+}
+
+#chatScreen {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0.4, 0, 0);
+    -fx-border-color: black;
+    -fx-border-radius: 10;
 }

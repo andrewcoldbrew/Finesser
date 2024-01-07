@@ -1,0 +1,8 @@
+0,HELP,*,*,Sure#Comma here are some commands you can use:#Newline        <li>help - Display this help message.</li>#Newline        <li>guide - Get a general guide on how to use the current page.</li>#Newline        <li>guide * - "*" is the current page name</li>#Newline        <li>report - Generate a financial report.</li>,commands.aiml
+0,GUIDE TRANSACTION,*,*,In transaction page#Comma you can...,commands.aiml
+0,GUIDE BUDGET,*,*,In budget page#Comma you can...,commands.aiml
+0,GUIDE FINANCE,*,*,In finance page#Comma you can...,commands.aiml
+0,GUIDE REPORT,*,*,In report page#Comma you can...,commands.aiml
+0,GUIDE DASHBOARD,*,*,In dashboard page#Comma you can...,commands.aiml
+0,GUIDE ACCOUNT,*,*,In account page#Comma you can...,commands.aiml
+0,REPORT,*,*,Generating your financial report. Please wait...,commands.aiml

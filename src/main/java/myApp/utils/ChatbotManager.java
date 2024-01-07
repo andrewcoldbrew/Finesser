@@ -1,5 +1,6 @@
 package myApp.utils;
 
+import myApp.controllers.components.ChatScreen;
 import org.alicebot.ab.Bot;
 import org.alicebot.ab.Chat;
 import org.alicebot.ab.MagicBooleans;
@@ -14,6 +15,8 @@ public class ChatbotManager {
     private static Bot bot;
     private static Chat chatSession;
 
+    private static ChatScreen chatScreen;
+
     public static void initializeBot() {
         try {
             String resourcesPath = getResourcesPath();
@@ -22,6 +25,8 @@ public class ChatbotManager {
             chatSession = new Chat(bot);
             bot.writeAIMLFiles();
             bot.brain.nodeStats();
+
+            chatScreen = new ChatScreen();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,5 +60,7 @@ public class ChatbotManager {
         return resourcesPath;
     }
 
-
+    public static ChatScreen getChatScreen() {
+        return chatScreen;
+    }
 }

@@ -23,6 +23,7 @@ public class MainAppManager {
 
     private static Chatbot chatbot;
     private static ChatScreen chatScreen;
+    private static String currentPage;
 
     static {
         scenes.put("transaction", "/views/transaction.fxml");
@@ -88,10 +89,19 @@ public class MainAppManager {
     public static void switchScene(String name) {
         setupScene(name);
         menuBarController.setActiveButtonForScene(name);
+        setCurrentPage(name);
     }
 
     public static void addChatBot(StackPane stackPane) {
         stackPane.getChildren().add(chatbot);
         stackPane.setAlignment(Pos.BOTTOM_RIGHT);
+    }
+
+    public static String getCurrentPage() {
+        return currentPage;
+    }
+
+    public static void setCurrentPage(String currentPage) {
+        MainAppManager.currentPage = currentPage;
     }
 }
