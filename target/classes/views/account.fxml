@@ -24,6 +24,88 @@
             <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
          </padding>
          <right>
+            <VBox alignment="CENTER_LEFT" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" fillWidth="false" styleClass="sideBox">
+                     <children>
+                        <Label text="Profile Picture">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/account/edit.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets bottom="2.0" top="2.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Update the profile picture to your liking" textAlignment="CENTER" wrappingWidth="200.0" />
+                         <Button onAction="#handleUploadProfilePicture" styleClass="updatePFP" text="Upload Profile Picture &gt;" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" fillWidth="false" styleClass="sideBox" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Account Info">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/account/edit.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets bottom="2.0" top="2.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Keep your personal information up-to-date" textAlignment="CENTER" wrappingWidth="200.0" />
+                        <Hyperlink onAction="#openUpdateInfoForm" text="Update Info &gt;" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" styleClass="sideBox" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Password">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/account/key.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets bottom="2.0" top="2.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Make your password stronger or change it if someone else knows it" textAlignment="CENTER" wrappingWidth="200.0" />
+                        <Hyperlink onAction="#handleChangePassword" text="Change password &gt;" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" styleClass="sideBox" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label text="Add cash to wallet">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/account/wallet.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets bottom="2.0" top="2.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Feeling broke? Add some cash to your wallet" textAlignment="CENTER" wrappingWidth="200.0" />
+                        <Hyperlink onAction="#handleAddWalletForm" text="Add cash &gt;" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </right>
+         <left>
             <VBox prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
                   <HBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
@@ -221,88 +303,6 @@
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
-            </VBox>
-         </right>
-         <left>
-            <VBox alignment="CENTER_LEFT" spacing="20.0" BorderPane.alignment="CENTER">
-               <children>
-                  <VBox alignment="CENTER" fillWidth="false" styleClass="sideBox">
-                     <children>
-                        <Label text="Profile Picture">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/account/edit.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets bottom="2.0" top="2.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Update the profile picture to your liking" textAlignment="CENTER" wrappingWidth="200.0" />
-                         <Button onAction="#handleUploadProfilePicture" styleClass="updatePFP" text="Upload Profile Picture &gt;" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" fillWidth="false" styleClass="sideBox" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Label text="Account Info">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/account/edit.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets bottom="2.0" top="2.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Keep your personal information up-to-date" textAlignment="CENTER" wrappingWidth="200.0" />
-                        <Hyperlink onAction="#openUpdateInfoForm" text="Update Info &gt;" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" styleClass="sideBox" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Label text="Password">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/account/key.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets bottom="2.0" top="2.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Make your password stronger or change it if someone else knows it" textAlignment="CENTER" wrappingWidth="200.0" />
-                        <Hyperlink onAction="#handleChangePassword" text="Change password &gt;" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" styleClass="sideBox" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Label text="Add cash to wallet">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/account/wallet.png" />
-                           </image>
-                           <VBox.margin>
-                              <Insets bottom="2.0" top="2.0" />
-                           </VBox.margin>
-                        </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Feeling broke? Add some cash to your wallet" textAlignment="CENTER" wrappingWidth="200.0" />
-                        <Hyperlink onAction="#handleAddWalletForm" text="Add cash &gt;" />
-                     </children>
-                  </VBox>
-               </children>
             </VBox>
          </left>
       </BorderPane>
