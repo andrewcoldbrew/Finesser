@@ -108,7 +108,7 @@
          <left>
             <VBox prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="profilePic">
                            <children>
@@ -119,14 +119,14 @@
                                </ImageView>
                            </children>
                         </HBox>
-                        <VBox alignment="CENTER_RIGHT" prefHeight="150.0" prefWidth="861.0" spacing="5.0">
+                        <VBox prefHeight="150.0" prefWidth="861.0" spacing="5.0">
                            <children>
-                              <Label fx:id="fullNameLabel" graphicTextGap="0.0" text="Full name">
+                              <Label fx:id="fullNameLabel" alignment="TOP_LEFT" graphicTextGap="0.0" text="Full name">
                                  <font>
                                     <Font name="System Bold" size="40.0" />
                                  </font>
                               </Label>
-                              <HBox alignment="CENTER_RIGHT">
+                              <HBox alignment="CENTER_LEFT">
                                  <children>
                                     <Label text="Email: ">
                                        <font>
@@ -140,7 +140,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT">
+                              <HBox alignment="CENTER_LEFT">
                                  <children>
                                     <Label text="Gender: ">
                                        <font>
@@ -154,7 +154,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT">
+                              <HBox alignment="CENTER_LEFT">
                                  <children>
                                     <Label text="Date of Birth: ">
                                        <font>
@@ -168,7 +168,7 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT">
+                              <HBox alignment="CENTER_LEFT">
                                  <children>
                                     <Label text="Country: ">
                                        <font>
@@ -184,7 +184,7 @@
                               </HBox>
                            </children>
                            <HBox.margin>
-                              <Insets left="70.0" />
+                              <Insets left="30.0" />
                            </HBox.margin>
                         </VBox>
                      </children>
