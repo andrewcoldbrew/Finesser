@@ -12,12 +12,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="addBudgetForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: #9FE2BF; -fx-border-width: 3; -fx-border-radius: 20;" stylesheets="@../css/addBudgetForm.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="addBudgetForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0" styleClass="body" stylesheets="@../css/addBudgetForm.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="82.0" layoutY="115.0" prefHeight="337.0" prefWidth="337.0" spacing="20.0">
          <children>
@@ -40,22 +37,6 @@
                <padding>
                   <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                </padding>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.5146198868751526" green="0.7616374492645264" blue="0.9263157844543457" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </textFill>
             </MFXButton>
             <MFXButton fx:id="exitButton" alignment="CENTER" buttonType="RAISED" depthLevel="LEVEL1" stylesheets="@../css/form.css" text="Cancel" textFill="RED">
                <font>

@@ -48,10 +48,10 @@ public class FinanceBox extends HBox {
             updateButton.setOnAction(this::updateFinace);
             deleteButton.setOnAction(this::deleteFinance);
             // Animate button
-            updateButton.setOnMouseEntered(this::animateUpdate);
-            updateButton.setOnMouseExited(this::staticUpdate);
-            deleteButton.setOnMouseEntered(this::animateDelete);
-            deleteButton.setOnMouseExited(this::staticDelete);
+//            updateButton.setOnMouseEntered(this::animateUpdate);
+//            updateButton.setOnMouseExited(this::staticUpdate);
+//            deleteButton.setOnMouseEntered(this::animateDelete);
+//            deleteButton.setOnMouseExited(this::staticDelete);
         } catch (IOException e) {
             throw new RuntimeException("Failed to load FXML file", e);
         }
@@ -93,24 +93,18 @@ public class FinanceBox extends HBox {
     }
 
     private void staticDelete(MouseEvent mouseEvent) {
-        deleteButton.setButtonType(ButtonType.FLAT);
         trashIcon.setImage(new Image("/images/budget/trash.png"));
     }
 
     private void animateDelete(MouseEvent mouseEvent) {
-        deleteButton.setButtonType(ButtonType.RAISED);
-        deleteButton.setDepthLevel(DepthLevel.LEVEL2);
         trashIcon.setImage(new Image("/images/gif/trash.gif"));
     }
 
     private void staticUpdate(MouseEvent mouseEvent) {
-        updateButton.setButtonType(ButtonType.FLAT);
         editIcon.setImage(new Image("/images/budget/edit.png"));
     }
 
     private void animateUpdate(MouseEvent mouseEvent) {
-        updateButton.setButtonType(ButtonType.RAISED);
-        updateButton.setDepthLevel(DepthLevel.LEVEL2);
         editIcon.setImage(new Image("/images/gif/edit.gif"));
     }
 }

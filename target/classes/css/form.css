@@ -1,4 +1,12 @@
 /* addTransactionForm */
+.body {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0.4, 0, 0);
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+}
+
 #bankComboBox .floating-text {
     -fx-background-color: white;
     -fx-text-fill: #1E152A;

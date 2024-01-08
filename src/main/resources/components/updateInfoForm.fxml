@@ -13,31 +13,16 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" stylesheets="@../css/updateInfoForm.css" type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/updateInfoForm.css" type="StackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
-         <center>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="30.0" BorderPane.alignment="CENTER">
-               <children>
-                  <MFXTextField fx:id="fnameField" floatingText="First name" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
-                  <MFXTextField fx:id="lnameField" floatingText="Last name" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
-                  <MFXTextField fx:id="emailField" floatingText="Email" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
-                  <MFXComboBox fx:id="genderComboBox" floatingText="Gender" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
-                  <MFXComboBox fx:id="countryComboBox" floatingText="Country" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
-                  <MFXDatePicker fx:id="datePicker" allowEdit="false" floatMode="INLINE" floatingText="Date of Birth" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" />
-               </children>
-               <BorderPane.margin>
-                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-               </BorderPane.margin>
-            </VBox>
-         </center>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="body">
          <bottom>
             <MFXButton fx:id="updateButton" buttonType="RAISED" text="Update Information" BorderPane.alignment="CENTER">
                <padding>
                   <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
                </padding>
                <BorderPane.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="20.0" top="20.0" />
                </BorderPane.margin>
             </MFXButton>
          </bottom>
@@ -59,6 +44,30 @@
                </BorderPane.margin>
             </HBox>
          </top>
+         <left>
+            <VBox spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <MFXTextField fx:id="fnameField" floatingText="First name" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #9FE2BF;" />
+                  <MFXTextField fx:id="lnameField" floatingText="Last name" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #9FE2BF;" />
+                  <MFXTextField fx:id="emailField" floatingText="Email" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #9FE2BF;" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </BorderPane.margin>
+            </VBox>
+         </left>
+         <right>
+            <VBox spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <MFXComboBox fx:id="genderComboBox" floatingText="Gender" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #9FE2BF;" />
+                  <MFXComboBox fx:id="countryComboBox" floatingText="Country" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #9FE2BF;" />
+                  <MFXDatePicker fx:id="datePicker" allowEdit="false" floatMode="INLINE" floatingText="Date of Birth" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #9FE2BF;" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </BorderPane.margin>
+            </VBox>
+         </right>
       </BorderPane>
    </children>
 </fx:root>

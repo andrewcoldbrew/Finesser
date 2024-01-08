@@ -365,6 +365,8 @@ public class NewSignupController implements Initializable {
 
     }
 
+
+
     private boolean isValidEmail(String email) {
         return email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
     }

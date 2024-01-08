@@ -32,7 +32,7 @@
                   </Label>
                </left>
                <right>
-                  <MFXButton fx:id="exitButton" contentDisplay="GRAPHIC_ONLY" BorderPane.alignment="CENTER">
+                  <MFXButton fx:id="exitButton" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -40,6 +40,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <BorderPane.margin>
+                        <Insets right="5.0" />
+                     </BorderPane.margin>
                   </MFXButton>
                </right>
                <BorderPane.margin>

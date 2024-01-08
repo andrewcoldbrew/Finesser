@@ -2,6 +2,7 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -47,6 +48,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </MFXButton>
                               <MFXButton fx:id="deleteButton" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: FAF5F1;">
                                  <graphic>
@@ -56,6 +60,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </MFXButton>
                            </children>
                         </HBox>
