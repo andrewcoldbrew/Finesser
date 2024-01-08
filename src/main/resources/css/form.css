@@ -27,14 +27,14 @@
     -fx-cursor: hand;
 }
 
-#updateButton {
+#addButton {
     -fx-background-color: transparent;
     -fx-border-color:  #9FE2BF;
     -fx-border-radius: 5;
 
 }
 
-#updateButton:hover {
+#addButton:hover {
     -fx-background-color:  #9FE2BF;
     -fx-background-radius: 5;
     -fx-text-fill: white;
