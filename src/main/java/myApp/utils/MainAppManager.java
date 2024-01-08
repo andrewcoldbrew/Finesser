@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import myApp.controllers.components.ChatScreen;
-import myApp.controllers.components.Chatbot;
 import myApp.controllers.views.MenuBarController;
 
 import java.io.IOException;
@@ -33,8 +31,6 @@ public class MainAppManager {
 
     private static MenuBarController menuBarController;
     public static void setupMainApp() {
-
-        ChatbotManager.initializeBot();
 
         mainAppStage = new Stage();
         mainAppStage.setMaximized(false);
@@ -85,11 +81,6 @@ public class MainAppManager {
         setupScene(name);
         menuBarController.setActiveButtonForScene(name);
         setCurrentPage(name);
-    }
-
-    public static void addChatBot(StackPane stackPane) {
-        stackPane.getChildren().add(ChatbotManager.getChatbot());
-        stackPane.setAlignment(Pos.BOTTOM_RIGHT);
     }
 
     public static String getCurrentPage() {

@@ -1,8 +1,0 @@
-0,HELP,*,*,Sure#Comma here are some commands you can use:#Newline    help - Display this help message.#Newline    guide me - Get a general guide on how to use the current page.#Newline    guide * - "*" is the page name.,commands.aiml
-0,GUIDE TRANSACTION,*,*,In transaction page#Comma you can...,commands.aiml
-0,GUIDE BUDGET,*,*,In budget page#Comma you can...,commands.aiml
-0,GUIDE FINANCE,*,*,In finance page#Comma you can...,commands.aiml
-0,GUIDE REPORT,*,*,In report page#Comma you can...,commands.aiml
-0,GUIDE DASHBOARD,*,*,In dashboard page#Comma you can...,commands.aiml
-0,GUIDE ACCOUNT,*,*,In account page#Comma you can freely customize your personal information using the update feature. You can also link with your bank account or add money to your wallet.,commands.aiml
-0,REPORT,*,*,Generating your financial report. Please wait...,commands.aiml

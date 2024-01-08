@@ -36,7 +36,7 @@
                       </HBox>
                       <HBox alignment="CENTER" spacing="50.0">
                           <children>
-                        <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="360.0" spacing="10.0">
+                        <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="390.0" spacing="10.0">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -52,7 +52,7 @@
                                     <PieChart fx:id="categoryPieChart" />
                            </children>
                         </VBox>
-                        <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="360.0" spacing="10.0">
+                        <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="390.0" spacing="10.0">
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
@@ -112,10 +112,16 @@
                   <center>
                       <VBox alignment="TOP_CENTER" spacing="25.0" style="-fx-border-radius: 20 0  20  0;" BorderPane.alignment="CENTER">
                           <children>
-                              <Label fx:id="totalBalanceLabel" alignment="CENTER" prefHeight="110.0" prefWidth="235.0" styleClass="sideBox" text="Total Balance">
+                              <Label fx:id="totalBalanceLabel" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="220.0" styleClass="sideBox" text="Total Balance" wrapText="true">
                                   <VBox.margin>
                                       <Insets left="10.0" right="10.0" top="15.0" />
                                   </VBox.margin>
+                           <padding>
+                              <Insets bottom="30.0" top="30.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
                         </Label>
                               <VBox alignment="TOP_CENTER" spacing="20.0" styleClass="sideBox" VBox.vgrow="ALWAYS">
                                   <VBox.margin>

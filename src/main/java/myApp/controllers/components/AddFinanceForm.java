@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import myApp.Main;
 import myApp.controllers.views.FinanceController;
 import myApp.utils.ConnectionManager;
+import myApp.utils.Draggable;
 import myApp.utils.NotificationCenter;
 
 import javax.swing.text.html.ImageView;
@@ -52,6 +53,7 @@ public class AddFinanceForm extends StackPane {
         try {
             fxmlLoader.load();
             initialize();
+            new Draggable().makeDraggable(this);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
