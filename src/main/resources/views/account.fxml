@@ -35,7 +35,7 @@
                         </Label>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/account/edit.png" />
+                              <Image url="@../images/account/updateImage.png" />
                            </image>
                            <VBox.margin>
                               <Insets bottom="2.0" top="2.0" />
@@ -80,7 +80,7 @@
                            </VBox.margin>
                         </ImageView>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Make your password stronger or change it if someone else knows it" textAlignment="CENTER" wrappingWidth="200.0" />
-                        <Hyperlink onAction="#handleChangePassword" text="Change password &gt;" />
+                        <Hyperlink onAction="#openChangePWForm" text="Change password &gt;" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" styleClass="sideBox" VBox.vgrow="ALWAYS">
@@ -108,7 +108,7 @@
          <left>
             <VBox prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="profilePic">
                            <children>
@@ -121,16 +121,16 @@
                         </HBox>
                         <VBox prefHeight="150.0" prefWidth="861.0" spacing="5.0">
                            <children>
-                              <Label fx:id="fullNameLabel" alignment="TOP_LEFT" graphicTextGap="0.0" text="Full name">
+                              <Label fx:id="fullNameLabel" graphicTextGap="0.0" text="Full name">
                                  <font>
                                     <Font name="System Bold" size="40.0" />
                                  </font>
                               </Label>
-                              <HBox alignment="CENTER_LEFT">
+                              <HBox>
                                  <children>
                                     <Label text="Email: ">
                                        <font>
-                                          <Font name="Yu Gothic UI Semibold" size="12.0" />
+                                          <Font name="Yu Gothic UI Semibold" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="emailLabel" text="Email">
@@ -140,11 +140,11 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT">
+                              <HBox>
                                  <children>
                                     <Label text="Gender: ">
                                        <font>
-                                          <Font name="Yu Gothic UI Semibold" size="12.0" />
+                                          <Font name="Yu Gothic UI Semibold" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="genderLabel" text="Gender">
@@ -154,11 +154,11 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT">
+                              <HBox>
                                  <children>
                                     <Label text="Date of Birth: ">
                                        <font>
-                                          <Font name="Yu Gothic UI Semibold" size="12.0" />
+                                          <Font name="Yu Gothic UI Semibold" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="dobLabel" text="Date of birth">
@@ -168,11 +168,11 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_LEFT">
+                              <HBox>
                                  <children>
                                     <Label text="Country: ">
                                        <font>
-                                          <Font name="Yu Gothic UI Semibold" size="12.0" />
+                                          <Font name="Yu Gothic UI Semibold" size="14.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="countryLabel" text="Country">

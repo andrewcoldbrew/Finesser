@@ -1,82 +1,42 @@
 package myApp.controllers.components;
 
-import animatefx.animation.*;
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Duration;
+public class SuccessAlert{
 
-import java.io.IOException;
-import java.util.Iterator;
+    public MFXButton closeButton;
+    public Text content;
+    public Label title;
 
-public class SuccessAlert extends BorderPane {
-    public ImageView successIcon;
-    public Text messageLabel;
+    public Stage stage;
 
-    public SuccessAlert(Pane pane, String message) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/components/successAlert.fxml"));
-
-        try {
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-            initialize(pane, message);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public MFXButton getCloseButton() {
+        return closeButton;
     }
 
-    private void initialize(Pane pane, String message) {
-        messageLabel.setText(message);
-        if (!alertIsShown(pane)) {
-            pane.getChildren().add(this);
-
-            // Play FadeIn animation
-            FadeIn fadeInAnimation = new FadeIn(this);
-            fadeInAnimation.setSpeed(1.25);
-            fadeInAnimation.setOnFinished(fadeInEvent -> {
-                // Play FadeOut animation after FadeIn finishes
-                FadeOut fadeOutAnimation = new FadeOut(this);
-                fadeOutAnimation.setDelay(Duration.seconds(3));
-                fadeOutAnimation.setSpeed(1.25);
-                fadeOutAnimation.setOnFinished(fadeOutEvent -> {
-                    // Clear the alert after FadeOut finishes
-                    Platform.runLater(() -> clearAlert(pane));
-                });
-                fadeOutAnimation.play();
-            });
-            fadeInAnimation.play();
-        }
+    public Text getContent() {
+        return content;
     }
 
-    private boolean alertIsShown(Pane pane) {
-        for (Node node : pane.getChildren()) {
-            if (node instanceof ErrorAlert)
-                return true;
-        }
-        return false;
+    public void setContent(String content) {
+        this.content.setText(content);
     }
 
-    private void clearAlert(Pane pane) {
-        Iterator<Node> iterator = pane.getChildren().iterator();
-        while (iterator.hasNext()) {
-            Node child = iterator.next();
-            if (child instanceof ErrorAlert) {
-                iterator.remove(); // Remove the ErrorAlert from the children
-                System.out.println("Alert cleared");
-            }
-        }
+    public Label getTitle() {
+        return title;
     }
 
+    public void setTitle(String title) {
+        this.title.setText(title);
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 }

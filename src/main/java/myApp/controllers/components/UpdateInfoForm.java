@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import myApp.controllers.views.AccountController;
 import myApp.models.User;
 import myApp.utils.Draggable;
+import myApp.utils.NotificationCenter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -69,7 +70,7 @@ public class UpdateInfoForm extends StackPane {
 
 
         if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || gender == null || dob == null || country == null) {
-            new ErrorAlert(stackPane, "Update declined", "Please fill in all fields!");
+            NotificationCenter.errorAlert("Empty fields!", "Please fill in all fields before proceed");
         } else {
             accountController.updateInfoInDatabase(fname, lname, email, gender, dob, country);
 

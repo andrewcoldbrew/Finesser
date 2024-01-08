@@ -17,6 +17,7 @@ import myApp.Main;
 import myApp.controllers.views.TransactionController;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
+import myApp.utils.NotificationCenter;
 
 import java.io.IOException;
 import java.sql.*;
@@ -83,7 +84,7 @@ public class AddTransactionForm extends StackPane {
             description = "No description";
         }
         if (name.isEmpty() || amountText.isEmpty() || category == null || bankName == null) {
-            System.out.println("Please fill in all required fields.");
+            NotificationCenter.errorAlert("Empty fields!", "Please fill in all fields before proceed");
             return;
         }
 
@@ -92,23 +93,21 @@ public class AddTransactionForm extends StackPane {
             if (bankName.equals("None")) {
                 addCashTransaction(name, amount, description, category, date, userId);
                 Platform.runLater(() -> updateCashAmount(userId, amount));
-                new SuccessAlert(transactionController.getStackPane(), "Transaction added!");
+                NotificationCenter.successAlert("Transaction added!", "Your transaction has been added successfully");
                 exit();
                 Platform.runLater(() -> transactionController.loadTransactions());
             } else {
                 int bankId = getBankIdByName(bankName); // Fetch bankId based on bank name
                 addBankTransaction(name, amount, description, category, bankId, date, userId);
                 Platform.runLater(() -> updateBankBalance(userId, amount));
-                new SuccessAlert(transactionController.getStackPane(), "Transaction added!");
+                NotificationCenter.successAlert("Transaction added!", "Your transaction has been added successfully");
                 exit();
                 Platform.runLater(() -> transactionController.loadTransactions());
             }
 
 
         } catch (NumberFormatException e) {
-            new ErrorAlert(transactionController.getStackPane(), "Invalid Amount",
-                    "The amount that you entered is not valid, please enter a number"
-                   );
+            NotificationCenter.errorAlert("Invalid Amount", "Entered amount must be a number");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error adding the transaction to the database.");

@@ -4,26 +4,19 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXFilterComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import myApp.Main;
 import myApp.controllers.views.BudgetController;
-import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
+import myApp.utils.NotificationCenter;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class AddBudgetForm extends BorderPane {
@@ -82,7 +75,7 @@ public class AddBudgetForm extends BorderPane {
             double limit = Double.parseDouble(limitField.getText());
             budgetController.addBudgetInDataBase(category, limit, startDate, endDate);
         } catch (NumberFormatException e) {
-            new ErrorAlert(budgetController.getStackPane(), "Error", "Limit must be a number!");
+            NotificationCenter.errorAlert("Invalid Amount", "Entered amount must be a number");
         }
     }
 

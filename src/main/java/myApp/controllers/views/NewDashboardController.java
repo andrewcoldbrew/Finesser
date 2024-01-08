@@ -53,14 +53,13 @@ public class NewDashboardController implements Initializable {
     private Tooltip barChartToolTip;
     private Tooltip areaChartToolTip;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new LoadingScreen(stackPane);
         initializeToolTips();
         seeMoreLink.setOnAction(this::moveToTransaction);
         loadIncomeVsOutcomeData();
-        
+
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {

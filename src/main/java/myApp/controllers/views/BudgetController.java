@@ -24,6 +24,7 @@ import myApp.models.Budget;
 import myApp.models.Transaction;
 import myApp.utils.ConnectionManager;
 import myApp.utils.Draggable;
+import myApp.utils.NotificationCenter;
 
 import java.net.URL;
 import java.sql.*;
@@ -130,7 +131,7 @@ public class BudgetController implements Initializable {
                 System.out.println("Budget updated successfully.");
                 Platform.runLater(() -> {
                     loadBudgetDataAsync();
-                    new SuccessAlert(stackPane, "Budget updated!");
+                    NotificationCenter.successAlert("Budget updated!", "Your budget has been updated successfully");
                     closeUpdateBudgetForm();
                 });
             }
@@ -183,7 +184,7 @@ public class BudgetController implements Initializable {
             Platform.runLater(() -> {
                 loadBudgetDataAsync();
                 closeAddForm();
-                new SuccessAlert(stackPane, "Budget successfully added!");
+                NotificationCenter.successAlert("Budget added!", "Your budged has been created successfully");
                 System.out.println("Budget added");
             });
         } catch (SQLException e) {

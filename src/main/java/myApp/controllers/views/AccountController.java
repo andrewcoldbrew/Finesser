@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -18,17 +19,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
+import javafx.stage.*;
 import myApp.Main;
 import myApp.controllers.components.*;
 import myApp.models.Transaction;
 import myApp.models.User;
-import myApp.utils.Animate;
-import myApp.utils.ConnectionManager;
+import myApp.utils.*;
 
 
-import javafx.stage.FileChooser;
-import javafx.stage.Window;
 import java.io.File;
 
 import java.io.IOException;
@@ -63,7 +61,6 @@ public class AccountController implements Initializable {
     public MFXButton linkBankButton;
     private List<BankBox> creditCardList;
     private Label noBankLabel;
-
     private static final String IMAGE_SAVE_DIRECTORY = "src/main/resources/images/profiles";
     private Preferences prefs;
     public AccountController() {
@@ -71,7 +68,7 @@ public class AccountController implements Initializable {
 
     }
 
-    @Override
+    @Override   
     public void initialize(URL url, ResourceBundle resourceBundle) {
         new LoadingScreen(stackPane);
         loadUserProfile();
@@ -89,7 +86,7 @@ public class AccountController implements Initializable {
 
         Connection con = ConnectionManager.getConnection();
         try {
-            PreparedStatement statement = con.prepareStatement("SELECT u.fname, u.lname, b.bankName, b.accountNumber  FROM user u JOIN bank b ON u.userID = b.ownerID WHERE u.userID = ? AND b.linked = true");
+            PreparedStatement statement = con.prepareStatement("SELECT u.fname, u.lname, b.bankName, b.accountNumber FROM user u JOIN bank b ON u.userID = b.ownerID WHERE u.userID = ? AND b.linked = true");
             statement.setInt(1, userId);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -271,7 +268,7 @@ public class AccountController implements Initializable {
 
             Platform.runLater(() -> {
                 loadUserProfile();
-                new SuccessAlert(stackPane, "Finance successfully updated!");
+                NotificationCenter.successAlert("Information Updated!", "Your information has been updated");
             });
         } catch (SQLException e) {
             e.printStackTrace();
@@ -343,6 +340,7 @@ public class AccountController implements Initializable {
         if (!isAddWalletFormOpen()) {
             stackPane.getChildren().add(new AddWalletForm(this));
         }
+
     }
 
     private boolean isLinkBankFormOpen() {
@@ -364,6 +362,23 @@ public class AccountController implements Initializable {
         }
         return false;
     }
+
+    public void openChangePWForm(ActionEvent actionEvent) {
+        if (!isChangePWFormOpen()) {
+            stackPane.getChildren().add(new ChangePasswordForm());
+        }
+    }
+
+    private boolean isChangePWFormOpen() {
+        // Check if a LinkBankForm is already present in mainPane
+        for (Node node : stackPane.getChildren()) {
+            if (node instanceof ChangePasswordForm) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void loadProfilePicture() {
         String imagePath = getUserProfileImagePath(Main.getUserId());
         if (imagePath != null && !imagePath.isEmpty()) {
@@ -443,9 +458,6 @@ public class AccountController implements Initializable {
 
     private Window getWindow() {
         return profileImage.getScene().getWindow();
-    }
-
-    public void handleChangePassword(ActionEvent actionEvent) {
     }
 
     public StackPane getStackPane() {

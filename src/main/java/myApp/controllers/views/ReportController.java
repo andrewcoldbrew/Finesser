@@ -4,17 +4,27 @@ import java.io.IOException;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+import java.util.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import myApp.controllers.components.LoadingScreen;
 import myApp.controllers.components.ReportLoading;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -23,6 +33,7 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import javafx.scene.control.Button;
 import javafx.fxml.FXML;
+import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
 import myApp.Main;
 import myApp.utils.ConnectionManager;
@@ -52,16 +63,142 @@ public class ReportController {
     private Label topSpentCategoriesLabel;
     @FXML
     private Button generateReportButton;
+    @FXML
+    private Label dateLabel;
+    @FXML
+    private BarChart<String, Number> categoryAmountBarChart;
+    @FXML
+    private TextFlow chartDescriptionTextFlow;
 
     public void initialize() {
         new LoadingScreen(stackPane);
-
         Platform.runLater(() -> {
             loadUserData(Main.getUserId());
             updateLabels();
+            loadCategoryAmountData();
         });
 
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        dateLabel.setText("Date: " + currentDate.format(formatter));
     }
+
+    private void loadCategoryAmountData() {
+        String query = "SELECT category, SUM(amount) AS total FROM transaction WHERE userID = ? AND category NOT IN ('Income', 'Dividend Income', 'Investment', 'Rent', 'Subscription', 'Insurance', 'Bills') GROUP BY category ORDER BY total DESC";
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Transaction Amounts by Category");
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, Main.getUserId());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String category = rs.getString("category");
+                double total = rs.getDouble("total");
+                XYChart.Data<String, Number> data = new XYChart.Data<>(category, total);
+                series.getData().add(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Platform.runLater(() -> {
+            categoryAmountBarChart.getData().clear();
+            categoryAmountBarChart.getData().add(series);
+
+            for (XYChart.Data<String, Number> data : series.getData()) {
+                Node node = data.getNode();
+                if (node != null) {
+                    node.setStyle("-fx-bar-fill: " + getCategoryColor(data.getXValue()) + ";");
+                } else {
+                    data.nodeProperty().addListener((observableValue, oldNode, newNode) -> {
+                        if (newNode != null) {
+                            newNode.setStyle("-fx-bar-fill: " + getCategoryColor(data.getXValue()) + ";");
+                        }
+                    });
+                }
+            }
+            updateChartDescription();
+        });
+    }
+
+    private void generateChartDescriptionText(Map<String, Double> categoryAmounts) {
+        if (categoryAmounts.isEmpty()) {
+            return;
+        }
+
+        String highestCategory = Collections.max(categoryAmounts.entrySet(), Map.Entry.comparingByValue()).getKey();
+        String lowestCategory = Collections.min(categoryAmounts.entrySet(), Map.Entry.comparingByValue()).getKey();
+
+
+        Text introText = new Text("This chart illustrates the distribution of financial transactions. ");
+        Text highestTextPrefix = new Text("The highest spending is in ");
+        Text highestCategoryText = new Text(highestCategory);
+        Text highestTextSuffix = new Text(". ");
+        Text lowestTextPrefix = new Text("The lowest is in ");
+        Text lowestCategoryText = new Text(lowestCategory);
+        Text lowestTextSuffix = new Text(". ");
+        Text outroText = new Text("Each bar represents a different category of spending, providing a quick visual summary of financial activity.");
+
+        highestCategoryText.setFont(Font.font("Cambria", FontWeight.BOLD, 18));
+        lowestCategoryText.setFont(Font.font("Cambria", FontWeight.BOLD, 18));
+
+
+        chartDescriptionTextFlow.getChildren().clear();
+        chartDescriptionTextFlow.getChildren().addAll(introText, highestTextPrefix, highestCategoryText, highestTextSuffix, lowestTextPrefix, lowestCategoryText, lowestTextSuffix, outroText);
+    }
+
+    private void updateChartDescription() {
+        Map<String, Double> categoryAmounts = new HashMap<>();
+        for (XYChart.Series<String, Number> series : categoryAmountBarChart.getData()) {
+            for (XYChart.Data<String, Number> data : series.getData()) {
+                categoryAmounts.put(data.getXValue(), data.getYValue().doubleValue());
+            }
+        }
+
+        generateChartDescriptionText(categoryAmounts);
+    }
+
+
+    private Map<String, Double> extractCategoryAmountsFromChart() {
+        Map<String, Double> categoryAmounts = new HashMap<>();
+        for (XYChart.Series<String, Number> series : categoryAmountBarChart.getData()) {
+            for (XYChart.Data<String, Number> data : series.getData()) {
+                categoryAmounts.put(data.getXValue(), data.getYValue().doubleValue());
+            }
+        }
+        return categoryAmounts;
+    }
+
+
+    private String getCategoryColor(String category) {
+        switch (category) {
+            case "Clothes":
+                return "orange";
+            case "Education":
+                return "dodgerblue";
+            case "Entertainment":
+                return "mediumseagreen";
+            case "Food":
+                return "crimson";
+            case "Groceries":
+                return "gold";
+            case "Healthcare":
+                return "violet";
+            case "Transportation":
+                return "lightcoral";
+            case "Travel":
+                return "lightskyblue";
+            case "Other":
+                return "silver";
+            default:
+                return "gray";
+        }
+    }
+
 
     private void loadUserData(int userId) {
         String query = "SELECT username, email, DOB, country FROM user WHERE userID = ?";
