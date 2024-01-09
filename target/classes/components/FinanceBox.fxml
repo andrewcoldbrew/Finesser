@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="financeBox" prefHeight="151.0" prefWidth="411.0" style="-fx-background-color: FAF5F1;" stylesheets="@../css/financeBox.css" type="HBox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="financeBox" prefHeight="151.0" prefWidth="411.0" style="-fx-background-color: #FAF5F1;" stylesheets="@../css/financeBox.css" type="HBox" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="154.0" prefWidth="433.0" spacing="20.0" HBox.hgrow="ALWAYS">
          <children>

@@ -81,7 +81,7 @@ public class AddFinanceForm extends StackPane {
         String recurrencePeriod = recurrenceComboBox.getValue();
 
         if (name.isEmpty() || amountText.isEmpty() || category.isEmpty() || date == null || bankName.isEmpty()) {
-            new ManualAlert(Alert.AlertType.ERROR, "ERROR", "There are empty fields", "Please fill in all required fields!").show();
+            new ManualAlert(Alert.AlertType.ERROR, "ERROR!", "There are empty fields", "Please fill in all required fields!").show();
             return;
         }
 

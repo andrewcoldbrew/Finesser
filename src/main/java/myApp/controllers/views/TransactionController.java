@@ -46,10 +46,6 @@ public class TransactionController implements Initializable {
     @FXML private Label firstCategoryTotalLabel;
     @FXML private Label secondCategoryTotalLabel;
     @FXML private Label thirdCategoryTotalLabel;
-    private AddTransactionForm addForm;
-    private UpdateTransactionForm updateForm;
-
-    private final Draggable draggable = new Draggable();
 
     private final ObservableList<Transaction> transactionData = FXCollections.observableArrayList();
     private FilteredList<Transaction> filteredTransactions;
@@ -172,15 +168,17 @@ public class TransactionController implements Initializable {
 
 
     private void filterTransactions(String searchText) {
-        if (searchText == null || searchText.isEmpty()) {
-            filteredTransactions.setPredicate(null);
-        } else {
-            filteredTransactions.setPredicate(transaction ->
-                    transaction.getName().toLowerCase().contains(searchText.toLowerCase())
-            );
+        Platform.runLater(() -> {
+            if (searchText == null || searchText.isEmpty()) {
+                filteredTransactions.setPredicate(null);
+            } else {
+                filteredTransactions.setPredicate(transaction ->
+                        transaction.getName().toLowerCase().contains(searchText.toLowerCase())
+                );
 
-        }
-        transactionTable.setItems(FXCollections.observableArrayList(filteredTransactions));
+            }
+            transactionTable.setItems(FXCollections.observableArrayList(filteredTransactions));
+        });
     }
 
     private double calculateTotalForCategory(String category) {
@@ -306,15 +304,11 @@ public class TransactionController implements Initializable {
 
     private void updateTransaction() {
         Platform.runLater(() -> {
-
            Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedValues().getFirst();
-
-           if (!mainPane.getChildren().contains(updateForm)) {
-               if (selectedTransaction.getRecurrencePeriod() != null) {
-                   new NewManualAlert(NewManualAlert.Type.WARNING, "Warning!", "You cannot update a finance through the transaction table. Please navigate to the finance page").show();
-               } else {
-                   openUpdateForm(selectedTransaction);
-               }
+           if (selectedTransaction.getRecurrencePeriod() != null) {
+               new NewManualAlert(NewManualAlert.Type.WARNING, "Warning!", "You cannot update a finance through the transaction table. Please navigate to the finance page").show();
+           } else {
+               openUpdateForm(selectedTransaction);
            }
         });
 

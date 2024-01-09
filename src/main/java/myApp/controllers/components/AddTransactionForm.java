@@ -118,8 +118,9 @@ public class AddTransactionForm extends StackPane {
 
     private int getBankIdByName(String bankName) throws SQLException {
         Connection con = ConnectionManager.getConnection();
-        try (PreparedStatement stmt = con.prepareStatement("SELECT bankID FROM bank WHERE bankName = ?")) {
+        try (PreparedStatement stmt = con.prepareStatement("SELECT bankID FROM bank WHERE bankName = ? AND ownerID = ?")) {
             stmt.setString(1, bankName);
+            stmt.setInt(2, Main.getUserId());
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt("bankID");

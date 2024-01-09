@@ -6,7 +6,7 @@
 
 #budgetBox {
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 7, 0.2, 0, 0);
-    -fx-background-color: white;
+    -fx-background-color:  #FAF5F1;
 }
 
 #budgetBox:hover {
