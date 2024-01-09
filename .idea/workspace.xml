@@ -5,206 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85f2a058-e5cd-4227-9722-3dfc2e36803c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ActionMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/ChatScreen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/Chatbot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/ChatbotManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/ConnectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/CustomButton.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/utils/MainAppManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/bot_profile.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/client_profile.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/commands.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/contactaction.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/custom.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/date.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/dialog.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/familiar.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/help.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/inappropriate.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/inquiry.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/insults.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/ontology.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/oob.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/personality.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/picture.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/profanity.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/reductions1.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/reductions_update.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/save.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/sraix.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/testjp.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/that.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/train.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/udc.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/update.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/update.save" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aiml/utilities.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/bot_profile.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/client_profile.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/commands.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/contactaction.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/custom.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/date.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/dialog.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/familiar.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/help.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/inappropriate.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/inquiry.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/insults.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/learnf.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/ontology.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/oob.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/personality.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/picture.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/profanity.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/reductions1.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/reductions_update.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/sraix.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/testjp.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/that.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/train.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/udc.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/update.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/aimlif/utilities.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/config/copyright.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/config/denormal.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/config/gender.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/config/normal.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/config/person.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/config/person2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/config/predicates.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/config/properties.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/maps/familiarpredicate.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/maps/gendername.external" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/maps/gendername.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/maps/number2ordinal.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/maps/ordinal2number.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/maps/profile2predicate.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/maps/verb2sp2verb1sp.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/bird.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/color.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/digit.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/familiarname.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/fastfood.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/language.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/mammal.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/mammalfeature.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/name.external" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/name.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/ordinal.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/place.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/preposition.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/profile.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/verb2sp.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bots/super/sets/verb2st.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/actionMessage.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/chatScreen.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/chatbot.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/updateTransactionForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/updateTransactionForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/profiles/user_11.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/profiles/user_11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/account.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/bot_profile.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/client_profile.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/commands.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/contactaction.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/custom.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/date.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/dialog.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/familiar.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/help.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/inappropriate.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/inquiry.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/insults.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/ontology.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/oob.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/personality.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/picture.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/profanity.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/reductions1.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/reductions_update.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/save.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/sraix.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/testjp.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/that.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/train.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/udc.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/update.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/update.save" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aiml/utilities.aiml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/bot_profile.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/client_profile.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/commands.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/contactaction.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/custom.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/date.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/dialog.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/familiar.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/help.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/inappropriate.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/inquiry.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/insults.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/learnf.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/ontology.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/oob.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/personality.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/picture.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/profanity.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/reductions1.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/reductions_update.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/sraix.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/testjp.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/that.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/train.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/udc.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/update.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/aimlif/utilities.aiml.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/config/copyright.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/config/denormal.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/config/gender.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/config/normal.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/config/person.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/config/person2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/config/predicates.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/config/properties.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/maps/familiarpredicate.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/maps/gendername.external" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/maps/gendername.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/maps/number2ordinal.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/maps/ordinal2number.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/maps/profile2predicate.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/maps/verb2sp2verb1sp.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/bird.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/color.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/digit.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/familiarname.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/fastfood.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/language.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/mammal.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/mammalfeature.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/name.external" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/name.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/ordinal.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/place.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/preposition.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/profile.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/verb2sp.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bots/super/sets/verb2st.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/actionMessage.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/chatScreen.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/components/chatbot.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/images/profiles/user_11.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/images/profiles/user_11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/ActionMessage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddFinanceForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/controllers/components/AddFinanceForm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/ChatScreen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/controllers/components/Chatbot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/ChatbotManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/ConnectionManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/ConnectionManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/myApp/utils/MainAppManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/account.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/account.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/views/dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/BankBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/BankBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/bankBox.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/bankBox.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/report.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/report.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,32 +23,32 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2ag7HQIR50FySG2JLfCqfmhgILl" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "NguyenTheVinh",
-    "last_opened_file_path": "C:/Users/vinhh/MySQL_JDBC/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.5443038",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;NguyenTheVinh&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/vinhh/MySQL_JDBC/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.5443038&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="myApp.Main" />
@@ -262,6 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1704728284076</updated>
       <workItem from="1704728286219" duration="2085000" />
+      <workItem from="1704763342934" duration="1949000" />
     </task>
     <servers />
   </component>

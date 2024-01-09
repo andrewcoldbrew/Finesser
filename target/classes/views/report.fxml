@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -18,175 +19,6 @@
 <StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myApp.controllers.views.ReportController">
     <children>
         <BorderPane prefHeight="795.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../css/report.css">
-            <center>
-                <BorderPane>
-                    <top>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Annual Financial Report" wrappingWidth="373.13671875" BorderPane.alignment="CENTER">
-                            <font>
-                                <Font name="Cambria" size="35.0" />
-                            </font>
-                        </Text>
-                    </top>
-                    <center>
-
-                        <VBox spacing="10" BorderPane.alignment="CENTER">
-                            <Separator>
-                                <VBox.margin>
-                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                </VBox.margin>
-                            </Separator>
-                            <HBox style="-fx-background-color: A92417;">
-                                <children>
-                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Financial Diagram" wrappingWidth="240.306640625">
-                                        <font>
-                                            <Font name="Cambria" size="25.0" />
-                                        </font>
-                                        <HBox.margin>
-                                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                        </HBox.margin>
-                                    </Text>
-                                </children>
-                                <VBox.margin>
-                                    <Insets left="15.0" right="15.0" />
-                                </VBox.margin>
-                            </HBox>
-                            <BorderPane>
-                                <left>
-                                    <TextFlow fx:id="chartDescriptionTextFlow" maxWidth="469.13671875" BorderPane.alignment="CENTER">
-                                        <BorderPane.margin>
-                                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                        </BorderPane.margin>
-                                    </TextFlow>
-
-                                </left>
-                                <right>
-                                    <BarChart fx:id="categoryAmountBarChart" animated="false" legendVisible="false" title="Transaction Categories" BorderPane.alignment="CENTER">
-                                        <xAxis>
-                                            <CategoryAxis fx:id="categoryAxis" label="Category" />
-                                        </xAxis>
-                                        <yAxis>
-                                            <NumberAxis fx:id="amountAxis" label="Amount" />
-                                        </yAxis>
-                                    </BarChart>
-                                </right>
-                            </BorderPane>
-                            <Separator>
-                                <VBox.margin>
-                                    <Insets left="15.0" />
-                                </VBox.margin>
-                            </Separator>
-                            <VBox>
-                                <children>
-                                    <BorderPane>
-                                        <left>
-                                            <Label fx:id="usernameLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0" styleClass="categories" text="  Username: " wrapText="true" BorderPane.alignment="CENTER">
-                                                <font>
-                                                    <Font name="Cambria" size="20.0" />
-                                                </font>
-                                                <BorderPane.margin>
-                                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                </BorderPane.margin>
-                                            </Label>
-                                        </left>
-                                        <right>
-                                            <Label fx:id="dobLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0" styleClass="categories" text="  Date of Birth: " wrapText="true" BorderPane.alignment="CENTER">
-                                                <font>
-                                                    <Font name="Cambria" size="20.0" />
-                                                </font>
-                                                <BorderPane.margin>
-                                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                </BorderPane.margin>
-                                            </Label>
-                                        </right>
-                                        <center>
-                                            <Label fx:id="emailLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0" styleClass="categories" text="  Email: " wrapText="true" BorderPane.alignment="CENTER">
-                                                <font>
-                                                    <Font name="Cambria" size="20.0" />
-                                                </font>
-                                                <BorderPane.margin>
-                                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                </BorderPane.margin>
-                                            </Label>
-                                        </center>
-                                    </BorderPane>
-                                    <BorderPane>
-                                        <left>
-                                            <Label fx:id="countryLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0" styleClass="categories" text="  Country: " wrapText="true" BorderPane.alignment="CENTER">
-                                                <font>
-                                                    <Font name="Cambria" size="20.0" />
-                                                </font>
-                                                <BorderPane.margin>
-                                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                </BorderPane.margin>
-                                            </Label>
-                                        </left>
-                                        <right>
-                                            <Label fx:id="totalIncomeFinancesLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0" styleClass="categories" text="  Total Number of Income Finances: " wrapText="true" BorderPane.alignment="CENTER">
-                                                <font>
-                                                    <Font name="Cambria" size="20.0" />
-                                                </font>
-                                                <BorderPane.margin>
-                                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                </BorderPane.margin>
-                                            </Label>
-                                        </right>
-                                        <center>
-                                            <Label fx:id="totalBudgetsLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0" styleClass="categories" text="  Total Number of Budgets: " wrapText="true" BorderPane.alignment="CENTER">
-                                                <font>
-                                                    <Font name="Cambria" size="20.0" />
-                                                </font>
-                                                <BorderPane.margin>
-                                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                </BorderPane.margin>
-                                            </Label>
-                                        </center>
-                                    </BorderPane>
-                                    <BorderPane>
-                                        <left>
-                                            <Label fx:id="topSpentCategoriesLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0" styleClass="categories" text="  Top Spent Categories: " wrapText="true" BorderPane.alignment="CENTER">
-                                                <font>
-                                                    <Font name="Cambria" size="20.0" />
-                                                </font>
-                                                <BorderPane.margin>
-                                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                </BorderPane.margin>
-                                            </Label>
-                                        </left>
-                                        <right>
-                                            <Label fx:id="totalTransactionsLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0" styleClass="categories" text="  Total Number of Transactions Made: " wrapText="true" BorderPane.alignment="CENTER">
-                                                <font>
-                                                    <Font name="Cambria" size="20.0" />
-                                                </font>
-                                                <BorderPane.margin>
-                                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                </BorderPane.margin>
-                                            </Label>
-                                        </right>
-                                        <center>
-                                            <Label fx:id="totalOutcomeFinancesLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0" styleClass="categories" text="  Total Number of Outcome Finances: " wrapText="true" BorderPane.alignment="CENTER">
-                                                <font>
-                                                    <Font name="Cambria" size="20.0" />
-                                                </font>
-                                                <BorderPane.margin>
-                                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                                                </BorderPane.margin>
-                                            </Label>
-                                        </center>
-                                    </BorderPane>
-                                </children>
-                            </VBox>
-
-                        </VBox>
-                    </center>
-                    <bottom>
-                        <Separator BorderPane.alignment="CENTER">
-                            <BorderPane.margin>
-                                <Insets left="15.0" right="15.0" />
-                            </BorderPane.margin>
-                        </Separator>
-                    </bottom>
-                </BorderPane>
-            </center>
             <top>
                 <VBox BorderPane.alignment="CENTER">
                     <children>
@@ -229,6 +61,179 @@
                     </children>
                 </HBox>
             </bottom>
+         <center>
+            <MFXScrollPane fitToWidth="true" BorderPane.alignment="CENTER">
+               <content>
+                      <BorderPane>
+                          <top>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Annual Financial Report" wrappingWidth="373.13671875" BorderPane.alignment="CENTER">
+                                  <font>
+                                      <Font name="Cambria" size="35.0" />
+                                  </font>
+                              </Text>
+                          </top>
+                          <center>
+      
+                                          <VBox spacing="10" BorderPane.alignment="CENTER">
+                                  <Separator>
+                                      <VBox.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                      </VBox.margin>
+                                  </Separator>
+                                  <HBox style="-fx-background-color: A92417;">
+                                      <children>
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Financial Diagram" wrappingWidth="240.306640625">
+                                              <font>
+                                                  <Font name="Cambria" size="25.0" />
+                                              </font>
+                                              <HBox.margin>
+                                                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                              </HBox.margin>
+                                          </Text>
+                                      </children>
+                                      <VBox.margin>
+                                          <Insets left="15.0" right="15.0" />
+                                      </VBox.margin>
+                                  </HBox>
+                                  <BorderPane>
+                                      <left>
+                                          <TextFlow fx:id="chartDescriptionTextFlow" maxWidth="469.13671875" BorderPane.alignment="CENTER">
+                                              <BorderPane.margin>
+                                                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                              </BorderPane.margin>
+                                          </TextFlow>
+      
+                                                  </left>
+                                      <right>
+                                          <BarChart fx:id="categoryAmountBarChart" animated="false" legendVisible="false" title="Transaction Categories" BorderPane.alignment="CENTER">
+                                              <xAxis>
+                                                  <CategoryAxis fx:id="categoryAxis" label="Category" />
+                                              </xAxis>
+                                              <yAxis>
+                                                  <NumberAxis fx:id="amountAxis" label="Amount" />
+                                              </yAxis>
+                                          </BarChart>
+                                      </right>
+                                  </BorderPane>
+                                  <Separator>
+                                      <VBox.margin>
+                                          <Insets left="15.0" />
+                                      </VBox.margin>
+                                  </Separator>
+                                  <VBox>
+                                      <children>
+                                          <BorderPane>
+                                              <left>
+                                                  <Label fx:id="usernameLabel" maxWidth="-Infinity" minHeight="50.0" minWidth="-Infinity" prefWidth="350.0" styleClass="categories" text="  Username: " wrapText="true" BorderPane.alignment="TOP_CENTER">
+                                                      <font>
+                                                          <Font name="Cambria" size="20.0" />
+                                                      </font>
+                                                      <BorderPane.margin>
+                                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                      </BorderPane.margin>
+                                                  </Label>
+                                              </left>
+                                              <right>
+                                                  <Label fx:id="dobLabel" maxWidth="-Infinity" minHeight="50.0" minWidth="-Infinity" prefWidth="350.0" styleClass="categories" text="  Date of Birth: " wrapText="true" BorderPane.alignment="TOP_CENTER">
+                                                      <font>
+                                                          <Font name="Cambria" size="20.0" />
+                                                      </font>
+                                                      <BorderPane.margin>
+                                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                      </BorderPane.margin>
+                                                  </Label>
+                                              </right>
+                                              <center>
+                                                  <Label fx:id="emailLabel" maxWidth="-Infinity" minHeight="50.0" minWidth="-Infinity" prefWidth="350.0" styleClass="categories" text="  Email: " wrapText="true" BorderPane.alignment="TOP_CENTER">
+                                                      <font>
+                                                          <Font name="Cambria" size="20.0" />
+                                                      </font>
+                                                      <BorderPane.margin>
+                                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                      </BorderPane.margin>
+                                                  </Label>
+                                              </center>
+                                          </BorderPane>
+                                          <BorderPane>
+                                              <left>
+                                                  <Label fx:id="countryLabel" maxWidth="-Infinity" minHeight="50.0" minWidth="-Infinity" prefWidth="350.0" styleClass="categories" text="  Country: " wrapText="true" BorderPane.alignment="TOP_CENTER">
+                                                      <font>
+                                                          <Font name="Cambria" size="20.0" />
+                                                      </font>
+                                                      <BorderPane.margin>
+                                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                      </BorderPane.margin>
+                                                  </Label>
+                                              </left>
+                                              <right>
+                                                  <Label fx:id="totalIncomeFinancesLabel" maxWidth="-Infinity" minHeight="50.0" minWidth="-Infinity" prefWidth="350.0" styleClass="categories" text="  Total Number of Income Finances: " wrapText="true" BorderPane.alignment="TOP_CENTER">
+                                                      <font>
+                                                          <Font name="Cambria" size="20.0" />
+                                                      </font>
+                                                      <BorderPane.margin>
+                                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                      </BorderPane.margin>
+                                                  </Label>
+                                              </right>
+                                              <center>
+                                                  <Label fx:id="totalBudgetsLabel" maxWidth="-Infinity" minHeight="50.0" minWidth="-Infinity" prefWidth="350.0" styleClass="categories" text="  Total Number of Budgets: " wrapText="true" BorderPane.alignment="TOP_CENTER">
+                                                      <font>
+                                                          <Font name="Cambria" size="20.0" />
+                                                      </font>
+                                                      <BorderPane.margin>
+                                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                      </BorderPane.margin>
+                                                  </Label>
+                                              </center>
+                                          </BorderPane>
+                                          <BorderPane>
+                                              <left>
+                                                  <Label fx:id="topSpentCategoriesLabel" maxWidth="-Infinity" minHeight="50.0" minWidth="-Infinity" prefWidth="350.0" styleClass="categories" text="  Top Spent Categories: " wrapText="true" BorderPane.alignment="TOP_CENTER">
+                                                      <font>
+                                                          <Font name="Cambria" size="20.0" />
+                                                      </font>
+                                                      <BorderPane.margin>
+                                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                      </BorderPane.margin>
+                                                  </Label>
+                                              </left>
+                                              <right>
+                                                  <Label fx:id="totalTransactionsLabel" maxWidth="-Infinity" minHeight="50.0" minWidth="-Infinity" prefWidth="350.0" styleClass="categories" text="  Total Number of Transactions Made: " wrapText="true" BorderPane.alignment="TOP_CENTER">
+                                                      <font>
+                                                          <Font name="Cambria" size="20.0" />
+                                                      </font>
+                                                      <BorderPane.margin>
+                                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                      </BorderPane.margin>
+                                                  </Label>
+                                              </right>
+                                              <center>
+                                                  <Label fx:id="totalOutcomeFinancesLabel" maxWidth="-Infinity" minHeight="50.0" minWidth="-Infinity" prefWidth="350.0" styleClass="categories" text="  Total Number of Outcome Finances: " wrapText="true" BorderPane.alignment="TOP_CENTER">
+                                                      <font>
+                                                          <Font name="Cambria" size="20.0" />
+                                                      </font>
+                                                      <BorderPane.margin>
+                                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                      </BorderPane.margin>
+                                                  </Label>
+                                              </center>
+                                          </BorderPane>
+                                      </children>
+                                  </VBox>
+      
+                                          </VBox>
+                          </center>
+                          <bottom>
+                              <Separator BorderPane.alignment="CENTER">
+                                  <BorderPane.margin>
+                                      <Insets left="15.0" right="15.0" />
+                                  </BorderPane.margin>
+                              </Separator>
+                          </bottom>
+                      </BorderPane>
+               </content>
+            </MFXScrollPane>
+         </center>
         </BorderPane>
     </children>
 </StackPane>

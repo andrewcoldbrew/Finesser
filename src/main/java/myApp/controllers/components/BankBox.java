@@ -31,6 +31,7 @@ public class BankBox extends BorderPane {
         try {
             fxmlLoader.load();
             initialize(bankName, userName, accountNumber);
+            Animate.addHoverScalingEffect(this, 1.02);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
