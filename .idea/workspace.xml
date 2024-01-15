@@ -7,14 +7,8 @@
     <list default="true" id="85f2a058-e5cd-4227-9722-3dfc2e36803c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddFinanceForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/AddTransactionForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateFinanceForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/components/UpdateFinanceForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/FinanceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/budgetBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/budgetBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/components/financeBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/components/financeBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/budget.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/budget.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/finance.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/views/transaction.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/views/transaction.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,10 +68,22 @@
       <workItem from="1704728286219" duration="2085000" />
       <workItem from="1704763342934" duration="1949000" />
       <workItem from="1704767257761" duration="4749000" />
+      <workItem from="1705281183992" duration="2520000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/myApp/controllers/views/TransactionController.java</url>
+          <line>182</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

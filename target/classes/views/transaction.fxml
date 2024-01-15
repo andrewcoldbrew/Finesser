@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXPaginatedTableView?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -21,11 +21,19 @@
                <children>
                   <BorderPane prefHeight="58.0" prefWidth="1100.0">
                      <left>
-                        <MFXTextField fx:id="searchBar" floatMode="BORDER" floatingText="Enter what you want to search" floatingTextGap="0.0" minHeight="45.0" minWidth="770.0" prefColumnCount="30" prefWidth="770.0" styleClass="searchBar" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER_LEFT" spacing="30.0" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets bottom="10.0" left="10.0" top="20.0" />
                            </BorderPane.margin>
-                        </MFXTextField>
+                           <children>
+                              <MFXTextField fx:id="searchBar" floatMode="BORDER" floatingText="Enter what you want to search" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefColumnCount="30" prefHeight="50.0" prefWidth="500.0" styleClass="searchBar" />
+                              <MFXButton fx:id="searchButton" buttonType="RAISED" maxHeight="-Infinity" minHeight="-Infinity" onAction="#search" prefHeight="50.0" text="Search">
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </MFXButton>
+                           </children>
+                        </HBox>
                      </left>
                      <right>
                         <MFXButton minHeight="45.0" minWidth="150.0" onAction="#handleAddTransactionForm" styleClass="addTransactionBtn" text="Add Transaction" BorderPane.alignment="CENTER">
@@ -35,11 +43,7 @@
                         </MFXButton>
                      </right>
                   </BorderPane>
-                  <MFXPaginatedTableView fx:id="transactionTable" pagesToShow="100" prefHeight="534.0" prefWidth="1100.0" rowsPerPage="10">
-                     <VBox.margin>
-                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                  </MFXPaginatedTableView>
+                  <MFXTableView fx:id="transactionTable" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1100.0" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />

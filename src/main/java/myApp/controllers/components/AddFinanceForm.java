@@ -80,8 +80,8 @@ public class AddFinanceForm extends StackPane {
         String bankName = bankComboBox.getSelectedItem();
         String recurrencePeriod = recurrenceComboBox.getValue();
 
-        if (name.isEmpty() || amountText.isEmpty() || category.isEmpty() || date == null || bankName.isEmpty()) {
-            new ManualAlert(Alert.AlertType.ERROR, "ERROR!", "There are empty fields", "Please fill in all required fields!").show();
+        if (name.isEmpty() || amountText.isEmpty() || category == null || date == null || bankName.isEmpty()) {
+            new NewManualAlert(NewManualAlert.Type.ERROR, "ERROR!", "There are empty fields. Please fill in all required fields!").show();
             return;
         }
 
@@ -89,7 +89,7 @@ public class AddFinanceForm extends StackPane {
         try {
             amount = Double.parseDouble(amountText);
         } catch (NumberFormatException e) {
-            new ManualAlert(Alert.AlertType.ERROR, "ERROR!", "Invalid amount", "Amount must be a number.").show();
+            new NewManualAlert(NewManualAlert.Type.ERROR, "ERROR!", "Invalid amount! Amount must be a number.").show();
             return;
         }
 
