@@ -67,8 +67,8 @@ public class AddFinanceForm extends StackPane {
         addButton.setOnAction(this::addFinance);
 
         recurrenceComboBox.getItems().clear();
-        recurrenceComboBox.getItems().addAll("None", "Weekly", "Monthly");
-        recurrenceComboBox.setValue("None");
+        recurrenceComboBox.getItems().addAll("Weekly", "Monthly");
+//        recurrenceComboBox.setValue("Weekly");
     }
 
     private void addFinance(ActionEvent actionEvent) {
@@ -80,8 +80,13 @@ public class AddFinanceForm extends StackPane {
         String bankName = bankComboBox.getSelectedItem();
         String recurrencePeriod = recurrenceComboBox.getValue();
 
-        if (name.isEmpty() || amountText.isEmpty() || category == null || date == null || bankName.isEmpty()) {
-            new NewManualAlert(NewManualAlert.Type.ERROR, "ERROR!", "There are empty fields. Please fill in all required fields!").show();
+        if (name.isEmpty() || amountText.isEmpty() || category == null || date == null || bankName == null || recurrencePeriod == null) {
+            NotificationCenter.errorAlert("Empty fields!", "Please fill in all fields before proceed");
+            return;
+        }
+
+        if (recurrencePeriod.equals("None")) {
+            NotificationCenter.errorAlert("Invalid recurrence period!", "The value for this field cannot be None or NULL");
             return;
         }
 
@@ -89,7 +94,7 @@ public class AddFinanceForm extends StackPane {
         try {
             amount = Double.parseDouble(amountText);
         } catch (NumberFormatException e) {
-            new NewManualAlert(NewManualAlert.Type.ERROR, "ERROR!", "Invalid amount! Amount must be a number.").show();
+            NotificationCenter.errorAlert("Invalid Amount!", "Please enter a valid number");
             return;
         }
 

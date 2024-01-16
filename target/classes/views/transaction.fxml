@@ -20,21 +20,6 @@
             <VBox styleClass="body" BorderPane.alignment="CENTER">
                <children>
                   <BorderPane prefHeight="58.0" prefWidth="1100.0">
-                     <left>
-                        <HBox alignment="CENTER_LEFT" spacing="30.0" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets bottom="10.0" left="10.0" top="20.0" />
-                           </BorderPane.margin>
-                           <children>
-                              <MFXTextField fx:id="searchBar" floatMode="BORDER" floatingText="Enter what you want to search" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefColumnCount="30" prefHeight="50.0" prefWidth="500.0" styleClass="searchBar" />
-                              <MFXButton fx:id="searchButton" buttonType="RAISED" maxHeight="-Infinity" minHeight="-Infinity" onAction="#search" prefHeight="50.0" text="Search">
-                                 <padding>
-                                    <Insets left="20.0" right="20.0" />
-                                 </padding>
-                              </MFXButton>
-                           </children>
-                        </HBox>
-                     </left>
                      <right>
                         <MFXButton minHeight="45.0" minWidth="150.0" onAction="#handleAddTransactionForm" styleClass="addTransactionBtn" text="Add Transaction" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
@@ -42,6 +27,12 @@
                            </BorderPane.margin>
                         </MFXButton>
                      </right>
+                     <left>
+                        <MFXTextField fx:id="searchBar" floatMode="BORDER" floatingText="Enter what you want to search" floatingTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefColumnCount="30" prefHeight="50.0" prefWidth="700.0" styleClass="searchBar" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="20.0" />
+                           </BorderPane.margin></MFXTextField>
+                     </left>
                   </BorderPane>
                   <MFXTableView fx:id="transactionTable" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1100.0" />
                </children>

@@ -69,7 +69,7 @@ public class AddWalletForm extends BorderPane {
 
             }
         } catch (NumberFormatException e) {
-            System.out.println("Invalid amount. Please enter a valid number.");
+            NotificationCenter.errorAlert("Invalid Amount!", "Please enter a valid number");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error adding the bank to the database.");
