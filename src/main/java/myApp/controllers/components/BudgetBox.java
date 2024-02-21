@@ -55,10 +55,10 @@ public class BudgetBox extends AnchorPane {
             updateButton.setOnAction(this::updateBudget);
             deleteButton.setOnAction(this::deleteBudget);
             // Animate button
-            updateButton.setOnMouseEntered(this::animateUpdate);
-            updateButton.setOnMouseExited(this::staticUpdate);
-            deleteButton.setOnMouseEntered(this::animateDelete);
-            deleteButton.setOnMouseExited(this::staticDelete);
+//            updateButton.setOnMouseEntered(this::animateUpdate);
+//            updateButton.setOnMouseExited(this::staticUpdate);
+//            deleteButton.setOnMouseEntered(this::animateDelete);
+//            deleteButton.setOnMouseExited(this::staticDelete);
 
             progressBar.getRanges1().add(NumberRange.of(0.0, 0.49));
             progressBar.getRanges2().add(NumberRange.of(0.50, 0.79));

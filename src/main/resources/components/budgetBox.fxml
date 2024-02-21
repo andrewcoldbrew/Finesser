@@ -22,7 +22,7 @@
                <right>
                   <HBox BorderPane.alignment="CENTER_RIGHT">
                      <children>
-                        <MFXButton fx:id="updateButton" contentDisplay="GRAPHIC_ONLY">
+                        <MFXButton fx:id="updateButton" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: #FAF5F1;">
                            <graphic>
                               <ImageView fx:id="editIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -31,7 +31,7 @@
                               </ImageView>
                            </graphic>
                         </MFXButton>
-                        <MFXButton fx:id="deleteButton" contentDisplay="GRAPHIC_ONLY">
+                        <MFXButton fx:id="deleteButton" contentDisplay="GRAPHIC_ONLY" style="-fx-background-color: #FAF5F1;">
                            <graphic>
                               <ImageView fx:id="trashIcon" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

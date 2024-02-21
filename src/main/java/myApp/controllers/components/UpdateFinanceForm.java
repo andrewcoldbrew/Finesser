@@ -90,7 +90,6 @@ public class UpdateFinanceForm extends StackPane {
 
             return;
         }
-
         try {
             double amount = Double.parseDouble(amountText);
             // INVOKE THE FUNCTION HERE! ~UwU~

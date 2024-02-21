@@ -133,7 +133,6 @@ public class ReportController {
         String highestCategory = Collections.max(categoryAmounts.entrySet(), Map.Entry.comparingByValue()).getKey();
         String lowestCategory = Collections.min(categoryAmounts.entrySet(), Map.Entry.comparingByValue()).getKey();
 
-
         Text introText = new Text("This chart illustrates the distribution of financial transactions. ");
         Text highestTextPrefix = new Text("The highest spending is in ");
         Text highestCategoryText = new Text(highestCategory);
@@ -143,13 +142,22 @@ public class ReportController {
         Text lowestTextSuffix = new Text(". ");
         Text outroText = new Text("Each bar represents a different category of spending, providing a quick visual summary of financial activity.");
 
-        highestCategoryText.setFont(Font.font("Cambria", FontWeight.BOLD, 18));
-        lowestCategoryText.setFont(Font.font("Cambria", FontWeight.BOLD, 18));
+        // Set font size for highest and lowest categories
+        highestCategoryText.setFont(Font.font("Cambria", FontWeight.BOLD, 30));
+        lowestCategoryText.setFont(Font.font("Cambria", FontWeight.BOLD, 30));
 
+        // Set font size for the rest
+        introText.setFont(Font.font("Cambria", 24));
+        highestTextPrefix.setFont(Font.font("Cambria", 24));
+        highestTextSuffix.setFont(Font.font("Cambria", 24));
+        lowestTextPrefix.setFont(Font.font("Cambria", 24));
+        lowestTextSuffix.setFont(Font.font("Cambria", 24));
+        outroText.setFont(Font.font("Cambria", 24));
 
         chartDescriptionTextFlow.getChildren().clear();
         chartDescriptionTextFlow.getChildren().addAll(introText, highestTextPrefix, highestCategoryText, highestTextSuffix, lowestTextPrefix, lowestCategoryText, lowestTextSuffix, outroText);
     }
+
 
     private void updateChartDescription() {
         Map<String, Double> categoryAmounts = new HashMap<>();
@@ -223,10 +231,10 @@ public class ReportController {
     }
 
     public void updateReportDetails(String username, String email, LocalDate dob, String country) {
-        usernameLabel.setText(username);
-        emailLabel.setText(email);
-        dobLabel.setText(dob.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        countryLabel.setText(country);
+        usernameLabel.setText("Username: " + username);
+        emailLabel.setText("Email: " + email);
+        dobLabel.setText("Date of Birth: " + dob.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        countryLabel.setText("Country: " + country);
     }
     private void updateLabels() {
         totalBudgetsLabel.setText("Total Number of Budgets: " + getTotalNumberOfBudgets());
@@ -262,7 +270,7 @@ public class ReportController {
 
     public Map<String, Double> getTopSpentCategories() {
         Map<String, Double> categoryTotals = new HashMap<>();
-        String query = "SELECT category, SUM(amount) AS total FROM transaction WHERE category NOT IN ('Income', 'Dividend Income', 'Investment', 'Subscription', 'Insurance', 'Bills','Rent') AND userID = ? GROUP BY category ORDER BY total DESC";
+        String query = "SELECT category, SUM(amount) AS total FROM transaction WHERE category NOT IN ('Income', 'Dividend Income', 'Investment', 'Subscription', 'Insurance', 'Bills','Rent') AND userID = ? GROUP BY category ORDER BY total DESC LIMIT 5";
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {

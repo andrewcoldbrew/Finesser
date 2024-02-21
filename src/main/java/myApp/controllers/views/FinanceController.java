@@ -254,11 +254,12 @@ public class FinanceController implements Initializable {
     }
 
     private int getBankIdByName(String bankName) {
-        String query = "SELECT bankID FROM bank WHERE bankName = ?";
+        String query = "SELECT bankID FROM bank WHERE bankName = ? AND ownerID = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, bankName);
+            pstmt.setInt(2, Main.getUserId());
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt("bankID");
@@ -287,7 +288,7 @@ public class FinanceController implements Initializable {
 
     private void updateSurplus() {
         double surplus = totalIncome - totalOutcome;
-        totalLabel.setText(String.format("Surplus Funds: $%.2f", surplus));
+        totalLabel.setText(String.format("Spare Funds: $%.2f", surplus));
         System.out.println("Total surplus"+surplus);
     }
 

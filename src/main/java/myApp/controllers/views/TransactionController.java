@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,19 +38,16 @@ import java.util.stream.Collectors;
 public class TransactionController implements Initializable {
     public BorderPane mainPane;
     public MFXTextField searchBar;
-    public MFXPaginatedTableView<Transaction> transactionTable;
+    public MFXTableView<Transaction> transactionTable;
     public StackPane stackPane;
     public ImageView firstCategoryIcon;
     public ImageView secondCategoryIcon;
     public ImageView thirdCategoryIcon;
+    public MFXButton searchButton;
 
     @FXML private Label firstCategoryTotalLabel;
     @FXML private Label secondCategoryTotalLabel;
     @FXML private Label thirdCategoryTotalLabel;
-    private AddTransactionForm addForm;
-    private UpdateTransactionForm updateForm;
-
-    private final Draggable draggable = new Draggable();
 
     private final ObservableList<Transaction> transactionData = FXCollections.observableArrayList();
     private FilteredList<Transaction> filteredTransactions;
@@ -77,9 +75,28 @@ public class TransactionController implements Initializable {
         transactionTable.getSelectionModel().setAllowsMultipleSelection(false);
         transactionTable.autosizeColumnsOnInitialization();
 
-        When.onChanged(transactionTable.currentPageProperty())
-                .then((oldValue, newValue) -> transactionTable.autosizeColumns())
-                .listen();
+//        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+//            filteredTransactions.setPredicate(transaction -> {
+//                if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+//                    return true;
+//                }
+//
+//
+//
+//                if (transaction.getName().toLowerCase().contains(searchText.toLowerCase())) {
+//                    return true;
+//                }
+//                return false;
+//            });
+//
+//            SortedList<Transaction> sortedData = new SortedList<>(filteredTransactions);
+//            sortedData.comparatorProperty().bind(transactionTable.getTransformableList().comparatorProperty());
+//            transactionTable.setItems(sortedData);
+//        });
+
+//        When.onChanged(transactionTable.currentPageProperty())
+//                .then((oldValue, newValue) -> transactionTable.autosizeColumns())
+//                .listen();
 
     }
 
@@ -116,8 +133,6 @@ public class TransactionController implements Initializable {
                 new StringFilter<>("Category", Transaction::getCategory),
                 new StringFilter<>("Bank", Transaction::getBankName)
                 );
-
-        Platform.runLater(() -> transactionTable.autosizeColumns());
     }
 
     public void loadTransactions() {
@@ -159,9 +174,20 @@ public class TransactionController implements Initializable {
 
         Platform.runLater(() -> {
             transactionTable.setItems(FXCollections.observableArrayList(transactionData));
-            transactionTable.setCurrentPage(1);
+//            transactionTable.setCurrentPage(1);
         });
     }
+
+    @FXML
+    private void search() {
+//        searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+//            System.out.println("Search text: " + newValue);
+//            filterTransactions(newValue.trim());
+//        });
+//        String input = searchBar.getText().trim();
+//        filterTransactions(input);
+    }
+
 
     private void setupSearchBar() {
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -170,7 +196,6 @@ public class TransactionController implements Initializable {
         });
     }
 
-
     private void filterTransactions(String searchText) {
         if (searchText == null || searchText.isEmpty()) {
             filteredTransactions.setPredicate(null);
@@ -178,8 +203,8 @@ public class TransactionController implements Initializable {
             filteredTransactions.setPredicate(transaction ->
                     transaction.getName().toLowerCase().contains(searchText.toLowerCase())
             );
-
         }
+
         transactionTable.setItems(FXCollections.observableArrayList(filteredTransactions));
     }
 
@@ -274,11 +299,12 @@ public class TransactionController implements Initializable {
         }
     }
     private int getBankIdByName(String bankName) {
-        String query = "SELECT bankID FROM bank WHERE bankName = ?";
+        String query = "SELECT bankID FROM bank WHERE bankName = ? AND ownerID = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, bankName);
+            pstmt.setInt(2, Main.getUserId());
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt("bankID");
@@ -306,15 +332,11 @@ public class TransactionController implements Initializable {
 
     private void updateTransaction() {
         Platform.runLater(() -> {
-
            Transaction selectedTransaction = transactionTable.getSelectionModel().getSelectedValues().getFirst();
-
-           if (!mainPane.getChildren().contains(updateForm)) {
-               if (selectedTransaction.getRecurrencePeriod() != null) {
-                   new NewManualAlert(NewManualAlert.Type.WARNING, "Warning!", "You cannot update a finance through the transaction table. Please navigate to the finance page").show();
-               } else {
-                   openUpdateForm(selectedTransaction);
-               }
+           if (selectedTransaction.getRecurrencePeriod() != null) {
+               new NewManualAlert(NewManualAlert.Type.WARNING, "Warning!", "You cannot update a finance through the transaction table. Please navigate to the finance page").show();
+           } else {
+               openUpdateForm(selectedTransaction);
            }
         });
 
